@@ -28,6 +28,7 @@ var FBSage = (function($) {
     // Fit them vids!
     $('main').fitVids();
 
+    _initThemeSwitcher();
     // _initNav();
     // _initSearch();
     // _initLoadMore();
@@ -67,6 +68,13 @@ var FBSage = (function($) {
       delay: delay,
       offset: -wpOffset
     }, "easeOutSine");
+  }
+
+  function _initThemeSwitcher() {
+    $('#theme-switcher select').on('change', function(e) {
+      var color = $(this).val();
+      $('body').attr('data-theme', color);
+    });
   }
 
   function _initSearch() {

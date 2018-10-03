@@ -1,9 +1,18 @@
 // Header
 
 .site-header {
-  @include media-sm {
-  }
+  .site-logo {
+    margin: 0;
 
-  @include media-md {
+    .ivoh-logo {
+      width: 55px;
+      height: 24px;
+      fill: color(black);
+
+      @include media-md {
+        width: 34px;
+        height: 15px;
+      }
+    }
   }
 }

@@ -1,22 +1,132 @@
 // Typography
 
-// Fonts
-$sans: Helvetica, sans-serif;
-$serif: Georgia, serif;
-
-// Sans-specific styles to chunk into one include
-@mixin font-sans() {
-}
-// Serif-specific styles to chunk into one include
-@mixin font-sans() {
+// font-face
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../fonts/CooperHewitt-Medium.woff2') format('woff2'),
+       url('../fonts/CooperHewitt-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
 }
 
-// Hide fonts while loading from Typekit
-.wf-loading {
-  visibility: hidden;
+// Font-family Mixins
+@mixin font-display {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Clearface', serif;
+}
+@mixin font-secondary {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Cooper Hewitt', sans-serif;
+}
+@mixin font-copy {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Libre Baskerville', serif;
 }
 
-//sizes
-$small: 0.5em;
-$med: 1em;
-$big: 3em;
+/// Mixin to allow us to concisely define all aspects of a paragraph style (except for family.)
+/// @param {number} $size - Font size specified in pixels (without 'px')
+/// @param {number} $lh - Line height specified in pixels (without 'px')
+/// @param {number} $ls [0em] - Letter spacing
+/// @param {string} $tt [none] - Text transform
+/// @example scss - Used as a shortcut in defining a paragraph style...
+///   @mixin h1 {
+///     @include avenir-heavy; // The font face
+///     @include paragraph-style (12, 16, $ls: .075em, $tt: uppercase); // Other properties
+///   }
+@mixin paragraph-style ($size, $lh, $ls: 0em, $tt: none) {
+  font-size: #{$size}px;
+  line-height: ($lh / $size);
+  letter-spacing: $ls;
+  text-transform: $tt;
+}
+
+// Type Style Mixins + Classes
+@mixin h1 {
+  @include font-display;
+  @include paragraph-style(36, 40, -.032em);
+
+  @include media-md {
+    @include paragraph-style(64, 48, -.046em);
+  }
+}
+.h1 {
+  @include h1;
+}
+
+@mixin h2 {
+  @include font-display;
+  @include paragraph-style(22, 24, -.032em);
+
+  @include media-md {
+    @include paragraph-style(48, 48, -.05em);
+  }
+}
+.h2 {
+  @include h2;
+}
+
+@mixin h3 {
+  @include font-display;
+  @include paragraph-style(22, 24, -.032em);
+
+  @include media-md {
+    @include paragraph-style(36, 40, -.032em);
+  }
+}
+.h3 {
+  @include h3;
+}
+
+@mixin h4 {
+  @include font-display;
+  @include paragraph-style(22, 24, -.032em);
+}
+.h4 {
+  @include h4;
+}
+
+@mixin h5 {
+  @include font-secondary;
+  @include paragraph-style(12, 16, .0193em, uppercase);
+}
+.h5 {
+  @include h5;
+}
+
+@mixin h6 {
+  @include font-secondary;
+  @include paragraph-style(12, 16, .0193em, uppercase);
+}
+.h6 {
+  @include h6;
+}
+
+@mixin p1 {
+  @include font-copy;
+  @include paragraph-style(20, 32, .01em);
+}
+.p1 {
+  @include p1;
+}
+
+@mixin p2 {
+  @include font-copy;
+  @include paragraph-style(16, 24, .02em);
+}
+.p2 {
+  @include p2;
+}
+
+// Type Resets
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+}

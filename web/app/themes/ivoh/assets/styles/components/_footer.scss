@@ -1,14 +1,69 @@
 // Footer
 
 .site-footer {
-  .contact {
-    @include media-sm {
+  padding: 24px $gutter 0;
+  @include media-md {
+    padding: $padding-md 0 0; 
+  }
 
+  .-inner {
+    @include padding;
+    padding-top: 24px;
+    text-align: center;
+    color: color(white);
+    padding-bottom: 24px;
+    background-color: color(black);
+
+    [class*=-column] {
+      margin-bottom: $gutter;
+    }
+
+    @include media-md {
+      text-align: left;
+      padding-top: $padding-md;
+      padding-bottom: $padding-md;
+
+      .-column-one {
+        max-width: columns(3,14);
+        flex-basis: columns(3,14);
+        padding-right: $padding-md;
+      }
+      .-column-two {
+        max-width: columns(4,14);
+        flex-basis: columns(4,14);
+        padding-right: $padding-md;
+      }
+      .-column-three {
+        max-width: columns(7,14);
+        flex-basis: columns(7,14);
+      }
     }
   }
 
-  .secondary-nav {
-    @include media-sm {}
-    @include media-md {}
+  .site-logo {
+    margin: 0;
+    line-height: 1;
+    font-size: 24px;
+
+    a {
+      vertical-align: top;
+      display: inline-block;
+    }
+
+    .ivoh-logo {
+      width: 55px;
+      height: 24px;
+      fill: color(white);
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+
+  .contact {
+    @include h5;
+  }
+
+  .social-media-links {
+    @extend .semantic-list;
   }
 }

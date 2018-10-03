@@ -8,21 +8,11 @@ html {
 }
 
 body {
-  color: $black;
-  font-size: 16px;
+  font-size: 20px;
   overflow-x: hidden;
-  font-family: $sans;
-  background: $white;
-}
-
-p {
-  em {
-    font-style: italic;
-  }
-}
-
-a {
-  color: inherit;
+  color: color(black);
+  background: color(pink);
+  @include font-copy;
 }
 
 img {
@@ -30,38 +20,58 @@ img {
   height: auto;
 }
 
-// Browser alert
-.alert-warning {
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
-  color: $black;
-  padding: 50px;
-  text-align: center;
-  background: $brand-primary;
-}
-.alert {
-  padding: 50px;
-  background: #fff;
-}
-
-// Disable scrolling when modals are active
-.no-scroll {
-  overflow: hidden;
-}
-
-// Utility classes
-.hide {
-  display: none;
-}
-
-.container {
+.site-wrap {
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  max-width: 1440px;
+}
+
+[class*=container] {
+  margin: 0 auto;
   position: relative;
-  @include clearfix();
-  @include media-md {
+}
+.container {
+  &-lg {
+    @include media-md {
+      width: columns(18);
+    }
   }
+
+  &-md {
+    @include media-md {
+      width: columns(16);
+    }
+  }
+
+  &-sm {
+    @include media-md {
+      width: columns(14);
+    }
+  }
+
+  &-content {
+    padding: 0 $gutter;
+
+    @include media-md {    
+      width: columns(14);
+      padding: 0 #{$gutter * 9};
+    }
+  }
+}
+
+// Patterned Background
+.patterned {
+  background-repeat: repeat;
+  background-image: url('../images/pattern.png');
+  background-size: 150px 150px;
+  @media (-webkit-min-device-pixel-ratio: 2), 
+  (min-resolution: 192dpi) {
+    background-size: 75px 75px;
+  }
+}
+
+// Bordered (top + bottom)
+.bordered {
+  border-top: 1px solid color(black);
+  border-bottom: 1px solid color(black);
 }

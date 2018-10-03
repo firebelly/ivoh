@@ -215,8 +215,7 @@ gulp.task('images', function() {
   return gulp.src(globs.images)
     .pipe(imagemin({
       progressive: true,
-      interlaced: true,
-      svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
+      interlaced: true
     }))
     .pipe(gulp.dest(path.dist + 'images'))
     .pipe(browserSync.stream());
@@ -237,15 +236,12 @@ gulp.task('svgs', function() {
         }]
     }))
     .pipe(gulp.dest(path.source + 'svgs'))
+    .pipe(gulp.dest(path.dist + 'svgs'))
     .pipe(svgstore({ inlineSvg: true }))
     .pipe(rename({suffix: '-defs'}))
-    .pipe(gulp.dest(path.source + 'svgs/build'));
-});
-// convert to png for fallback
-gulp.task('svgfallback', function() {
-  return gulp.src(path.source + 'svgs/*.svg')
-    .pipe(svg2png())
-    .pipe(gulp.dest('assets/images'));
+    .pipe(gulp.dest(path.source + 'svgs/build'))
+    .pipe(gulp.dest(path.dist + 'svgs/build'))
+    .pipe(browserSync.stream());
 });
 
 // ### JSHint
@@ -283,7 +279,7 @@ gulp.task('watch', ['styles', 'scripts'], function() {
   gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
-  gulp.watch([path.source + 'svgs/*.svg'], ['svgs', 'svgfallback']);
+  gulp.watch([path.source + 'svgs/*.svg'], ['svgs']);
   gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
 });
 

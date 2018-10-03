@@ -1,0 +1,10 @@
+// Component Library
+
+.component.colors {
+  .color {
+    height: 0;
+    padding-bottom: 100%;
+    margin-bottom: $gutter;
+    @extend .bordered;
+  }
+}

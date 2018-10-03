@@ -1,0 +1,33 @@
+// Colors
+
+@each $color, $value in $colors {
+  // Color-themes based on data attribute
+  [data-theme="#{$color}"] {
+    background-color: $value;
+
+    .background-blend {
+      position: relative;
+
+      &::after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+        background-color: $value;
+      }
+    }
+  }
+
+  .color-#{$color} {
+    fill: $value;
+    color: $value;
+  }
+
+  .background-#{$color} {
+    background-color: $value;
+  }
+}

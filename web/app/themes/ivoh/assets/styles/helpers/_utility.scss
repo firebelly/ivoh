@@ -1,0 +1,41 @@
+// Utility Classes
+
+// Visibility
+.hidden {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+
+// Disable-scrolling
+.no-scroll {
+  position: fixed;
+  overflow: hidden;
+}
+
+// Clearfix
+.clearfix,
+.cf {
+  @include clearfix;
+}
+
+// Semantic List
+.semantic-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Utility Style classes
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}

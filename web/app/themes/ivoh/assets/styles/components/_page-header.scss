@@ -1,0 +1,48 @@
+// Page Header
+
+.page-header {
+  @extend .bordered;
+  padding: 0 $gutter;
+  @include media-md {
+    padding: 0;
+  }
+}
+
+// Banner Images
+.banner-image-container {
+
+  .banner-image {
+    height: 192px;
+    position: relative;
+    filter: grayscale(1);
+    background-size: cover;
+    background-position: center;
+
+    @include media-md {
+      height: 0;
+      padding-bottom: 31.25%;
+    }
+
+    &::before,
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &::before {
+      mix-blend-mode: multiply;
+      background-color: color(gray-light);
+    }
+
+    &::after {
+      opacity: .35;
+      mix-blend-mode: screen;
+      background-color: color(gray);
+    }
+  }
+}
