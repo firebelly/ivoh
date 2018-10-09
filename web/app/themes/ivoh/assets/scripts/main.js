@@ -4,13 +4,19 @@
 // Good Design for Good Reason for Good Namespace
 var FBSage = (function($) {
 
-  var screen_width = 0,
-      breakpoint_small = false,
-      breakpoint_medium = false,
-      breakpoint_large = false,
-      breakpoint_array = [480,1000,1200],
+  var $window = $(window),
+      $body = $('body'),
+      breakpointIndicatorString,
+      breakpoint_xl,
+      breakpoint_nav,
+      breakpoint_lg,
+      breakpoint_md,
+      breakpoint_sm,
+      breakpoint_xs,
+      resizeTimer,
+      transitionElements,
       $document,
-      $sidebar,
+      $siteNav,
       loadingTimer,
       page_at;
 
@@ -20,16 +26,21 @@ var FBSage = (function($) {
 
     // Cache some common DOM queries
     $document = $(document);
-    $('body').addClass('loaded');
+    $body.addClass('loaded');
+    $siteNav = $('.site-nav');
 
     // Set screen size vars
     _resize();
+
+    // Transition elements to enable/disable on resize
+    transitionElements = [$siteNav, $('.search-form-container')];
 
     // Fit them vids!
     $('main').fitVids();
 
     _initThemeSwitcher();
-    // _initNav();
+    _initActiveToggle();
+    _initNav();
     // _initSearch();
     // _initLoadMore();
 
@@ -77,6 +88,15 @@ var FBSage = (function($) {
     });
   }
 
+  function _initActiveToggle() {
+    $(document).on('click', '[data-active-toggle]', function(e) {
+      $(this).toggleClass('-active');
+      if ($(this).attr('data-active-toggle') !== '') {
+        $($(this).attr('data-active-toggle')).toggleClass('-active');
+      }
+    });
+  }
+
   function _initSearch() {
     $('.search-form:not(.mobile-search) .search-submit').on('click', function (e) {
       if ($('.search-form').hasClass('active')) {
@@ -100,23 +120,27 @@ var FBSage = (function($) {
   // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
-    $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
-      .prependTo('header.banner')
+    $('<div class="menu-toggle"><span class="text">Menu</span><span class="menu-bar"></span></div>')
+      .appendTo('header.site-header')
       .on('click', function(e) {
-        _showMobileNav();
+        if ($(this).is('.-active')) {
+          _hideMobileNav();
+        } else {
+          _showMobileNav();
+        }
       });
-    var mobileSearch = $('.search-form').clone().addClass('mobile-search');
-    mobileSearch.prependTo('.site-nav');
   }
 
   function _showMobileNav() {
-    $('.menu-toggle').addClass('menu-open');
-    $('.site-nav').addClass('active');
+    $('.menu-toggle .text').html('close');
+    $body.addClass('menu-open');
+    $('.menu-toggle, .site-nav').addClass('-active');
   }
 
   function _hideMobileNav() {
-    $('.menu-toggle').removeClass('menu-open');
-    $('.site-nav').removeClass('active');
+    $('.menu-toggle .text').html('menu');
+    $body.removeClass('menu-open');
+    $('.menu-toggle, .site-nav').removeClass('-active');
   }
 
   function _initLoadMore() {
@@ -168,18 +192,45 @@ var FBSage = (function($) {
     if (typeof ga !== 'undefined') { ga('send', 'event', category, action); }
   }
 
-  // Called in quick succession as window is resized
-  function _resize() {
-    screenWidth = document.documentElement.clientWidth;
-    breakpoint_small = (screenWidth > breakpoint_array[0]);
-    breakpoint_medium = (screenWidth > breakpoint_array[1]);
-    breakpoint_large = (screenWidth > breakpoint_array[2]);
+  // Disabling transitions on certain elements on resize
+  function _disableTransitions() {
+    $.each(transitionElements, function() {
+      $(this).css('transition', 'none');
+    });
   }
 
-  // Called on scroll
-  // function _scroll(dir) {
-  //   var wintop = $(window).scrollTop();
-  // }
+  function _enableTransitions() {
+    $.each(transitionElements, function() {
+      $(this).attr('style', '');
+    });
+  }
+
+  // Called in quick succession as window is resized
+  function _resize() {
+    // Check breakpoint indicator in DOM ( :after { content } is controlled by CSS media queries )
+    breakpointIndicatorString = window.getComputedStyle(
+      document.querySelector('#breakpoint-indicator'), ':after'
+    ).getPropertyValue('content')
+    .replace(/['"]+/g, '');
+
+    // Determine current breakpoint
+    breakpoint_nav = breakpointIndicatorString === 'nav';
+    breakpoint_xl = breakpointIndicatorString === 'xl' || breakpoint_nav;
+    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_xl;
+    breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
+    breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
+    breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    // Disable transitions when resizing  
+    _disableTransitions();
+
+    // Functions to run on resize end
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      // Re-enable transitions
+      _enableTransitions();    
+    }, 250);
+  }
 
   // Public functions
   return {

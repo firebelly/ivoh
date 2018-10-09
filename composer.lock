@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8bad08410414a61dff574c2f75fda26",
+    "content-hash": "fbbfe4ef92dd6ecb0cf5f17f2ddcaf87",
     "packages": [
         {
             "name": "composer/installers",
@@ -382,6 +382,26 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/intuitive-custom-post-order",
+            "version": "3.1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/intuitive-custom-post-order/",
+                "reference": "tags/3.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/intuitive-custom-post-order.3.1.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/intuitive-custom-post-order/"
         }
     ],
     "packages-dev": [

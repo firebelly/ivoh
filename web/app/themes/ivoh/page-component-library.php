@@ -1,10 +1,10 @@
 <div class="page-header patterned">
-  <div class="banner-image-container background-blend container-lg">
+  <div class="banner-image-container background-blend fb-container-lg">
     <div class="banner-image" style="background-image:url('<?= get_stylesheet_directory_uri(); ?>/dist/images/sample.jpg');"></div>
   </div>
 </div>
 
-<div class="container-lg">
+<div class="fb-container-lg">
 
   <form action="" id="theme-switcher">
     <select name="themeswitcher">
@@ -17,7 +17,7 @@
   
 </div>
 
-<div class="container-content">
+<div class="fb-container-content">
   <h2 class="h2">Colors</h2>
   <div class="component colors grid">
     <div class="one-half md-one-third lg-one-fourth">
@@ -55,7 +55,7 @@
   </div>
 </div>
 
-<div class="container-content">
+<div class="fb-container-content">
   <h1 class="h1">H1 Adipiscing Fusce</h1>
   <h2 class="h2">H2 Ultricies Tristique Purus</h2>
   <h3 class="h3">H3 Egestas Fermentum Purus Sollicitudin</h3>
@@ -66,7 +66,28 @@
   <p class="p2">P2 Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Aenean lacinia bibendum nulla sed consectetur.</p>
 </div>
 
-<div class="container-content">
+<div class="fb-container-content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus delectus, quaerat, eligendi nulla assumenda maxime. Odit quod ducimus laborum, accusamus labore veniam. Nobis adipisci debitis sit, saepe, vero cum amet.</p>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis dolor a atque itaque illo consequatur iure quis quidem saepe, ullam recusandae inventore eveniet eaque. Fugit quidem, iusto repellat repellendus ex.</p>
+</div>
+
+<div class="grid patterned fb-container-lg">
+  <article class="card md-one-half lg-one-third">
+    <h3 class="card-subtitle">Secondary Text</h4>
+    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+    <p class="card-action"><a href="#" class="button">Read</a></p>
+  </article>
+  <article class="card md-one-half lg-one-third">
+    <h3 class="card-subtitle">Secondary Text</h4>
+    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+    <p class="card-action"><a href="#" class="button">Read</a></p>
+  </article>
+  <article class="card md-one-half lg-one-third">
+    <h3 class="card-subtitle">Secondary Text</h4>
+    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+    <p class="card-action"><a href="#" class="button">Read</a></p>
+  </article>
 </div>

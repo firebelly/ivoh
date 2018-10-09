@@ -1,37 +1,37 @@
 // Footer
 
 .site-footer {
-  padding: 24px $gutter 0;
+  padding: $padding-md $gutter 0;
   @include media-md {
-    padding: $padding-md 0 0; 
+    padding: $padding-lg 0 0; 
   }
 
   .-inner {
     @include padding;
-    padding-top: 24px;
     text-align: center;
     color: color(white);
-    padding-bottom: 24px;
+    padding-top: $padding-md;
+    padding-bottom: $padding-md;
     background-color: color(black);
 
     [class*=-column] {
       margin-bottom: $gutter;
     }
 
-    @include media-md {
+    @include media-lg {
       text-align: left;
-      padding-top: $padding-md;
-      padding-bottom: $padding-md;
+      padding-top: $padding-lg;
+      padding-bottom: $padding-lg;
 
       .-column-one {
         max-width: columns(3,14);
         flex-basis: columns(3,14);
-        padding-right: $padding-md;
+        padding-right: $padding-lg;
       }
       .-column-two {
         max-width: columns(4,14);
         flex-basis: columns(4,14);
-        padding-right: $padding-md;
+        padding-right: $padding-lg;
       }
       .-column-three {
         max-width: columns(7,14);
@@ -63,7 +63,36 @@
     @include h5;
   }
 
+  .address {
+    margin-bottom: $gutter;
+
+    p {
+      margin: 0;
+    }
+  }
+
   .social-media-links {
+    @include clearfix;
+    text-align: center;
     @extend .semantic-list;
+
+    li {
+      display: inline-block;
+      margin-left: #{$padding-sm * 2};
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    @include media-lg {
+      li {      
+        float: left;
+        margin-left: #{$padding-sm * 3};
+      }
+    }
+  }
+
+  .footer-text p {
+    @include p2;
   }
 }

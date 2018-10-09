@@ -1,6 +1,6 @@
 <footer class="site-footer patterned" role="contentinfo">
   <div class="site-wrap">  
-    <div class="-inner container-md grid">
+    <div class="-inner fb-container-md grid">
 
       <div class="-column-one">
         <h1 class="site-logo"><a href="<?= esc_url(home_url('/')); ?>"><svg class="ivoh-logo"><use xlink:href="#logo"/></svg><span class="sr-only"><?php bloginfo('name'); ?></span></a></h1>
@@ -17,8 +17,8 @@
           <p class="email">contactemail@ivoh.org</p>
         </div>
         <ul class="social-media-links">
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Twitter</a></li>
+          <li><a href="#" class="button circular"><svg class="icon icon-facebook" aria-hidden="true" role="presentation"><use xlink:href="#icon-facebook"/></svg></a></li>
+          <li><a href="#" class="button circular"><svg class="icon icon-twitter" aria-hidden="true" role="presentation"><use xlink:href="#icon-twitter"/></svg></a></li>
         </ul>
       </div>
 

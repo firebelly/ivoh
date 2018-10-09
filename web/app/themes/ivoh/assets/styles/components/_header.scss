@@ -1,17 +1,336 @@
 // Header
 
+// Page-padding to compensate for fixed header
+body {
+  padding-top: $headerHeightSm;
+  @include media-nav {
+    padding-top: $headerHeightMd;
+  }
+}
+
 .site-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  position: fixed;
+  padding: 0 $padding-md;
+  height: $headerHeightSm;
+  background-color: color(pink);
+  border-bottom: 1px solid color(black);
+  @include transition(background-color);
+
+  @include media-nav {
+    padding: 0;
+    height: $headerHeightMd;
+
+    > .-inner {
+      @include clearfix;
+    }
+
+    &:hover,
+    &.-hover {
+      color: color(white);
+      border-color: color(white);
+      background-color: color(black);
+
+      .site-logo .ivoh-logo {
+        fill: color(white);
+      }
+
+      .primary-nav,
+      .secondary-nav {
+        > li:not(.donate)::after {
+          background-color: color(white);
+        }
+      }
+    }
+  }
+
   .site-logo {
     margin: 0;
+    left: -10px;
+    font-size: 24px;
+    position: relative;
+    line-height: $headerHeightSm;
+
+    a {
+      padding: 0 10px;
+      display: inline-block;
+    }
 
     .ivoh-logo {
+      top: 2px;
       width: 55px;
       height: 24px;
+      position: relative;
       fill: color(black);
+    }
 
-      @include media-md {
+    @include media-nav {
+      float: left;
+      font-size: 15px;
+      margin-right: 62px;
+      line-height: $headerHeightMd;
+
+      .ivoh-logo {
+        top: 0;
         width: 34px;
         height: 15px;
+      }
+    }
+  }
+}
+
+// Nav
+.site-nav {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  color: color(white);
+  padding-top: $headerHeightSm;
+  transform: translateY(-100%);
+  background-color: color(black);
+  @include transition(transform);
+
+  &.-active {
+    transform: none;
+  }
+
+  @include media-nav {
+    top: auto;
+    left: auto;
+    width: auto;
+    bottom: auto;
+    display: flex;
+    color: inherit;
+    padding-top: 0;
+    transform: none;
+    position: relative;
+    background-color: transparent;
+    justify-content: space-between;
+  }
+
+  a {
+    color: inherit;
+    display: block;
+    padding: 0 $gutter;
+    text-decoration: none;
+    height: $headerHeightSm;
+  }
+
+  // Top Level Items
+  .primary-nav,
+  .secondary-nav {
+    > li {
+
+      > a {
+        @include h5;
+        line-height: #{$headerHeightMd + 1};
+      }
+
+      @include media-nav {
+        &:not(.donate) {        
+          overflow: hidden;
+          position: relative;
+
+          a {
+            height: $headerHeightMd;
+          }
+
+          &::after {
+            left: 50%;
+            bottom: 0;
+            opacity: 0;
+            content: '';
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            position: absolute;
+            @include transition(opacity);
+            background-color: color(black);
+            transform: translateX(-50%) translateY(12px);
+          }
+
+          &:hover,
+          &:focus,
+          &.current-menu-item {
+            &::after {
+              opacity: 1;
+            }
+          }
+
+          &:hover,
+          &:focus {
+            &::after {
+              background-color: color(white);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  ul {
+    @include clearfix;
+    @extend .semantic-list;
+
+    li {
+      @include media-nav {
+        float: left;
+        height: $headerHeightMd;
+      }
+    }
+  }
+
+  .sub-menu {
+    display: none;
+
+    a {
+      @include h4;
+    }
+  }
+
+  .primary-nav {
+
+
+    @include media-nav {
+      li {
+        margin-left: $gutter;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .secondary-nav-container {
+    @include media-nav {
+      @include clearfix;
+      > * {
+        float: left;
+      }
+    }
+  }
+
+  .secondary-nav {
+    @include media-nav {
+      li:not(.donate) {
+        margin-left: #{$gutter * 2};
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  // Donate Button
+  li.donate {
+
+    @include media-nav {    
+      position: relative;
+      vertical-align: top;
+      margin-left: #{$padding-sm * 2};
+      line-height: #{$headerHeightMd - 3};
+
+      a {
+        @include button;
+      }
+    }
+  }
+
+  // Search Toggle
+  .search-toggle {
+    display: none;
+
+    @include media-nav {
+      top: 15px;
+      display: flex;
+      margin-left: 20px;
+      position: relative;
+    }
+  }
+
+}
+
+// Menu-open
+body.menu-open {
+  .site-logo {
+    z-index: 1;
+    .ivoh-logo {
+      fill: color(white);
+    }
+  }
+}
+
+// Menu Toggle
+.menu-toggle {
+  top: 15px;
+  z-index: 30;
+  cursor: pointer;
+  @include clearfix;
+  position: absolute;
+  right: #{$padding-sm * 3};
+
+  @include media-nav {
+    display: none;
+  }
+
+  .text {
+    float: left;
+    @include h5;
+    margin-top: 1px;
+    margin-right: 10px;
+  }
+
+  .menu-bar {
+    top: 8px;
+    float: left;
+    height: 1px;
+    width: 18px;
+    position: relative;
+    background-color: color(black);
+
+    &::before,
+    &::after {
+      width: 18px;
+      height: 1px;
+      content: '';
+      position: absolute;
+      background-color: color(black);
+    }
+    &::before {
+      top: -7px;
+      transform-origin: top right;
+    }
+    &::after {
+      bottom: -7px;
+      transform-origin: bottom right;
+    }
+  }
+
+  &.-active {
+    .text {
+      color: color(red);
+    }
+
+    .menu-bar {
+      background-color: transparent;
+
+      &::before,
+      &::after {
+        background-color: color(red);
+      }
+
+      &::before {
+        transform: rotate(-45deg) translateY(-1px) translateX(-3px);
+      }
+      &::after {
+        transform: rotate(45deg) translateY(2px) translateX(-2px);
       }
     }
   }

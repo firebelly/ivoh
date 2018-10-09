@@ -1,1 +1,21 @@
 // Search form
+
+.search-form-container {
+
+  @include media-nav {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    position: fixed;
+    top: $headerHeightMd;
+    transition: transform .3s ease-out;
+    background-color: rgba(color(black),.9);
+    transform: translateY(calc(-100% - #{$headerHeightMd}));
+
+    &.-active {
+      transform: none;
+    }
+  }
+
+}

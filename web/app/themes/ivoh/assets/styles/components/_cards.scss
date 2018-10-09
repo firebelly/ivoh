@@ -1,0 +1,20 @@
+// Cards
+
+.card {
+  text-align: center;
+  padding: #{$padding-sm * 3};
+  background-color: color(pink);
+  outline: 1px solid color(black);
+  
+  .card-subtitle {
+    @include h5;
+  }
+
+  .card-title {
+    @include h3;
+  }
+
+  .card-text {
+    @include p2;
+  }
+}

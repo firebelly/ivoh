@@ -1,0 +1,54 @@
+// Buttons
+
+// Button Mixin
+@mixin button() {
+  @include h5;
+  outline: none;
+  background: none;
+  box-shadow: none;
+  appearance: none;
+  color: color(red);
+  border-radius: 8px;
+  display: inline-block;
+  text-decoration: none;
+  line-height: #{$gutter * 3};
+  border: 1px solid color(red);
+  padding-left: #{$padding-sm * 3};
+  padding-right: #{$padding-sm * 3};
+  @include transition(color, background-color);
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    fill: color(red);
+    @include transition(fill);
+  }
+
+  // States
+  &.-hover,
+  &:hover,
+  &:focus {
+    color: color(white);
+    background-color: color(red);
+
+    .icon {
+      fill: color(white);
+    }
+  }
+}
+
+.button {
+  @include button;
+
+  &.circular {
+    padding: 0;
+    display: flex;
+    border-radius: 50%;
+    width: #{$gutter * 3};
+    height: #{$gutter * 3};
+
+    .icon {
+      margin: auto;
+    }
+  }
+}

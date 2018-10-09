@@ -5,6 +5,11 @@
   [data-theme="#{$color}"] {
     background-color: $value;
 
+    .site-header,
+    .card {
+      background-color: $value;
+    }
+
     .background-blend {
       position: relative;
 

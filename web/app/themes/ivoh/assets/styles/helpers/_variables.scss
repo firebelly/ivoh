@@ -24,13 +24,21 @@ $breakpoint-lg: 1000px;
 $breakpoint-xl: 1200px;
 $breakpoint-nav: 1050px;
 
+// Sizes
+$headerHeightSm: 48px;
+$headerHeightMd: 80px;
+
 // Global Padding
 $padding-sm: 8px;
-$padding-md: 72px;
+$padding-md: $padding-sm * 3;
+$padding-lg: $padding-sm * 9;
 @mixin padding() {
   padding: 0 $padding-sm;
 
   @include media-md {
-    padding: 0 $padding-md;
+    padding: 0 $padding-lg;
   }
 }
+
+// Global UI Transitions
+$transition: .2s;
