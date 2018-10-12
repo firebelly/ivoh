@@ -2,9 +2,25 @@
 
 .card {
   text-align: center;
-  padding: #{$padding-sm * 3};
   background-color: color(pink);
   outline: 1px solid color(black);
+
+
+  .card-content {
+    padding: $padding-md;
+    
+    @include media-md {
+      padding: #{$padding-md * 2};
+    }
+  }
+
+  .card-image {
+    height: 0;
+    background-size: cover;
+    padding-bottom: 61.7647%;
+    @include image-treatment();
+    background-position: center;
+  }
   
   .card-subtitle {
     @include h5;
@@ -16,5 +32,10 @@
 
   .card-text {
     @include p2;
+  }
+
+  .card-action {
+    margin-bottom: 0;
+    margin-top: $gutter;
   }
 }

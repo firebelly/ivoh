@@ -10,6 +10,12 @@
       background-color: $value;
     }
 
+    @include media-nav {
+      .site-nav {
+        background-color: $value;
+      }
+    }
+
     .background-blend {
       position: relative;
 

@@ -71,23 +71,32 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis dolor a atque itaque illo consequatur iure quis quidem saepe, ullam recusandae inventore eveniet eaque. Fugit quidem, iusto repellat repellendus ex.</p>
 </div>
 
-<div class="grid patterned fb-container-lg">
+<div class="mobile-gutter grid patterned fb-container-lg">
   <article class="card md-one-half lg-one-third">
-    <h3 class="card-subtitle">Secondary Text</h4>
-    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
-    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
-    <p class="card-action"><a href="#" class="button">Read</a></p>
+    <div class="card-content">    
+      <h3 class="card-subtitle">Secondary Text</h4>
+      <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+      <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+      <p class="card-action"><a href="#" class="button">Read</a></p>
+    </div>
   </article>
   <article class="card md-one-half lg-one-third">
-    <h3 class="card-subtitle">Secondary Text</h4>
-    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
-    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
-    <p class="card-action"><a href="#" class="button">Read</a></p>
+    <div class="card-content">    
+      <h3 class="card-subtitle">Secondary Text</h4>
+      <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+      <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+      <p class="card-action"><a href="#" class="button">Read</a></p>
+    </div>
   </article>
   <article class="card md-one-half lg-one-third">
-    <h3 class="card-subtitle">Secondary Text</h4>
-    <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
-    <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
-    <p class="card-action"><a href="#" class="button">Read</a></p>
+    <div class="card-image-container background-blend">
+      <div class="card-image" style="background-image:url('<?= get_stylesheet_directory_uri(); ?>/dist/images/sample.jpg');"></div>
+    </div>
+    <div class="card-content">    
+      <h3 class="card-subtitle">Secondary Text</h4>
+      <h2 class="card-title">Porta Cras Adipiscing Vestibulum</h2>
+      <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus porro, provident. Omnis facere sequi laudantium voluptatibus voluptas odio libero cupiditate nostrum, quibusdam quaerat minus unde repudiandae eveniet, vitae eos quo!</div>
+      <p class="card-action"><a href="#" class="button">Read</a></p>
+    </div>
   </article>
 </div>

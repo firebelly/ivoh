@@ -1,5 +1,46 @@
 // Forms
 
+form {
+
+  .input-wrap {
+    position: relative;
+    color: color(black);
+  }
+
+  label {
+    @include h5;
+    top: $gutter;
+    left: $gutter;
+    position: absolute;
+    @include transition(all);
+  }
+
+  input {
+    width: 100%;
+    @include p2;
+    border: none;
+    height: #{$beat * 7};
+    border-radius: 8px 8px 0 0;
+    padding: 21px $gutter 11px;
+    background-color: color(white);
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid color(black);
+
+      + label {
+        top: 4px;
+        @include h6;
+      }
+    }
+  }
+
+  input[type=search] {
+    box-sizing: border-box;
+  }
+
+}
+
 // Custom select styles
 
 .select-wrapper {

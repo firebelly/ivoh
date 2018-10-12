@@ -59,6 +59,14 @@ img {
   }
 }
 
+.mobile-gutter {
+  padding: 0 $gutter;
+
+  @include media-md {
+    padding: 0;
+  }
+}
+
 // Patterned Background
 .patterned {
   background-repeat: repeat;

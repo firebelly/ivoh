@@ -1,6 +1,28 @@
 // Search form
 
 .search-form-container {
+  padding: $padding-md $gutter;
+
+  h3 {
+    @include h4;
+    text-align: center;
+  }
+
+  .-inner {
+    display: flex;
+  }
+
+  .input-wrap {
+    flex-grow: 2;
+  }
+
+  .search-submit {
+    margin-left: $beat;
+  }
+
+  .search-close {
+    display: none;
+  }
 
   @include media-nav {
     left: 0;
@@ -15,6 +37,10 @@
 
     &.-active {
       transform: none;
+    }
+
+    .search-close {
+      display: block;
     }
   }
 

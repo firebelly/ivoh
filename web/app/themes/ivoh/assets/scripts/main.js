@@ -41,7 +41,7 @@ var FBSage = (function($) {
     _initThemeSwitcher();
     _initActiveToggle();
     _initNav();
-    // _initSearch();
+    _initSearch();
     // _initLoadMore();
 
     // Esc handlers
@@ -98,29 +98,32 @@ var FBSage = (function($) {
   }
 
   function _initSearch() {
-    $('.search-form:not(.mobile-search) .search-submit').on('click', function (e) {
-      if ($('.search-form').hasClass('active')) {
-
+    $('.search-toggle').on('click', function(e) {
+      if ($(this).is('.-active')) {
+        _hideSearch();
       } else {
-        e.preventDefault();
-        $('.search-form').addClass('active');
-        $('.search-field:first').focus();
+        _showSearch();
       }
     });
-    $('.search-form .close-button').on('click', function() {
+
+    $('.search-close').on('click', function() {
       _hideSearch();
-      _hideMobileNav();
     });
   }
 
+  function _showSearch() {
+    $body.addClass('search-open');
+  }
+
   function _hideSearch() {
-    $('.search-form').removeClass('active');
+    $body.removeClass('search-open');
+    $('#search, .search-toggle').removeClass('-active');
   }
 
   // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
-    $('<div class="menu-toggle"><span class="text">Menu</span><span class="menu-bar"></span></div>')
+    $('<div class="menu-toggle" aria-hidden="true"><span class="text">Menu</span><span class="menu-bar"></span></div>')
       .appendTo('header.site-header')
       .on('click', function(e) {
         if ($(this).is('.-active')) {
@@ -129,6 +132,11 @@ var FBSage = (function($) {
           _showMobileNav();
         }
       });
+
+    // Adding functionality to sub-nav
+    $siteNav.find('.menu-item-has-children').each(function(e) {
+      $(this).append('<button class="sub-nav-button" aria-hidden="true"></button>');
+    });
   }
 
   function _showMobileNav() {
