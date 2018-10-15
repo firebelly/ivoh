@@ -277,6 +277,10 @@ body {
     &::after {
       transform: translateX(-50%) rotate(90deg);
     }
+
+    @include media-nav {
+      display: none;
+    }
   }
 
   .sub-menu {
