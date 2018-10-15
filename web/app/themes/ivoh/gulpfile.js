@@ -69,6 +69,12 @@ var enabled = {
 // Path to the compiled assets manifest in the dist directory
 var revManifest = path.dist + 'assets.json';
 
+// Error checking; produce an error rather than crashing.
+var onError = function(err) {
+  console.log(err.toString());
+  this.emit('end');
+};
+
 // ## Reusable Pipelines
 // See https://github.com/OverZealous/lazypipe
 
@@ -99,8 +105,6 @@ var cssTasks = function(filename) {
     .pipe(autoprefixer, {
       browsers: [
         'last 2 versions',
-        'ie 9',
-        'android 2.3',
         'android 4',
         'opera 12'
       ]
@@ -178,6 +182,7 @@ gulp.task('styles', ['wiredep'], function() {
       });
     }
     merged.add(gulp.src(dep.globs, {base: 'styles'})
+      .pipe(plumber({errorHandler: onError}))
       .pipe(cssTasksInstance));
   });
   return merged
@@ -192,6 +197,7 @@ gulp.task('scripts', ['jshint'], function() {
   manifest.forEachDependency('js', function(dep) {
     merged.add(
       gulp.src(dep.globs, {base: 'scripts'})
+        .pipe(plumber({errorHandler: onError}))
         .pipe(jsTasks(dep.name))
     );
   });
@@ -213,34 +219,13 @@ gulp.task('fonts', function() {
 // `gulp images` - Run lossless compression on all the images.
 gulp.task('images', function() {
   return gulp.src(globs.images)
-    .pipe(imagemin({
-      progressive: true,
-      interlaced: true
-    }))
+    .pipe(imagemin([
+      imagemin.svgo({plugins: [
+        {removeUnknownsAndDefaults: false},
+        {cleanupIDs: false}
+      ]})
+    ]))
     .pipe(gulp.dest(path.dist + 'images'))
-    .pipe(browserSync.stream());
-});
-
-// ### SVG time!
-gulp.task('svgs', function() {
-  return gulp.src(path.source + 'svgs/*.svg')
-    .pipe(svgmin({
-        plugins: [{
-            removeViewBox: false
-        }, {
-            removeEmptyAttrs: false
-        },{
-            mergePaths: false
-        },{
-            cleanupIDs: false
-        }]
-    }))
-    .pipe(gulp.dest(path.source + 'svgs'))
-    .pipe(gulp.dest(path.dist + 'svgs'))
-    .pipe(svgstore({ inlineSvg: true }))
-    .pipe(rename({suffix: '-defs'}))
-    .pipe(gulp.dest(path.source + 'svgs/build'))
-    .pipe(gulp.dest(path.dist + 'svgs/build'))
     .pipe(browserSync.stream());
 });
 
@@ -259,6 +244,26 @@ gulp.task('jshint', function() {
 // `gulp clean` - Deletes the build folder entirely.
 gulp.task('clean', require('del').bind(null, [path.dist]));
 
+// ### SVG time!
+gulp.task('svgs', function() {
+  return gulp.src(path.source + 'svgs/*.svg')
+    .pipe(svgmin({
+        plugins: [{
+            removeViewBox: false
+        }, {
+            removeEmptyAttrs: false
+        },{
+            mergePaths: false
+        },{
+            cleanupIDs: false
+        }]
+    }))
+    .pipe(gulp.dest(path.source + 'svgs'))
+    .pipe(svgstore({ inlineSvg: true }))
+    .pipe(rename({suffix: '-defs'}))
+    .pipe(gulp.dest(path.dist + 'svgs/build'));
+});
+
 // ### Watch
 // `gulp watch` - Use BrowserSync to proxy your dev server and synchronize code
 // changes across devices. Specify the hostname of your dev server at
@@ -268,7 +273,7 @@ gulp.task('clean', require('del').bind(null, [path.dist]));
 gulp.task('watch', ['styles', 'scripts'], function() {
   browserSync.init({
     files: ['{lib,templates}/**/*.php', '*.php'],
-    proxy: config.devUrl,
+//    proxy: config.devUrl,
     notify: false,
     snippetOptions: {
       whitelist: ['/wp-admin/admin-ajax.php'],
