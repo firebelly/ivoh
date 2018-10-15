@@ -29,6 +29,7 @@ $firebelly_includes = [
   'lib/fb-page-fields.php',      // Extra fields for pages
   'lib/fb-post-fields.php',      // Extra fields for posts + CPTs
   'lib/fb-site-options.php',     // Custom site options page for admin
+  'lib/cpt-feature.php',         // CPT Feature
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);
