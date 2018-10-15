@@ -79,30 +79,3 @@ function get_total_pages($category, $per_page) {
   $num_pages = ceil($cat_info->count / $per_page);
   return $num_pages;
 }
-
-/**
- * Get Page Blocks
- */
-function get_page_blocks($post) {
-  $output = '';
-  $page_blocks = get_post_meta($post->ID, '_cmb2_page_blocks', true);
-  if ($page_blocks) {
-    foreach ($page_blocks as $page_block) {
-      if (empty($page_block['hide_block'])) {
-        $block_title = $block_body = '';
-        if (!empty($page_block['title']))
-          $block_title = $page_block['title'];
-        if (!empty($page_block['body'])) {
-          $block_body = apply_filters('the_content', $page_block['body']);
-          $output .= '<div class="page-block">';
-          if ($block_title) {
-            $output .= '<h2 class="flag">' . $block_title . '</h2>';
-          }
-          $output .= '<div class="user-content">' . $block_body . '</div>';
-          $output .= '</div>';
-        }
-      }
-    }
-  }
-  return $output;
-}
