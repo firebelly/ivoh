@@ -175,6 +175,19 @@ namespace :deploy do
       end
     end
 
+    # Install WP-CLI
+    puts "Installing WP-CLI..."
+    on roles :web do
+      if test("[ -f /home/#{fetch(:login)}/bin/wp ]")
+        puts "WP-CLI already installed."
+      else
+        within "/home/#{fetch(:login)}/bin" do
+          execute :curl, "-so wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar | #{fetch(:php)}"
+          execute :chmod, "u+x wp"
+        end
+      end
+    end
+
     # Delete default index.html file if it exists
     on roles :web do
       execute :rm, "-f #{release_path.join('../index.html')}"
