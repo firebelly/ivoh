@@ -15,7 +15,7 @@ function metaboxes() {
   $page_intro = new_cmb2_box([
     'id'            => $prefix . 'page_intro',
     'title'         => esc_html__( 'Page Intro', 'cmb2' ),
-    'object_types'  => ['page'],
+    'object_types'  => ['page', 'tool'],
     'context'       => 'normal',
     'priority'      => 'high',
   ]);
@@ -63,6 +63,49 @@ function metaboxes() {
     'row_classes' => '-half',
   ]);
 
+  /**
+    * Annual Summit fields
+    */
+  $annual_summit = new_cmb2_box([
+    'id'            => 'secondary_content',
+    'title'         => __( 'Annual Summit Info', 'cmb2' ),
+    'object_types'  => ['page'],
+    'context'       => 'normal',
+    'show_on'       => ['key' => 'page-template', 'value' => 'page-annual-summit.php'],
+    'priority'      => 'high',
+    'show_names'    => true,
+  ]);
+  $annual_summit->add_field([
+    'name'    => esc_html__( 'Date Start', 'cmb2' ),
+    'id'      => $prefix . 'date_start',
+    'type'    => 'text_date',
+  ]);
+  $annual_summit->add_field([
+    'name'    => esc_html__( 'Date End', 'cmb2' ),
+    'id'      => $prefix . 'date_end',
+    'type'    => 'text_date',
+  ]);
+  $annual_summit->add_field([
+    'name'    => esc_html__( 'Venue', 'cmb2' ),
+    'id'      => $prefix . 'venue',
+    'type'    => 'text',
+  ]);
+  $annual_summit->add_field([
+    'name' => esc_html__( 'Address', 'cmb2' ),
+    'id'   => $prefix . 'address',
+    'type' => 'address',
+  ]);
+  $annual_summit->add_field([
+    'name' => esc_html__( 'Register URL', 'cmb2' ),
+    'id'   => $prefix . 'register_url',
+    'type' => 'text_url',
+  ]);
+  $annual_summit->add_field([
+    'name' => esc_html__( 'Microsite URL', 'cmb2' ),
+    'id'   => $prefix . 'microsite_url',
+    'type' => 'text_url',
+  ]);
+
   // /**
   //   * Homepage fields
   //   */
@@ -106,97 +149,21 @@ function metaboxes() {
   /**
     * Donate page fields
     */
-  $donate_multiple_fields = new_cmb2_box([
-    'id'            => 'donation_multiple_fields',
-    'title'         => __( 'Monthly Donation Options', 'cmb2' ),
-    'object_types'  => ['page'],
-    'context'       => 'normal',
-    'show_on'       => ['key' => 'page-template', 'value' => 'page-donate.php'],
-    'priority'      => 'core',
-    'show_names'    => true,
-  ]);
-  $group_field_id = $donate_multiple_fields->add_field( [
-    'id'              => 'donation_multiple_options',
-    'type'            => 'group',
-    'show_on'         => ['key' => 'page-template', 'value' => 'page-donate.php'],
-    'options'         => [
-      'group_title'   => __( 'Option {#}', 'cmb2' ),
-      'add_button'    => __( 'Add Another Option', 'cmb2' ),
-      'remove_button' => __( 'Remove Option', 'cmb2' ),
-      'sortable'      => true,
-    ],
-  ]);
-  $donate_multiple_fields->add_group_field( $group_field_id, [
-    'name' => 'Amount',
-    'id'   => 'amount',
-    'type' => 'text',
-    'row_classes' => '-half',
-  ]);
-  $donate_multiple_fields->add_group_field( $group_field_id, [
-    'name' => 'Description',
-    'id'   => 'description',
-    'type' => 'text',
-  'row_classes' => '-half',
-  ]);
-
-  $donate_gift_fields = new_cmb2_box([
-    'id'            => 'donation_gift_fields',
-    'title'         => __( 'Multiple Donation Gift Options', 'cmb2' ),
-    'object_types'  => ['page'],
-    'context'       => 'normal',
-    'show_on'       => ['key' => 'page-template', 'value' => 'page-donate.php'],
-    'priority'      => 'core',
-    'show_names'    => true,
-  ]);
-  $group_field_id = $donate_gift_fields->add_field( [
-    'id'              => 'donation_gift_options',
-    'type'            => 'group',
-    'show_on'         => ['key' => 'page-template', 'value' => 'page-donate.php'],
-    'options'         => [
-      'group_title'   => __( 'Option {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
-      'add_button'    => __( 'Add Another Option', 'cmb2' ),
-      'remove_button' => __( 'Remove Option', 'cmb2' ),
-      'sortable'      => true,
-    ],
-  ]);
-  $donate_gift_fields->add_group_field( $group_field_id, [
-    'name' => 'Description',
-    'id'   => 'description',
-    'type' => 'text',
-  ]);
-
   $donate_single_fields = new_cmb2_box([
-    'id'            => 'donation_single_fields',
-    'title'         => __( 'Single Donation Options', 'cmb2' ),
+    'id'            => 'donation_options',
+    'title'         => __( 'Donation Options', 'cmb2' ),
     'object_types'  => ['page'],
     'context'       => 'normal',
     'show_on'       => ['key' => 'page-template', 'value' => 'page-donate.php'],
     'priority'      => 'core',
     'show_names'    => true,
   ]);
-  $group_field_id = $donate_single_fields->add_field( [
-    'id'              => 'donation_single_options',
-    'type'            => 'group',
-    'show_on'         => ['key' => 'page-template', 'value' => 'page-donate.php'],
-    'options'         => [
-      'group_title'   => __( 'Option {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
-      'add_button'    => __( 'Add Another Option', 'cmb2' ),
-      'remove_button' => __( 'Remove Option', 'cmb2' ),
-      'sortable'      => true,
-    ],
-  ]);
-  $donate_single_fields->add_group_field( $group_field_id, [
+  $donate_single_fields->add_field([
     'name'        => 'Amount',
     'id'          => 'amount',
     'type'        => 'text',
-    'row_classes' => '-half',
-  ]);
-  $donate_single_fields->add_group_field( $group_field_id, [
-    'name'            => 'Description',
-    'id'              => 'description',
-    'sanitization_cb' => __NAMESPACE__.'\sanitize_text_callback',
-    'type'            => 'text',
-    'row_classes'     => '-half',
+    'sortable'    => true,
+    'repeatable'  => true,
   ]);
 }
 
