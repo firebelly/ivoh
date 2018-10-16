@@ -39,3 +39,6 @@ bin
 
 # Capistrano
 .gems
+
+# Error Log
+log

@@ -1,10 +1,15 @@
 // Page Header
 
 .page-header {
-  @extend .bordered;
-  padding: 0 $gutter;
+  text-align: center;
+  padding: #{$beat * 6} $gutter;
+
+  h1 {
+    @include h1;
+  }
+
   @include media-md {
-    padding: 0;
+    padding: #{$beat * 9} $gutter;
   }
 }
 

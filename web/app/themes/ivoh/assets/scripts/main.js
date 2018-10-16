@@ -135,18 +135,20 @@ var FBSage = (function($) {
 
     // Adding functionality to sub-nav
     $siteNav.find('.menu-item-has-children').each(function(e) {
-      $(this).append('<button class="sub-nav-button" aria-hidden="true"></button>');
+      $(this).append('<button class="sub-nav-button expand-contract" aria-hidden="true"><span class="icon plus-minus"></span></button>');
     });
 
     // Toggling sub-nav from the mobile menu
-      $siteNav.on('click', '.menu-item-has-children > a, .menu-item-has-children .sub-nav-button', function(e) {
+      $siteNav.on('click', '.menu-item-has-children > a', function(e) {
         e.preventDefault();
 
         if (!breakpoint_nav) {
           if ($(this).parent('li').is('.-active')) {
             $(this).parent('li').removeClass('-active');
+            $(this).parent('li').find('.sub-nav-button').removeClass('-active');
           } else {
             $(this).parent('li').addClass('-active');
+            $(this).parent('li').find('.sub-nav-button').addClass('-active');
           }
         }
       });
