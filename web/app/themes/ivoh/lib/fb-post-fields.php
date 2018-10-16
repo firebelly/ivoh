@@ -24,6 +24,21 @@ function metaboxes() {
     'type'    => 'checkbox',
   ]);
 
+  // $author = new_cmb2_box([
+  //   'id'            => $prefix . 'author',
+  //   'title'         => esc_html__( 'Author', 'cmb2' ),
+  //   'object_types'  => ['post', 'story'],
+  //   'context'       => 'normal',
+  //   'priority'      => 'high',
+  // ]);
+  // $author->add_field([
+  //   'name'      => 'Author',
+  //   'id'        => $prefix . 'author',
+  //   'type'             => 'select',
+  //   'show_option_none' => true,
+  //   'options_cb'       => '\Firebelly\CMB2\get_people'
+  // ]);
+
   // $image_slideshow = new_cmb2_box([
   //   'id'            => 'image_slideshow',
   //   'title'         => esc_html__( 'Image Slideshow', 'cmb2' ),
