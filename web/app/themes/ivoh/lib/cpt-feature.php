@@ -46,10 +46,10 @@ add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get features
  */
-function get_features($options=[]) {
-  if (empty($options['num_posts'])) $options['num_posts'] = -1;
+function get_features($opts=[]) {
+  if (empty($opts['num_posts'])) $opts['num_posts'] = -1;
   $args = [
-    'numberposts' => $options['num_posts'],
+    'numberposts' => $opts['num_posts'],
     'post_type'   => 'feature',
   ];
 
@@ -58,7 +58,6 @@ function get_features($options=[]) {
   if (!$features_posts) return false;
   $output = '';
   foreach ($features_posts as $feature_post):
-    $feature_post->column_width = $options['column-width'];
     ob_start();
     include(locate_template('templates/article-feature.php'));
     $output .= ob_get_clean();

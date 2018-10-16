@@ -43,7 +43,7 @@ add_filter('mce_buttons_2', __NAMESPACE__ . '\mce_buttons_2');
 
 function simplify_tinymce($settings) {
   // What goes into the 'formatselect' list
-  $settings['block_formats'] = 'H2=h2;H3=h3;Paragraph=p';
+  $settings['block_formats'] = 'H2=h2;H3=h3;Paragraph=p;Blockquote=blockquote';
 
   $settings['inline_styles'] = 'false';
   if (!empty($settings['formats']))

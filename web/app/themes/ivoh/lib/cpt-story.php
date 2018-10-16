@@ -51,26 +51,26 @@ function metaboxes() {
     'id'        => $prefix . 'story_republished',
     'type'      => 'text_medium',
   ]);
-  $story_info->add_field([
-    'name'      => 'Featured Image Caption',
-    'id'        => $prefix . 'featured_image_caption',
-    'type'      => 'text',
-  ]);
-  $story_info->add_field([
-    'name'      => 'Featured Image Credit',
-    'id'        => $prefix . 'featured_image_credit',
-    'type'      => 'text',
-  ]);
+  // $story_info->add_field([
+  //   'name'      => 'Featured Image Caption',
+  //   'id'        => $prefix . 'featured_image_caption',
+  //   'type'      => 'text',
+  // ]);
+  // $story_info->add_field([
+  //   'name'      => 'Featured Image Credit',
+  //   'id'        => $prefix . 'featured_image_credit',
+  //   'type'      => 'text',
+  // ]);
 }
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 
 /**
  * Get storys
  */
-function get_storys($options=[]) {
-  if (empty($options['num_posts'])) $options['num_posts'] = -1;
+function get_storys($opts=[]) {
+  if (empty($opts['num_posts'])) $opts['num_posts'] = -1;
   $args = [
-    'numberposts' => $options['num_posts'],
+    'numberposts' => $opts['num_posts'],
     'post_type'   => 'story',
   ];
 
@@ -79,7 +79,6 @@ function get_storys($options=[]) {
   if (!$stories_posts) return false;
   $output = '';
   foreach ($stories_posts as $story_post):
-    $story_post->column_width = $options['column-width'];
     ob_start();
     include(locate_template('templates/article-story.php'));
     $output .= ob_get_clean();

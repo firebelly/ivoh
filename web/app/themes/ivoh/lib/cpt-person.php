@@ -91,7 +91,6 @@ function get_people($options=[]) {
   if (!$people_posts) return false;
   $output = '';
   foreach ($people_posts as $person_post):
-    $person_post->column_width = $options['column-width'];
     ob_start();
     include(locate_template('templates/article-person.php'));
     $output .= ob_get_clean();
