@@ -36,3 +36,6 @@ bin
 
 # Mac crap
 .DS_Store
+
+# Error Log
+log
