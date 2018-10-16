@@ -11,8 +11,8 @@ function metaboxes() {
 
   $post_is_featured = new_cmb2_box([
     'id'            => $prefix . 'post_is_featured',
-    'title'         => esc_html__( 'Is this a featured post on the homepage?', 'cmb2' ),
-    'object_types'  => ['post', 'program'],
+    'title'         => esc_html__( 'Featured Post', 'cmb2' ),
+    'object_types'  => ['post'],
     'context'       => 'side',
     'priority'      => 'default',
     'show_names'    => false,
@@ -20,7 +20,7 @@ function metaboxes() {
   $post_is_featured->add_field([
     'name'    => esc_html__( 'Featured', 'cmb2' ),
     'id'      => $prefix . 'featured',
-    'desc'    => 'Featured?',
+    'desc'    => 'Feature on homepage',
     'type'    => 'checkbox',
   ]);
 
@@ -40,4 +40,21 @@ function metaboxes() {
   //   'desc'       => esc_html__('Slideshow for bottom of post', 'cmb2'),
   // ]);
 
+}
+
+/**
+ * Record timestamp when post is marked featured for ordering
+ */
+add_action('add_post_meta', __NAMESPACE__ . '\\check_featured_added', 10, 3);
+function check_featured_added($post_id, $meta_key, $meta_value) {
+	if ($meta_key === '_cmb2_featured' && $meta_value === 'on') {
+		update_post_meta($post_id, '_date_featured', time());
+	}
+}
+// ... and delete timestamp when unmarked as featured
+add_action('delete_post_meta', __NAMESPACE__ . '\\check_featured_deleted', 10, 4);
+function check_featured_deleted($meta_id, $post_id, $meta_key, $meta_value) {
+	if ($meta_key === '_cmb2_featured') {
+		delete_post_meta($post_id, '_date_featured');
+	}
 }
