@@ -12,25 +12,27 @@
       ],
       "main": true
     },
+    "admin.css": {
+      "files": [ "styles/admin.scss" ]
+    },
+    "admin.js": {
+      "vendor": ["assets/scripts/admin.js"]
+    },
     "customizer.js": {
       "files": [
         "scripts/customizer.js"
       ]
     },
+    "modernizr-custom.js": {
+      "files": [
+        "scripts/modernizr-custom.js"
+      ]
+    },
     "jquery.js": {
       "bower": ["jquery"]
-    },
-    "modernizr.js": {
-      "bower": ["modernizr"]
-    },
-    "respond.js": {
-      "bower": ["respond"]
-    },
-    "svg4everybody.js": {
-      "bower": ["svg4everybody"]
     }
   },
   "config": {
-    "devUrl": "http://ivoh.sage"
+    "devUrl": "http://ivoh.localhost"
   }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Firebelly\Init;
+use Roots\Sage\Assets;
 
 /**
  * Bump up # search results
@@ -74,14 +75,112 @@ function simplify_tinymce($settings) {
       'block' => 'span',
       'classes' => 'button',
     ),
-    // array(
-    //   'title' => '» Arrow Link',
-    //   'block' => 'span',
-    //   'classes' => 'arrow-link',
-    // ),
+    array(
+      'title' => 'Quote Attribution',
+      'block' => 'cite',
+      'classes' => 'quote-attribution',
+    ),
  );
   $settings['style_formats'] = json_encode($style_formats);
 
   return $settings;
 }
 add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
+
+/**
+ * Clean up content before saving post
+ */
+function clean_up_content($content) {
+  // Convert <span class="button"><a></span> to <a class="button"> (can't just add class to element w/ tinymce style formats, has to have wrapper)
+  $content = preg_replace('/<span class=\\\"button\\\"><a(.*)<\/a><\/span>/', '<a class=\"button\"$1</a>', $content);
+  return $content;
+}
+add_filter('content_save_pre', __NAMESPACE__ . '\\clean_up_content', 10, 1);
+//
+// ... and support for cmb2 wysiwyg fields:
+//
+function cmb2_sanitize_wysiwyg_callback($override_value, $content) {
+  $content = preg_replace('/<span class=\\\"button\\\"><a(.*)<\/a><\/span>/', '<a class=\"button\"$1</a>', $content);
+  return $content;
+}
+add_filter('cmb2_sanitize_wysiwyg', __NAMESPACE__ . '\\cmb2_sanitize_wysiwyg_callback', 10, 2);
+
+/**
+ * Remove unused Customize link from admin bar
+ */
+add_action( 'wp_before_admin_bar_render', function() {
+  global $wp_admin_bar;
+  $wp_admin_bar->remove_menu('customize');
+});
+
+/**
+ * Custom Admin styles + JS
+ */
+add_action('admin_enqueue_scripts', function($hook){
+  wp_enqueue_style('fb_wp_admin_css', Assets\asset_path('styles/admin.css'));
+  wp_enqueue_script('fb_wp_admin_js', Assets\asset_path('scripts/admin.js'), ['jquery'], null, true);
+}, 100);
+
+/**
+ * Remove labels from archive/category titles
+ */
+add_filter( 'get_the_archive_title', function($title) {
+  if ( is_category() ) {
+      $title = single_cat_title( '', false );
+  } elseif ( is_tag() ) {
+      $title = single_tag_title( '', false );
+  } elseif ( is_author() ) {
+      $title = '<span class="vcard">' . get_the_author() . '</span>';
+  } elseif ( is_post_type_archive() ) {
+      $title = post_type_archive_title( '', false );
+  } elseif ( is_tax() ) {
+      $title = single_term_title( '', false );
+  }
+  return $title;
+} );
+
+/**
+ * Also search postmeta
+ */
+function search_join($join) {
+  global $wpdb;
+  if (is_search()) {
+    $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+  }
+  return $join;
+}
+add_filter('posts_join', __NAMESPACE__ . '\search_join');
+function search_where($where) {
+  global $wpdb;
+  if (is_search()) {
+    $where = preg_replace(
+      "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+      "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where);
+  }
+  return $where;
+}
+add_filter('posts_where', __NAMESPACE__ . '\search_where');
+function search_distinct($where) {
+  global $wpdb;
+  if (is_search()) {
+    return "DISTINCT";
+  }
+  return $where;
+}
+add_filter('posts_distinct', __NAMESPACE__ . '\search_distinct');
+
+
+/**
+ * Hide editor on specific pages
+ */
+add_action('admin_head', __NAMESPACE__.'\\hide_editor');
+function hide_editor() {
+  global $pagenow;
+  if($pagenow !== 'post.php') return;
+  $post_id = !empty($_GET['post']) ? $_GET['post'] : (!empty($_POST['post_ID']) ? $_POST['post_ID'] : '');
+  if(!isset($post_id)) return;
+  $template_file = basename(get_page_template());
+  if($template_file == 'front-page.php') {
+    remove_post_type_support('page', 'editor');
+  }
+}
