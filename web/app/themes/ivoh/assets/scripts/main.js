@@ -137,6 +137,19 @@ var FBSage = (function($) {
     $siteNav.find('.menu-item-has-children').each(function(e) {
       $(this).append('<button class="sub-nav-button" aria-hidden="true"></button>');
     });
+
+    // Toggling sub-nav from the mobile menu
+      $siteNav.on('click', '.menu-item-has-children > a, .menu-item-has-children .sub-nav-button', function(e) {
+        e.preventDefault();
+
+        if (!breakpoint_nav) {
+          if ($(this).parent('li').is('.-active')) {
+            $(this).parent('li').removeClass('-active');
+          } else {
+            $(this).parent('li').addClass('-active');
+          }
+        }
+      });
   }
 
   function _showMobileNav() {
@@ -222,10 +235,10 @@ var FBSage = (function($) {
     .replace(/['"]+/g, '');
 
     // Determine current breakpoint
-    breakpoint_nav = breakpointIndicatorString === 'nav';
-    breakpoint_xl = breakpointIndicatorString === 'xl' || breakpoint_nav;
+    breakpoint_xl = breakpointIndicatorString === 'xl';
     breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_xl;
-    breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
+    breakpoint_nav = breakpointIndicatorString === 'nav' || breakpoint_lg;
+    breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_nav;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
 
