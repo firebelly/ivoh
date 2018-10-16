@@ -4,6 +4,7 @@
 @mixin button() {
   @include h5;
   outline: none;
+  cursor: pointer;
   background: none;
   box-shadow: none;
   appearance: none;
@@ -33,6 +34,13 @@
 
     .icon {
       fill: color(white);
+      &.plus-minus,
+      &.close {
+        &::before,
+        &::after {
+          background-color: color(white);
+        }
+      }
     }
   }
 }
@@ -44,11 +52,60 @@
     padding: 0;
     display: flex;
     border-radius: 50%;
-    width: #{$gutter * 3};
-    height: #{$gutter * 3};
+    width: #{$beat * 6};
+    height: #{$beat * 6};
 
     .icon {
       margin: auto;
+    }
+  }
+}
+
+// Expand/contract button
+.expand-contract {
+  &.-active {
+    .icon.plus-minus {
+      &::after {
+        transform: translateX(-50%) rotate(0deg);
+      }
+    }
+  }
+}
+
+// CSS Icons Used in Buttons
+.icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: relative;
+  &::before,
+  &::after {
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    width: 18px;
+    content: '';
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: color(red);
+    @include transition(background-color);
+  }
+
+  // Plus/minus icon button
+  &.plus-minus {
+    &::after {
+      @include transition(transform);
+      transform: translateX(-50%) rotate(90deg);
+    }
+  }
+
+  // Close icon
+  &.close {
+    &::before {
+      transform: translateX(-50%) rotate(-45deg);
+    }
+    &::after {
+      transform: translateX(-50%) rotate(45deg);
     }
   }
 }
