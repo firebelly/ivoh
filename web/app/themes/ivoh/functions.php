@@ -32,6 +32,8 @@ $firebelly_includes = [
   // 'lib/cpt-feature.php',         // CPT Feature
   'lib/cpt-story.php',           // CPT Story
   'lib/cpt-person.php',          // CPT Person
+  'lib/cpt-research.php',        // CPT Research
+  'lib/cpt-tool.php',            // CPT Tool
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);
