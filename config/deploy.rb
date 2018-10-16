@@ -1,9 +1,9 @@
-set :application, 'fb-bedrock'
-set :domain, 'fb-bedrock.firebelly.co'
-set :theme, 'fb-sage'
+set :application, 'ivoh'
+set :domain, 'ivoh.firebelly.co'
+set :theme, 'ivoh'
 set :login, 'firebelly'
-set :repo_url, 'git@github.com:firebelly/fb-bedrock.git'
-set :php, 'php70'
+set :repo_url, 'git@github.com:firebelly/ivoh.git'
+set :php, 'php72'
 
 # Hardcodes branch to always be master
 # This could be overridden in a stage config file
@@ -58,17 +58,13 @@ require "#{fetch(:local_abs_path)}/config/webfaction.rb"
 namespace :deploy do
   task :compile_assets do
     run_locally do
-      within fetch(:local_theme_path) do
-        execute :gulp, '--production'
-      end
+      execute "cd #{fetch(:local_theme_path)} && npx gulp --production"
     end
   end
 
   task :ungulp do
     run_locally do
-      within fetch(:local_theme_path) do
-        execute :gulp, '--development'
-      end
+      execute "cd #{fetch(:local_theme_path)} && npx gulp --development"
     end
   end
 
