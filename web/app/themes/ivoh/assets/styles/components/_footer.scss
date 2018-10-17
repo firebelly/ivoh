@@ -2,6 +2,7 @@
 
 .site-footer {
   padding: $padding-md $gutter 0;
+  border-top: 1px solid color(black);
   @include media-md {
     padding: $padding-lg 0 0; 
   }
@@ -95,4 +96,31 @@
   .footer-text p {
     @include p2;
   }
+}
+
+// Site pre-footer
+.site-pre-footer {
+  border-top: solid 1px color(black);
+
+  .-item {
+    padding: $gutter;
+    text-align: center;
+
+    &:first-of-type {
+      border-bottom: 1px solid color(black);
+    }
+
+    h3 {
+      @include h4;
+    }
+
+    @include media-md {
+      padding: #{$beat * 6} #{$beat  * 10};
+
+      &:first-of-type {
+        border-bottom: none;
+        border-right: 1px solid color(black);
+      }
+    }
+  } 
 }

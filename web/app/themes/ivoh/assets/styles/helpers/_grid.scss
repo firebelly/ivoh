@@ -28,6 +28,17 @@ $gutter: 16px;
   &.right-aligned {
     flex-direction: row-reverse;
   }
+
+  // Spaced Items
+  &.spaced {
+    margin-left: -#{$beat / 2};
+    width: calc(100% + #{$beat});
+
+    > * {
+      padding-left: #{$beat / 2};
+      padding-right: #{$beat / 2};
+    }
+  }
 }
 
 // Float Grid Alternative

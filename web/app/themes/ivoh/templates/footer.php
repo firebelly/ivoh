@@ -1,3 +1,10 @@
+<?php
+  $slug = $post->post_name;
+  if ($slug !== 'search' || $slug !== 'donate') {
+    get_template_part('templates/pre-footer');
+  }
+?>
+
 <footer class="site-footer patterned" role="contentinfo">
   <div class="site-wrap">  
     <div class="-inner fb-container-md grid">

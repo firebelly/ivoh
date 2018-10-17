@@ -1,0 +1,56 @@
+// Accordions
+.accordion {
+  &-toggle {
+    margin: 0;
+    cursor: pointer;
+
+    &,
+    .-inner {
+      position: relative;
+    }
+
+    button {
+      top: 50%;
+      right: 0;
+      position: absolute;
+      transform: translate(100%,-50%);
+    }
+  }
+
+  &-content {
+    padding-top: $gutter;
+  }
+
+  // Expanded classes for showing/hiding content
+  // at different breakpoints
+  &.expanded-md {
+    @include media-md {
+      .accordion-toggle {
+        pointer-events: none;
+        button {
+          display: none;
+        }
+      }
+    }
+  }
+  &.expanded-lg {
+    @include media-lg {
+      .accordion-toggle {
+        pointer-events: none;
+        button {
+          display: none;
+        }
+      }
+    }
+  }
+  &.expanded-xl {
+    @include media-xl {
+      .accordion-toggle {
+        pointer-events: none;
+        button {
+          display: none;
+        }
+      }
+    }
+  }
+}
