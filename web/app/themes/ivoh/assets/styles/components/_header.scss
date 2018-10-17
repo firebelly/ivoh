@@ -13,7 +13,7 @@ body {
     padding-top: $headerHeightSm + 46px;
 
     @include min-screen(783px) {
-      padding-top: $headerHeightMd + 32px;
+      padding-top: $headerHeightMd;
 
       .site-header,
       .site-nav:after {
