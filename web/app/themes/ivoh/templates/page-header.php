@@ -17,11 +17,11 @@
     <p class="page-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo a aliquid veritatis quod esse itaque alias iusto ab enim, quam vitae recusandae aperiam explicabo placeat earum totam, doloribus dignissimos suscipit.</p>
     -->
   </div>
-  
+
   <?php if (has_post_thumbnail($post)) { ?>
   <div class="page-header-banner bordered patterned">
     <div class="banner-image-container background-blend fb-container-lg">
-      <div class="banner-image" style="background-image:url('<?= \Firebelly\Media\get_post_thumbnail($post->ID, 'banner'); ?>');"></div>
+      <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
     </div>
   </div>
   <?php } ?>

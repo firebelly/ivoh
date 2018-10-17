@@ -58,7 +58,7 @@ function get_attachment_id_from_src($image_src) {
 }
 
 /**
- * Get header bg for post, duotone treated
+ * Get header bg for post (or category or file field), duotone-free
  * @param  string|object   $post_or_image (WP post object or background image)
  * @return HTML            background image code
  */
@@ -67,55 +67,37 @@ function get_header_bg($post_or_image, $opts=[]) {
   $opts = array_merge([
     'absolute_url' => false,
     'thumb_id' => '',
-    'colors' => ['222222','f0f0f0'],
     'size' => 'banner',
     'output' => 'background',
   ], $opts);
   $header_bg = $background_image = false;
+  $upload_dir = wp_upload_dir();
 
   // If WP post object, get the featured image
   if (is_object($post_or_image)) {
     if (has_post_thumbnail($post_or_image->ID)) {
       $opts['thumb_id'] = get_post_thumbnail_id($post_or_image->ID);
-      $background_image = get_thumbnail_size_path($opts['thumb_id'], $opts['size']);
+      $background_image = wp_get_attachment_image_src($opts['thumb_id'], $opts['size'])[0];
     }
   } else {
     // Absolute URLs, e.g. from a taxonomy page or other CMB2 file field
     if ($opts['thumb_id'] && is_numeric($opts['thumb_id'])) {
       // If thumb_id is sent, use that to get image
-      $background_image = get_thumbnail_size_path($opts['thumb_id'], $opts['size']);
+      $background_image = wp_get_attachment_image_src($opts['thumb_id'], $opts['size'])[0];
     } else if (preg_match('/^http/', $post_or_image)) {
       // If it's an absolute URL, make it relative
-      $background_image = wp_upload_dir()['basedir'] . wp_make_link_relative($post_or_image);
+      $background_image = $upload_dir['baseurl'] . wp_make_link_relative($post_or_image);
     } else {
       // Not sure when this would ever happen...
       $background_image = $post_or_image;
     }
   }
   if ($background_image) {
-    $upload_dir = wp_upload_dir();
-    $base_dir = $upload_dir['basedir'] . '/backgrounds/';
-
-    // Build treated filename with thumb_id in case there are filename conflicts
-    $treated_filename = preg_replace("/.+\/(.+)\.(\w{2,5})$/", $opts['thumb_id']."-$1-".$opts['colors'][0]."-".$opts['colors'][1].".$2", $background_image);
-    $treated_image = $base_dir . $treated_filename;
-
-    // If treated file doesn't exist, create it
-    if (!file_exists($treated_image)) {
-
-      // If the background directory doesn't exist, create it first
-      if(!file_exists($base_dir)) {
-        mkdir($base_dir);
-      }
-      $convert_command = (WP_ENV==='development') ? '/usr/local/bin/convert' : '/usr/bin/convert';
-      exec($convert_command.' '.$background_image.' +profile "*"  -quality 65 -modulate 100,0 -size 256x1! gradient:#'.$shadow.'-#'.$opts['colors'][1].' -clut '.$treated_image);
-    }
-
     // Option to return commonly used style=background, or just filename
     if ($opts['output'] == 'background') {
-      $header_bg = ' style="background-image:url(' . $upload_dir['baseurl'] . '/backgrounds/' . $treated_filename . ');"';
+      $header_bg = ' style="background-image:url(' . $background_image . ');"';
     } else {
-      $header_bg = $upload_dir['baseurl'] . '/backgrounds/' . $treated_filename;
+      $header_bg = $background_image;
     }
   }
   return $header_bg;
