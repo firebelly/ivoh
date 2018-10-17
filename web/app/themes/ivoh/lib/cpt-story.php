@@ -16,9 +16,9 @@ $stories->filters(['story_type', 'story_topic']);
 $stories->register();
 
 // Custom taxonomies
-$story_topic = new Taxonomy('story_topic', ['hierarchical' => false]);
+$story_topic = new Taxonomy('story_topic');
 $story_topic->register();
-$story_type = new Taxonomy('story_type');
+$story_type = new Taxonomy('story_type', ['hierarchical' => false]);
 $story_type->register();
 
 /**
@@ -102,13 +102,6 @@ function shortcode_story_carousel($atts) {
     'meta_key'    => '_date_featured',
     'orderby'     => 'meta_value_num',
     'order'       => 'DESC',
-    'tax_query'   => [
-      [
-        'taxonomy' => 'story_type',
-        'field'    => 'slug',
-        'terms'    => $atts['type'],
-      ]
-    ],
     'meta_query'  => [
       [
         'key'       => '_cmb2_featured',
@@ -116,11 +109,21 @@ function shortcode_story_carousel($atts) {
       ]
     ],
   ];
+  // Filter by category?
+  if ($atts['type'] != 'all') {
+    $args['tax_query'] = [
+      [
+        'taxonomy' => 'story_type',
+        'field'    => 'slug',
+        'terms'    => $atts['type'],
+      ]
+    ];
+  }
   $stories = get_posts($args);
 
   foreach ($stories as $story_post) {
     ob_start();
-    include(locate_template('templates/article-story.php'));
+    include(locate_template('templates/carousel-story.php'));
     $output .= ob_get_clean();
   }
 
