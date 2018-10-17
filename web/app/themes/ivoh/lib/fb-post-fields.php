@@ -27,7 +27,7 @@ function metaboxes() {
   $seo_fields = new_cmb2_box([
     'id'            => $prefix . 'seo_fields',
     'title'         => esc_html__( 'SEO', 'cmb2' ),
-    'object_types'  => ['post', 'story', 'page'],
+    'object_types'  => ['post', 'story', 'page', 'tool'],
     'context'       => 'normal',
     'priority'      => 'default',
   ]);
