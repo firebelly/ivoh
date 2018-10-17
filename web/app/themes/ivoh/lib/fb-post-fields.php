@@ -40,7 +40,7 @@ function metaboxes() {
   $seo_fields->add_field([
     'name'    => esc_html__( 'SEO Description', 'cmb2' ),
     'id'      => $prefix . 'seo_description',
-    'desc'    => 'Used for meta description to improve SEO — limit to 155 chars',
+    'desc'    => 'Used for meta description to improve SEO, and for social sharing — limit to 155 chars',
     'type'    => 'textarea_small',
   ]);
 
