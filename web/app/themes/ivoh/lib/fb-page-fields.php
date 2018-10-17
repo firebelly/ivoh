@@ -33,10 +33,10 @@ function metaboxes() {
   $page_intro->add_field([
     'name' => esc_html__( 'Intro Body', 'cmb2' ),
     'id'   => $prefix .'intro_body',
-    'type' => 'wysiwyg',
-    'options' => [
-      'textarea_rows' => 8,
-    ],
+    'type' => 'textarea_small',
+    // 'options' => [
+    //   'textarea_rows' => 8,
+    // ],
   ]);
 
   $group_field_id = $page_intro->add_field([
