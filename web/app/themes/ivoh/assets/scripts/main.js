@@ -43,6 +43,7 @@ var FBSage = (function($) {
     _initNav();
     _initSearch();
     // _initLoadMore();
+    _initAccordions();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -205,6 +206,112 @@ var FBSage = (function($) {
     });
   }
 
+  function _initAccordions() {
+    // Activate/deactive functions
+
+    $('.accordion').each(function() {
+      var $accordion = $(this),
+          $toggle = $accordion.find('.accordion-toggle'),
+          $content = $accordion.find('.accordion-content');
+
+      // Start contracted/expanded depending on screen size
+      if ($accordion.is('.expanded-md')) {
+        if (!breakpoint_md) {
+          $content.hide();
+        } else {
+          _activateAccordion($accordion);
+        }
+      }
+
+      if ($accordion.is('.expanded-lg')) {
+        if (!breakpoint_lg) {
+          $content.hide();
+        } else {
+          _activateAccordion($accordion);
+        }
+      }
+
+      if ($accordion.is('.expanded-xl')) {
+        if (!breakpoint_xl) {
+          $content.hide();
+        } else {
+          _activateAccordion($accordion);
+        }
+      }
+
+      $toggle.on('click', function(e) {
+        if ($accordion.is('.-active')) {
+          _collapseAccordion($accordion);
+        } else {
+          _expandAccordion($accordion);
+        }
+      });
+
+    });
+  }
+
+  function _resetAccordions() {
+    if ($('.accordion').length) {
+      $('.accordion').each(function() {
+        var $accordion = $(this);
+
+        if ($accordion.is('.expanded-md')) {
+          if (!breakpoint_md) {
+            _hideAccordion($accordion);
+          } else {
+            _showAccordion($accordion);
+          }
+        }
+
+        if ($accordion.is('.expanded-lg')) {
+          if (!breakpoint_lg) {
+            _hideAccordion($accordion);
+          } else {
+            _showAccordion($accordion);
+          }
+        }
+
+        if ($accordion.is('.expanded-xl')) {
+          if (!breakpoint_xl) {
+            _hideAccordion($accordion);
+          } else {
+            _showAccordion($accordion);
+          }
+        }
+      });
+    }
+  }
+
+  function _deactivateAccordion($accordion) {
+    $accordion.removeClass('-active');
+    $accordion.find('.expand-contract').removeClass('-active');        
+  }
+
+  function _activateAccordion($accordion) {
+    $accordion.addClass('-active');
+    $accordion.find('.expand-contract').addClass('-active');
+  }
+
+  function _collapseAccordion($accordion) {
+    _deactivateAccordion($accordion);
+    $accordion.find('.accordion-content').slideUp(250);
+  }
+
+  function _expandAccordion($accordion) {
+    _activateAccordion($accordion);
+    $accordion.find('.accordion-content').slideDown(250);
+  }
+
+  function _hideAccordion($accordion) {
+    _deactivateAccordion($accordion);
+    $accordion.find('.accordion-content').hide();
+  }
+
+  function _showAccordion($accordion) {
+    _activateAccordion($accordion);
+    $accordion.find('.accordion-content').show();
+  }
+
   // Track ajax pages in Analytics
   function _trackPage() {
     if (typeof ga !== 'undefined') { ga('send', 'pageview', document.location.href); }
@@ -251,7 +358,9 @@ var FBSage = (function($) {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
       // Re-enable transitions
-      _enableTransitions();    
+      _enableTransitions();
+      // Reset Acordions
+      _resetAccordions();
     }, 250);
   }
 
