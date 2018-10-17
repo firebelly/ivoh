@@ -85,3 +85,44 @@ function get_storys($opts=[]) {
   endforeach;
   return $output;
 }
+
+/**
+ * Story carousel shortcode [story_carousel]
+ */
+add_shortcode('story_carousel', __NAMESPACE__ . '\shortcode_story_carousel');
+function shortcode_story_carousel($atts) {
+  $output = '';
+  $atts = shortcode_atts([
+    'type' => 'restorative-narratives',
+  ], $atts, 'story_carousel');
+
+  $args = [
+    'numberposts' => 3,
+    'post_type'   => 'story',
+    'meta_key'    => '_date_featured',
+    'orderby'     => 'meta_value_num',
+    'order'       => 'DESC',
+    'tax_query'   => [
+      [
+        'taxonomy' => 'story_type',
+        'field'    => 'slug',
+        'terms'    => $atts['type'],
+      ]
+    ],
+    'meta_query'  => [
+      [
+        'key'       => '_cmb2_featured',
+        'value'     => 'on',
+      ]
+    ],
+  ];
+  $stories = get_posts($args);
+
+  foreach ($stories as $story_post) {
+    ob_start();
+    include(locate_template('templates/article-story.php'));
+    $output .= ob_get_clean();
+  }
+
+  return $output;
+}
