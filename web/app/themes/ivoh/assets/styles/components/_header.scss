@@ -1,10 +1,29 @@
 // Header
 
+
 // Page-padding to compensate for fixed header
 body {
   padding-top: $headerHeightSm;
   @include media-nav {
     padding-top: $headerHeightMd;
+  }
+
+  // Page-padding to compensate for wp-admin bar
+  &.admin-bar {
+    padding-top: $headerHeightSm + 46px;
+
+    @include min-screen(783px) {
+      padding-top: $headerHeightMd + 32px;
+
+      .site-header,
+      .site-nav:after {
+        top: 32px;
+      }
+
+      .search-form-container {
+        top: $headerHeightMd + 32px;
+      }
+    }
   }
 }
 
