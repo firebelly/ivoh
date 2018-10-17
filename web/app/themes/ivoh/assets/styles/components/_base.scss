@@ -94,3 +94,21 @@ img {
   border-top: 1px solid color(black);
   border-bottom: 1px solid color(black);
 }
+
+// Background-blend 
+// used on containers of css-treated images
+.background-blend {
+  position: relative;
+
+  &::after {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    background-color: color(pink); // default color
+  }
+}
