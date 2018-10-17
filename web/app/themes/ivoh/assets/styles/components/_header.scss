@@ -174,9 +174,9 @@ body {
     > li {
       border-bottom: 1px solid color(white);
 
-      &.current-menu-item,
+      &.active,
       &.current-menu-parent,
-      .current-menu-item {
+      .active {
         > a {
           text-decoration: underline;
         }
@@ -192,8 +192,7 @@ body {
         border-bottom: none;
         height: $headerHeightMd;
 
-        &.current-menu-item,
-        &.current-menu-parent {
+        &.active {
           > a {
             text-decoration: none;
           }
@@ -224,8 +223,7 @@ body {
 
           &:hover,
           &:focus,
-          &.current-menu-item,
-          &.current-menu-parent {
+          &.active {
             &::after {
               opacity: 1;
             }

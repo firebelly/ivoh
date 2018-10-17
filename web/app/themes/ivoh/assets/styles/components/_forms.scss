@@ -2,6 +2,12 @@
 
 form {
 
+  .form-row {
+    + .form-row {
+      margin-top: $beat;
+    }
+  }
+
   .input-wrap {
     position: relative;
     color: color(black);

@@ -27,6 +27,18 @@
   list-style: none;
 }
 
+// Button reset
+.button-reset {
+  border: none;
+  appearance: none;
+  background: none;
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}
+
 // Transitions-disabled
 .no-transitions {
   transition: none;

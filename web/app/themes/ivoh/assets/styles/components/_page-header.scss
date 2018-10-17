@@ -2,19 +2,70 @@
 
 .page-header {
   text-align: center;
-  padding: #{$beat * 6} $gutter;
 
-  h1 {
+  &-text {
+    padding: #{$beat * 6} $gutter;
+  }
+
+  .page-title {
+    margin: 0;
     @include h1;
   }
 
+  .page-description {
+    margin: #{$beat * 2} auto 0;
+
+    @include media-md {
+      width: columns(8,10);
+    }
+  }
+
   @include media-md {
-    padding: #{$beat * 9} $gutter;
+    &-text {
+      margin: 0 auto;
+      width: columns(10);
+      padding: #{$beat * 9} 0;
+    }
+  }
+}
+
+// Breadcrumbs
+.breadcrumbs {
+  @include h5;
+  @include clearfix;
+  text-align: center;
+  @extend .semantic-list;
+  margin-bottom: #{$beat * 2};
+
+  li {
+    display: inline-block;
+    &::after {
+      content: '/';
+      margin: 0 5px 0 8px;
+    }
+    &:last-of-type {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  a {
+    color: color(black);
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 }
 
 // Banner Images
 .banner-image-container {
+  padding: 0 $gutter;
+  @include media-md {
+    padding: 0;
+  }
 
   .banner-image {
     height: 192px;

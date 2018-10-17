@@ -3,11 +3,8 @@
 // Button Mixin
 @mixin button() {
   @include h5;
-  outline: none;
   cursor: pointer;
-  background: none;
   box-shadow: none;
-  appearance: none;
   color: color(red);
   border-radius: 8px;
   display: inline-block;
@@ -46,6 +43,7 @@
 }
 
 .button {
+  @extend .button-reset;
   @include button;
 
   &.circular {
@@ -63,6 +61,8 @@
 
 // Expand/contract button
 .expand-contract {
+  @extend .button-reset;
+
   &.-active {
     .icon.plus-minus {
       &::after {

@@ -1,8 +1,4 @@
-<div class="page-header patterned">
-  <div class="banner-image-container background-blend fb-container-lg">
-    <div class="banner-image" style="background-image:url('<?= get_stylesheet_directory_uri(); ?>/dist/images/sample.jpg');"></div>
-  </div>
-</div>
+<?php get_template_part('templates/page', 'header'); ?>
 
 <div class="fb-container-lg">
 
