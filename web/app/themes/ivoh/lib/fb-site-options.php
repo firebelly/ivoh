@@ -122,15 +122,15 @@ class FbSiteOptions {
     ) );
 
     $cmb->add_field( array(
-      'name'       => __( 'Twitter ID', 'cmb2' ),
-      'id'         => 'twitter_id',
+      'name'       => __( 'Twitter URL', 'cmb2' ),
+      'id'         => 'twitter_url',
       'type'       => 'text',
       'before_row' => '<h3>Footer Links & Info</h3>',
     ) );
 
     $cmb->add_field( array(
-      'name' => __( 'Facebook ID', 'cmb2' ),
-      'id'   => 'facebook_id',
+      'name' => __( 'Facebook URL', 'cmb2' ),
+      'id'   => 'facebook_url',
       'type' => 'text',
     ) );
 
