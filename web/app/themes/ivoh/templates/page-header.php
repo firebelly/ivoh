@@ -18,11 +18,11 @@
     -->
   </div>
   
-  <!-- if page banner
+  <?php if (has_post_thumbnail($post)) { ?>
   <div class="page-header-banner bordered patterned">
     <div class="banner-image-container background-blend fb-container-lg">
-      <div class="banner-image" style="background-image:url('<?= get_stylesheet_directory_uri(); ?>/dist/images/sample.jpg');"></div>
+      <div class="banner-image" style="background-image:url('<?= \Firebelly\Media\get_post_thumbnail($post->ID, 'banner'); ?>');"></div>
     </div>
   </div>
-  -->
+  <?php } ?>
 </header>
