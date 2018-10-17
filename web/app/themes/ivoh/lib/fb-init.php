@@ -184,3 +184,17 @@ function hide_editor() {
     remove_post_type_support('page', 'editor');
   }
 }
+
+/**
+ * Add support for SEO title field
+ */
+add_filter('pre_get_document_title', __NAMESPACE__.'\\change_the_title');
+function change_the_title() {
+  global $post;
+  if (is_singular() && !empty($post)) {
+    $seo_title = get_post_meta($post->ID, '_cmb2_seo_title', true);
+  }
+  if (!empty($seo_title)) {
+    return $seo_title;
+  }
+}
