@@ -24,6 +24,21 @@ function metaboxes() {
     'type'    => 'checkbox',
   ]);
 
+  $photo_caption = new_cmb2_box([
+    'id'            => $prefix . 'photo_caption',
+    'title'         => esc_html__( 'Photo Caption', 'cmb2' ),
+    'object_types'  => ['post', 'page', 'story'],
+    'context'       => 'side',
+    'priority'      => 'low',
+    'show_names'    => false,
+  ]);
+  $photo_caption->add_field([
+    'name'    => esc_html__( 'Caption', 'cmb2' ),
+    'id'      => $prefix . 'photo_caption',
+    'desc'    => 'Use this field to override the default image caption for just this post',
+    'type'    => 'textarea_small',
+  ]);
+
   // $author = new_cmb2_box([
   //   'id'            => $prefix . 'author',
   //   'title'         => esc_html__( 'Author', 'cmb2' ),
