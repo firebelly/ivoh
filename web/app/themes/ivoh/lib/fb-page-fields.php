@@ -23,6 +23,7 @@ function metaboxes() {
     'name' => esc_html__( 'Intro Subhead', 'cmb2' ),
     'id'   => $prefix .'intro_subhead',
     'type' => 'text_medium',
+    'desc' => 'Will use parent page title if left blank'
   ]);
   $page_intro->add_field([
     'name' => esc_html__( 'Intro Headline', 'cmb2' ),
