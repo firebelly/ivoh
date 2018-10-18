@@ -8,11 +8,13 @@ var FBSage = (function($) {
       $body = $('body'),
       breakpointIndicatorString,
       breakpoint_xl,
-      breakpoint_nav,
       breakpoint_lg,
+      breakpoint_nav,
       breakpoint_md,
       breakpoint_sm,
       breakpoint_xs,
+      breakpoints = [],
+      breakpointClasses = ['xs','sm','md','nav','lg','xl'],
       resizeTimer,
       transitionElements,
       $document,
@@ -207,35 +209,20 @@ var FBSage = (function($) {
   }
 
   function _initAccordions() {
-    // Activate/deactive functions
-
     $('.accordion').each(function() {
       var $accordion = $(this),
           $toggle = $accordion.find('.accordion-toggle'),
           $content = $accordion.find('.accordion-content');
 
       // Start contracted/expanded depending on screen size
-      if ($accordion.is('.expanded-md')) {
-        if (!breakpoint_md) {
-          $content.hide();
-        } else {
-          _activateAccordion($accordion);
-        }
-      }
-
-      if ($accordion.is('.expanded-lg')) {
-        if (!breakpoint_lg) {
-          $content.hide();
-        } else {
-          _activateAccordion($accordion);
-        }
-      }
-
-      if ($accordion.is('.expanded-xl')) {
-        if (!breakpoint_xl) {
-          $content.hide();
-        } else {
-          _activateAccordion($accordion);
+      var i;
+      for (i=0;i<=breakpoints.length;i++){
+        if ($accordion.is('.expanded-'+breakpointClasses[i])) {
+          if (!breakpoints[i]) {
+            $content.hide();
+          } else {
+            _activateAccordion($accordion);
+          }
         }
       }
 
@@ -255,27 +242,15 @@ var FBSage = (function($) {
       $('.accordion').each(function() {
         var $accordion = $(this);
 
-        if ($accordion.is('.expanded-md')) {
-          if (!breakpoint_md) {
-            _hideAccordion($accordion);
-          } else {
-            _showAccordion($accordion);
-          }
-        }
-
-        if ($accordion.is('.expanded-lg')) {
-          if (!breakpoint_lg) {
-            _hideAccordion($accordion);
-          } else {
-            _showAccordion($accordion);
-          }
-        }
-
-        if ($accordion.is('.expanded-xl')) {
-          if (!breakpoint_xl) {
-            _hideAccordion($accordion);
-          } else {
-            _showAccordion($accordion);
+        // Start contracted/expanded depending on screen size
+        var i;
+        for (i=0;i<=breakpoints.length;i++){
+          if ($accordion.is('.expanded-'+breakpointClasses[i])) {
+            if (!breakpoints[i]) {
+              _hideAccordion($accordion);
+            } else {
+              _showAccordion($accordion);
+            }
           }
         }
       });
@@ -350,6 +325,8 @@ var FBSage = (function($) {
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_nav;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    breakpoints = [breakpoint_xs,breakpoint_sm,breakpoint_md,breakpoint_nav,breakpoint_lg,breakpoint_xl];
 
     // Disable transitions when resizing  
     _disableTransitions();
