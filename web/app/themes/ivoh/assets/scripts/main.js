@@ -29,7 +29,7 @@ var FBSage = (function($) {
     // Cache some common DOM queries
     $document = $(document);
     $body.addClass('loaded');
-    $siteNav = $('.site-nav');
+    $siteNav = $('#site-nav');
 
     // Set screen size vars
     _resize();
@@ -142,19 +142,39 @@ var FBSage = (function($) {
     });
 
     // Toggling sub-nav from the mobile menu
-      $siteNav.on('click', '.menu-item-has-children > a', function(e) {
-        e.preventDefault();
+    $siteNav.on('click', '.menu-item-has-children > a', function(e) {
+      e.preventDefault();
+      var $listItem = $(this).parent('li');
 
-        if (!breakpoint_nav) {
-          if ($(this).parent('li').is('.-active')) {
-            $(this).parent('li').removeClass('-active');
-            $(this).parent('li').find('.sub-nav-button').removeClass('-active');
-          } else {
-            $(this).parent('li').addClass('-active');
-            $(this).parent('li').find('.sub-nav-button').addClass('-active');
-          }
+      if (!breakpoint_nav) {
+        if ($listItem.is('.-active')) {
+          _contractSubNav($listItem);
+        } else {
+          _expandSubNav($listItem);
         }
-      });
+      }
+    });
+  }
+
+  function _expandSubNav($listItem) {
+    // Close others that are open
+    _contractSubNav($('.menu-item-has-children.-active').not($listItem));
+
+    $listItem.addClass('-active');
+    $listItem.find('.sub-nav-button').addClass('-active');
+    $listItem.find('.sub-menu').velocity('slideDown', {
+      easing: 'easeOutQuart', 
+      duration: 250
+    });
+  }
+
+  function _contractSubNav($listItem) {
+    $listItem.removeClass('-active');
+    $listItem.find('.sub-nav-button').removeClass('-active');
+    $listItem.find('.sub-menu').velocity('slideUp', {
+      easing: 'easeOutQuart', 
+      duration: 250
+    });
   }
 
   function _showMobileNav() {
@@ -209,51 +229,53 @@ var FBSage = (function($) {
   }
 
   function _initAccordions() {
-    $('.accordion').each(function() {
-      var $accordion = $(this),
-          $toggle = $accordion.find('.accordion-toggle'),
-          $content = $accordion.find('.accordion-content');
+    if ($('.accordion').length) {
+      var accordions = $('.accordion');
+      for (var i=0;i<accordions.length;i++) {
+        var $accordion = $(accordions[i]),
+            $toggle = $accordion.find('.accordion-toggle'),
+            $content = $accordion.find('.accordion-content');
 
-      // Start contracted/expanded depending on screen size
-      var i;
-      for (i=0;i<=breakpoints.length;i++){
-        if ($accordion.is('.expanded-'+breakpointClasses[i])) {
-          if (!breakpoints[i]) {
-            $content.hide();
-          } else {
-            _activateAccordion($accordion);
+        // Start contracted/expanded depending on screen size
+        for (var b=0;b<=breakpoints.length;b++){
+          if ($accordion.is('.expanded-'+breakpointClasses[b])) {
+            if (!breakpoints[b]) {
+              $content.hide();
+            } else {
+              _activateAccordion($accordion);
+            }
           }
         }
       }
 
-      $toggle.on('click', function(e) {
+      $('.accordion').on('click', '.accordion-toggle', function(e) {
+        var $accordion = $(this).parent('.accordion');
         if ($accordion.is('.-active')) {
           _collapseAccordion($accordion);
         } else {
           _expandAccordion($accordion);
         }
       });
-
-    });
+    }
   }
 
   function _resetAccordions() {
     if ($('.accordion').length) {
-      $('.accordion').each(function() {
-        var $accordion = $(this);
-
-        // Start contracted/expanded depending on screen size
-        var i;
-        for (i=0;i<=breakpoints.length;i++){
-          if ($accordion.is('.expanded-'+breakpointClasses[i])) {
-            if (!breakpoints[i]) {
+      var accordions = $('.accordion');
+      for (var i=0;i<accordions.length;i++) {
+        var $accordion = $(accordions[i]);
+        // Contracted/expand accordions depending on screen size
+        // and their assigned '.expanded-xx' class
+        for (var b=0;b<breakpoints.length;b++){
+          if ($accordion.is('.expanded-'+breakpointClasses[b])) {
+            if (!breakpoints[b]) {
               _hideAccordion($accordion);
             } else {
               _showAccordion($accordion);
             }
           }
         }
-      });
+      }
     }
   }
 
@@ -269,12 +291,18 @@ var FBSage = (function($) {
 
   function _collapseAccordion($accordion) {
     _deactivateAccordion($accordion);
-    $accordion.find('.accordion-content').slideUp(250);
+    $accordion.find('.accordion-content').velocity('slideUp', {
+      easing: 'easeOutQuart', 
+      duration: 250
+    });
   }
 
   function _expandAccordion($accordion) {
     _activateAccordion($accordion);
-    $accordion.find('.accordion-content').slideDown(250);
+    $accordion.find('.accordion-content').velocity('slideDown', {
+      easing: 'easeOutQuart', 
+      duration: 250
+    });
   }
 
   function _hideAccordion($accordion) {
@@ -327,6 +355,12 @@ var FBSage = (function($) {
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
 
     breakpoints = [breakpoint_xs,breakpoint_sm,breakpoint_md,breakpoint_nav,breakpoint_lg,breakpoint_xl];
+
+    // Reset inline styles for navigation for medium breakpoint
+    if (breakpoint_nav && $('.site-nav .sub-menu')[0].hasAttribute('style')) {
+      $('#site-nav .-active').removeClass('-active');
+      $('#site-nav .sub-menu[style]').attr('style', '');
+    }
 
     // Disable transitions when resizing  
     _disableTransitions();

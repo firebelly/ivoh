@@ -274,18 +274,10 @@ body {
   .menu-item-has-children {
     position: relative;
 
-    &.-active {
-      .sub-nav-button {
-        &::after {
-          display: none;
-        }
-      }
-    }
-
     @include max-screen($breakpoint-nav) {
       &.-active {
         .sub-menu {
-          display: block;
+          // display: block;
         }
       }
     }

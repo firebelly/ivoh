@@ -114,6 +114,10 @@
       @include h4;
     }
 
+    .action {
+      margin-bottom: 0;
+    }
+
     @include media-md {
       padding: #{$beat * 6} #{$beat  * 10};
 
