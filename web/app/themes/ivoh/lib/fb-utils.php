@@ -79,3 +79,15 @@ function get_total_pages($category, $per_page) {
   $num_pages = ceil($cat_info->count / $per_page);
   return $num_pages;
 }
+
+/**
+ * Edit post link for various front end areas
+ */
+function admin_edit_link($post_or_term) {
+  if (!empty($post_or_term->term_id)) {
+    $link = get_edit_term_link($post_or_term->term_id);
+  } else {
+    $link = get_edit_post_link($post_or_term->ID);
+  }
+  return !empty($link) ? '<a class="edit-link" href="'.$link.'">Edit</a>' : '';
+}

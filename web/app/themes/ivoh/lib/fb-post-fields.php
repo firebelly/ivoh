@@ -12,7 +12,7 @@ function metaboxes() {
   $post_is_featured = new_cmb2_box([
     'id'            => $prefix . 'post_is_featured',
     'title'         => esc_html__( 'Featured Post', 'cmb2' ),
-    'object_types'  => ['post'],
+    'object_types'  => ['post', 'story'],
     'context'       => 'side',
     'priority'      => 'default',
     'show_names'    => false,
@@ -22,6 +22,41 @@ function metaboxes() {
     'id'      => $prefix . 'featured',
     'desc'    => 'Feature on homepage',
     'type'    => 'checkbox',
+  ]);
+
+  $seo_fields = new_cmb2_box([
+    'id'            => $prefix . 'seo_fields',
+    'title'         => esc_html__( 'SEO', 'cmb2' ),
+    'object_types'  => ['post', 'story', 'page', 'tool'],
+    'context'       => 'normal',
+    'priority'      => 'default',
+  ]);
+  $seo_fields->add_field([
+    'name'    => esc_html__( 'SEO Title', 'cmb2' ),
+    'id'      => $prefix . 'seo_title',
+    'desc'    => 'Custom title override to improve SEO — limit to 69 chars',
+    'type'    => 'text',
+  ]);
+  $seo_fields->add_field([
+    'name'    => esc_html__( 'SEO Description', 'cmb2' ),
+    'id'      => $prefix . 'seo_description',
+    'desc'    => 'Used for meta description to improve SEO, and for social sharing — limit to 155 chars',
+    'type'    => 'textarea_small',
+  ]);
+
+  $photo_caption = new_cmb2_box([
+    'id'            => $prefix . 'photo_caption',
+    'title'         => esc_html__( 'Photo Caption', 'cmb2' ),
+    'object_types'  => ['post', 'page', 'story'],
+    'context'       => 'side',
+    'priority'      => 'low',
+    'show_names'    => false,
+  ]);
+  $photo_caption->add_field([
+    'name'    => esc_html__( 'Caption', 'cmb2' ),
+    'id'      => $prefix . 'photo_caption',
+    'desc'    => 'Use this field to override the default image caption for just this post',
+    'type'    => 'textarea_small',
   ]);
 
   // $author = new_cmb2_box([

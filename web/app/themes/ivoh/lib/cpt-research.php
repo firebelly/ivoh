@@ -37,10 +37,15 @@ function metaboxes() {
     'name'      => 'URL',
     'id'        => $prefix . 'research_url',
     'type'      => 'text_url',
-    'column'    => array( // adds this field to admin columns
+    'column'    => array(
       'position' => 3,
       'name'     => 'URL',
     ),
+  ]);
+  $research_info->add_field([
+    'name'      => 'Description',
+    'id'        => $prefix . 'description',
+    'type'      => 'textarea_small',
   ]);
 }
 

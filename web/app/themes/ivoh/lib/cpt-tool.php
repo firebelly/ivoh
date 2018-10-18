@@ -33,32 +33,32 @@ function metaboxes() {
     'type'      => 'textarea_small',
     'desc'      => 'Shown above the application form',
   ]);
-  $group_field_id = $tool_info->add_field([
-    'id'              => 'asset_categories',
-    'type'            => 'group',
-    'options'         => [
-      'group_title'   => __( 'Category {#}', 'cmb2' ),
-      'add_button'    => __( 'Add Another Category', 'cmb2' ),
-      'remove_button' => __( 'Remove Category', 'cmb2' ),
-      'sortable'      => true,
+  $tool_info->add_field([
+    'name'      => 'Mailchimp List ID',
+    'id'        => $prefix . 'mailchimp_list_id',
+    'type'      => 'text_small',
+    'desc'      => 'Mailchimp list new applicants are added to',
+  ]);
+  $tool_info->add_field([
+    'name'      => 'Sample PDF(s)',
+    'id'        => $prefix . 'sample_pdfs',
+    'type'      => 'file_list',
+    'desc'      => 'PDF(s) shown on public page',
+  ]);
+  $tool_info->add_field([
+    'name'      => 'Final PDF(s)',
+    'id'        => $prefix . 'final_pdfs',
+    'type'      => 'file_list',
+    'desc'      => 'PDF(s) attached to email sent to applicants',
+  ]);
+  $tool_info->add_field([
+    'name'      => 'Applicant email',
+    'id'        => $prefix . 'applicant_email',
+    'type'      => 'wysiwyg',
+    'desc'      => 'Template for email sent to applicants',
+    'options' => [
+      'textarea_rows' => 8,
     ],
-  ]);
-  $tool_info->add_group_field( $group_field_id, [
-    'name' => 'Category Title',
-    'id'   => 'category_title',
-    'type' => 'text',
-  ]);
-  $tool_info->add_group_field( $group_field_id, [
-      'id'            => 'assets',
-      'name'          => __('Assets', 'cmb2'),
-      'type'          => 'file_list',
-      // 'text' => array(
-      //   'add_upload_files_text' => 'Replacement', // default: "Add or Upload Files"
-      //   'remove_image_text' => 'Replacement', // default: "Remove Image"
-      //   'file_text' => 'Replacement', // default: "File:"
-      //   'file_download_text' => 'Replacement', // default: "Download"
-      //   'remove_text' => 'Replacement', // default: "Remove"
-      // ),
   ]);
 }
 

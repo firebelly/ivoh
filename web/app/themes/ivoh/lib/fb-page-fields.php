@@ -23,6 +23,7 @@ function metaboxes() {
     'name' => esc_html__( 'Intro Subhead', 'cmb2' ),
     'id'   => $prefix .'intro_subhead',
     'type' => 'text_medium',
+    'desc' => 'Will use parent page title if left blank'
   ]);
   $page_intro->add_field([
     'name' => esc_html__( 'Intro Headline', 'cmb2' ),
@@ -39,7 +40,15 @@ function metaboxes() {
     // ],
   ]);
 
-  $group_field_id = $page_intro->add_field([
+  $page_intro_links = new_cmb2_box([
+    'id'            => $prefix . 'page_intro_links',
+    'title'         => esc_html__( 'Page Intro Links', 'cmb2' ),
+    'show_on'       => ['key' => 'page-template', 'value' => ['front-page.php', 'page-fellowship.php']],
+    'object_types'  => ['page', 'tool'],
+    'context'       => 'normal',
+    'priority'      => 'high',
+  ]);
+  $group_field_id = $page_intro_links->add_field([
     'id'              => 'intro_links',
     'type'            => 'group',
     'options'         => [
@@ -47,16 +56,15 @@ function metaboxes() {
       'add_button'    => __( 'Add Another Link', 'cmb2' ),
       'remove_button' => __( 'Remove Link', 'cmb2' ),
       'sortable'      => true,
-      'closed'        => true,
     ],
   ]);
-  $page_intro->add_group_field( $group_field_id, [
+  $page_intro_links->add_group_field( $group_field_id, [
     'name' => 'Link Text',
     'id'   => 'link_text',
     'type' => 'text',
     'row_classes' => '-half',
   ]);
-  $page_intro->add_group_field( $group_field_id, [
+  $page_intro_links->add_group_field( $group_field_id, [
     'name' => 'Link URL',
     'id'   => 'url',
     'type' => 'text',

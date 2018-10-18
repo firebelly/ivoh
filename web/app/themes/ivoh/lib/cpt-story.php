@@ -16,9 +16,9 @@ $stories->filters(['story_type', 'story_topic']);
 $stories->register();
 
 // Custom taxonomies
-$story_topic = new Taxonomy('story_topic', ['hierarchical' => false]);
+$story_topic = new Taxonomy('story_topic');
 $story_topic->register();
-$story_type = new Taxonomy('story_type');
+$story_type = new Taxonomy('story_type', ['hierarchical' => false]);
 $story_type->register();
 
 /**
@@ -83,5 +83,49 @@ function get_storys($opts=[]) {
     include(locate_template('templates/article-story.php'));
     $output .= ob_get_clean();
   endforeach;
+  return $output;
+}
+
+/**
+ * Story carousel shortcode [story_carousel]
+ */
+add_shortcode('story_carousel', __NAMESPACE__ . '\shortcode_story_carousel');
+function shortcode_story_carousel($atts) {
+  $output = '';
+  $atts = shortcode_atts([
+    'type' => 'restorative-narratives',
+  ], $atts, 'story_carousel');
+
+  $args = [
+    'numberposts' => 3,
+    'post_type'   => 'story',
+    'meta_key'    => '_date_featured',
+    'orderby'     => 'meta_value_num',
+    'order'       => 'DESC',
+    'meta_query'  => [
+      [
+        'key'       => '_cmb2_featured',
+        'value'     => 'on',
+      ]
+    ],
+  ];
+  // Filter by category?
+  if ($atts['type'] != 'all') {
+    $args['tax_query'] = [
+      [
+        'taxonomy' => 'story_type',
+        'field'    => 'slug',
+        'terms'    => $atts['type'],
+      ]
+    ];
+  }
+  $stories = get_posts($args);
+
+  foreach ($stories as $story_post) {
+    ob_start();
+    include(locate_template('templates/carousel-story.php'));
+    $output .= ob_get_clean();
+  }
+
   return $output;
 }
