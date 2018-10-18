@@ -44,6 +44,7 @@ var FBSage = (function($) {
     _initActiveToggle();
     _initNav();
     _initSearch();
+    _initFormActions();
     // _initLoadMore();
     _initAccordions();
 
@@ -121,6 +122,16 @@ var FBSage = (function($) {
   function _hideSearch() {
     $body.removeClass('search-open');
     $('#search, .search-toggle').removeClass('-active');
+  }
+
+  function _initFormActions() {  
+    $('form input, form textarea').on('blur', function() {
+      if($(this).val()) {
+        $(this).parents('.input-wrap').addClass('filled');
+      } else {
+        $(this).parents('.input-wrap').removeClass('filled');
+      }
+    });
   }
 
   // Handles main nav

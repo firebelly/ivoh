@@ -13,6 +13,15 @@ form {
     color: color(black);
   }
 
+  .input-wrap.filled input,
+  input:focus {
+
+    + label {
+      top: 4px;
+      @include h6;
+    }
+  }
+
   label {
     @include h5;
     top: $gutter;
@@ -33,11 +42,6 @@ form {
     &:focus {
       outline: none;
       border-bottom: 1px solid color(black);
-
-      + label {
-        top: 4px;
-        @include h6;
-      }
     }
   }
 
