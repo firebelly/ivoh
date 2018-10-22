@@ -1,12 +1,12 @@
 <?php
-  $slug = $post->post_name;
+  $slug = !empty($post) ? $post->post_name : '';
   if ($slug !== 'search' || $slug !== 'donate') {
     get_template_part('templates/pre-footer');
   }
 ?>
 
 <footer class="site-footer patterned" role="contentinfo">
-  <div class="site-wrap">  
+  <div class="site-wrap">
     <div class="-inner fb-container-md grid">
 
       <div class="-column-one">
@@ -14,7 +14,7 @@
       </div>
 
       <div class="-column-two">
-        <div class="contact">        
+        <div class="contact">
           <div class="address">
             <p>3912 N. Broadway Ave</p>
             <p> Unit 330</p>
