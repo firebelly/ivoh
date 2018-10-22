@@ -4,8 +4,12 @@ use Roots\Sage\Titles;
 // Default vars
 $intro_body = $intro_subhead = $intro_body = $photo_caption = $photo_byline = '';
 
-// Get all post_meta
-$post_meta = get_post_meta($post->ID);
+// Get all post_meta (if we can)
+if (!empty($post)) {
+  $post_meta = get_post_meta($post->ID);
+} else {
+  $post_meta = [];
+}
 
 // Subhead set in Page intro fields?
 if (is_404()) {
