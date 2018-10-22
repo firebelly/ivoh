@@ -12,7 +12,7 @@
     @include h1;
   }
 
-  .page-description {
+  .page-intro-body {
     margin: #{$beat * 2} auto 0;
 
     @include media-md {

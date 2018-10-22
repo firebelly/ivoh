@@ -1,0 +1,60 @@
+// Story Carousels
+.story-carousel-container {
+  .flickity-button {
+    top: auto;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    background: none;
+    border: 1px solid color(red);
+    svg {
+      top: auto;
+      left: auto;
+      width: 18px;
+      height: 18px;
+      margin: auto;
+      fill: color(red);
+      position: relative;
+    }
+  }
+
+  .flickity-page-dots {
+    bottom: 0;
+    height: 95px;
+    border-top: 1px solid color(black);
+
+    .dot {
+      top: 50%;
+      opacity: 1;
+      width: 16px;
+      height: 16px;
+      position: relative;
+      transform: translateY(-8px);
+      border: 1px solid color(red);
+      background-color: rgba(color(red),0);
+      @include transition(background-color);
+      &.is-selected {
+        background-color: rgba(color(red),1);
+      }
+    }
+  }
+
+  .story-content-carousel {
+    .story-content {
+      width: 100%;
+      padding-bottom: 95px + $gutter;
+    }
+  }
+}
+
+.story-image-carousel {
+  .story-image-container,
+  .story-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .story-image {
+    @include image-treatment();
+  }
+}

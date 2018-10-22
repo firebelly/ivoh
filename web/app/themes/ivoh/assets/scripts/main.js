@@ -45,6 +45,7 @@ var FBSage = (function($) {
     _initNav();
     _initSearch();
     _initFormActions();
+    _initCarousels();
     // _initLoadMore();
     _initAccordions();
 
@@ -132,6 +133,31 @@ var FBSage = (function($) {
         $(this).parents('.input-wrap').removeClass('filled');
       }
     });
+  }
+
+  function _initCarousels() {
+    // Page Banner Carousels
+    var $storyImageCarousel = $('.story-image-carousel'),
+        $storyContentCarousel = $('.story-content-carousel');
+
+    var storyContentCarousel = $storyContentCarousel.flickity({
+      pageDots: true,
+      wrapAround: true,
+      cellAlign: 'left',
+      cellSelector: '.story-content',
+      arrowShape: 'M55.1,100L7.9,52.8H100v-5.6H7.9L55.1,0h-7.9L0,47.2v5.6L47.2,100H55.1z'
+    });
+    
+    var storyImageCarousel = $storyImageCarousel.flickity({
+      pageDots: false,
+      bgLazyLoad: 1,
+      draggable: false,
+      cellAlign: 'left',
+      prevNextButtons: false,
+      cellSelector: '.story-image-container',
+      asNavFor: '.story-content-carousel'
+    });
+
   }
 
   // Handles main nav

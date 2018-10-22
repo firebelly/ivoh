@@ -27,6 +27,7 @@ form {
     top: $gutter;
     left: $gutter;
     position: absolute;
+    pointer-events: none;
     @include transition(all);
   }
 
