@@ -40,9 +40,10 @@ function metaboxes() {
     'type'      => 'text_date',
   ]);
   $story_info->add_field([
-    'name'      => 'Author',
-    'id'        => $prefix . 'author',
-    'type'             => 'select',
+    'name'             => 'Author(s)',
+    'id'               => $prefix . 'author',
+    'type'             => 'pw_multiselect',
+    'multiple'         => true,
     'show_option_none' => true,
     'options_cb'       => '\Firebelly\CMB2\get_people'
   ]);
@@ -67,12 +68,22 @@ add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get storys
  */
-function get_storys($opts=[]) {
+function get_stories($opts=[]) {
   if (empty($opts['num_posts'])) $opts['num_posts'] = -1;
   $args = [
     'numberposts' => $opts['num_posts'],
     'post_type'   => 'story',
   ];
+
+  if (!empty($options['category'])) {
+    $args['tax_query'] = [
+      [
+        'taxonomy' => 'person_category',
+        'field' => 'slug',
+        'terms' => $options['category']
+      ]
+    ];
+  }
 
   // Display all matching posts using article-{$post_type}.php
   $stories_posts = get_posts($args);
