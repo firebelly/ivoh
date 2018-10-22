@@ -91,3 +91,53 @@ function admin_edit_link($post_or_term) {
   }
   return !empty($link) ? '<a class="edit-link" href="'.$link.'">Edit</a>' : '';
 }
+
+/**
+ * Support for sending vars to get_template_part()
+ * (from https://github.com/JolekPress/Get-Template-Part-With-Variables)
+ */
+function get_template_part_with_vars($slug, $name = null, array $namedVariables = []) {
+  // Taken from standard get_template_part function
+  \do_action("get_template_part_{$slug}", $slug, $name);
+
+  $templates = array();
+  $name = (string)$name;
+  if ('' !== $name)
+      $templates[] = "{$slug}-{$name}.php";
+
+  $templates[] = "{$slug}.php";
+
+  $template = \locate_template($templates, false, false);
+
+  if (empty($template)) {
+    return;
+  }
+
+  // @see load_template (wp-includes/template.php) - these are needed for WordPress to work.
+  global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;
+
+  if (is_array($wp_query->query_vars)) {
+    \extract($wp_query->query_vars, EXTR_SKIP);
+  }
+
+  if (isset($s)) {
+      $s = \esc_attr($s);
+  }
+  // End standard WordPress behavior
+
+  foreach ($namedVariables as $variableName => $value) {
+    if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_\x7f-\xff]*/', $variableName)) {
+      trigger_error('Variable names must be valid. Skipping "' . $variableName . '" because it is not a valid variable name.');
+      continue;
+    }
+
+    if (isset($$variableName)) {
+      trigger_error("{$variableName} already existed, probably set by WordPress, so it wasn't set to {$value} like you wanted. Instead it is set to: " . print_r($$variableName, true));
+      continue;
+    }
+
+    $$variableName = $value;
+  }
+
+  require $template;
+}
