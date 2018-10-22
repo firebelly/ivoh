@@ -10,7 +10,7 @@ $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
   <?php if ($story_image): ?>
     <div class="image" <?= $story_image ?>></div>
   <?php endif; ?>
-  <h1 class="h3"><?= $story_post->post_title ?></h1>
+  <h1 class="h3"><a href="<?= get_permalink($story_post) ?>"><?= $story_post->post_title ?></a></h1>
   <?php if (!empty($story_authors)): ?>
     <p class="author">
       <?php
