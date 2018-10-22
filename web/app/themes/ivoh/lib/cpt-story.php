@@ -117,6 +117,7 @@ function get_stories($opts=[]) {
       ],
     ]);
   }
+
   // Display all matching posts using article-{$post_type}.php
   $story_posts = get_posts($args);
   if (!$story_posts) return false;
@@ -181,3 +182,14 @@ function shortcode_story_carousel($atts) {
 
   return $output;
 }
+
+/**
+ * Add query vars for story bank
+ */
+function add_query_vars_filter($vars){
+  $vars[] = 'topic';
+  $vars[] = 'order_by';
+  $vars[] = 'order_dir';
+  return $vars;
+}
+add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );

@@ -1,6 +1,6 @@
 <?php
 $story_author_post = null;
-if ($story_authors = get_post_meta($story_post->ID, '_cmb2_author'));
+$story_authors = get_post_meta($story_post->ID, '_cmb2_author');
 $story_image = \Firebelly\Media\get_header_bg($story_post, ['size' => 'medium']);
 $topics = \Firebelly\Media\get_header_bg($story_post, ['size' => 'medium']);
 $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
