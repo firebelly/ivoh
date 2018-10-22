@@ -17,7 +17,7 @@ $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
       $story_author_links = [];
       foreach ($story_authors as $author_id) {
         $story_author_post = get_post($author_id);
-        $story_author_links[] = '<a href="/search?author_id=' . $author_id . '">' . $story_author_post->post_title . '</a>';
+        $story_author_links[] = '<a href="' . get_permalink($author_id) . '">' . $story_author_post->post_title . '</a>';
       }
       echo implode(', ', $story_author_links);
       ?>
