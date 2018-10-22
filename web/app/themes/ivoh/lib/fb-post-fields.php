@@ -24,6 +24,23 @@ function metaboxes() {
     'type'    => 'checkbox',
   ]);
 
+  $post_author = new_cmb2_box([
+    'id'            => $prefix . 'post_author',
+    'title'         => esc_html__( 'Author(s)', 'cmb2' ),
+    'object_types'  => ['post', 'story'],
+    'context'       => 'normal',
+    'priority'      => 'default',
+    'show_names'    => false,
+  ]);
+  $post_author->add_field([
+    'name'             => 'Author(s)',
+    'id'               => $prefix . 'author',
+    'type'             => 'pw_multiselect',
+    'multiple'         => true,
+    'show_option_none' => true,
+    'options_cb'       => '\Firebelly\CMB2\get_people'
+  ]);
+
   $seo_fields = new_cmb2_box([
     'id'            => $prefix . 'seo_fields',
     'title'         => esc_html__( 'SEO', 'cmb2' ),

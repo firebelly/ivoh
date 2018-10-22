@@ -40,14 +40,6 @@ function metaboxes() {
     'type'      => 'text_date',
   ]);
   $story_info->add_field([
-    'name'             => 'Author(s)',
-    'id'               => $prefix . 'author',
-    'type'             => 'pw_multiselect',
-    'multiple'         => true,
-    'show_option_none' => true,
-    'options_cb'       => '\Firebelly\CMB2\get_people'
-  ]);
-  $story_info->add_field([
     'name'      => 'Republished from',
     'id'        => $prefix . 'story_republished',
     'type'      => 'text_medium',
@@ -113,6 +105,18 @@ function get_stories($opts=[]) {
         [
           'key'       => '_cmb2_featured',
           'value'     => 'on',
+        ]
+      ],
+    ]);
+  }
+
+  // Filter by author?
+  if (!empty($opts['author'])) {
+    $args = array_merge($args, [
+      'meta_query'  => [
+        [
+          'key'   => '_cmb2_author',
+          'value' => $opts['author'],
         ]
       ],
     ]);

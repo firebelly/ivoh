@@ -1,8 +1,9 @@
 <?php
+// todo: News/Story articles are nearly identical, refactor to share template
 $story_author_post = null;
 $story_authors = get_post_meta($story_post->ID, '_cmb2_author');
 $story_image = \Firebelly\Media\get_header_bg($story_post, ['size' => 'medium']);
-$topics = \Firebelly\Media\get_header_bg($story_post, ['size' => 'medium']);
+$topics = wp_get_post_terms($story_post->ID, 'story_topic');
 $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
 ?>
 <article class="story <?= $story_post->column_width ?>"><div class="wrap">
@@ -22,6 +23,17 @@ $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
       echo implode(', ', $story_author_links);
       ?>
     </p>
+    <?php if (!empty($topics)): ?>
+      <p class="topics">
+        <?php
+        $topic_links = [];
+        foreach ($topics as $term) {
+          $topic_links[] = '<a href="/story-bank/?topic=' . $term->slug . '">' . $term->name . '</a>';
+        }
+        echo implode(', ', $topic_links);
+        ?>
+      </p>
+    <?php endif ?>
   <?php endif; ?>
   <?php if (!empty($story_desc)): ?>
     <div class="user-content"><?= $story_desc ?></div>
