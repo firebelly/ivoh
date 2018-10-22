@@ -69,27 +69,64 @@ add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
  * Get storys
  */
 function get_stories($opts=[]) {
-  if (empty($opts['num_posts'])) $opts['num_posts'] = -1;
+  // Default opts
+  $opts = array_merge([
+    'return' => 'html',
+    'type'   => 'all',
+  ], $opts);
+
+  // Default args
   $args = [
-    'numberposts' => $opts['num_posts'],
+    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
     'post_type'   => 'story',
   ];
 
-  if (!empty($options['category'])) {
+  // Filter by topic?
+  if (!empty($opts['topic'])) {
     $args['tax_query'] = [
       [
-        'taxonomy' => 'person_category',
+        'taxonomy' => 'story_topic',
         'field' => 'slug',
-        'terms' => $options['category']
+        'terms' => [$opts['topic']]
       ]
     ];
   }
 
+  // Filter by type?
+  if ($opts['type'] != 'all') {
+    $args['tax_query'] = [
+      [
+        'taxonomy' => 'story_type',
+        'field'    => 'slug',
+        'terms'    => $opts['type'],
+      ]
+    ];
+  }
+
+  // Filter by featured?
+  if (!empty($opts['featured'])) {
+    $args = array_merge($args, [
+      'meta_key'    => '_date_featured',
+      'orderby'     => 'meta_value_num',
+      'order'       => 'DESC',
+      'meta_query'  => [
+        [
+          'key'       => '_cmb2_featured',
+          'value'     => 'on',
+        ]
+      ],
+    ]);
+  }
   // Display all matching posts using article-{$post_type}.php
-  $stories_posts = get_posts($args);
-  if (!$stories_posts) return false;
+  $story_posts = get_posts($args);
+  if (!$story_posts) return false;
+  // Just return array of posts?
+  if ($opts['return'] == 'array') {
+    return $story_posts;
+  }
+  // Otherwise spit out HTML
   $output = '';
-  foreach ($stories_posts as $story_post):
+  foreach ($story_posts as $story_post):
     ob_start();
     include(locate_template('templates/article-story.php'));
     $output .= ob_get_clean();
@@ -109,28 +146,11 @@ function shortcode_story_carousel($atts) {
 
   $args = [
     'numberposts' => 3,
-    'post_type'   => 'story',
-    'meta_key'    => '_date_featured',
-    'orderby'     => 'meta_value_num',
-    'order'       => 'DESC',
-    'meta_query'  => [
-      [
-        'key'       => '_cmb2_featured',
-        'value'     => 'on',
-      ]
-    ],
+    'type'        => $atts['type'],
+    'return'      => 'array',
+    'featured'    => 1,
   ];
-  // Filter by category?
-  if ($atts['type'] != 'all') {
-    $args['tax_query'] = [
-      [
-        'taxonomy' => 'story_type',
-        'field'    => 'slug',
-        'terms'    => $atts['type'],
-      ]
-    ];
-  }
-  $stories = get_posts($args);
+  $stories = get_stories($args);
 
   $output .= '
     <div class="story-carousel-container card landscape grid">
