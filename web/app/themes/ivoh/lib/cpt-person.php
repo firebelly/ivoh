@@ -71,9 +71,9 @@ add_action('save_post_person', __NAMESPACE__.'\person_sort_meta');
  * Get People
  */
 function get_people($options=[]) {
-  if (empty($options['num_posts'])) $options['num_posts'] = -1;
+  if (empty($options['numberposts'])) $options['numberposts'] = -1;
   $args = [
-    'numberposts' => $options['num_posts'],
+    'numberposts' => $options['numberposts'],
     'post_type'   => 'person',
   ];
   if (!empty($options['category'])) {

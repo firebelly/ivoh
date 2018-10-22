@@ -53,9 +53,9 @@ function metaboxes() {
  * Get research posts
  */
 function get_research($opts=[]) {
-  if (empty($opts['num_posts'])) $opts['num_posts'] = -1;
+  if (empty($opts['numberposts'])) $opts['numberposts'] = -1;
   $args = [
-    'numberposts' => $opts['num_posts'],
+    'numberposts' => $opts['numberposts'],
     'post_type'   => 'research',
   ];
 
