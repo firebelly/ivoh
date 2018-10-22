@@ -273,7 +273,7 @@ gulp.task('svgs', function() {
 gulp.task('watch', ['styles', 'scripts'], function() {
   browserSync.init({
     files: ['{lib,templates}/**/*.php', '*.php'],
-//    proxy: config.devUrl,
+   proxy: 'ivoh.sage',
     notify: false,
     snippetOptions: {
       whitelist: ['/wp-admin/admin-ajax.php'],

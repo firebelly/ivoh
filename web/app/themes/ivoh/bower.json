@@ -12,13 +12,19 @@
     "fitvids": "~1.1.0",
     "imagesloaded": "~3.1.8",
     "history.js": "~1.8.0",
-    "respond": "~1.4.2",
     "velocity": "~1.2.2",
-    "fastclick": "~1.0.6"
+    "fastclick": "~1.0.6",
+    "flickity": "^2.1.2"
   },
   "overrides": {
     "modernizr": {
       "main": "./modernizr.js"
+    },
+    "flickity": {
+      "main": [
+        "./dist/flickity.pkgd.js",
+        "./dist/flickity.min.css"
+      ]
     }
   }
 }

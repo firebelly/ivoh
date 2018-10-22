@@ -2,5 +2,10 @@
 /*
   Template name: Homepage
 */
+?>
 
-echo do_shortcode('[story_carousel type=all]');
+<div class="site-wrap">
+  <div class="stories fb-container-md">
+    <?php echo do_shortcode('[story_carousel type=all]'); ?>
+  </div>
+</div>

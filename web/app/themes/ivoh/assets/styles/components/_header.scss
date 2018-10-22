@@ -10,18 +10,41 @@ body {
 
   // Page-padding to compensate for wp-admin bar
   &.admin-bar {
-    padding-top: $headerHeightSm + 46px;
+    padding-top: 0;
 
-    @include min-screen(783px) {
-      padding-top: $headerHeightMd + 32px;
+    @include min-screen(600px) {
+      padding-top: $headerHeightSm;
 
       .site-header,
+      .site-nav,
+      .site-nav:after {
+        top: 46px;
+      }
+
+      .search-form-container {
+        top: $headerHeightSm + 32px;
+      }
+    }
+
+    @include min-screen(783px) {
+      padding-top: $headerHeightSm;
+
+      .site-header,
+      .site-nav,
       .site-nav:after {
         top: 32px;
       }
 
       .search-form-container {
         top: $headerHeightMd + 32px;
+      }
+    }
+
+    @include media-nav {
+      padding-top: $headerHeightMd;
+
+      .site-nav {
+        top: 0;
       }
     }
   }
@@ -274,18 +297,10 @@ body {
   .menu-item-has-children {
     position: relative;
 
-    &.-active {
-      .sub-nav-button {
-        &::after {
-          display: none;
-        }
-      }
-    }
-
     @include max-screen($breakpoint-nav) {
       &.-active {
         .sub-menu {
-          display: block;
+          // display: block;
         }
       }
     }

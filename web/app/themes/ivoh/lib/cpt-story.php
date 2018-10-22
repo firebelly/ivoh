@@ -132,11 +132,32 @@ function shortcode_story_carousel($atts) {
   }
   $stories = get_posts($args);
 
+  $output .= '
+    <div class="story-carousel-container card landscape grid">
+      <div class="story-image-carousel md-one-half">
+  ';
+
   foreach ($stories as $story_post) {
     ob_start();
-    include(locate_template('templates/carousel-story.php'));
+    include(locate_template('templates/carousel-story-image.php'));
     $output .= ob_get_clean();
   }
+
+  $output .= '
+    </div><!-- .story-image-carousel -->
+    <div class="story-content-carousel md-one-half">
+  ';
+
+  foreach ($stories as $story_post) {
+    ob_start();
+    include(locate_template('templates/carousel-story-content.php'));
+    $output .= ob_get_clean();
+  }
+
+  $output .= '
+      </div><!-- .story-content-carousel -->
+    </div><!-- .story-carousel-container -->
+  ';
 
   return $output;
 }
