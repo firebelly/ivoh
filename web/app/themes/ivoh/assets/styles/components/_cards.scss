@@ -8,6 +8,15 @@
 
   .card-content {
     padding: $padding-md;
+
+    a:not(.button) {
+      color: inherit;
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
     
     @include media-md {
       padding: #{$padding-md * 2};
@@ -22,12 +31,17 @@
     background-position: center;
   }
   
-  .card-subtitle {
+  .card-subtitle,
+  .card-author {
     @include h5;
   }
 
   .card-title {
     @include h3;
+  }
+
+  .card-tags {
+    @include h6;
   }
 
   .card-text {

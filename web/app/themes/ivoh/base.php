@@ -3,6 +3,12 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
+if (!empty(get_post_meta($post->ID, '_cmb2_page_color', true))) {
+  $page_color = get_post_meta($post->ID, '_cmb2_page_color', true);
+} else {
+  $page_color = 'pink';
+}
+
 ?>
 
 <!doctype html>
@@ -10,7 +16,7 @@ use Roots\Sage\Wrapper;
 <!--[if IE 9 ]> <html class="no-js ie9 lt-ie10" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
   <?php get_template_part('templates/head'); ?>
-  <body <?php body_class(); ?>>
+  <body <?php body_class(); ?> data-theme="<?= $page_color ?>">
     <div id="breakpoint-indicator"></div>
     <!--[if lt IE 9]>
       <div class="alert alert-warning">

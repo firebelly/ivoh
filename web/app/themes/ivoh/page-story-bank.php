@@ -43,12 +43,12 @@ $story_type_options = [
 
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="story-type filters">
-  <h3>Filter by Story Type</h3>
+<div class="story-type filters fb-container-md">
+  <h3 class="filter-title">Filter by Story Type</h3>
   <ul>
     <?php foreach ($story_type_options as $story_type_option => $story_type_title):
       if (in_array($story_type_option, $story_types)) {
-        $active = ' class="active"';
+        $active = ' class="-active"';
         $filtered = array_filter($story_types, function ($el) use ($story_type_option) { return ($el != $story_type_option); });
         $link = add_query_arg(['story-types' => implode(',', $filtered) ]);
       } else {
@@ -56,17 +56,17 @@ $story_type_options = [
         $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_option]))) ]);
       }
       ?>
-      <li<?= $active ?>><a href="<?= $link ?>"><?= $story_type_title ?></a></option>
+      <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $story_type_title ?></a></option>
     <?php endforeach; ?>
   </ul>
 </div>
 
-<div class="topics filters">
-  <h3>Filter by Issue</h3>
+<div class="topics filters fb-container-md">
+  <h3 class="filter-title">Filter by Issue</h3>
   <ul class="topics">
   <?php foreach ($story_topics as $term):
     if (in_array($term->slug, $topics)) {
-      $active = ' class="active"';
+      $active = ' class="-active"';
       $filtered = array_filter($topics, function ($el) use ($term) { return ($el != $term->slug); });
       $link = add_query_arg(['topics' => implode(',', $filtered) ]);
     } else {
@@ -74,12 +74,12 @@ $story_type_options = [
       $link = add_query_arg(['topics' => implode(',', array_filter(array_merge($topics, [$term->slug]))) ]);
     }
     ?>
-    <li<?= $active ?>><a href="<?= $link ?>"><?= $term->name ?></a></li>
+    <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $term->name ?></a></li>
   <?php endforeach; ?>
   </ul>
 </div>
 
-<div class="sort-by">
+<div class="sort-by fb-container-content">
   <h3>Sort By</h3>
   <select name="sort-by" class="jumpSelect">
     <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
@@ -88,8 +88,10 @@ $story_type_options = [
   </select>
 </div>
 
-<?php if (empty($stories)): ?>
-  <p class="no-posts">No posts found.</p>
-<?php else: ?>
-  <?= $stories ?>
-<?php endif; ?>
+<div class="fb-container-md grid patterned">
+  <?php if (empty($stories)): ?>
+    <p class="no-posts">No posts found.</p>
+  <?php else: ?>
+    <?= $stories ?>
+  <?php endif; ?>
+</div>
