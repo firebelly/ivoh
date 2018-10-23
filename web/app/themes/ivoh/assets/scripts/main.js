@@ -156,6 +156,8 @@ var IVOH = (function($) {
       draggable: false,
       cellAlign: 'left',
       prevNextButtons: false,
+      adaptiveHeight: true,
+      setGallerySize: false,
       cellSelector: '.story-image-container',
       asNavFor: '.story-content-carousel'
     });
