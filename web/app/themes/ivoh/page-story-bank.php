@@ -3,19 +3,21 @@
   Template name: Story Bank
 */
 
-// Topic var
+// Get filter vars
 $topics = explode(',', get_query_var('topics', ''));
 $order_by = get_query_var('order-by', 'date-desc');
 $story_types = explode(',', get_query_var('story-types', 'rn,sbm'));
+
+// Default story types = all story types
 if (empty($story_types)) {
   $story_types = 'rn,sbm';
 }
 
 // Get all stories matching filters
 $stories = \Firebelly\PostTypes\Story\get_stories([
-  'types'   => array_filter($story_types),
-  'topics'  => array_filter($topics),
-  'orderby' => $order_by,
+  'story-types' => array_filter($story_types),
+  'topics'      => array_filter($topics),
+  'order-by'    => $order_by,
 ]);
 
 // Get base topics for filtering

@@ -47,102 +47,11 @@ function metaboxes() {
 }
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 
-/**
- * Get storys
- */
-function get_stories($opts=[]) {
-  // Default opts
-  $opts = array_merge([
-    'return' => 'html',
-    'orderby' => 'date-desc',
-    'types'   => ['sbm','rn'],
-  ], $opts);
-  $orderby = explode('-', $opts['orderby']);
-
-  // Default args
-  $args = [
-    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
-    'post_type'   => 'story',
-    'orderby'     => $orderby[0],
-    'order'       => strtoupper($orderby[1]),
-  ];
-
-  // Order by author uses generated postmeta _author_sort which is saved in a hook
-  if ($orderby[0]=='author') {
-    $args = array_merge($args, [
-      'orderby'  => 'meta_value',
-      'meta_key' => '_author_sort',
-    ]);
-  }
-
-  // Filter by type?
-  $args['tax_query'] = [
-    [
-      'taxonomy' => 'story_type',
-      'field'    => 'slug',
-      'terms'    => $opts['types'],
-      'compare'  => 'IN',
-    ]
-  ];
-
-  // Filter by topic?
-  if (!empty($opts['topics'])) {
-    $args['tax_query'] = array_merge(
-      $args['tax_query'],
-      [
-      'relation' => 'AND',
-        [
-        'taxonomy' => 'story_topic',
-        'field'    => 'slug',
-        'terms'    => $opts['topics'],
-        'compare'  => 'IN',
-        ]
-      ]
-    );
-  }
-
-  // Filter by featured?
-  if (!empty($opts['featured'])) {
-    $args = array_merge($args, [
-      'meta_key'    => '_date_featured',
-      'orderby'     => 'meta_value_num',
-      'order'       => 'DESC',
-      'meta_query'  => [
-        [
-          'key'       => '_cmb2_featured',
-          'value'     => 'on',
-        ]
-      ],
-    ]);
-  }
-
-  // Filter by author?
-  if (!empty($opts['author'])) {
-    $args = array_merge($args, [
-      'meta_query'  => [
-        [
-          'key'   => '_cmb2_author',
-          'value' => $opts['author'],
-        ]
-      ],
-    ]);
-  }
-
-  // Display all matching posts using article-{$post_type}.php
-  $story_posts = get_posts($args);
-  if (!$story_posts) return false;
-  // Just return array of posts?
-  if ($opts['return'] == 'array') {
-    return $story_posts;
-  }
-  // Otherwise spit out HTML
-  $output = '';
-  foreach ($story_posts as $story_post):
-    ob_start();
-    include(locate_template('templates/article-story.php'));
-    $output .= ob_get_clean();
-  endforeach;
-  return $output;
+function get_stories($opts) {
+  return \Firebelly\Utils\get_posts(array_merge([
+    'post-type'      => 'story',
+    'topic-taxonomy' => 'story_topic',
+  ], $opts));
 }
 
 /**
@@ -157,8 +66,8 @@ function shortcode_story_carousel($atts) {
 
   $stories = get_stories([
     'numberposts' => 3,
-    'types'       => ($atts['type']=='all' ? ['rn','sbm'] : [$atts['type']]),
     'return'      => 'array',
+    'story-types' => ($atts['type']=='all' ? ['rn','sbm'] : [$atts['type']]),
     'featured'    => 1,
   ]);
   if (empty($stories)) return '';
@@ -198,16 +107,18 @@ add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
 /**
  * Update post meta for sorting articles by author(s)
  */
-function update_sort_meta($post_id) {
-  if (wp_is_post_revision($post_id))
+function update_sort_meta($post_id, $post, $update) {
+  if (wp_is_post_revision($post_id) || !in_array($post->post_type, ['post', 'story']))
     return;
 
   $author_last_names = [];
   $story_authors = get_post_meta($post_id, '_cmb2_author');
-  foreach ($story_authors as $author_id) {
-    $last_name = get_post_meta($author_id, '_last_name', true);
-    $author_last_names[] = $last_name;
+  if (!empty($story_authors)) {
+    foreach ($story_authors as $author_id) {
+      $last_name = get_post_meta($author_id, '_last_name', true);
+      $author_last_names[] = $last_name;
+    }
   }
   update_post_meta($post_id, '_author_sort', implode(' ', $author_last_names));
 }
-add_action('save_post_story', __NAMESPACE__.'\update_sort_meta');
+add_action('save_post', __NAMESPACE__.'\update_sort_meta', 10, 3);
