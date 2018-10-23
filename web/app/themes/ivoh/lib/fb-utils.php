@@ -142,3 +142,105 @@ function get_template_part_with_vars($slug, $name = null, array $namedVariables 
 
   require $template;
 }
+
+/**
+ * Custom get_posts
+ */
+
+/**
+ * Get storys
+ */
+function get_posts($opts=[]) {
+  // Default opts
+  $opts = array_merge([
+    'return'    => 'html',
+    'post-type' => 'news',
+    'order-by'   => 'date-desc',
+    'topic-taxonomy' => 'category',
+  ], $opts);
+  $orderby = explode('-', $opts['order-by']);
+
+  // Default args
+  $args = [
+    'numberposts'    => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
+    'post_type'      => ($opts['post-type'] == 'news' ? 'post' : $opts['post-type']),
+    'orderby'        => $orderby[0],
+    'order'          => strtoupper($orderby[1]),
+  ];
+
+  // Order by author uses generated postmeta _author_sort which is saved in a hook
+  if ($orderby[0]=='author') {
+    $args = array_merge($args, [
+      'orderby'  => 'meta_value',
+      'meta_key' => '_author_sort',
+    ]);
+  }
+
+  $args['tax_query'] = [];
+
+  // Filter by type?
+  if (!empty($opts['story-types'])) {
+    $args['tax_query'][] = [
+      'relation' => 'AND',
+      [
+        'taxonomy' => 'story_type',
+        'field'    => 'slug',
+        'terms'    => $opts['story-types'],
+        'compare'  => 'IN',
+      ]
+    ];
+  }
+
+  // Filter by topic?
+  if (!empty($opts['topics'])) {
+    $args['tax_query'][] = [
+      'taxonomy' => $opts['topic-taxonomy'],
+      'field'    => 'slug',
+      'terms'    => $opts['topics'],
+      'compare'  => 'IN',
+    ];
+  }
+
+  // Filter by featured?
+  if (!empty($opts['featured'])) {
+    $args = array_merge($args, [
+      'meta_key'    => '_date_featured',
+      'orderby'     => 'meta_value_num',
+      'order'       => 'DESC',
+      'meta_query'  => [
+        [
+          'key'       => '_cmb2_featured',
+          'value'     => 'on',
+        ]
+      ],
+    ]);
+  }
+
+  // Filter by author?
+  if (!empty($opts['author'])) {
+    $args = array_merge($args, [
+      'meta_query'  => [
+        [
+          'key'   => '_cmb2_author',
+          'value' => $opts['author'],
+        ]
+      ],
+    ]);
+  }
+
+  // Display all matching posts using article-{$post_type}.php
+  $posts = \get_posts($args);
+  if (!$posts) return false;
+  // Just return array of posts?
+  if ($opts['return'] == 'array') {
+    return $posts;
+  }
+  // Otherwise spit out HTML
+  $output = '';
+  foreach ($posts as $post):
+    ob_start();
+    get_template_part_with_vars('templates/article', $opts['post-type'], [ $opts['post-type'].'_post' => $post ]);
+    $output .= ob_get_clean();
+  endforeach;
+  return $output;
+}
