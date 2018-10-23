@@ -2,6 +2,7 @@
 
 .page-header {
   text-align: center;
+  margin-bottom: $padding-md;
 
   &-text {
     padding: #{$beat * 6} $gutter;
@@ -65,6 +66,8 @@
   padding: 0 $gutter;
   @include media-md {
     padding: 0;
+    margin: 0 auto;
+    width: columns(18);
   }
 
   .banner-image {
@@ -77,5 +80,21 @@
       height: 0;
       padding-bottom: 31.25%;
     }
+  }
+}
+
+.banner-text {
+  padding-top: $gutter;
+
+  .photo-caption {
+    @include h6;
+    text-align: center;
+    + .photo-byline {
+      margin-top: $beat;
+    }
+  }
+  .photo-byline {
+    @include h5;
+    text-align: center;
   }
 }

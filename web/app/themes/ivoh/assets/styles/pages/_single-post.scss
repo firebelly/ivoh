@@ -1,21 +1,88 @@
 // Single Posts
 
-.single-post {
+body.single {
+
+  .page-header {
+    @extend .patterned;
+    padding-top: $gutter;
+    @include media-md {
+      padding-top: $padding-lg;
+    }
+
+    .page-header-text {
+      margin: 0 $gutter;
+      position: relative;
+      background-color: color(pink);
+      border: 1px solid color(black);
+      border-bottom: none;
+      &::after {
+        left: 50%;
+        bottom: 0;
+        z-index: -1;
+        content: '';
+        height: 1px;
+        width: 100vw;
+        position: absolute;
+        background: color(black);
+        transform: translateX(-50%);
+      }
+
+      @include media-md {
+        margin: 0 auto;
+        width: columns(14);
+      }
+    }
+
+    .page-header-banner {
+      border: none;
+      position: relative;
+      padding-top: $padding-md;
+      background-color: color(pink);
+      &::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        content: '';
+        position: absolute;
+        height: $padding-md;
+        background-color: inherit;
+      }
+
+      @include media-md {
+        background-image: none;
+      }
+    }
+
+    .banner-image-container {
+      padding: 0;
+      margin: 0 $gutter;
+      @include media-md {
+        margin: 0 auto;
+        width: columns(14);
+      }
+    }
+
+    .banner-text {
+      background-color: color(pink);
+
+      p {
+        margin: 0 auto;
+        width: columns(14);
+      }
+    }
+  }
 
   article {
     @include clearfix();
 
-    main {
-    }
-
-    header {
-    }
-
-    .user-content {
+    .entry-content {
       h1, h2, h3, h4, h5, h6 {
-      }
+        @include h3;
+        margin-bottom: $beat * 2;
 
-      img {
+        @include media-md {
+          margin-bottom: $beat * 4;
+        }
       }
 
       ul, ol {
@@ -23,26 +90,6 @@
         li {
           font-size: 16px;
           line-height: 1.5em;
-        }
-      }
-
-      figure, figure:first-child {
-        margin: 30px 0;
-      }
-
-      figure > img,
-      figure >img:first-child {
-        margin: 0;
-      }
-
-      figcaption {
-      }
-
-      blockquote {
-        padding: 20px 0;
-        p {
-          font-size: 24px;
-          margin-bottom: 0;
         }
       }
     }

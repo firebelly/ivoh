@@ -16,6 +16,10 @@ if (is_404()) {
   $intro_subhead = 'Error 404';
 } elseif (!empty($post_meta['_cmb2_intro_subhead'])) {
   $intro_subhead = $post_meta['_cmb2_intro_subhead'][0];
+} elseif (get_post_type($post) == 'story') {
+  $story_types = get_the_terms($post, 'story_type');
+  $story_type = array_pop($story_types);
+  $intro_subhead = $story_type->name;
 } elseif ($parent_id = wp_get_post_parent_id($post->ID)) {
   // Fallback to parent post title if subhead isn't set in Page Intro fields
   $parent_post = get_post($parent_id);
@@ -63,15 +67,19 @@ if (has_post_thumbnail($post)) {
 
   <?php if (has_post_thumbnail($post)): ?>
     <div class="page-header-banner bordered patterned">
-      <div class="banner-image-container background-blend fb-container-lg">
+      <div class="banner-image-container background-blend">
         <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
       </div>
     </div>
-    <?php if (!empty($photo_caption)): ?>
-      <p class="photo-caption"><?= $photo_caption ?></p>
-    <?php endif; ?>
-    <?php if (!empty($photo_byline)): ?>
-      <p class="photo-byline"><?= $photo_byline ?></p>
+    <?php if (!empty($photo_caption) || !empty($photo_byline)): ?>
+      <div class="banner-text">
+        <?php if (!empty($photo_caption)): ?>
+          <p class="photo-caption"><?= $photo_caption ?></p>
+        <?php endif; ?>
+        <?php if (!empty($photo_byline)): ?>
+          <p class="photo-byline"><?= $photo_byline ?></p>
+        <?php endif; ?>
+      </div>
     <?php endif; ?>
   <?php endif; ?>
 </header>

@@ -8,7 +8,13 @@
   }
 
   p {
+    @include p2;
+    margin-bottom: $beat * 2;
 
+    @include media-md {
+      @include p1;
+      margin-bottom: $beat * 4;
+    }
   }
 
   a {
@@ -44,5 +50,56 @@
     font-weight: bold;
   }
 
+  blockquote {
+    text-align: center;
+    margin: $padding-sm 0;
+    padding: $padding-sm 0;
+    border-top: 1px solid color(black);
+    border-bottom: 1px solid color(black);
+
+    p {
+      margin: 0;
+      @include h3;
+
+      cite {
+        @include h5;
+        margin-bottom: 0;
+        margin-top: #{$beat * 2};
+      }
+    }
+
+    @include media-md {
+      width: columns(12,10);
+      padding: #{$beat * 6} 0;
+      margin: $padding-md 0 $padding-md -#{columns(1,10)};
+    }
+  }
+
+  figure {
+    width: 100%!important; // override wp inline width
+    max-width: none;
+
+    img {
+      width: 100%;
+      display: block;
+      max-width: none;
+    }
+
+    figcaption {
+      @include p2;
+      margin-top: $gutter;
+
+      cite {
+        @include h5;
+        display: block;
+        margin-top: $beat;
+      }
+    }
+
+    @include media-md {
+      width: columns(14,10)!important;
+      margin: $padding-md 0 $padding-md -#{columns(2,10)};
+    }
+  }
 
 }

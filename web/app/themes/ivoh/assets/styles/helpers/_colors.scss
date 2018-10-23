@@ -6,7 +6,10 @@
     background-color: $value;
 
     .site-header,
-    .card {
+    .card,
+    &.single .page-header-text,
+    &.single .page-header-banner,
+    &.single .banner-text {
       background-color: $value;
     }
 
