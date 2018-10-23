@@ -60,6 +60,38 @@ if (has_post_thumbnail($post)) {
   <div class="page-header-text">
     <h4 class="breadcrumbs"><?= $intro_subhead ?></h4>
     <h1 class="page-title"><?= $intro_title; ?></h1>
+    <?php if (!empty($authors)): ?>
+      <p class="post-byline">By 
+        <?php
+        $author_links = [];
+        foreach ($authors as $author_id) {
+          $author_post = get_post($author_id);
+          $author_links[] = '<a href="' . get_permalink($author_id) . '">' . $author_post->post_title . '</a>';
+        }
+        echo implode(', ', $author_links);
+        ?>
+      </p>
+    <?php endif ?>
+    <?php if (!empty($post_date) || !empty($republished_from) || !empty($post_terms)): ?>
+      <div class="post-meta">
+        <?php if (!empty($post_date)): ?>
+          <span class="post-date"><?= $post_date ?></span>
+        <?php endif ?>
+        <?php if (!empty($republished_from)): ?>
+          <span class="republished-from">Republished from <?= $republished_from ?></span>
+        <?php endif ?>
+
+        <?php if (!empty($post_terms)): ?>
+          <ul class="post-terms">
+            <?php 
+              foreach ($post_terms as $term):
+                echo '<li><a href="'.get_term_link($term).'">'.$term->name.'</a></li>';
+              endforeach;
+            ?>
+          </ul>
+        <?php endif ?>
+      </div>
+    <?php endif ?>
     <?php if (!empty($intro_body)): ?>
       <p class="page-intro-body"><?= $intro_body ?></p>
     <?php endif ?>

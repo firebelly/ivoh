@@ -13,6 +13,45 @@
     @include h1;
   }
 
+  .post-byline {
+    margin-top: $padding-sm;
+    a {
+      color: inherit;
+    }
+  }
+
+  .post-meta {
+    @include h6;
+
+    span {
+      display: block;
+      @include media-md {
+        display: inline-block;
+        &:first-of-type {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .post-terms {
+      margin: $gutter 0 0;
+      padding: $gutter 0 0;
+      border-top: 1px solid color(black);
+
+      li {
+        list-style: none;
+        display: inline-block;
+        + li {
+          margin-left: $gutter;
+        }
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  }
+
   .page-intro-body {
     margin: #{$beat * 2} auto 0;
 

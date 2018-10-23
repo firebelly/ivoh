@@ -1,5 +1,22 @@
 <?php while (have_posts()) : the_post(); ?>
-  <?php \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', ['foo' => 'bar']); ?>
+  <?php 
+    $authors =  get_post_meta($post->ID, '_cmb2_author');
+    $post_date = get_the_date('m/d/Y');
+    if (!empty(get_post_meta($post->ID, '_cmb2_story_republished'))) {
+      $republished_from = get_post_meta($post->ID, '_cmb2_story_republished')[0];
+    } else {
+      $republished_from = '';
+    }
+    if (get_the_terms($post, 'story_topic')) {
+      $terms = get_the_terms($post, 'story_topic');
+    } elseif (get_the_terms($post, 'category')) {
+      $terms = get_the_terms($post, 'category');
+    } else {
+      $terms = '';
+    }
+
+    \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', ['authors' => $authors, 'post_date' => $post_date, 'republished_from' => $republished_from, 'post_terms' => $terms]);
+  ?>
 
   <article <?php post_class('fb-container-content'); ?>>
     <div class="entry-content user-content">

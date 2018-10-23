@@ -11,6 +11,7 @@ body.single {
 
     .page-header-text {
       margin: 0 $gutter;
+      padding-bottom: 0;
       position: relative;
       background-color: color(pink);
       border: 1px solid color(black);
@@ -30,6 +31,8 @@ body.single {
       @include media-md {
         margin: 0 auto;
         width: columns(14);
+        padding-left: columns(2);
+        padding-right: columns(2);
       }
     }
 
