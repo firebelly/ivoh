@@ -157,10 +157,7 @@ function shortcode_story_carousel($atts) {
   ];
   $stories = get_stories($args);
 
-  $output .= '
-    <div class="story-carousel-container card landscape grid">
-      <div class="story-image-carousel md-one-half">
-  ';
+  $output .= '<div class="story-carousel-container card landscape grid"><div class="story-image-carousel md-one-half">';
 
   foreach ($stories as $story_post) {
     ob_start();
@@ -168,10 +165,7 @@ function shortcode_story_carousel($atts) {
     $output .= ob_get_clean();
   }
 
-  $output .= '
-    </div><!-- .story-image-carousel -->
-    <div class="story-content-carousel md-one-half">
-  ';
+  $output .= '</div><div class="story-content-carousel md-one-half">';
 
   foreach ($stories as $story_post) {
     ob_start();
@@ -179,10 +173,7 @@ function shortcode_story_carousel($atts) {
     $output .= ob_get_clean();
   }
 
-  $output .= '
-      </div><!-- .story-content-carousel -->
-    </div><!-- .story-carousel-container -->
-  ';
+  $output .= '</div></div>';
 
   return $output;
 }
