@@ -31,8 +31,7 @@ $sort_by_options = [
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="story-type filters">
-<div class="topics filters">
+<div class="topics filters fb-container-md">
   <h3>Filter by Issue</h3>
   <ul class="topics">
   <?php foreach ($news_topics as $term):
@@ -45,12 +44,12 @@ $sort_by_options = [
       $link = add_query_arg(['topics' => implode(',', array_filter(array_merge($topics, [$term->slug]))) ]);
     }
     ?>
-    <li<?= $active ?>><a href="<?= $link ?>"><?= $term->name ?></a></li>
+    <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $term->name ?></a></li>
   <?php endforeach; ?>
   </ul>
 </div>
 
-<div class="sort-by">
+<div class="sort-by fb-container-md">
   <h3>Sort By</h3>
   <select name="sort-by" class="jumpSelect">
     <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
@@ -59,8 +58,10 @@ $sort_by_options = [
   </select>
 </div>
 
-<?php if (empty($posts)): ?>
-  <p class="no-posts">No posts found.</p>
-<?php else: ?>
-  <?= $posts ?>
-<?php endif; ?>
+<div class="fb-container-md grid patterned">
+  <?php if (empty($posts)): ?>
+    <p class="no-posts">No posts found.</p>
+  <?php else: ?>
+    <?= $posts ?>
+  <?php endif; ?>
+</div>

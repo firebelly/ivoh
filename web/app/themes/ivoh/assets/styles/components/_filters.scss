@@ -1,0 +1,49 @@
+// Filters
+// Appear on the News and Story Bank pages
+
+.filters {
+  padding: $gutter 0;
+  border-top: 1px solid color(black);
+
+  @include media-md {
+    text-align: center;  
+  }
+
+  .filter-title {
+    @include h4;
+
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      max-width: 50%;
+      flex-basis: 50%;
+      list-style: none;
+      display: inline-block;
+    }
+
+    @include media-md {
+      justify-content: center;
+  
+      li {
+        max-width: none;
+        flex-basis: auto;
+        margin: 0 #{$beat / 2};
+
+        &.-active {
+          a {
+            border: none;
+            color: color(white);
+            background-color: color(red);
+          }
+        }
+      }
+    }
+  }
+  
+}

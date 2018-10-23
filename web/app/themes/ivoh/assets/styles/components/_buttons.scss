@@ -57,6 +57,22 @@
       margin: auto;
     }
   }
+
+  &.rounded {
+    border-radius: 25px;
+  }
+
+  &.solid {
+    border: none;
+    color: color(white);
+    background-color: color(red);
+  }
+
+  &.white {
+    border: none;
+    color: color(black);
+    background-color: color(white);
+  }
 }
 
 // Expand/contract button

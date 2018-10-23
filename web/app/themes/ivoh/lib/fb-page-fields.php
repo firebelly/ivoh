@@ -40,6 +40,30 @@ function metaboxes() {
     // ],
   ]);
 
+  /**
+    * Page Color Field
+    */
+  $page_color = new_cmb2_box([
+    'id'            => $prefix . 'page_color_theme',
+    'title'         => esc_html__( 'Page Color', 'cmb2' ),
+    'object_types'  => ['page'],
+    'context'       => 'side',
+    'priority'      => 'default',
+    'show_names'    => false,
+  ]);
+  $page_color->add_field([
+    'name'      => esc_html__( 'Page Color', 'cmb2' ),
+    'id'        => $prefix .'page_color',
+    'type'      => 'select',
+    'default'   => 'pink',
+    'options'   => array(
+      'pink'    => __( 'Pink', 'cmb2' ),
+      'mint'    => __( 'Mint', 'cmb2' ),
+      'blue'    => __( 'Blue', 'cmb2' ),
+      'sand'    => __( 'Sand', 'cmb2' ),
+    ),
+  ]);
+
   $page_intro_links = new_cmb2_box([
     'id'            => $prefix . 'page_intro_links',
     'title'         => esc_html__( 'Page Intro Links', 'cmb2' ),
