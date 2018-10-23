@@ -55,8 +55,7 @@ add_action('admin_init', __NAMESPACE__ . '\disable_comments_dashboard');
 
 // Remove comments links from admin bar
 function disable_comments_admin_bar() {
-  if (is_admin_bar_showing()) {
-    remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
-  }
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('comments');
 }
-add_action('init', __NAMESPACE__ . '\disable_comments_admin_bar');
+add_action('wp_before_admin_bar_render', __NAMESPACE__.'\disable_comments_admin_bar');
