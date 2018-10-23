@@ -18,7 +18,7 @@ $stories->register();
 // Custom taxonomies
 $story_topic = new Taxonomy('story_topic');
 $story_topic->register();
-$story_type = new Taxonomy('story_type', ['hierarchical' => false]);
+$story_type = new Taxonomy('story_type');
 $story_type->register();
 
 /**
@@ -44,16 +44,6 @@ function metaboxes() {
     'id'        => $prefix . 'story_republished',
     'type'      => 'text_medium',
   ]);
-  // $story_info->add_field([
-  //   'name'      => 'Featured Image Caption',
-  //   'id'        => $prefix . 'featured_image_caption',
-  //   'type'      => 'text',
-  // ]);
-  // $story_info->add_field([
-  //   'name'      => 'Featured Image Credit',
-  //   'id'        => $prefix . 'featured_image_credit',
-  //   'type'      => 'text',
-  // ]);
 }
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 
@@ -64,35 +54,51 @@ function get_stories($opts=[]) {
   // Default opts
   $opts = array_merge([
     'return' => 'html',
-    'type'   => 'all',
+    'orderby' => 'date-desc',
+    'types'   => ['sbm','rn'],
   ], $opts);
+  $orderby = explode('-', $opts['orderby']);
 
   // Default args
   $args = [
     'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
     'post_type'   => 'story',
+    'orderby'     => $orderby[0],
+    'order'       => strtoupper($orderby[1]),
   ];
 
-  // Filter by topic?
-  if (!empty($opts['topic'])) {
-    $args['tax_query'] = [
-      [
-        'taxonomy' => 'story_topic',
-        'field' => 'slug',
-        'terms' => [$opts['topic']]
-      ]
-    ];
+  // Order by author uses generated postmeta _author_sort which is saved in a hook
+  if ($orderby[0]=='author') {
+    $args = array_merge($args, [
+      'orderby'  => 'meta_value',
+      'meta_key' => '_author_sort',
+    ]);
   }
 
   // Filter by type?
-  if ($opts['type'] != 'all') {
-    $args['tax_query'] = [
+  $args['tax_query'] = [
+    [
+      'taxonomy' => 'story_type',
+      'field'    => 'slug',
+      'terms'    => $opts['types'],
+      'compare'  => 'IN',
+    ]
+  ];
+
+  // Filter by topic?
+  if (!empty($opts['topics'])) {
+    $args['tax_query'] = array_merge(
+      $args['tax_query'],
       [
-        'taxonomy' => 'story_type',
+      'relation' => 'AND',
+        [
+        'taxonomy' => 'story_topic',
         'field'    => 'slug',
-        'terms'    => $opts['type'],
+        'terms'    => $opts['topics'],
+        'compare'  => 'IN',
+        ]
       ]
-    ];
+    );
   }
 
   // Filter by featured?
@@ -146,16 +152,16 @@ add_shortcode('story_carousel', __NAMESPACE__ . '\shortcode_story_carousel');
 function shortcode_story_carousel($atts) {
   $output = '';
   $atts = shortcode_atts([
-    'type' => 'restorative-narratives',
+    'type' => 'rn',
   ], $atts, 'story_carousel');
 
-  $args = [
+  $stories = get_stories([
     'numberposts' => 3,
-    'type'        => $atts['type'],
+    'types'       => ($atts['type']=='all' ? ['rn','sbm'] : [$atts['type']]),
     'return'      => 'array',
     'featured'    => 1,
-  ];
-  $stories = get_stories($args);
+  ]);
+  if (empty($stories)) return '';
 
   $output .= '<div class="story-carousel-container card landscape grid"><div class="story-image-carousel md-one-half">';
 
@@ -179,12 +185,29 @@ function shortcode_story_carousel($atts) {
 }
 
 /**
- * Add query vars for story bank
+ * Add query vars for story bank filtering
  */
 function add_query_vars_filter($vars){
-  $vars[] = 'topic';
-  $vars[] = 'order_by';
-  $vars[] = 'order_dir';
+  $vars[] = 'topics';
+  $vars[] = 'order-by';
+  $vars[] = 'story-types';
   return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
+
+/**
+ * Update post meta for sorting articles by author(s)
+ */
+function update_sort_meta($post_id) {
+  if (wp_is_post_revision($post_id))
+    return;
+
+  $author_last_names = [];
+  $story_authors = get_post_meta($post_id, '_cmb2_author');
+  foreach ($story_authors as $author_id) {
+    $last_name = get_post_meta($author_id, '_last_name', true);
+    $author_last_names[] = $last_name;
+  }
+  update_post_meta($post_id, '_author_sort', implode(' ', $author_last_names));
+}
+add_action('save_post_story', __NAMESPACE__.'\update_sort_meta');

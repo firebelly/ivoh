@@ -62,8 +62,9 @@ function person_sort_meta($post_id) {
     $first = '';
     $last = $post_title;
   }
-  update_post_meta($post_id, '_cmb2_first_name', $first);
-  update_post_meta($post_id, '_cmb2_last_name', $last);
+  update_post_meta($post_id, '_first_name', $first);
+  update_post_meta($post_id, '_last_name', $last);
+  // todo: update all stories/posts `_author_sort` for this person
 }
 add_action('save_post_person', __NAMESPACE__.'\person_sort_meta');
 
