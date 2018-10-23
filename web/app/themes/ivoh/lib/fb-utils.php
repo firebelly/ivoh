@@ -144,28 +144,24 @@ function get_template_part_with_vars($slug, $name = null, array $namedVariables 
 }
 
 /**
- * Custom get_posts
- */
-
-/**
- * Get storys
+ * Custom get_posts function to share between News and Stories
  */
 function get_posts($opts=[]) {
   // Default opts
   $opts = array_merge([
-    'return'    => 'html',
-    'post-type' => 'news',
-    'order-by'   => 'date-desc',
+    'return'         => 'html',
+    'post-type'      => 'news',
+    'order-by'       => 'date-desc',
     'topic-taxonomy' => 'category',
   ], $opts);
   $orderby = explode('-', $opts['order-by']);
 
-  // Default args
+  // Default args for get_posts call
   $args = [
-    'numberposts'    => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
-    'post_type'      => ($opts['post-type'] == 'news' ? 'post' : $opts['post-type']),
-    'orderby'        => $orderby[0],
-    'order'          => strtoupper($orderby[1]),
+    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
+    'post_type'   => ($opts['post-type'] == 'news' ? 'post' : $opts['post-type']),
+    'orderby'     => $orderby[0],
+    'order'       => strtoupper($orderby[1]),
   ];
 
   // Order by author uses generated postmeta _author_sort which is saved in a hook
@@ -228,14 +224,17 @@ function get_posts($opts=[]) {
     ]);
   }
 
-  // Display all matching posts using article-{$post_type}.php
   $posts = \get_posts($args);
+
+  // No posts? false!
   if (!$posts) return false;
+
   // Just return array of posts?
   if ($opts['return'] == 'array') {
     return $posts;
   }
-  // Otherwise spit out HTML
+
+  // Display all matching posts using templates/article-{$post_type}.php
   $output = '';
   foreach ($posts as $post):
     ob_start();
