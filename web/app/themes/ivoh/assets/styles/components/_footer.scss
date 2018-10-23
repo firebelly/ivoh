@@ -8,11 +8,11 @@
   }
 
   .-inner {
-    @include padding;
     text-align: center;
     color: color(white);
     padding-top: $padding-md;
     padding-bottom: $padding-md;
+    @include padding(horizontal);
     background-color: color(black);
 
     [class*=-column] {
@@ -79,7 +79,7 @@
 
     li {
       display: inline-block;
-      margin-left: #{$padding-sm * 2};
+      margin-left: #{$beat * 2};
       &:first-of-type {
         margin-left: 0;
       }
@@ -88,7 +88,7 @@
     @include media-lg {
       li {      
         float: left;
-        margin-left: #{$padding-sm * 3};
+        margin-left: $padding-sm;
       }
     }
   }
@@ -100,7 +100,11 @@
 
 // Site pre-footer
 .site-pre-footer {
+  margin-top: $padding-md;
   border-top: solid 1px color(black);
+  @include media-md {
+    margin-top: $padding-lg;
+  }
 
   .-item {
     padding: $gutter;

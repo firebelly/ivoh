@@ -9,10 +9,10 @@
   border-radius: 8px;
   display: inline-block;
   text-decoration: none;
-  line-height: #{$gutter * 3};
+  line-height: #{$beat * 6};
+  padding-left: #{$beat * 3};
+  padding-right: #{$beat * 3};
   border: 1px solid color(red);
-  padding-left: #{$padding-sm * 3};
-  padding-right: #{$padding-sm * 3};
   @include transition(color, background-color);
 
   .icon {

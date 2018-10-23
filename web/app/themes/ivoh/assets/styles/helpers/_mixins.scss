@@ -92,3 +92,26 @@
     background-color: color(gray);
   }
 }
+
+// Global padding mixin
+@mixin padding($sides: horizontal) {
+  @if $sides == 'horizontal' or $sides == 'both' {
+    padding-left: $padding-sm;
+    padding-right: $padding-sm;
+
+    @include media-md {
+      padding-left: $padding-lg;
+      padding-right: $padding-lg;
+    }
+  }
+
+  @if $sides == 'vertical' or $sides == 'both' {  
+    padding-top: $padding-sm;
+    padding-bottom: $padding-sm;
+
+    @include media-md {
+      padding-top: $padding-lg;
+      padding-bottom: $padding-lg;
+    }
+  }
+}

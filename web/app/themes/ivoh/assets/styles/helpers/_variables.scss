@@ -30,16 +30,9 @@ $headerHeightMd: 80px;
 
 // Global Padding
 $beat: 8px;
-$padding-sm: 8px;
-$padding-md: $padding-sm * 3;
-$padding-lg: $padding-sm * 9;
-@mixin padding() {
-  padding: 0 $padding-sm;
-
-  @include media-md {
-    padding: 0 $padding-lg;
-  }
-}
+$padding-sm: $beat * 3;
+$padding-md: $beat * 6;
+$padding-lg: $beat * 9;
 
 // Global UI Transitions
 $transition: .2s;

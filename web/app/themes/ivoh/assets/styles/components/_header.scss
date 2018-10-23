@@ -413,7 +413,7 @@ body {
     @include media-nav {    
       position: relative;
       vertical-align: top;
-      margin-left: #{$padding-sm * 2};
+      margin-left: #{$beat * 2};
       line-height: #{$headerHeightMd - 3};
 
       a {
