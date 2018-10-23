@@ -1,8 +1,8 @@
-// FBSage - Firebelly 2015
+// IVOH - Firebelly 2018
 /*jshint latedef:false*/
 
 // Good Design for Good Reason for Good Namespace
-var FBSage = (function($) {
+var IVOH = (function($) {
 
   var $window = $(window),
       $body = $('body'),
@@ -19,13 +19,9 @@ var FBSage = (function($) {
       transitionElements,
       $document,
       $siteNav,
-      loadingTimer,
-      page_at;
+      loadingTimer;
 
   function _init() {
-    // touch-friendly fast clicks
-    FastClick.attach(document.body);
-
     // Cache some common DOM queries
     $document = $(document);
     $body.addClass('loaded');
@@ -36,6 +32,12 @@ var FBSage = (function($) {
 
     // Transition elements to enable/disable on resize
     transitionElements = [$siteNav, $('.search-form-container')];
+
+    // Selects that jump to URLs
+    $(document).on('change', 'select.jumpSelect', function(e) {
+      var jumpTo = $(this).find(':selected').val();
+      location.href = jumpTo;
+    });
 
     // Fit them vids!
     $('main').fitVids();
@@ -125,7 +127,7 @@ var FBSage = (function($) {
     $('#search, .search-toggle').removeClass('-active');
   }
 
-  function _initFormActions() {  
+  function _initFormActions() {
     $('form input, form textarea').on('blur', function() {
       if($(this).val()) {
         $(this).parents('.input-wrap').addClass('filled');
@@ -147,7 +149,7 @@ var FBSage = (function($) {
       cellSelector: '.story-content',
       arrowShape: 'M55.1,100L7.9,52.8H100v-5.6H7.9L55.1,0h-7.9L0,47.2v5.6L47.2,100H55.1z'
     });
-    
+
     var storyImageCarousel = $storyImageCarousel.flickity({
       pageDots: false,
       bgLazyLoad: 1,
@@ -200,7 +202,7 @@ var FBSage = (function($) {
     $listItem.addClass('-active');
     $listItem.find('.sub-nav-button').addClass('-active');
     $listItem.find('.sub-menu').velocity('slideDown', {
-      easing: 'easeOutQuart', 
+      easing: 'easeOutQuart',
       duration: 250
     });
   }
@@ -209,7 +211,7 @@ var FBSage = (function($) {
     $listItem.removeClass('-active');
     $listItem.find('.sub-nav-button').removeClass('-active');
     $listItem.find('.sub-menu').velocity('slideUp', {
-      easing: 'easeOutQuart', 
+      easing: 'easeOutQuart',
       duration: 250
     });
   }
@@ -318,7 +320,7 @@ var FBSage = (function($) {
 
   function _deactivateAccordion($accordion) {
     $accordion.removeClass('-active');
-    $accordion.find('.expand-contract').removeClass('-active');        
+    $accordion.find('.expand-contract').removeClass('-active');
   }
 
   function _activateAccordion($accordion) {
@@ -329,7 +331,7 @@ var FBSage = (function($) {
   function _collapseAccordion($accordion) {
     _deactivateAccordion($accordion);
     $accordion.find('.accordion-content').velocity('slideUp', {
-      easing: 'easeOutQuart', 
+      easing: 'easeOutQuart',
       duration: 250
     });
   }
@@ -337,7 +339,7 @@ var FBSage = (function($) {
   function _expandAccordion($accordion) {
     _activateAccordion($accordion);
     $accordion.find('.accordion-content').velocity('slideDown', {
-      easing: 'easeOutQuart', 
+      easing: 'easeOutQuart',
       duration: 250
     });
   }
@@ -399,7 +401,7 @@ var FBSage = (function($) {
       $('#site-nav .sub-menu[style]').attr('style', '');
     }
 
-    // Disable transitions when resizing  
+    // Disable transitions when resizing
     _disableTransitions();
 
     // Functions to run on resize end
@@ -424,7 +426,7 @@ var FBSage = (function($) {
 })(jQuery);
 
 // Fire up the mothership
-jQuery(document).ready(FBSage.init);
+jQuery(document).ready(IVOH.init);
 
 // Zig-zag the mothership
-jQuery(window).resize(FBSage.resize);
+jQuery(window).resize(IVOH.resize);
