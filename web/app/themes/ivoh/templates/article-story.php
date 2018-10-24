@@ -38,9 +38,6 @@ $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
         </p>
       <?php endif ?>
     <?php endif; ?>
-<!--     <?php if (!empty($story_desc)): ?>
-      <div class="user-content"><?= $story_desc ?></div>
-    <?php endif; ?> -->
     <p class="card-action"><a href="<?= get_permalink($story_post) ?>" class="button">Read</a></p>
   </div>
 </article>

@@ -58,6 +58,15 @@ function get_research($opts=[]) {
     'numberposts' => $opts['numberposts'],
     'post_type'   => 'research',
   ];
+  if (!empty($opts['category'])) {
+    $args['tax_query'] = [
+      [
+        'taxonomy' => 'research_topic',
+        'field' => 'slug',
+        'terms' => $opts['category']
+      ]
+    ];
+  }
 
   // Display all matching posts using article-{$post_type}.php
   $research_posts = get_posts($args);

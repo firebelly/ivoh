@@ -6,7 +6,6 @@ $feature_image = \Firebelly\Media\get_header_bg($feature_post, ['size' => 'mediu
 ?>
 <article class="feature">
   <div class="wrap">
-  <?= \Firebelly\Utils\admin_edit_link($feature_post) ?>
   <?php if ($feature_image): ?>
     <div class="image" <?= $feature_image ?>></div>
   <?php endif; ?>
