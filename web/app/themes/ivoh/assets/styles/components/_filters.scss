@@ -2,27 +2,42 @@
 // Appear on the News and Story Bank pages
 
 .filters {
-  padding: $padding-sm 0;
   border-top: 1px solid color(black);
 
   @include media-md {
-    text-align: center;  
+    text-align: center;
+    padding: $padding-sm 0;
   }
 
   .filter-title {
     @include h4;
+    padding: $padding-sm 0;
+
     .-inner {
       display: block;
       button {
         transform: translateY(-50%);
       }
     }
+    
+    @include media-md {
+      padding: 0;
+      margin-bottom: $gutter;
+    }
+  }
+
+  .accordion-content {
+    padding: 0 0 $padding-sm;
+
+    @include media-md {
+      padding: 0;
+    }
   }
 
   ul {
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
-    padding: $padding-sm 0 0;
     margin: 0 0 0 -#{$beat / 2};
     width: calc(100% + #{$beat});
 
