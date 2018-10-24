@@ -46,10 +46,12 @@ var IVOH = (function($) {
     _initActiveToggle();
     _initNav();
     _initSearch();
+    _initCardActions();
     _initFormActions();
     _initCarousels();
     // _initLoadMore();
     _initAccordions();
+    _initMasonry();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -125,6 +127,14 @@ var IVOH = (function($) {
   function _hideSearch() {
     $body.removeClass('search-open');
     $('#search, .search-toggle').removeClass('-active');
+  }
+
+  function _initCardActions() {
+    $('.card').on('mouseenter', '.card-image, .card-title a, .card-action a', function(e) {
+      $(this).closest('.card').addClass('-hover');
+    }).on('mouseleave', '.card-image, .card-title a, .card-action a', function(e) {
+      $(this).closest('.card').removeClass('-hover');
+    });
   }
 
   function _initFormActions() {
@@ -354,6 +364,16 @@ var IVOH = (function($) {
   function _showAccordion($accordion) {
     _activateAccordion($accordion);
     $accordion.find('.accordion-content').show();
+  }
+
+  function _initMasonry() {
+    $('.card-grid .-inner').masonry({
+      itemSelector: '.card',
+      horizontalOrder: true,
+      percentPosition: true,
+      transitionDuration: 0,
+      columnWidth: '.grid-sizer'
+    });
   }
 
   // Track ajax pages in Analytics

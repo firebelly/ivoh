@@ -65,7 +65,8 @@ $sort_by_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="mobile-gutter">  
+  <div class="-inner">  
+    <div class="grid-sizer"></div>
     <?php if (empty($posts)): ?>
       <p class="no-posts">No posts found.</p>
     <?php else: ?>

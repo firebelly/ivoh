@@ -6,17 +6,17 @@ $news_image = \Firebelly\Media\get_header_bg($news_post, ['size' => 'medium']);
 $topics = wp_get_post_terms($news_post->ID, 'category');
 $news_desc = \Firebelly\Utils\get_excerpt($news_post, $length=25);
 ?>
-<article class="story card md-one-half lg-one-third <?= $news_post->column_width ?>">
+<article class="story card sm-one-half md-one-third lg-one-fourth <?= $news_post->column_width ?>">
   <?= \Firebelly\Utils\admin_edit_link($news_post) ?>
   <?php if ($news_image): ?>
     <div class="card-image-container background-blend">
-      <div class="card-image" <?= $news_image ?>></div>
+      <a href="<?= get_permalink($news_post) ?>" class="card-image" <?= $news_image ?>></a>
     </div>
   <?php endif; ?>
   <div class="card-content">
     <h1 class="card-title"><a href="<?= get_permalink($news_post) ?>"><?= $news_post->post_title ?></a></h1>
     <?php if (!empty($news_authors)): ?>
-      <p class="author card-subtitle">
+      <p class="author card-subtitle">By 
         <?php
         $news_author_links = [];
         foreach ($news_authors as $author_id) {
@@ -39,7 +39,7 @@ $news_desc = \Firebelly\Utils\get_excerpt($news_post, $length=25);
       <?php endif ?>
     <?php endif; ?>
     <?php if (!empty($news_desc)): ?>
-      <div class="user-content"><?= $news_desc ?></div>
+      <div class="card-text user-content"><?= $news_desc ?></div>
     <?php endif; ?>
     <p class="card-action"><a href="<?= get_permalink($news_post) ?>" class="button">Read</a></p>
   </div>

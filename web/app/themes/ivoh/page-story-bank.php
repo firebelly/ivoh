@@ -97,7 +97,8 @@ $story_type_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="mobile-gutter grid">  
+  <div class="-inner">
+    <div class="grid-sizer"></div>
     <?php if (empty($stories)): ?>
       <p class="no-posts">No posts found.</p>
     <?php else: ?>
