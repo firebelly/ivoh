@@ -7,7 +7,6 @@ $topics = wp_get_post_terms($news_post->ID, 'category');
 $news_desc = \Firebelly\Utils\get_excerpt($news_post, $length=25);
 ?>
 <article class="story card md-one-half lg-one-third <?= $news_post->column_width ?>">
-  <?= \Firebelly\Utils\admin_edit_link($news_post) ?>
   <?php if ($news_image): ?>
     <div class="card-image-container background-blend">
       <div class="card-image" <?= $news_image ?>></div>
