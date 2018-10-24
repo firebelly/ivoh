@@ -271,7 +271,7 @@ gulp.task('svgs', function() {
 // `manifest.config.devUrl`. When a modification is made to an asset, run the
 // build step for that asset and inject the changes into the page.
 // See: http://www.browsersync.io
-gulp.task('watch', ['styles', 'scripts'], function() {
+gulp.task('watch', ['build'], function() {
   browserSync.init({
     files: ['{lib,templates}/**/*.php', '*.php'],
     proxy: 'ivoh.sage',
@@ -291,13 +291,16 @@ gulp.task('watch', ['styles', 'scripts'], function() {
 });
 
 // ### Build
-// `gulp build` - Run all the build tasks but don't clean up beforehand.
+// `gulp build` - Run all the build tasks
 // Generally you should be running `gulp` instead of `gulp build`.
 gulp.task('build', function(callback) {
-  runSequence('styles',
-              'scripts',
-              ['fonts', 'images', 'svgs'],
-              callback);
+  runSequence(
+    'clean',
+    'styles',
+    'scripts',
+    ['fonts', 'images', 'svgs'],
+    callback
+  );
 });
 
 // ### Wiredep
@@ -315,6 +318,6 @@ gulp.task('wiredep', function() {
 
 // ### Gulp
 // `gulp` - Run a complete build. To compile for production run `gulp --production`.
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
   gulp.start('build');
 });
