@@ -2,7 +2,7 @@
 // Appear on the News and Story Bank pages
 
 .filters {
-  padding: $gutter 0;
+  padding: $padding-sm 0;
   border-top: 1px solid color(black);
 
   @include media-md {
@@ -11,20 +11,25 @@
 
   .filter-title {
     @include h4;
-
+    .-inner {
+      display: block;
+      button {
+        transform: translateY(-50%);
+      }
+    }
   }
 
   ul {
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
+    padding: $padding-sm 0 0;
+    margin: 0 0 0 -#{$beat / 2};
+    width: calc(100% + #{$beat});
 
     li {
-      max-width: 50%;
-      flex-basis: 50%;
       list-style: none;
       display: inline-block;
+      margin: 0 #{$beat / 2} $beat;
     }
 
     @include media-md {
@@ -33,17 +38,42 @@
       li {
         max-width: none;
         flex-basis: auto;
-        margin: 0 #{$beat / 2};
+
+        a {
+          position: relative;
+          padding-left: 40px;
+          padding-right: 40px;
+        }
 
         &.-active {
           a {
             border: none;
             color: color(white);
             background-color: color(red);
+
+            &::before {
+              top: 10px;
+              content: '';
+              width: 18px;
+              height: 18px;
+              left: $gutter;
+              position: absolute;
+              background: url('../svgs/icon-checkmark-white.svg');
+            }
           }
         }
       }
     }
   }
   
+}
+
+// Sort-by Filter Section
+.sort-by {
+  .select-wrap {
+    width: 100%;
+    @include media-md {
+      width: 50%;
+    }
+  }
 }

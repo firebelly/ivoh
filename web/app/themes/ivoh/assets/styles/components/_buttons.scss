@@ -59,7 +59,10 @@
   }
 
   &.rounded {
+    line-height: 1;
+    padding-top: 15px;
     border-radius: 25px;
+    padding-bottom: 13px;
   }
 
   &.solid {
@@ -72,6 +75,12 @@
     border: none;
     color: color(black);
     background-color: color(white);
+    &.-hover,
+    &:hover,
+    &:focus {
+      color: color(white);
+      background-color: color(red);
+    }
   }
 }
 

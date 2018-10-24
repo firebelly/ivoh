@@ -259,6 +259,7 @@ gulp.task('svgs', function() {
         }]
     }))
     .pipe(gulp.dest(path.source + 'svgs'))
+    .pipe(gulp.dest(path.dist + 'svgs'))
     .pipe(svgstore({ inlineSvg: true }))
     .pipe(rename({suffix: '-defs'}))
     .pipe(gulp.dest(path.dist + 'svgs/build'));

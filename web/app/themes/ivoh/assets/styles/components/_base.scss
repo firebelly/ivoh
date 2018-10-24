@@ -71,10 +71,12 @@ img {
 }
 
 .mobile-gutter {
-  padding: 0 $gutter;
+  padding-left: $gutter;
+  padding-right: $gutter;
 
   @include media-md {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 

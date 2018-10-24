@@ -5,9 +5,8 @@
   background-color: color(pink);
   outline: 1px solid color(black);
 
-
   .card-content {
-    padding: $padding-md;
+    padding: $padding-sm #{$beat * 4};
 
     a:not(.button) {
       color: inherit;
@@ -16,10 +15,6 @@
       &:focus {
         text-decoration: underline;
       }
-    }
-    
-    @include media-md {
-      padding: #{$padding-md * 2};
     }
   }
 
@@ -68,4 +63,11 @@
       }
     }
   }
+}
+
+// Card Grid
+.card-grid {
+  @extend .grid;
+  @extend .patterned;
+  outline: 1px solid color(black);
 }

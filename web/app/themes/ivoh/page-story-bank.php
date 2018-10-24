@@ -45,55 +45,63 @@ $story_type_options = [
 
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="story-type filters fb-container-md">
-  <h3 class="filter-title">Filter by Story Type</h3>
-  <ul>
-    <?php foreach ($story_type_options as $story_type_option => $story_type_title):
-      if (in_array($story_type_option, $story_types)) {
+<div class="mobile-gutter">
+  <div class="story-type filters fb-container-md accordion expanded-md">
+    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Story Type<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
+    <ul class="accordion-content">
+      <?php foreach ($story_type_options as $story_type_option => $story_type_title):
+        if (in_array($story_type_option, $story_types)) {
+          $active = ' class="-active"';
+          $filtered = array_filter($story_types, function ($el) use ($story_type_option) { return ($el != $story_type_option); });
+          $link = add_query_arg(['story-types' => implode(',', $filtered) ]);
+        } else {
+          $active = '';
+          $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_option]))) ]);
+        }
+        ?>
+        <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $story_type_title ?></a></option>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+
+  <div class="topics filters fb-container-md accordion expanded-md">
+    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Issue<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
+    <ul class="topics accordion-content">
+    <?php foreach ($story_topics as $term):
+      if (in_array($term->slug, $topics)) {
         $active = ' class="-active"';
-        $filtered = array_filter($story_types, function ($el) use ($story_type_option) { return ($el != $story_type_option); });
-        $link = add_query_arg(['story-types' => implode(',', $filtered) ]);
+        $filtered = array_filter($topics, function ($el) use ($term) { return ($el != $term->slug); });
+        $link = add_query_arg(['topics' => implode(',', $filtered) ]);
       } else {
         $active = '';
-        $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_option]))) ]);
+        $link = add_query_arg(['topics' => implode(',', array_filter(array_merge($topics, [$term->slug]))) ]);
       }
       ?>
-      <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $story_type_title ?></a></option>
+      <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $term->name ?></a></li>
     <?php endforeach; ?>
-  </ul>
+    </ul>
+  </div>
+
+  <div class="sort-by filters fb-container-content accordion expanded-md">
+    <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
+    <div class="accordion-content">
+      <div class="select-wrap">
+        <select name="sort-by" class="jumpSelect">
+          <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
+            <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="topics filters fb-container-md">
-  <h3 class="filter-title">Filter by Issue</h3>
-  <ul class="topics">
-  <?php foreach ($story_topics as $term):
-    if (in_array($term->slug, $topics)) {
-      $active = ' class="-active"';
-      $filtered = array_filter($topics, function ($el) use ($term) { return ($el != $term->slug); });
-      $link = add_query_arg(['topics' => implode(',', $filtered) ]);
-    } else {
-      $active = '';
-      $link = add_query_arg(['topics' => implode(',', array_filter(array_merge($topics, [$term->slug]))) ]);
-    }
-    ?>
-    <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $term->name ?></a></li>
-  <?php endforeach; ?>
-  </ul>
-</div>
-
-<div class="sort-by fb-container-content">
-  <h3>Sort By</h3>
-  <select name="sort-by" class="jumpSelect">
-    <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
-      <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
-    <?php endforeach; ?>
-  </select>
-</div>
-
-<div class="fb-container-md grid patterned">
-  <?php if (empty($stories)): ?>
-    <p class="no-posts">No posts found.</p>
-  <?php else: ?>
-    <?= $stories ?>
-  <?php endif; ?>
+<div class="fb-container-md card-grid">
+  <div class="mobile-gutter grid">  
+    <?php if (empty($stories)): ?>
+      <p class="no-posts">No posts found.</p>
+    <?php else: ?>
+      <?= $stories ?>
+    <?php endif; ?>
+  </div>
 </div>

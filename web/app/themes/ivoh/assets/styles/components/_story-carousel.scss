@@ -42,7 +42,11 @@
   .story-content-carousel {
     .story-content {
       width: 100%;
-      padding-bottom: 95px + $gutter;
+      padding-bottom: 95px + $padding-sm;
+      
+      @include media-md {
+        padding: $padding-md $padding-md #{95px + $padding-md};
+      }
     }
   }
 }
