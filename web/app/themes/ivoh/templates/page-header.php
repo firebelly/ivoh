@@ -20,9 +20,9 @@ if (is_404()) {
   $story_types = get_the_terms($post, 'story_type');
   $story_type = array_pop($story_types);
   $intro_subhead = $story_type->name;
-} elseif ($parent_id = wp_get_post_parent_id($post->ID)) {
+} elseif ($post->post_parent) {
   // Fallback to parent post title if subhead isn't set in Page Intro fields
-  $parent_post = get_post($parent_id);
+  $parent_post = get_post($post->post_parent);
   $intro_subhead = $parent_post->post_title;
 }
 
@@ -61,7 +61,7 @@ if (has_post_thumbnail($post)) {
     <h4 class="breadcrumbs"><?= $intro_subhead ?></h4>
     <h1 class="page-title"><?= $intro_title; ?></h1>
     <?php if (!empty($authors)): ?>
-      <p class="post-byline">By 
+      <p class="post-byline">By
         <?php
         $author_links = [];
         foreach ($authors as $author_id) {
@@ -83,7 +83,7 @@ if (has_post_thumbnail($post)) {
 
         <?php if (!empty($post_terms)): ?>
           <ul class="post-terms">
-            <?php 
+            <?php
               foreach ($post_terms as $term):
                 echo '<li><a href="'.get_term_link($term).'">'.$term->name.'</a></li>';
               endforeach;
