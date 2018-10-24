@@ -1,5 +1,5 @@
 <?php while (have_posts()) : the_post(); ?>
-  <?php 
+  <?php
     $authors =  get_post_meta($post->ID, '_cmb2_author');
     $post_date = get_the_date('m/d/Y');
     if (!empty(get_post_meta($post->ID, '_cmb2_story_republished'))) {
@@ -15,7 +15,12 @@
       $terms = '';
     }
 
-    \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', ['authors' => $authors, 'post_date' => $post_date, 'republished_from' => $republished_from, 'post_terms' => $terms]);
+    \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', [
+      'authors'          => $authors,
+      'post_date'        => $post_date,
+      'republished_from' => $republished_from,
+      'post_terms'       => $terms
+    ]);
   ?>
 
   <article <?php post_class('fb-container-content'); ?>>
@@ -25,6 +30,5 @@
     <footer>
       <?php wp_link_pages(['before' => '<nav class="page-nav"><p>' . __('Pages:', 'sage'), 'after' => '</p></nav>']); ?>
     </footer>
-    <?php comments_template('/templates/comments.php'); ?>
   </article>
 <?php endwhile; ?>
