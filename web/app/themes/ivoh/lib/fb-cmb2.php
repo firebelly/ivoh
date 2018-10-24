@@ -19,10 +19,17 @@ function get_post_options($query_args) {
 }
 
 /**
- * Get people
+ * Get people for CMB select
  */
 function get_people() {
     return get_post_options(['post_type' => 'person']);
+}
+
+/**
+ * Get pages for CMB select
+ */
+function get_pages() {
+    return get_post_options(['post_type' => 'page', 'post_parent' => null]);
 }
 
 /**

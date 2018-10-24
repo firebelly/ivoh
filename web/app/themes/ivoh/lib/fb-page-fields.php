@@ -41,6 +41,32 @@ function metaboxes() {
   ]);
 
   /**
+    * Page next/prev nav
+    */
+  $page_links = new_cmb2_box([
+    'id'            => $prefix . 'page_links',
+    'title'         => esc_html__( 'Footer Page Links', 'cmb2' ),
+    'object_types'  => ['page', 'story', 'post'],
+    'context'       => 'normal',
+    'priority'      => 'default',
+    'show_on_cb'    => __NAMESPACE__.'\\cmb_show_for_fbdev',
+  ]);
+  $page_links->add_field([
+    'name'             => esc_html__( 'Previous Page', 'cmb2' ),
+    'id'               => $prefix .'previous_page',
+    'type'             => 'select',
+    'show_option_none' => true,
+    'options_cb'       => '\Firebelly\CMB2\get_pages'
+  ]);
+  $page_links->add_field([
+    'name'             => esc_html__( 'Next Page', 'cmb2' ),
+    'id'               => $prefix .'next_page',
+    'type'             => 'select',
+    'show_option_none' => true,
+    'options_cb'       => '\Firebelly\CMB2\get_pages'
+  ]);
+
+  /**
     * Page Color Field
     */
   $page_color = new_cmb2_box([
@@ -56,14 +82,17 @@ function metaboxes() {
     'id'        => $prefix .'page_color',
     'type'      => 'select',
     'default'   => 'pink',
-    'options'   => array(
+    'options'   => [
       'pink'    => __( 'Pink', 'cmb2' ),
       'mint'    => __( 'Mint', 'cmb2' ),
       'blue'    => __( 'Blue', 'cmb2' ),
       'sand'    => __( 'Sand', 'cmb2' ),
-    ),
+    ],
   ]);
 
+  /**
+   * Page intro links (only used on homepage and fellowship)
+   */
   $page_intro_links = new_cmb2_box([
     'id'            => $prefix . 'page_intro_links',
     'title'         => esc_html__( 'Page Intro Links', 'cmb2' ),
@@ -138,46 +167,6 @@ function metaboxes() {
     'type' => 'text_url',
   ]);
 
-  // /**
-  //   * Homepage fields
-  //   */
-  // $homepage_fields = new_cmb2_box([
-  //   'id'            => 'secondary_content',
-  //   'title'         => __( 'Custom Featured Block', 'cmb2' ),
-  //   'object_types'  => ['page'],
-  //   'context'       => 'normal',
-  //   'show_on'       => ['key' => 'page-template', 'value' => 'front-page.php'],
-  //   'priority'      => 'high',
-  //   'show_names'    => true,
-  // ]);
-  // $homepage_fields->add_field([
-  //   'name'    => esc_html__( 'Custom Featured Image', 'cmb2' ),
-  //   'id'      => $prefix . 'custom_featured_image',
-  //   'type'    => 'file',
-  //   'options' => [
-  //     'url'   => false, // Hide the text input for the url
-  //   ],
-  // ]);
-  // $homepage_fields->add_field([
-  //   'name' => esc_html__( 'Custom Featured Title', 'cmb2' ),
-  //   'id'   => $prefix . 'custom_featured_title',
-  //   'type' => 'text',
-  // ]);
-  // $homepage_fields->add_field([
-  //   'name' => esc_html__( 'Custom Featured Body', 'cmb2' ),
-  //   'id'   => $prefix . 'custom_featured_body',
-  //   'type' => 'wysiwyg',
-  //   'options' => [
-  //     'textarea_rows' => 8,
-  //   ],
-  // ]);
-  // $homepage_fields->add_field([
-  //   'name' => esc_html__( 'Custom Featured Link', 'cmb2' ),
-  //   'id'   => $prefix . 'custom_featured_link',
-  //   'type' => 'text_url',
-  //   'desc' => 'e.g. http://foo.com/',
-  // ]);
-
   /**
     * Donate page fields
     */
@@ -199,7 +188,20 @@ function metaboxes() {
   ]);
 }
 
+/**
+ * This can be used to allow tags in text fields
+ * usage: 'sanitization_cb' => __NAMESPACE__.'\\sanitize_text_callback',
+ */
 function sanitize_text_callback( $value, $field_args, $field ) {
   $value = strip_tags( $value, '<b><strong><i><em>' );
   return $value;
+}
+
+/**
+ * Only show fields to fbdev user
+ */
+function cmb_show_for_fbdev($cmb) {
+  $user = wp_get_current_user();
+  $show = ($user->user_login === 'fbdev') ? true : false;
+  return $show;
 }
