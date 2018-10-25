@@ -95,6 +95,18 @@
     }
   }
 
+  // Person Variation
+  &.person {
+    .card-image-container {
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .card-image {
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  }
+
   // Hover State
   &.-hover {
     z-index: 1;
@@ -116,23 +128,29 @@
 
 // Card Grid
 .card-grid {
+  @extend .grid;
   padding: 0 $gutter;
   @extend .patterned;
   outline: 1px solid color(black);
+
   @include media-md {
     padding: 0;
   }
 
-  .grid-sizer {
-    width: 100%;
-    @include media-sm {
-      width: 50%;
-    }
-    @include media-md {
-      width: 33.3333%;
-    }
-    @include media-lg {
-      width: 25%;
+  &.masonry {
+    display: block;
+    .grid-sizer {
+      width: 100%;
+      @include media-sm {
+        width: 50%;
+      }
+      @include media-md {
+        width: 33.3333%;
+      }
+      @include media-lg {
+        width: 25%;
+      }
     }
   }
+
 }

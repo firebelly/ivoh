@@ -367,7 +367,7 @@ var IVOH = (function($) {
   }
 
   function _initMasonry() {
-    $('.card-grid .-inner').masonry({
+    $('.masonry-cards').masonry({
       itemSelector: '.card',
       horizontalOrder: true,
       percentPosition: true,
