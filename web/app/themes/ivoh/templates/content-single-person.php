@@ -29,12 +29,20 @@ $posts = get_posts([
 
 <?php get_template_part('templates/page', 'header'); ?>
 
-<?= $author_bio ?>
+<div class="fb-container-md">
+  <div class="fb-container-content">
+    <?= $author_bio ?>
 
-<h3>Posts by author:</h3>
+    <div class="card">    
+      <h3 class="card-title">Posts by author:</h3>
 
-<?= $stories ?>
+      <?= $stories ?>
 
-<?php foreach ($posts as $news_post): ?>
-  <?php include(locate_template('templates/article-news.php')); ?>
-<?php endforeach ?>
+      <?php foreach ($posts as $news_post): ?>
+        <?php include(locate_template('templates/article-news.php')); ?>
+      <?php endforeach ?>
+    </div>
+  </div>
+
+</div>
+

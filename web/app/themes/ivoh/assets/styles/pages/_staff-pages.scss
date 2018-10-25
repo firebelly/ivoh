@@ -6,5 +6,45 @@ body.staff {
 
 body.board-of-advisors,
 body.board-of-trustees {
-  
+
+}
+
+// Person Article
+.person {
+  &.trustees,
+  &.advisors {  
+    .card-content {
+      display: flex;
+      text-align: left;
+    }
+
+    .card-image-container {
+      flex-basis: 72px;
+      @include media-md {
+        flex-basis: 112px;
+      }
+    }
+
+    .card-image-container,
+    .card-image {
+      padding: 0;
+      width: 72px;
+      height: 72px;
+      margin: 0 $gutter 0 0;
+
+      @include media-md {
+        width: 112px;
+        height: 112px;
+      }
+    }
+
+    .card-text {
+      flex-shrink: 20;
+    }
+
+    .card-action a {
+      @include h5;
+      color: color(red);
+    }
+  }
 }
