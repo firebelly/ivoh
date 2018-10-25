@@ -7,7 +7,6 @@ $topics = wp_get_post_terms($story_post->ID, 'story_topic');
 $story_desc = \Firebelly\Utils\get_excerpt($story_post, $length=25);
 ?>
 <article class="story card sm-one-half md-one-third lg-one-fourth <?= $story_post->column_width ?>">
-  <?= \Firebelly\Utils\admin_edit_link($story_post) ?>
   <?php if ($story_image): ?>
     <div class="card-image-container background-blend">
       <a href="<?= get_permalink($story_post) ?>" class="card-image" <?= $story_image ?>></a>
