@@ -19,11 +19,14 @@
       }
     }
 
-    .background-blend {
+    // CSS-treated images
+    .background-blend::after {
+      background-color: $value;
+    }
 
-      &::after {
-        background-color: $value;
-      }
+    // Card hover state
+    .card.-hover .card-image-container::after {
+      background-color: rgba($value,0);
     }
   }
 

@@ -119,7 +119,7 @@ img {
     position: absolute;
     pointer-events: none;
     mix-blend-mode: multiply;
-    @include transition(opacity);
-    background-color: color(pink); // default color
+    @include transition(background-color);
+    background-color: rgba(color(pink),1); // default color
   }
 }
