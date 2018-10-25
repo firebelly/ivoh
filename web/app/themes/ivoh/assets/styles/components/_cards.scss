@@ -99,10 +99,13 @@
   &.person {
     .card-image-container {
       overflow: hidden;
+      max-width: 208px;
       border-radius: 50%;
+      margin: 0 auto $gutter;
     }
     .card-image {
       width: 100%;
+      max-width: 208px;
       padding-bottom: 100%;
     }
   }
