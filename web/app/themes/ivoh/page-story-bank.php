@@ -96,7 +96,7 @@ $story_type_options = [
   </div>
 </div>
 
-<div class="fb-container-md card-grid masonry">
+<div class="fb-container-md card-grid">
   <div class="masonry-cards -inner">
     <div class="grid-sizer"></div>
     <?php if (empty($stories)): ?>

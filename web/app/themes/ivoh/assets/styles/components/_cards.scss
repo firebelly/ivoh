@@ -131,7 +131,6 @@
 
 // Card Grid
 .card-grid {
-  @extend .grid;
   padding: 0 $gutter;
   @extend .patterned;
   outline: 1px solid color(black);
@@ -140,7 +139,7 @@
     padding: 0;
   }
 
-  &.masonry {
+  .masonry-cards {
     display: block;
     .grid-sizer {
       width: 100%;
