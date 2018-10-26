@@ -3,8 +3,10 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
-if (!empty(get_post_meta($post->ID, '_cmb2_page_color', true))) {
-  $page_color = get_post_meta($post->ID, '_cmb2_page_color', true);
+$top_ancestor = \Firebelly\Utils\get_top_ancestor($post);
+
+if (!empty(get_post_meta($top_ancestor, '_cmb2_page_color', true))) {
+  $page_color = get_post_meta($top_ancestor, '_cmb2_page_color', true);
 } else {
   $page_color = 'pink';
 }

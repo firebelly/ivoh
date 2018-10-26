@@ -73,6 +73,7 @@ function metaboxes() {
     'id'            => $prefix . 'page_color_theme',
     'title'         => esc_html__( 'Page Color', 'cmb2' ),
     'object_types'  => ['page'],
+    'show_on_cb'    => __NAMESPACE__.'\\ba_metabox_add_for_top_level_posts_only',
     'context'       => 'side',
     'priority'      => 'default',
     'show_names'    => false,
@@ -204,4 +205,15 @@ function cmb_show_for_fbdev($cmb) {
   $user = wp_get_current_user();
   $show = ($user->user_login === 'fbdev') ? true : false;
   return $show;
+}
+
+/**
+ * Exclude metabox on non top level posts
+ * @author Travis Northcutt
+ * @param  object $cmb CMB2 object
+ * @return bool        True/false whether to show the metabox
+ */
+function ba_metabox_add_for_top_level_posts_only( $cmb ) {
+  $has_parent = $cmb->object_id() && get_post_ancestors( $cmb->object_id() );
+  return ! $has_parent;
 }
