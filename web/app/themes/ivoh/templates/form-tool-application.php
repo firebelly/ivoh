@@ -1,38 +1,30 @@
 <form action="<?= admin_url('admin-ajax.php') ?>" class="applicant-form">
 
-  <div class="grid">
-    <div class="md-one-half">
-      <div class="input-wrap">
-        <input type="text" name="first_name" required>
-        <label>Name</label>
-      </div>
+  <div class="form-row grid spaced">
+    <div class="input-wrap one-half">
+      <input type="text" name="first_name" required>
+      <label>Name</label>
     </div>
-    <div class="md-one-half">
-      <div class="input-wrap">
-        <input type="text" name="last_name" required>
-        <label>Last Name</label>
-      </div>
+    <div class="input-wrap one-half">
+      <input type="text" name="last_name" required>
+      <label>Last Name</label>
     </div>
   </div>
 
-  <div class="grid">
-    <div class="md-one-third">
-      <div class="input-wrap">
-        <input type="text" name="organization"  organization">
-        <label>Organization</label>
-      </div>
+  <div class="form-row grid spaced">
+    <div class="input-wrap one-third">
+      <input type="text" name="organization"  organization">
+      <label>Organization</label>
     </div>
-    <div class="md-one-third">
-      <div class="input-wrap">
-        <input type="text" name="title"  title">
-        <label>Title</label>
-      </div>
+
+    <div class="input-wrap one-third">
+      <input type="text" name="title"  title">
+      <label>Title</label>
     </div>
-    <div class="md-one-third">
-      <div class="input-wrap">
-        <input type="email" name="email"  email" required>
-        <label>Email</label>
-      </div>
+
+    <div class="input-wrap one-third">
+      <input type="email" name="email"  email" required>
+      <label>Email</label>
     </div>
   </div>
 
