@@ -103,7 +103,7 @@ function metaboxes() {
     'priority'      => 'high',
   ]);
   $group_field_id = $page_intro_links->add_field([
-    'id'              => 'intro_links',
+    'id'              => $prefix .'intro_links',
     'type'            => 'group',
     'options'         => [
       'group_title'   => __( 'Intro Link {#}', 'cmb2' ),

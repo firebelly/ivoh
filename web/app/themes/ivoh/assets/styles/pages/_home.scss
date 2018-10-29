@@ -1,4 +1,72 @@
 // Home page
 
 .home.page {
+
+  .page-header {
+
+    .page-header-top {
+      display: flex;
+      position: relative;
+      align-items: flex-end;
+      padding-top: $beat * 22;
+      padding-bottom: $beat * 5;
+      @include media-md {
+        padding-top: 0;
+        min-height: 680px;
+        padding-bottom: $padding-lg;
+      }
+    }
+
+    .page-title {
+      z-index: 1;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      color: color(white);
+      padding-bottom: $padding-sm;
+      @include media-md {
+        padding-bottom: $padding-md;
+      }
+    }
+
+    .header-image {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-size: cover;
+    }
+
+    .page-header-text {
+      z-index: 1;
+      position: relative;
+      padding-top: $padding-sm;
+      margin: -#{$beat * 5} $gutter 0;
+      @include media-md {
+        padding-top: $padding-md;
+        margin: -$padding-lg auto 0;
+      }
+
+      .page-intro-body {
+        @include h3;
+        margin-top: 0;
+      }
+
+      .intro-link {
+        margin-top: $padding-sm;
+      }
+
+      .banner-text {
+        margin-top: $padding-md;
+        @include media-md {
+          margin-left: auto;
+          margin-right: auto;
+          width: columns(8,10);
+        }
+      }
+    }
+
+  }
+
 }
