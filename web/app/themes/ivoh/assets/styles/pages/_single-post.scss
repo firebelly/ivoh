@@ -9,6 +9,10 @@ body.single {
       padding-top: $padding-lg;
     }
 
+    .page-title {
+      @include h2;
+    }
+
     .page-header-text {
       margin: 0 $gutter;
       padding-bottom: 0;

@@ -8,7 +8,7 @@ if ($person_type->name == 'Staff' || $person_type->name == date('Y').'-fellows')
   $read_more_text = 'About '.$person_post->post_title;
 }
 ?>
-<article class="person card md-one-half lg-one-third <?= $person_type->slug ?>">
+<article class="person card sm-one-half lg-one-third <?= $person_type->slug ?>">
   <div class="card-content">
     <?php if ($person_image): ?>
       <div class="card-image-container background-blend">

@@ -141,7 +141,8 @@
 
   .masonry-cards {
     display: block;
-    .grid-sizer {
+    .grid-sizer,
+    .card {
       width: 100%;
       @include media-sm {
         width: 50%;

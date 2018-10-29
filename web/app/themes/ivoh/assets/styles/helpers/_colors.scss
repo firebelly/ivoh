@@ -9,14 +9,9 @@
     .card,
     &.single .page-header-text,
     &.single .page-header-banner,
-    &.single .banner-text {
+    &.single .banner-text,
+    .article-list .-inner {
       background-color: $value;
-    }
-
-    @include media-nav {
-      .site-nav {
-        background-color: $value;
-      }
     }
 
     // CSS-treated images
@@ -27,6 +22,12 @@
     // Card hover state
     .card.-hover .card-image-container::after {
       background-color: rgba($value,0);
+    }
+
+    @include media-nav {
+      .site-nav {
+        background-color: $value;
+      }
     }
   }
 
