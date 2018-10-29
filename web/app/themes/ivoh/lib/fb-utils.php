@@ -94,7 +94,7 @@ function admin_edit_link($post_or_term) {
 
 /**
  * Support for sending vars to get_template_part()
- * e.g. \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', ['foo' => 'bar']);
+ * usage: \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', ['foo' => 'bar']);
  * (from https://github.com/JolekPress/Get-Template-Part-With-Variables)
  */
 function get_template_part_with_vars($slug, $name = null, array $namedVariables = []) {
@@ -144,7 +144,7 @@ function get_template_part_with_vars($slug, $name = null, array $namedVariables 
 }
 
 /**
- * Custom get_posts function to share between News and Stories
+ * Custom get_posts function to share between News and Stories listing pages w/ several filter options
  */
 function get_posts($opts=[]) {
   // Default opts

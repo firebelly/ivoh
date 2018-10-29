@@ -65,7 +65,7 @@ function metaboxes() {
 /**
  * Get tool posts
  */
-function get_tool($opts=[]) {
+function get_tools($opts=[]) {
   if (empty($opts['numberposts'])) $opts['numberposts'] = -1;
   $args = [
     'numberposts' => $opts['numberposts'],
