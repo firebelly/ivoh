@@ -116,13 +116,13 @@ function metaboxes() {
     'name' => 'Link Text',
     'id'   => 'link_text',
     'type' => 'text',
-    'row_classes' => '-half',
+    'row_classes' => '-one-half',
   ]);
   $page_intro_links->add_group_field( $group_field_id, [
     'name' => 'Link URL',
     'id'   => 'url',
     'type' => 'text',
-    'row_classes' => '-half',
+    'row_classes' => '-one-half',
   ]);
 
   /**
