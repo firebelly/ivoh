@@ -10,7 +10,8 @@
     &.single .page-header-text,
     &.single .page-header-banner,
     &.single .banner-text,
-    .article-list .-inner {
+    .article-list .-inner,
+    &.home.page .page-header-text {
       background-color: $value;
     }
 
