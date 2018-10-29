@@ -32,12 +32,20 @@ function metaboxes() {
     'id'        => $prefix . 'application_prompt',
     'type'      => 'textarea_small',
     'desc'      => 'Shown above the application form',
+    'column'     => [
+      'position' => 2,
+      'name'     => 'Application Prompt',
+    ],
   ]);
   $tool_info->add_field([
-    'name'      => 'Mailchimp List ID',
-    'id'        => $prefix . 'mailchimp_list_id',
-    'type'      => 'text_small',
-    'desc'      => 'Mailchimp list new applicants are added to',
+    'name'       => 'Mailchimp List ID',
+    'id'         => $prefix . 'mailchimp_list_id',
+    'type'       => 'text_small',
+    'desc'       => 'Mailchimp list new applicants are added to',
+    'column'     => [
+      'position' => 3,
+      'name'     => 'Mailchimp List ID',
+    ],
   ]);
   $tool_info->add_field([
     'name'      => 'Sample PDF(s)',
