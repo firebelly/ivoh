@@ -10,7 +10,7 @@ if (!empty($post_meta['_cmb2_intro_subhead'])) {
 }
 ?>
 <article class="tool"><div class="wrap">
-  <h4 class="breadcrumb"><?= $subhead ?></h4>
+  <h4><?= $subhead ?></h4>
   <h2><?= $tool_post->post_title ?></h2>
   <?php if (!empty($post_meta['_cmb2_intro_body'])): ?>
     <div class="user-content">

@@ -5,4 +5,4 @@
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-<?php \Firebelly\PostTypes\Tool\get_tools(); ?>
+<?= \Firebelly\PostTypes\Tool\get_tools(); ?>
