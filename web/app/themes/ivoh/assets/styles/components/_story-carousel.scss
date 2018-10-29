@@ -1,5 +1,6 @@
 // Story Carousels
 .story-carousel-container {
+
   .flickity-button {
     top: auto;
     bottom: 0;
@@ -7,6 +8,7 @@
     display: flex;
     background: none;
     border: 1px solid color(red);
+    @include transition(background);
     svg {
       top: auto;
       left: auto;
@@ -15,6 +17,24 @@
       margin: auto;
       fill: color(red);
       position: relative;
+      @include transition(fill);
+    }
+
+    &:hover,
+    &:focus {
+      background: color(red);
+      svg {
+        fill: color(white);
+      }
+    }
+
+    &.flickity-prev-next-button {
+      &.previous {
+        left: $gutter;
+      }
+      &.next {
+        right: $gutter;
+      }
     }
   }
 
@@ -33,7 +53,8 @@
       border: 1px solid color(red);
       background-color: rgba(color(red),0);
       @include transition(background-color);
-      &.is-selected {
+      &.is-selected,
+      &:hover {
         background-color: rgba(color(red),1);
       }
     }
@@ -48,40 +69,44 @@
         padding: $padding-md $padding-md #{95px + $padding-md};
       }
     }
-  }
-}
 
-.story-image-carousel {
-  height: 0;
-  width: 100%;
-  padding-bottom: 66.6666%;
-  
-  .flickity-viewport,
-  .flickity-slider {
+    .card-title {
+      @include h3;
+    }
+  }
+
+  .story-image-carousel {
+    height: 0;
     width: 100%;
-    height: 100%;
-    position: absolute;
-  }
+    padding-bottom: 66.6666%;
+    
+    .flickity-viewport,
+    .flickity-slider {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
 
-  .story-image-container {
-    width: 100%;
-    height: 100%;
-  }
+    .story-image-container {
+      width: 100%;
+      height: 100%;
+    }
 
-  .story-image {
-    @include image-treatment();
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    background-size: cover;
-    background-position: center;
-  }
+    .story-image {
+      @include image-treatment();
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+    }
 
-  @include media-lg {
-    height: auto;
-    padding-bottom: 0;
+    @include media-lg {
+      height: auto;
+      padding-bottom: 0;
+    }
   }
 }
 

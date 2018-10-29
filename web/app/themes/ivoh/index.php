@@ -33,7 +33,7 @@ $sort_by_options = [
 
 <div class="mobile-gutter">
   <div class="topics filters fb-container-md accordion expanded-md">
-    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Issue<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
+    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Topic<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <ul class="topics accordion-content">
     <?php foreach ($news_topics as $term):
       if (in_array($term->slug, $topics)) {
@@ -65,7 +65,8 @@ $sort_by_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="mobile-gutter">  
+  <div class="masonry-cards -inner">  
+    <div class="grid-sizer"></div>
     <?php if (empty($posts)): ?>
       <p class="no-posts">No posts found.</p>
     <?php else: ?>

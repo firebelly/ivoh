@@ -13,7 +13,8 @@
     "imagesloaded": "~3.1.8",
     "history.js": "~1.8.0",
     "velocity": "~1.2.2",
-    "flickity": "^2.1.2"
+    "flickity": "^2.1.2",
+    "masonry-layout": "masonry#^4.2.2"
   },
   "overrides": {
     "modernizr": {
@@ -23,6 +24,17 @@
       "main": [
         "./dist/flickity.pkgd.js",
         "./dist/flickity.min.css"
+      ]
+    },
+    "masonry-layout": {
+      "main": [
+        "./dist/masonry.pkgd.js"
+      ]
+    },
+    "outlayer": {
+      "main": [
+        "item.js",
+        "outlayer.js"
       ]
     }
   }

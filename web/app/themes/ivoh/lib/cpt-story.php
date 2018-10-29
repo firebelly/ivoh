@@ -48,7 +48,14 @@ function metaboxes() {
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 
 function get_stories($opts) {
+  // Set template type
+  if (!empty($opts['template-type'])) {
+    $template_type = $opts['template-type'];
+  } else {
+    $template_type = 'story';
+  }
   return \Firebelly\Utils\get_posts(array_merge([
+    'template-type'  => $template_type,
     'post-type'      => 'story',
     'topic-taxonomy' => 'story_topic',
   ], $opts));

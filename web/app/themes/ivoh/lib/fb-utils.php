@@ -234,11 +234,18 @@ function get_posts($opts=[]) {
     return $posts;
   }
 
+  // Set template type
+  if (!empty($opts['template-type'])) {
+    $template_type = $opts['template-type'];
+  } else {
+    $template_type = $opts['post-type'];
+  }
+
   // Display all matching posts using templates/article-{$post_type}.php
   $output = '';
   foreach ($posts as $post):
     ob_start();
-    get_template_part_with_vars('templates/article', $opts['post-type'], [ $opts['post-type'].'_post' => $post ]);
+    get_template_part_with_vars('templates/article', $template_type, [ 'article_post' => $post, 'topic_taxonomy' => $opts['topic-taxonomy'] ]);
     $output .= ob_get_clean();
   endforeach;
   return $output;

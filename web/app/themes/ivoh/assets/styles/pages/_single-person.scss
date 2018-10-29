@@ -1,0 +1,77 @@
+// Single Person
+
+body.single-person {
+  .page-header {
+    .banner-image-container {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 50%;
+
+      .banner-image {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        position: absolute;
+      }
+
+      @include media-md {
+        width: 416px;
+        height: 416px;
+      }
+    }
+  } 
+}
+
+.article-list {
+  @extend .patterned;
+  @include media-md {
+    background: none;
+  }
+
+  .-inner {  
+    padding: 0 $padding-sm;
+    border: 1px solid color(black);
+    @include media-md {
+      padding: 0 $padding-md $padding-sm;
+    }
+  }
+
+  h3 {
+    text-align: center;
+    margin: $padding-sm 0;
+  }
+
+  article {
+    padding: $gutter 0;
+    border-top: 1px solid color(black);
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        color: color(red);
+      }
+    }
+    .article-title {
+      @include h4;
+      margin: 0 0 $beat;
+    }
+    .article-tags {
+      @include h6;
+      margin: 0 0 $beat;
+    }
+    .article-action {
+      margin: 0;
+      a {
+        @include h5;
+        color: color(red);
+      }
+    }
+  }
+}

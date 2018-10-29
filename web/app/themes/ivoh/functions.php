@@ -20,21 +20,21 @@ $sage_includes = [
 ];
 
 $firebelly_includes = [
-  'lib/fb-disable-comments.php', // Disables WP comments in admin and frontend
-  'lib/fb-init.php',             // Various setup and config
-  'lib/fb-media.php',            // Media functions (image size definitions, image helpers)
-  'lib/fb-metatags.php',         // SEO/OG Metatags
-  'lib/fb-utils.php',            // Utility functions
-  'lib/fb-ajax.php',             // AJAX functions
-  'lib/fb-cmb2.php',             // CMB2 helper functions
-  'lib/fb-page-fields.php',      // Extra fields for pages
-  'lib/fb-post-fields.php',      // Extra fields for posts + CPTs
-  'lib/fb-site-options.php',     // Custom site options page for admin
-  // 'lib/cpt-feature.php',         // CPT Feature
-  'lib/cpt-story.php',           // CPT Story
-  'lib/cpt-person.php',          // CPT Person
-  'lib/cpt-research.php',        // CPT Research
-  'lib/cpt-tool.php',            // CPT Tool
+  'lib/fb-disable-comments.php',               // Disables WP comments in admin and frontend
+  'lib/fb-disable-image-attachment-pages.php', // Disables image attachment pages
+  'lib/fb-init.php',                           // Various setup and config
+  'lib/fb-media.php',                          // Media functions (image size definitions, image helpers)
+  'lib/fb-metatags.php',                       // SEO/OG Metatags
+  'lib/fb-utils.php',                          // Utility functions
+  'lib/fb-ajax.php',                           // AJAX functions
+  'lib/fb-cmb2.php',                           // CMB2 helper functions
+  'lib/fb-page-fields.php',                    // Extra fields for pages
+  'lib/fb-post-fields.php',                    // Extra fields for posts + CPTs
+  'lib/fb-site-options.php',                   // Custom site options page for admin
+  'lib/cpt-story.php',                         // CPT Story
+  'lib/cpt-person.php',                        // CPT Person
+  'lib/cpt-research.php',                      // CPT Research
+  'lib/cpt-tool.php',                          // CPT Tool
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

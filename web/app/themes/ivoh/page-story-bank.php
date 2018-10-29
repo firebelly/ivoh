@@ -82,7 +82,7 @@ $story_type_options = [
     </ul>
   </div>
 
-  <div class="sort-by filters fb-container-content accordion expanded-md">
+  <div class="sort-by filters accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <div class="accordion-content">
       <div class="select-wrap">
@@ -97,7 +97,8 @@ $story_type_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="mobile-gutter grid">  
+  <div class="masonry-cards -inner">
+    <div class="grid-sizer"></div>
     <?php if (empty($stories)): ?>
       <p class="no-posts">No posts found.</p>
     <?php else: ?>
