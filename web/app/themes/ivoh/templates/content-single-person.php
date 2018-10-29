@@ -7,7 +7,7 @@
 $post_meta = get_post_meta($post->ID);
 
 // Author Bio
-$author_bio = apply_filters('the-content', $post->post_content);
+$author_bio = apply_filters('the_content', $post->post_content);
 
 // Get all stories by author
 $stories = \Firebelly\PostTypes\Story\get_stories([
