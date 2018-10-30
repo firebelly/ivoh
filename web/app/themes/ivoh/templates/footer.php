@@ -1,8 +1,13 @@
 <?php
-  $slug = !empty($post) ? $post->post_name : '';
-  if (!is_search() && $slug !== 'donate') {
-    get_template_part('templates/pre-footer');
-  }
+$slug = !empty($post) ? $post->post_name : '';
+if (!is_search() && $slug !== 'donate') {
+  get_template_part('templates/pre-footer');
+}
+
+// Pull fields that we need to check for being populated
+$contact_address_2 = \Firebelly\SiteOptions\get_option('contact_address_2');
+$contact_phone = \Firebelly\SiteOptions\get_option('contact_phone');
+$contact_email = \Firebelly\SiteOptions\get_option('contact_email');
 ?>
 
 <footer class="site-footer patterned" role="contentinfo">
@@ -15,22 +20,30 @@
 
       <div class="-column-two">
         <div class="contact">
-          <div class="address">
-            <p>3912 N. Broadway Ave</p>
-            <p> Unit 330</p>
-            <p> Chicago, IL 60613</p>
+          <div translate="no" typeof="schema:PostalAddress">
+            <p class="address">
+              <span property="schema:streetAddress"><?= \Firebelly\SiteOptions\get_option('contact_address'); ?>
+              <?php if (!empty($contact_address_2)): ?>
+                <br><?= $contact_address_2 ?>
+              <?php endif ?>
+              <br><span property="schema:addressLocality"><?= \Firebelly\SiteOptions\get_option('contact_locality'); ?></span>, <abbr property="schema:addressRegion"><?= \Firebelly\SiteOptions\get_option('contact_region'); ?></abbr> <span property="schema:postalCode"><?= \Firebelly\SiteOptions\get_option('contact_zip'); ?></span>
+            </p>
+            <?php if (!empty($contact_phone)): ?>
+              <a href="tel:<?= $contact_phone ?>"> <span property="schema:telephone" class="phone"><?= $contact_phone ?></a>
+            <?php endif; ?>
+            <?php if (!empty($contact_email)): ?>
+              <a href="mailto: <?= $contact_email ?>" class="email" property="schema:email"><?= $contact_email ?></a>
+            <?php endif; ?>
           </div>
-          <p class="phone">(000) 000-0000</p>
-          <p class="email">contactemail@ivoh.org</p>
         </div>
         <ul class="social-media-links">
-          <li><a href="#" class="button circular"><svg class="icon icon-facebook" aria-hidden="true" role="presentation"><use xlink:href="#icon-facebook"/></svg></a></li>
-          <li><a href="#" class="button circular"><svg class="icon icon-twitter" aria-hidden="true" role="presentation"><use xlink:href="#icon-twitter"/></svg></a></li>
+          <li><a rel="noopener" target="_blank" href="<?= \Firebelly\SiteOptions\get_option('facebook_url'); ?>" class="button circular"><svg class="icon icon-facebook" aria-hidden="true" role="presentation"><use xlink:href="#icon-facebook"/></svg></a></li>
+          <li><a rel="noopener" target="_blank" href="<?= \Firebelly\SiteOptions\get_option('twitter_url'); ?>" class="button circular"><svg class="icon icon-twitter" aria-hidden="true" role="presentation"><use xlink:href="#icon-twitter"/></svg></a></li>
         </ul>
       </div>
 
       <div class="footer-text -column-three">
-        <p>Donec sed odio dui. Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit.</p>
+        <p><?= \Firebelly\SiteOptions\get_option('footer_statement'); ?></p>
       </div>
 
     </div>

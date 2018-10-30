@@ -39,18 +39,15 @@ var IVOH = (function($) {
       location.href = jumpTo;
     });
 
-    // Research "read more" buttons to reveal description (superfluous?)
-    $(document).on('click', 'article.research a.read-description', function(e) {
-      e.preventDefault();
-      $(this).hide().parents('article.research:first').find('.description').velocity('slideDown', {
-        easing: 'easeOutQuart',
-        duration: 250,
-        complete: function() {
-          // Update masonry layout
-          $('.masonry').masonry('layout');
-        }
-      });
+    // Other value handling in donation form
+    $('.donate-form .other-amount input[type=text]').on('focus change keyup', function(e) {
+      var val = $(this).val();
+      $(this).parents('.control:first').find('input[type=radio]').prop('checked', true).val(val);
+    }).on('invalid', function(e) {
+      // Custom HTML5 validation message
+      this.setCustomValidity('Please enter a number.');
     });
+
 
     // Fit them vids!
     $('main').fitVids();
@@ -65,6 +62,8 @@ var IVOH = (function($) {
     // _initLoadMore();
     _initAccordions();
     _initMasonry();
+    _initResearch();
+    _initDonations();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -89,6 +88,33 @@ var IVOH = (function($) {
     });
 
   } // end init()
+
+  function _initResearch() {
+    // Research "read more" buttons to reveal description (superfluous?)
+    $(document).on('click', 'article.research a.read-description', function(e) {
+      e.preventDefault();
+      $(this).hide().parents('article.research:first').find('.description').velocity('slideDown', {
+        easing: 'easeOutQuart',
+        duration: 250,
+        complete: function() {
+          $this.hide();
+          // Update masonry layout
+          $('.masonry').masonry('layout');
+        }
+      });
+    });
+  }
+
+  function _initDonations() {
+    // Other value handling in donation form
+    $('.donate-form .other-amount input[type=text]').on('focus change keyup', function(e) {
+      var val = $(this).val();
+      $(this).parents('.control:first').find('input[type=radio]').prop('checked', true).val(val);
+    }).on('invalid', function(e) {
+      // Custom HTML5 validation message
+      this.setCustomValidity('Please enter a number.');
+    });
+  }
 
   function _scrollBody(element, duration, delay) {
     if ($('#wpadminbar').length) {

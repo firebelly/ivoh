@@ -182,7 +182,7 @@ function metaboxes() {
   ]);
   $donate_single_fields->add_field([
     'name'        => 'Amount',
-    'id'          => 'amount',
+    'id'          => $prefix . 'donation_amounts',
     'type'        => 'text',
     'sortable'    => true,
     'repeatable'  => true,

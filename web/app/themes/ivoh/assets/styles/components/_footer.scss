@@ -4,7 +4,7 @@
   padding: $padding-md $gutter 0;
   border-top: 1px solid color(black);
   @include media-md {
-    padding: $padding-lg 0 0; 
+    padding: $padding-lg 0 0;
   }
 
   .-inner {
@@ -62,14 +62,17 @@
 
   .contact {
     @include h5;
+
+    a {
+      display: block;
+      margin-bottom: $gutter;
+      color: color(white);
+      text-decoration: none;
+    }
   }
 
   .address {
     margin-bottom: $gutter;
-
-    p {
-      margin: 0;
-    }
   }
 
   .social-media-links {
@@ -86,7 +89,7 @@
     }
 
     @include media-lg {
-      li {      
+      li {
         float: left;
         margin-left: $padding-sm;
       }
@@ -130,5 +133,5 @@
         border-right: 1px solid color(black);
       }
     }
-  } 
+  }
 }

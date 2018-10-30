@@ -143,14 +143,35 @@ class FbSiteOptions {
     $cmb->add_field( array(
       'name' => __( 'Contact Street Address', 'cmb2' ),
       'id'   => 'contact_address',
-      'desc' => __( 'e.g. 555 N Western Ave #2'),
+      'desc' => __( 'e.g. 555 N Western Ave'),
       'type' => 'text',
     ) );
 
     $cmb->add_field( array(
-      'name' => __( 'Contact City, State & Postal Code', 'cmb2' ),
+      'name' => __( 'Contact Street Address', 'cmb2' ),
+      'id'   => 'contact_address_2',
+      'desc' => __( 'e.g. Unit 330'),
+      'type' => 'text',
+    ) );
+
+    $cmb->add_field( array(
+      'name' => __( 'Contact City', 'cmb2' ),
       'id'   => 'contact_locality',
-      'desc' => __( 'e.g. Chicago, IL 60605'),
+      'desc' => __( 'e.g. Chicago'),
+      'type' => 'text',
+    ) );
+
+    $cmb->add_field( array(
+      'name' => __( 'Contact State', 'cmb2' ),
+      'id'   => 'contact_region',
+      'desc' => __( 'e.g. IL'),
+      'type' => 'text',
+    ) );
+
+    $cmb->add_field( array(
+      'name' => __( 'Contact Zipcode', 'cmb2' ),
+      'id'   => 'contact_zip',
+      'desc' => __( 'e.g. 60622'),
       'type' => 'text',
     ) );
 
