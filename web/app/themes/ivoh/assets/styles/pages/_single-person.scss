@@ -1,28 +1,42 @@
 // Single Person
+$personImageSm: 128px;
+$personImageMd: 416px;
 
 body.single-person {
   .page-header {
-    .banner-image-container {
-      width: 128px;
-      height: 128px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 50%;
+    padding-top: #{($personImageSm / 2) + $padding-sm};
+    @include media-md {
+      padding-top: #{($personImageMd / 2) + $padding-md};
+    }
 
-      .banner-image {
-        top: 0;
-        left: 0;
-        bottom: 0;
-        padding: 0;
-        width: 100%;
-        height: auto;
-        position: absolute;
-      }
+    .-inner {
+      background: color(pink);
+      border-top: 1px solid color(black);
+    }
+
+    .person-image {
+      overflow: hidden;
+      position: relative;
+      border-radius: 50%;
+      width: $personImageSm;
+      height: $personImageSm;
+      background-size: cover;
+      top: -#{$personImageSm / 2};
+      background-position: center;
+      border: 1px solid color(black);
+      margin: 0 auto -#{($personImageSm / 2) - $padding-sm};
 
       @include media-md {
-        width: 416px;
-        height: 416px;
+        width: $personImageMd;
+        height: $personImageMd;
+        top: -#{$personImageMd / 2};
+        margin-bottom: -#{($personImageMd / 2) - $padding-sm};
       }
+    }
+
+    .person-title {
+      @include h5;
+      margin: $beat 0 0;
     }
   } 
 }

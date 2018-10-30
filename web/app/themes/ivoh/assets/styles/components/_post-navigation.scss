@@ -1,0 +1,18 @@
+// Post Navigation
+
+.post-navigation {
+  
+  .back-navigation {
+    text-align: center;
+    padding-top: $padding-md;
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        color: color(red);
+      }
+    }
+  }
+}
