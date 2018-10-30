@@ -8,8 +8,8 @@ $post_meta = get_post_meta($post->ID, '');
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="fb-container-content patterned-small">
-  
+<div class="fb-container-content patterned-sm">
+
   <div class="summit-card inherit-background">
     <?php if (!empty($post_meta['_cmb2_date_start'])): ?>
       <?php
@@ -19,7 +19,7 @@ $post_meta = get_post_meta($post->ID, '');
 
       <div class="when card-section">
         <h4 class="h5">When</h4>
-        <div class="-inner">        
+        <div class="-inner">
           <time class="date-start inherit-background" datetime="<?= date('Y-m-d', $timestamp_start) ?>">
             <span class="day"><?= date('l', $timestamp_start) ?></span>
             <span class="date"><?= date('m / d / Y', $timestamp_start) ?></span>
