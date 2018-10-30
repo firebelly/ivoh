@@ -42,7 +42,14 @@ var IVOH = (function($) {
     // Research "read more" buttons to reveal description (superfluous?)
     $(document).on('click', 'article.research a.read-description', function(e) {
       e.preventDefault();
-      $(this).hide().parents('article.research:first').find('.description').addClass('active');
+      $(this).hide().parents('article.research:first').find('.description').velocity('slideDown', {
+        easing: 'easeOutQuart',
+        duration: 250,
+        complete: function() {
+          // Update masonry layout
+          $('.masonry').masonry('layout');
+        }
+      });
     });
 
     // Fit them vids!

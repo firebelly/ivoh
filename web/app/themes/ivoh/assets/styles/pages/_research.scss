@@ -1,12 +1,7 @@
 // Research Page
 article.research {
 	.description {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 0.25s cubic-bezier(0,1,0,1);
-		&.active {
-			max-height: 500px;
-			transition: max-height 0.25s cubic-bezier(1,0,1,0);
-		}
+		// Shown with velocity when READ MORE is clicked
+		display: none;
 	}
 }
