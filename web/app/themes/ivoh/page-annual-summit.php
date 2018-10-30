@@ -19,15 +19,16 @@ $post_meta = get_post_meta($post->ID, '');
 
       <div class="when card-section">
         <h4 class="h5">When</h4>
-        <time class="date-start" datetime="<?= date('Y-m-d', $timestamp_start) ?>">
-          <span class="day"><?= date('l', $timestamp_start) ?></span>
-          <span class="date"><?= date('m / d / Y', $timestamp_start) ?></span>
-        </time>
-        –
-        <time class="date-end" datetime="<?= date('Y-m-d', $timestamp_end) ?>">
-          <span class="day"><?= date('l', $timestamp_end) ?></span>
-          <span class="date"><?= date('m / d / Y', $timestamp_end) ?></span>
-        </time>
+        <div class="-inner">        
+          <time class="date-start inherit-background" datetime="<?= date('Y-m-d', $timestamp_start) ?>">
+            <span class="day"><?= date('l', $timestamp_start) ?></span>
+            <span class="date"><?= date('m / d / Y', $timestamp_start) ?></span>
+          </time>
+          <time class="date-end inherit-background" datetime="<?= date('Y-m-d', $timestamp_end) ?>">
+            <span class="day"><?= date('l', $timestamp_end) ?></span>
+            <span class="date"><?= date('m / d / Y', $timestamp_end) ?></span>
+          </time>
+        </div>
       </div>
     <?php endif; ?>
 

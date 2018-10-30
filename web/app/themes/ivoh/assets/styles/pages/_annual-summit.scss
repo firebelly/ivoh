@@ -13,14 +13,82 @@
   }
 
   .when {
+    .-inner {
+      position: relative;
+      &::after {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        content: '';
+        position: absolute;
+        background-color: color(black);
+      }
+
+      @include media-xl {
+        display: flex;
+        justify-content: space-between;
+        &::after {        
+          left: 0;
+          right: 0;
+          top: 50%;
+          height: 1px;
+          width: 100%;
+          bottom: auto;
+        }
+      }
+    }
+
     time {
+      z-index: 1;
       @include h3;
+      display: block;
+      padding: $beat 0 0;
+      position: relative;
+
+      &:first-of-type {
+        padding-top: 0;
+        padding-bottom: $beat;
+        margin-bottom: $beat * 5;
+      }
+
+      span {
+        display: block;
+      }
+
+      @include media-xl {
+        display: inline-block;
+        padding: 0 #{$beat * 4};
+        &:first-of-type {
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
     }
   }
 
   .where {
     p {
+      margin: 0;
       @include h3;
+    }
+  }
+
+  .links {
+    padding-bottom: 0;
+    padding-top: $gutter;
+
+    a {
+      width: 100%;
+      margin-bottom: $gutter;
+    }
+
+    @include media-md {
+      padding-top: $padding-sm;
+      a {
+        width: auto;
+        margin: 0 $beat $padding-sm;
+      }
     }
   }
 }
