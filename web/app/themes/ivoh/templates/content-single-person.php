@@ -47,7 +47,7 @@ $posts = get_posts([
 
 <header class="page-header">
   <div class="-inner">
-    <div class="person-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
+    <div class="person-image" <?= \Firebelly\Media\get_header_bg($post, ['size'=>'medium']) ?>></div>
     <div class="fb-container-content">
       <h2 class="page-title"><?= $post->post_title; ?></h2>
       <?php if (!empty($person_title)): ?>

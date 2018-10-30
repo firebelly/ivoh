@@ -88,13 +88,19 @@ img {
 }
 
 // Patterned Background
-.patterned {
+.patterned,
+.patterned-small {
   background-repeat: repeat;
   background-image: url('../images/pattern.png');
   background-size: 150px 150px;
   @media (-webkit-min-device-pixel-ratio: 2), 
   (min-resolution: 192dpi) {
     background-size: 75px 75px;
+  }
+}
+.patterned-small {
+  @include media-md {
+    background: none;
   }
 }
 
