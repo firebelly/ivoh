@@ -1,0 +1,26 @@
+// Annual Summit Page
+
+.summit-card {
+  @extend .outlined;
+  text-align: center;
+
+  .card-section {
+    border-top: 1px solid color(black);
+    padding: $padding-sm $padding-md $padding-md;
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
+  .when {
+    time {
+      @include h3;
+    }
+  }
+
+  .where {
+    p {
+      @include h3;
+    }
+  }
+}
