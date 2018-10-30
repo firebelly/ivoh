@@ -22,7 +22,7 @@ form {
     }
   }
 
-  label {
+  label:not(.radio) {
     @include h5;
     top: $gutter;
     left: $gutter;
