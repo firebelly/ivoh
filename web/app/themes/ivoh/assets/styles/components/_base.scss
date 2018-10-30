@@ -20,6 +20,16 @@ img {
   height: auto;
 }
 
+hr {
+  height: 0;
+  border: none;
+  margin: $padding-sm 0;
+  border-top: 1px solid color(black);
+  @include media-md {
+    margin: $padding-md 0;
+  }
+}
+
 .site-wrap {
   width: 100%;
   margin: 0 auto;
@@ -52,7 +62,7 @@ img {
   &-content {
     padding: 0 $gutter;
 
-    @include media-md {    
+    @include media-md {
       width: columns(14);
       padding: 0 #{$gutter * 9};
     }
@@ -89,16 +99,16 @@ img {
 
 // Patterned Background
 .patterned,
-.patterned-small {
+.patterned-sm {
   background-repeat: repeat;
   background-image: url('../images/pattern.png');
   background-size: 150px 150px;
-  @media (-webkit-min-device-pixel-ratio: 2), 
+  @media (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 192dpi) {
     background-size: 75px 75px;
   }
 }
-.patterned-small {
+.patterned-sm {
   @include media-md {
     background: none;
   }
@@ -115,7 +125,7 @@ img {
   outline: 1px solid color(black);
 }
 
-// Background-blend 
+// Background-blend
 // used on containers of css-treated images
 .background-blend {
   position: relative;
