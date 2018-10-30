@@ -5,5 +5,6 @@
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-
-<?= \Firebelly\PostTypes\Tool\get_tools(); ?>
+<div class="grid fb-container-md">
+  <?= \Firebelly\PostTypes\Tool\get_tools(); ?>
+</div>

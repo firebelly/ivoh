@@ -47,6 +47,10 @@
   .card-title {
     margin: 0;
     @include h4;
+
+    &.-large {
+      @include h3;
+    }
   }
 
   .card-subtitle,
