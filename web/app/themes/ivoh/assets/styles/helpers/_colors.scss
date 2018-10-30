@@ -11,7 +11,8 @@
     &.single .page-header-banner,
     &.single .banner-text,
     .article-list .-inner,
-    &.home.page .page-header-text {
+    &.home.page .page-header-text,
+    .research-group-list .research-group {
       background-color: $value;
     }
 

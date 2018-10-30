@@ -8,4 +8,5 @@ $research_description = get_post_meta($research_post->ID, '_cmb2_description', t
     <!-- <p class="read-more">Read More</p> -->
     <p class="description"><?= $research_description ?></p>
   <?php endif; ?>
+  <p class="article-action"><a rel="noopener" target="_blank" href="<?= $research_url ?>">Read More</a></p>
 </article>
