@@ -1,0 +1,36 @@
+# Custom redirects
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Force single domain
+# RewriteCond %{REQUEST_URI} !\.well-known
+# RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+# RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
+# RewriteRule ^(.*)$ https://ivoh\.org%{REQUEST_URI} [R=301,L]
+
+# Force HTTPS
+# RewriteCond %{REQUEST_URI} !\.well-known
+# RewriteCond %{HTTP:X-Forwarded-SSL} !on
+# RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+# RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Custom redirects
+# Redirect individual research articles (e.g. View Research button in WP) to base /research/ page
+RewriteRule ^research/(.*)/$ /resources/research/ [R=301,L]
+
+</IfModule>
+# END Custom redirects
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress

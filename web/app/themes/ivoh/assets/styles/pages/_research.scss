@@ -1,1 +1,7 @@
 // Research Page
+article.research {
+	.description {
+		// Shown with velocity when READ MORE is clicked
+		display: none;
+	}
+}
