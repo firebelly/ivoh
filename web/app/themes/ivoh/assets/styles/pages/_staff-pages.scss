@@ -11,8 +11,9 @@ body.board-of-trustees {
 
 // Person Article
 .person {
+  &.past-fellows,
   &.trustees,
-  &.advisors {  
+  &.advisors {
     .card-content {
       display: flex;
       text-align: left;

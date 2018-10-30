@@ -91,9 +91,10 @@ function get_people($options=[]) {
   $people_posts = get_posts($args);
   if (!$people_posts) return false;
   $output = '';
+  $extra_class = !empty($options['extra-class']) ? $options['extra-class'] : '';
   foreach ($people_posts as $person_post):
     ob_start();
-    include(locate_template('templates/article-person.php'));
+    \Firebelly\Utils\get_template_part_with_vars('templates/article', 'person', [ 'person_post' => $person_post, 'extra_class' => $extra_class ]);
     $output .= ob_get_clean();
   endforeach;
   return $output;
