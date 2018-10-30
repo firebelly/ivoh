@@ -4,17 +4,20 @@
 */
 use Roots\Sage\Titles;
 
+// Get all post_meta
+$post_meta = get_post_meta($post->ID);
+
 // Headline set?
-if (!empty(get_post_meta($post->ID, '_cmb2_intro_headline'))) {
-  $intro_title = get_post_meta($post->ID, '_cmb2_intro_headline')[0];
+if (!empty($post_meta['_cmb2_intro_headline'])) {
+  $intro_title = $post_meta['_cmb2_intro_headline'][0];
 } else {
   // Fallback to page title
   $intro_title = Titles\title();
 }
 
 // Intro body set?
-if (!empty(get_post_meta($post->ID, '_cmb2_intro_body'))) {
-  $intro_body = get_post_meta($post->ID, '_cmb2_intro_body')[0];
+if (!empty($post_meta['_cmb2_intro_body'])) {
+  $intro_body = $post_meta['_cmb2_intro_body'][0];
 }
 
 // Intro Links?
@@ -25,8 +28,8 @@ if (!empty(get_post_meta($post->ID, '_cmb2_intro_links', true))) {
 // Try to get photo caption and byline
 if (has_post_thumbnail($post)) {
   // Override caption?
-  if (!empty(get_post_meta($post->ID, '_cmb2_photo_caption'))) {
-    $photo_caption = get_post_meta($post->ID, '_cmb2_photo_caption')[0];
+  if (!empty($post_meta['_cmb2_photo_caption'])) {
+    $photo_caption = $post_meta['_cmb2_photo_caption'][0];
   } else {
     // Fallback to default WP caption
     $photo_caption = get_the_post_thumbnail_caption($post);
