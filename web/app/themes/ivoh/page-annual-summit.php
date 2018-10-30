@@ -8,9 +8,9 @@ $post_meta = get_post_meta($post->ID, '');
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="fb-container-content">
+<div class="fb-container-content patterned-small">
   
-  <div class="summit-card">
+  <div class="summit-card inherit-background">
     <?php if (!empty($post_meta['_cmb2_date_start'])): ?>
       <?php
       $timestamp_start = strtotime($post_meta['_cmb2_date_start'][0]);
