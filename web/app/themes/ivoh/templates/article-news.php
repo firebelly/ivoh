@@ -5,7 +5,7 @@ $news_authors = get_post_meta($article_post->ID, '_cmb2_author');
 $news_image = \Firebelly\Media\get_header_bg($article_post, ['size' => 'medium']);
 $topics = wp_get_post_terms($article_post->ID, 'category');
 ?>
-<article class="news card">
+<article class="news card item">
   <?php if ($news_image): ?>
     <div class="card-image-container background-blend">
       <a href="<?= get_permalink($article_post) ?>" class="card-image" <?= $news_image ?>></a>

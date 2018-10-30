@@ -63,8 +63,8 @@ $posts = get_posts([
 
 <?php if ($stories || $posts): ?>
   <div class="article-list page-section fb-container-content">
-    <div class="-inner">
-      <h3 class="h5">Posts by author:</h3>
+    <div class="-inner inherit-background">
+      <h3 class="list-title">Posts by author:</h3>
 
       <?= $stories ?>
 

@@ -5,12 +5,12 @@
   [data-theme="#{$color}"] {
     background-color: $value;
 
+    .inherit-background,
     .site-header,
     .card,
     &.single .page-header-text,
     &.single .page-header-banner,
     &.single .banner-text,
-    .article-list .-inner,
     &.home.page .page-header-text,
     .research-group-list .research-group {
       background-color: $value;

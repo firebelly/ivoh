@@ -5,7 +5,7 @@ $story_authors = get_post_meta($article_post->ID, '_cmb2_author');
 $story_image = \Firebelly\Media\get_header_bg($article_post, ['size' => 'medium']);
 $topics = wp_get_post_terms($article_post->ID, 'story_topic');
 ?>
-<article class="story card">
+<article class="story card item">
   <?php if ($story_image): ?>
     <div class="card-image-container background-blend">
       <a href="<?= get_permalink($article_post) ?>" class="card-image" <?= $story_image ?>></a>
