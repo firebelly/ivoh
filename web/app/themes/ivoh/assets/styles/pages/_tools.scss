@@ -1,0 +1,17 @@
+// Tools Pages
+
+body.single-tool {
+  .form-section {
+    form {
+      margin-top: $gutter;
+
+      .input-submit {
+        margin-top: $beat;
+      }
+
+      @include media-md {
+        margin-top: $padding-sm;
+      }
+    }
+  }
+}

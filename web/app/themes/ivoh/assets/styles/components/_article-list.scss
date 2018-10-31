@@ -4,7 +4,7 @@
 .article-list {
   @extend .patterned;
 
-  .-inner {  
+  .-inner {
     padding: 0 $padding-sm;
     border: 1px solid color(black);
     @include media-md {
@@ -26,9 +26,31 @@
     margin: $padding-sm 0;
   }
 
-  article {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  article,
+  .article {
     padding: $gutter 0;
     border-top: 1px solid color(black);
+
+    &.with-icon {
+      position: relative;
+      padding-right: $beat * 5;
+    }
+
+    .icon {
+      top: 50%;
+      right: 0;
+      width: 18px;
+      height: 18px;
+      fill: color(red);
+      position: absolute;
+      transform: translateY(-50%);
+    }
 
     a {
       color: inherit;
@@ -39,16 +61,17 @@
       }
     }
     .article-title {
+      margin: 0;
       @include h4;
-      margin: 0 0 $beat;
     }
     .article-tags {
       @include h6;
       margin: 0 0 $beat;
     }
     .article-action {
-      margin: 0;
-      a {
+      margin: $beat 0 0;
+      a,
+      span {
         @include h5;
         color: color(red);
       }

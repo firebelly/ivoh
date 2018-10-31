@@ -1,6 +1,6 @@
 // Single Posts
 
-body.single {
+body.single:not(.single-tool) {
 
   .page-header {
     @extend .patterned;
