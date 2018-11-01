@@ -1,14 +1,5 @@
 // Donate Page
 
-body.donate {
-  .site-footer {
-    margin-top: $padding-md;
-    @include media-md {
-      margin-top: $padding-lg;
-    }
-  }
-}
-
 .donate-form {
   margin-top: $padding-sm;
   padding-top: $padding-sm;

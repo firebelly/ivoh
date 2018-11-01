@@ -36,6 +36,13 @@ hr {
   max-width: 1440px;
 }
 
+.site-main {
+  padding-bottom: $padding-md;
+  @include media-md {
+    padding-bottom: $padding-lg;
+  }
+}
+
 [class*=fb-container] {
   margin: 0 auto;
   position: relative;
