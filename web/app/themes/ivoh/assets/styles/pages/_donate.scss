@@ -1,0 +1,38 @@
+// Donate Page
+
+body.donate {
+  .site-footer {
+    margin-top: $padding-md;
+    @include media-md {
+      margin-top: $padding-lg;
+    }
+  }
+}
+
+.donate-form {
+  margin-top: $padding-sm;
+  padding-top: $padding-sm;
+  border-top: 1px solid color(black);
+  label.radio:not(.other-amount) {
+    display: inline-block;
+    margin-right: $beat * 4;
+  }
+  .other-amount {
+    margin-top: $gutter;
+    .control-text {
+      padding: 0;
+      display: block;
+    }
+    .input-wrap {
+      width: 100%;
+    }
+  }
+}
+
+.donate-by-mail {
+  .card-text {
+    margin-top: $padding-sm;
+    padding-top: $padding-sm;
+    border-top: 1px solid color(black);
+  }
+}
