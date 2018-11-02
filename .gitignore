@@ -41,3 +41,6 @@ bin
 
 # Error Log
 log
+
+# Todo list
+.todo
