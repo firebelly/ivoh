@@ -9,7 +9,7 @@ use PostTypes\Taxonomy;
 
 $research = new PostType(['name' => 'research', 'plural' => 'Research', 'slug' => 'research'], [
   'taxonomies' => ['research_topic'],
-  'supports'   => ['title'],
+  'supports'   => ['title', 'revisions'],
   'rewrite'    => ['with_front' => false],
 ]);
 $research->filters(['research_topic']);

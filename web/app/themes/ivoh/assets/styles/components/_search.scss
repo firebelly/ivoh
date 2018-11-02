@@ -1,15 +1,13 @@
 // Search form
 
-.search-form-container {
-  padding: $padding-md $gutter;
-
-  h3 {
-    @include h4;
-    text-align: center;
-  }
-
+.search-form {
   .-inner {
     display: flex;
+  }
+
+  .search-title {
+    @include h4;
+    text-align: center;
   }
 
   .input-wrap {
@@ -19,6 +17,10 @@
   .search-submit {
     margin-left: $beat;
   }
+}
+
+.search-form-container {
+  padding: $padding-md $gutter;
 
   .search-close {
     display: none;
@@ -44,6 +46,30 @@
 
     .search-close {
       display: flex;
+    }
+  }
+}
+
+// Search Results Page
+
+body.search-results {
+  .page-search-form {
+    @extend .bordered;
+    padding: $padding-sm 0;
+    margin-bottom: $padding-sm;
+
+    form {
+      width: 100%;
+
+      .search-close {
+        display: none;
+      }
+    }
+  }
+
+  .search-result {
+    .post-url {
+      margin-top: $beat;
     }
   }
 }

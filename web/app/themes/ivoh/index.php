@@ -52,8 +52,8 @@ $sort_by_options = [
 
   <div class="sort-by filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
-    <div class="accordion-content">    
-      <div class="select-wrap">  
+    <div class="accordion-content">
+      <div class="select-wrap">
         <select name="sort-by" class="jumpSelect">
           <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
             <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
@@ -65,7 +65,7 @@ $sort_by_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="masonry -inner">  
+  <div class="masonry sm-halves md-thirds lg-fourths -inner">
     <div class="grid-sizer"></div>
     <?php if (empty($posts)): ?>
       <p class="no-posts">No posts found.</p>

@@ -43,7 +43,7 @@
     @include image-treatment();
     background-position: center;
   }
-  
+
   .card-title {
     margin: 0;
     @include h4;
@@ -148,14 +148,53 @@
     .grid-sizer,
     .card {
       width: 100%;
+    }
+    &.sm-halves {
       @include media-sm {
-        width: 50%;
+        .grid-sizer,
+        .card {
+          width: 50%;
+        }
       }
+    }
+    &.md-halves {
       @include media-md {
-        width: 33.3333%;
+        .grid-sizer,
+        .card {
+          width: 50%;
+        }
       }
+    }
+    &.md-thirds {
+      @include media-md {
+        .grid-sizer,
+        .card {
+          width: 33.3333%;
+        }
+      }
+    }
+    &.lg-halves {
       @include media-lg {
-        width: 25%;
+        .grid-sizer,
+        .card {
+          width: 50%;
+        }
+      }
+    }
+    &.lg-thirds {
+      @include media-lg {
+        .grid-sizer,
+        .card {
+          width: 33.3333%;
+        }
+      }
+    }
+    &.lg-fourths {
+      @include media-lg {
+        .grid-sizer,
+        .card {
+          width: 25%;
+        }
       }
     }
   }

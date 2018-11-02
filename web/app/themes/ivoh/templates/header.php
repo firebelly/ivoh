@@ -15,11 +15,13 @@
         endif;
         ?>
 
-        <button class="search-toggle button circular" data-active-toggle="#search"><span class="sr-only">Search</span><svg class="icon icon-search" aria-hidden="true" role="presentation"><use xlink:href="#icon-search"/></svg></button>
+        <button class="search-toggle button circular"><span class="sr-only">Search</span><svg class="icon icon-search" aria-hidden="true" role="presentation"><use xlink:href="#icon-search"/></svg></button>
 
       </div>
 
-      <?php get_search_form(); ?>
+      <div id="header-search" class="search-form-container">
+        <?php \Firebelly\Utils\get_template_part_with_vars('templates/searchform', null, ['search_title' => 'Search']); ?>
+      </div>
     </nav>
   </div>
 

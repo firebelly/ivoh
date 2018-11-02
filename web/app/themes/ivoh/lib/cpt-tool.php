@@ -8,7 +8,7 @@ use PostTypes\PostType; // see https://github.com/jjgrainger/PostTypes
 use PostTypes\Taxonomy;
 
 $tool = new PostType('tool', [
-  'supports'   => ['title', 'editor'],
+  'supports'   => ['title', 'editor', 'revisions'],
   'rewrite'    => ['with_front' => false],
 ]);
 $tool->register();

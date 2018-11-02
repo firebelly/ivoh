@@ -9,7 +9,7 @@ use PostTypes\Taxonomy;
 
 $stories = new PostType(['name' => 'story', 'plural' => 'Stories', 'slug' => 'story'], [
   'taxonomies' => ['story_type', 'story_topic'],
-  'supports'   => ['title', 'editor', 'thumbnail'],
+  'supports'   => ['title', 'editor', 'thumbnail', 'revisions'],
   'rewrite'    => ['with_front' => false],
 ]);
 $stories->filters(['story_type', 'story_topic']);

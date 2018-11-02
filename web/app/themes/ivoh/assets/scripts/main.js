@@ -19,6 +19,7 @@ var IVOH = (function($) {
       transitionElements,
       $document,
       $siteNav,
+      $headerSearch,
       loadingTimer;
 
   function _init() {
@@ -26,6 +27,7 @@ var IVOH = (function($) {
     $document = $(document);
     $body.addClass('loaded');
     $siteNav = $('#site-nav');
+    $headerSearch = $('#header-search');
 
     // Set screen size vars
     _resize();
@@ -154,18 +156,23 @@ var IVOH = (function($) {
       }
     });
 
-    $('.search-close').on('click', function() {
-      _hideSearch();
+    $headerSearch.on('click', function(e) {
+      if ($(e.target).is('.search-close') || !$(e.target).is('form') && !$(e.target).parents('form').length) {
+        _hideSearch();
+      }
     });
   }
 
   function _showSearch() {
     $body.addClass('search-open');
+    $headerSearch.addClass('-active').find('input').first().focus();
+    $('.search-toggle').addClass('-active');
   }
 
   function _hideSearch() {
     $body.removeClass('search-open');
-    $('#search, .search-toggle').removeClass('-active');
+    $headerSearch.removeClass('-active').find('input').first().blur();
+    $('.search-toggle').removeClass('-active');
   }
 
   function _initCardActions() {

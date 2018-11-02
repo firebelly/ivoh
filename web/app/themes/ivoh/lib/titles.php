@@ -15,7 +15,9 @@ function title() {
   } elseif (is_archive()) {
     return get_the_archive_title();
   } elseif (is_search()) {
-    return sprintf(__('Search Results for %s', 'sage'), get_search_query());
+    global $wp_query;
+    $total_results = $wp_query->found_posts;
+    return $total_results.' Results Found for "'.get_search_query().'"';
   } elseif (is_404()) {
     return __('Page Not Found', 'sage');
   } else {

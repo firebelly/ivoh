@@ -97,7 +97,7 @@ $story_type_options = [
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="masonry -inner">
+  <div class="masonry sm-halves md-thirds lg-fourths -inner">
     <div class="grid-sizer"></div>
     <?php if (empty($stories)): ?>
       <p class="no-posts">No posts found.</p>

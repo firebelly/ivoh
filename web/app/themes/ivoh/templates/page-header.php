@@ -12,7 +12,9 @@ if (!empty($post)) {
 }
 
 // Subhead set in Page intro fields?
-if (is_404()) {
+if (is_search()) {
+  $intro_subhead = 'Search Results';
+} elseif (is_404()) {
   $intro_subhead = 'Error 404';
 } elseif (!empty($post_meta['_cmb2_intro_subhead'])) {
   $intro_subhead = $post_meta['_cmb2_intro_subhead'][0];
@@ -97,7 +99,7 @@ if (has_post_thumbnail($post)) {
     <?php endif ?>
   </div>
 
-  <?php if (has_post_thumbnail($post)): ?>
+  <?php if (!is_search() && has_post_thumbnail($post)): ?>
     <div class="page-header-banner bordered patterned">
       <div class="banner-image-container background-blend">
         <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>

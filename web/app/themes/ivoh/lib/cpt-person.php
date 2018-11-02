@@ -9,7 +9,7 @@ use PostTypes\Taxonomy;
 
 $persons = new PostType(['name' => 'person', 'plural' => 'People', 'slug' => 'person'], [
   'taxonomies' => ['person_category'],
-  'supports'   => ['title', 'editor', 'thumbnail'],
+  'supports'   => ['title', 'editor', 'thumbnail', 'revisions'],
   'rewrite'    => ['with_front' => false],
 ]);
 $persons->filters(['person_category']);
