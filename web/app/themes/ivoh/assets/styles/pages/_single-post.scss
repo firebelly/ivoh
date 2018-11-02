@@ -79,6 +79,49 @@ body.single:not(.single-tool) {
     }
   }
 
+  .post-author-meta {
+    display: flex;
+    padding: $gutter 0;
+    position: relative;
+    margin-bottom: $padding-sm;
+    border-top: 1px solid color(black);
+    min-height: #{72px + ($gutter * 2)};
+    border-bottom: 1px solid color(black);
+
+    .author-photo {
+      left: 0;
+      width: 72px;
+      top: $gutter;
+      height: 72px;
+      border-radius: 50%;
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid color(black);
+    }
+
+    .author-bio {
+      @include h5;
+      padding-left: 72px + $gutter;
+    }
+
+    @include media-md {
+      padding: $padding-sm 0;
+      margin-bottom: $padding-md;
+      min-height: #{96px + ($padding-sm * 2)};
+
+      .author-photo {
+        width: 96px;
+        height: 96px;
+        top: $padding-sm;
+      }
+
+      .author-bio {
+        padding-left: 96px + $padding-sm;
+      }
+    }
+  }
+
   article {
     @include clearfix();
 

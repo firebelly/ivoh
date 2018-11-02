@@ -2,7 +2,7 @@
 $personImageSm: 128px;
 $personImageMd: 416px;
 
-body.single-person {
+body.single.single-person {
   .page-header {
     padding-top: #{($personImageSm / 2) + $padding-sm};
     @include media-md {
