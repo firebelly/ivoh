@@ -61,7 +61,7 @@ var IVOH = (function($) {
     _initCardActions();
     _initFormActions();
     _initCarousels();
-    // _initLoadMore();
+    _initLoadMore();
     _initAccordions();
     _initMasonry();
     _initResearch();
@@ -293,7 +293,6 @@ var IVOH = (function($) {
       var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'news';
       var page = parseInt($load_more.attr('data-page-at'));
       var per_page = parseInt($load_more.attr('data-per-page'));
-      var category = $load_more.attr('data-category');
       var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
@@ -304,14 +303,13 @@ var IVOH = (function($) {
               action: 'load_more_posts',
               post_type: post_type,
               page: page+1,
-              per_page: per_page,
-              category: category
+              per_page: per_page
           },
           success: function(data) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
             more_container.append($data).removeClass('loading');
-            if (breakpoint_medium) {
+            if (breakpoint_md) {
               more_container.masonry('appended', $data, true);
             }
             $load_more.attr('data-page-at', page+1);

@@ -3,8 +3,11 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
-$top_ancestor = \Firebelly\Utils\get_top_ancestor($post);
-
+if (is_home()) {
+  $top_ancestor = get_option( 'page_for_posts' );
+} else {
+  $top_ancestor = \Firebelly\Utils\get_top_ancestor($post);
+}
 if (!empty(get_post_meta($top_ancestor, '_cmb2_page_color', true))) {
   $page_color = get_post_meta($top_ancestor, '_cmb2_page_color', true);
 } else {
@@ -42,7 +45,7 @@ if (!empty(get_post_meta($top_ancestor, '_cmb2_page_color', true))) {
       get_template_part('templates/footer');
       wp_footer();
     ?>
-    
+
     <?php if (WP_ENV === 'development'): ?>
     <script id="__bs_script__">//<![CDATA[
         document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.3'><\/script>".replace("HOST", location.hostname));

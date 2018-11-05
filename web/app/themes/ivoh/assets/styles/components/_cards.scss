@@ -149,6 +149,9 @@
     .card {
       width: 100%;
     }
+    .card {
+      z-index: 1;
+    }
     &.sm-halves {
       @include media-sm {
         .grid-sizer,
@@ -198,5 +201,31 @@
       }
     }
   }
+}
 
+// Grid Actions
+.grid-actions {
+  top: 1px;
+  padding: $gutter;
+  @extend .outlined;
+  text-align: center;
+  position: relative;
+
+  a, span {
+    display: block;
+    + a {
+      margin-top: $gutter;
+    }
+  }
+
+  @include media-md {
+    padding: $padding-sm;
+
+    span, a {
+      display: inline-block;
+      + a {
+        margin: 0;
+      }
+    }
+  }
 }

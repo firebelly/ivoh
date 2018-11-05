@@ -28,6 +28,10 @@ $sort_by_options = [
   'author-asc' => 'Author Name (A-Z)',
   'author-desc' => 'Author Name (Z-A)',
 ];
+
+// Load More Vars
+$per_page = get_option('posts_per_page');
+$num_posts = wp_count_posts('post')->publish;
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
@@ -64,13 +68,20 @@ $sort_by_options = [
   </div>
 </div>
 
-<div class="fb-container-md card-grid">
-  <div class="masonry sm-halves md-thirds lg-fourths -inner">
-    <div class="grid-sizer"></div>
-    <?php if (empty($posts)): ?>
-      <p class="no-posts">No posts found.</p>
-    <?php else: ?>
-      <?= $posts ?>
-    <?php endif; ?>
+<div class="fb-container-md">
+  <div class="card-grid">
+    <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
+      <div class="grid-sizer"></div>
+      <?php if (empty($posts)): ?>
+        <p class="no-posts">No posts found.</p>
+      <?php else: ?>
+        <?= $posts ?>
+      <?php endif; ?>
+    </div>
   </div>
+  <?php if ($num_posts > $per_page): ?>
+  <div class="grid-actions">
+    <span class="load-more" data-post-type="news" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>"><a href="#" class="button">Load More</a></span>
+  </div>
+  <?php endif ?>
 </div>

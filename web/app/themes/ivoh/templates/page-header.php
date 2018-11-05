@@ -99,7 +99,7 @@ if (has_post_thumbnail($post)) {
     <?php endif ?>
   </div>
 
-  <?php if (!is_search() && has_post_thumbnail($post)): ?>
+  <?php if (!is_search() && !is_home() && has_post_thumbnail($post)): ?>
     <div class="page-header-banner bordered patterned">
       <div class="banner-image-container background-blend">
         <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>

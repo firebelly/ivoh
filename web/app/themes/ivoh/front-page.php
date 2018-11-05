@@ -4,6 +4,10 @@
 */
 use Roots\Sage\Titles;
 
+// Load More Posts Vars
+$per_page = 3;
+$num_posts = wp_count_posts('post')->publish;
+
 // Get all post_meta
 $post_meta = get_post_meta($post->ID);
 
@@ -81,13 +85,19 @@ if (has_post_thumbnail($post)) {
   <div class="page-section fb-container-md">
   	<h2 class="h3 text-center">News & Commentary</h2>
     <div class="card-grid">
-      <div class="masonry sm-halves md-thirds lg-fourths -inner">
+      <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
         <div class="grid-sizer"></div>
       	<?php // todo: shove any news posts marked featured to top of list (sticky behavior) ?>
       	<?= \Firebelly\Utils\get_posts([
-      		'numberposts' => 3,
+      		'numberposts' => $per_page,
       	]); ?>
       </div>
+    </div>
+    <div class="grid-actions">
+    <?php if ($num_posts > $per_page): ?>
+      <span class="load-more" data-post-type="news" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>"><a href="#" class="button">Load More</a></span>
+    <?php endif ?>
+      <a href="/news" class="button">All News + Commentary</a>
     </div>
   </div>
 
