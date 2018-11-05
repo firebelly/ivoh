@@ -23,7 +23,6 @@
     <header>
       <h3 class="card-subtitle"><?= $subtitle ?></h3>
       <h2 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-      <?php if (get_post_type() === 'post') { get_template_part('templates/entry-meta'); } ?>
     </header>
     <div class="card-text">
       <?= \Firebelly\Utils\get_excerpt($post); ?>
