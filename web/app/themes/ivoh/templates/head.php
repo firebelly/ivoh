@@ -16,4 +16,15 @@
       document.body.insertBefore(div, document.body.childNodes[0]);
     }
   </script>
+  <?php if (WP_ENV === 'production'): ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46282009-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-46282009-1');
+    </script>
+  <?php endif; ?>
 </head>
