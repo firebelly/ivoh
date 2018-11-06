@@ -1,3 +1,8 @@
+<?php
+  if (empty($search_title)):
+    $search_title = 'Search';
+  endif;
+?>
 <form role="search" method="get" class="search-form fb-container-content" action="<?= esc_url(home_url('/')); ?>">
   <h3 class="search-title"><?= $search_title ?></h3>
   <div class="-inner">

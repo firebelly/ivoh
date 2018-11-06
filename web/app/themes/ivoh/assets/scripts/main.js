@@ -66,6 +66,7 @@ var IVOH = (function($) {
     _initMasonry();
     _initResearch();
     _initDonations();
+    _initScrollEvents();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -420,6 +421,28 @@ var IVOH = (function($) {
     });
   }
 
+  function _initScrollEvents() {
+    // Homapage scroll event
+
+    function addScrolledClass(offset) {
+      var st = $(window).scrollTop();
+
+      if (st >= offset) {
+        $body.addClass('scrolled');
+      } else {
+        $body.removeClass('scrolled');
+      }
+    }
+
+    if ($('body.home').length) {
+      addScrolledClass(10);
+
+      $(window).scroll(function() {
+        addScrolledClass(10);
+      });
+    }
+  }
+
   // Track ajax pages in Analytics
   function _trackPage() {
     if (typeof ga !== 'undefined') { ga('send', 'pageview', document.location.href); }
@@ -465,6 +488,10 @@ var IVOH = (function($) {
     if (breakpoint_nav && $('.site-nav .sub-menu')[0].hasAttribute('style')) {
       $('#site-nav .-active').removeClass('-active');
       $('#site-nav .sub-menu[style]').attr('style', '');
+    }
+    // Deactivate mobile nav when resizing to large screen
+    if (breakpoint_nav) {
+      _hideMobileNav();
     }
 
     // Disable transitions when resizing

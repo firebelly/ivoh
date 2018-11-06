@@ -1,6 +1,97 @@
 // Home page
 
 .home.page {
+  padding-top: 0;
+
+  // Pre-scroll styles
+  &[data-theme="pink"] {
+    color: color(white);
+    background: color(black);
+    @include transition(color, background-color);
+    .site-header {
+      color: color(white);
+      background-color: transparent;
+    }
+    .site-header::after {
+      background-color: transparent;
+    }
+    .site-nav::after {
+      border-color: color(white);
+    }
+    .ivoh-logo {
+      fill: color(white);
+    }
+    .page-header-text {
+      background-color: color(black);
+      @include transition(background-color);
+    }
+    // Menu Open
+    &.menu-open {
+      .site-nav::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        content: '';
+        position: absolute;
+        height: $headerHeightSm;
+        background-color: color(black);
+      }
+    }
+    @include media-nav {
+      &.menu-open {
+        .site-nav::before {
+          display: none;
+        }
+      }
+      .site-nav {
+        background-color: transparent;
+      }
+    }
+
+    // Resetting the styls on scroll
+    &.scrolled:not(.menu-open) {
+      color: color(black);
+      background: color(pink);
+      .site-header,
+      .site-nav,
+      .page-header-text {
+        color: color(black);
+        background-color: color(pink);
+      }
+      .site-header::after {
+        background-color: color(pink);
+      }
+      .site-nav::after {
+        border-color: color(black);
+      }
+      .ivoh-logo {
+        fill: color(black);
+      }
+      .banner-image-container {
+        &::after {
+          opacity: 1;
+        }
+        .banner-image {
+          filter: grayscale(1);
+          &::before {
+            opacity: 1;
+          }
+          &::after {
+            opacity: .35;
+          }
+        }
+      }
+
+      @include media-md {
+        .page-header-top {
+          padding-bottom: 300px;
+        }
+        .page-header-text {
+          margin-top: -300px;
+        }
+      }
+    }
+  }
 
   .page-header {
 
@@ -14,6 +105,7 @@
         padding-top: 0;
         min-height: 680px;
         padding-bottom: $padding-lg;
+        @include transition(padding-bottom);
       }
     }
 
@@ -29,14 +121,31 @@
       }
     }
 
-    .header-image {
+    .banner-image-container {
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
+      width: 100%;
       position: absolute;
-      background-size: cover;
-      background-position: center;
+      &::after {
+        opacity: 0;
+      }
+
+      .banner-image {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: auto;
+        filter: none;
+        padding-bottom: 0;
+        position: absolute;
+        &::before,
+        &::after {
+          opacity: 0;
+        }
+      }
     }
 
     .page-header-text {
@@ -45,8 +154,10 @@
       padding-top: $padding-sm;
       margin: -#{$beat * 5} $gutter 0;
       @include media-md {
+        width: columns(12,20);
         padding-top: $padding-md;
         margin: -$padding-lg auto 0;
+        @include transition(margin-top);
       }
 
       .page-intro-body {

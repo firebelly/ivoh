@@ -51,25 +51,25 @@
 }
 
 // Search Results Page
-
 body.search-results {
   .page-search-form {
     @extend .bordered;
     padding: $padding-sm 0;
     margin-bottom: $padding-sm;
-
-    form {
-      width: 100%;
-
-      .search-close {
-        display: none;
-      }
-    }
   }
-
   .search-result {
     .post-url {
       margin-top: $beat;
+    }
+  }
+}
+
+// In-page search styles
+.page-search-form {
+  form {
+    width: 100%;
+    .search-close {
+      display: none;
     }
   }
 }
