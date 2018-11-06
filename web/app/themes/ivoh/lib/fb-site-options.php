@@ -191,15 +191,21 @@ class FbSiteOptions {
       'name' => __( 'Footer Statement', 'cmb2' ),
       'id'   => 'footer_statement',
       'desc' => __( 'Statement shown in the footer'),
-      'type' => 'textarea_small',
-    ) );
+      'type' => 'wysiwyg',
+      'options' => [
+         'textarea_rows' => 4,
+       ],
+      ) );
 
     $cmb->add_field( array(
       'name' => __( 'Support Us Statement', 'cmb2' ),
       'id'   => 'support_us_statement',
       'desc' => __( 'Statement shown sitewide next to donate link'),
-      'type' => 'textarea_small',
-    ) );
+      'type' => 'wysiwyg',
+      'options' => [
+         'textarea_rows' => 4,
+       ],
+      ) );
 
     $cmb->add_field( array(
       'name'       => __( 'Facebook App ID', 'cmb2' ),

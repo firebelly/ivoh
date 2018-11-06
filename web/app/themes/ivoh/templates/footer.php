@@ -42,8 +42,8 @@ $contact_email = \Firebelly\SiteOptions\get_option('contact_email');
         </ul>
       </div>
 
-      <div class="footer-text -column-three">
-        <p><?= \Firebelly\SiteOptions\get_option('footer_statement'); ?></p>
+      <div class="footer-text -column-three user-content">
+        <?= apply_filters('the_content', \Firebelly\SiteOptions\get_option('footer_statement')); ?>
       </div>
 
     </div>
