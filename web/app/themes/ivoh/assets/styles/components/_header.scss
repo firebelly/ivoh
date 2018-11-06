@@ -157,7 +157,6 @@ body {
   transform: translateY(-100%);
   @include transition(transform);
   background-color: lighten(color(black),10%);
-  @extend .patterned;
 
   &.-active {
     transform: none;
@@ -226,7 +225,7 @@ body {
 
       > a {
         @include h5;
-        line-height: $headerHeightSm; 
+        line-height: $headerHeightSm;
       }
 
       @include media-nav {
@@ -281,7 +280,7 @@ body {
       }
     }
   }
-  
+
   ul {
     @include clearfix;
     @extend .semantic-list;
@@ -410,7 +409,7 @@ body {
   // Donate Button
   li.donate {
 
-    @include media-nav {    
+    @include media-nav {
       position: relative;
       vertical-align: top;
       margin-left: #{$beat * 2};
@@ -439,7 +438,7 @@ body {
 // Menu-open
 body.menu-open,
 body.search-open {
-  @include max-screen($breakpoint-nav) {  
+  @include max-screen($breakpoint-nav) {
     .site-header {
       &::after {
         border-color: color(white);

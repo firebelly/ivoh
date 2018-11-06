@@ -3,12 +3,12 @@
 /* @import must be at top of file, otherwise CSS will not work */
 @import url("//hello.myfonts.net/count/37c478");
 
-  
+
 @font-face {font-family: 'ClearfaceITCPro-BoldItalic';src: url('../fonts/37C478_0_0.eot');src: url('../fonts/37C478_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/37C478_0_0.woff2') format('woff2'),url('../fonts/37C478_0_0.woff') format('woff'),url('../fonts/37C478_0_0.ttf') format('truetype');}
- 
-  
+
+
 @font-face {font-family: 'ClearfaceITCPro-Bold';src: url('../fonts/37C478_1_0.eot');src: url('../fonts/37C478_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/37C478_1_0.woff2') format('woff2'),url('../fonts/37C478_1_0.woff') format('woff'),url('../fonts/37C478_1_0.ttf') format('truetype');}
- 
+
 
 // font-face
 @font-face {
@@ -59,7 +59,7 @@
   @include paragraph-style(36, 40, -.032em);
 
   @include media-md {
-    @include paragraph-style(64, 48, -.046em);
+    @include paragraph-style(64, 64, -.046em);
   }
 }
 .h1 {

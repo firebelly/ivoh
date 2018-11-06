@@ -50,7 +50,9 @@ if (has_post_thumbnail($post)) {
 
   <header class="page-header">
     <div class="page-header-top">
-      <div class="header-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
+      <div class="banner-image-container background-blend">
+        <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
+      </div>
       <div class="fb-container-md">
         <h2 class="page-title fb-container-content"><?= $intro_title; ?></h2>
       </div>
