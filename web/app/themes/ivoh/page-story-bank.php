@@ -37,10 +37,7 @@ $sort_by_options = [
 ];
 
 // Story type options
-$story_type_options = [
-  'rn' => 'Restorative Narratives',
-  'sbm' => 'Strength-Based Media',
-];
+$story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
 ?>
 
 <?php get_template_part('templates/page', 'header'); ?>
@@ -49,14 +46,16 @@ $story_type_options = [
   <div class="story-type filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Story Type<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <ul class="accordion-content">
-      <?php foreach ($story_type_options as $story_type_option => $story_type_title):
-        if (in_array($story_type_option, $story_types)) {
+      <?php foreach ($story_type_terms as $story_type_cat):
+        $story_type_slug = $story_type_cat->slug;
+        $story_type_title = $story_type_cat->name;
+        if (in_array($story_type_slug, $story_types)) {
           $active = ' class="-active"';
-          $filtered = array_filter($story_types, function ($el) use ($story_type_option) { return ($el != $story_type_option); });
+          $filtered = array_filter($story_types, function ($el) use ($story_type_slug) { return ($el != $story_type_slug); });
           $link = add_query_arg(['story-types' => implode(',', $filtered) ]);
         } else {
           $active = '';
-          $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_option]))) ]);
+          $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_slug]))) ]);
         }
         ?>
         <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $story_type_title ?></a></option>
