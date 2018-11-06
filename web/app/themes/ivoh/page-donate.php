@@ -2,10 +2,15 @@
 /*
   Template name: Donate
 */
-
-$body = apply_filters('the_content', $post->post_content);
+$by_mail_prompt = get_post_meta($post->ID, '_cmb2_donation_bymail', true);
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
+
+<?php if (!empty(trim($post->post_content))): ?>
+<div class="post-content user-content fb-container-content">
+  <?= apply_filters('the_content', $post->post_content) ?>
+</div>
+<?php endif; ?>
 
 <div class="grid fb-container-md mobile-gutter patterned">
   <div class="card md-one-half">
@@ -55,7 +60,7 @@ $body = apply_filters('the_content', $post->post_content);
     <div class="card-content">
       <h4 class="card-subtitle">By Mail</h4>
       <div class="card-text user-content text-left">
-        <?= $body ?>
+        <?= apply_filters('the_content', $by_mail_prompt) ?>
       </div>
     </div>
   </div>
