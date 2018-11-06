@@ -39,6 +39,8 @@ if (!empty($post_meta['_cmb2_intro_headline'])) {
 // Intro body set?
 if (!empty($post_meta['_cmb2_intro_body'])) {
   $intro_body = $post_meta['_cmb2_intro_body'][0];
+} elseif (is_404()) {
+  $intro_body = 'Sorry, but the page you were trying to view does not exist.';
 }
 
 // Try to get photo caption and byline
@@ -99,7 +101,7 @@ if (has_post_thumbnail($post)) {
     <?php endif ?>
   </div>
 
-  <?php if (!is_search() && !is_home() && has_post_thumbnail($post)): ?>
+  <?php if (!is_search() && !is_home() && !is_404() && has_post_thumbnail($post)): ?>
     <div class="page-header-banner bordered patterned">
       <div class="banner-image-container background-blend">
         <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>

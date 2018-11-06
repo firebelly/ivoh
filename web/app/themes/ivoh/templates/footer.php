@@ -1,6 +1,6 @@
 <?php
 $slug = !empty($post) ? $post->post_name : '';
-if (!is_search() && $slug !== 'donate') {
+if (!is_search() && !is_404() && $slug !== 'donate') {
   get_template_part('templates/pre-footer');
 }
 
