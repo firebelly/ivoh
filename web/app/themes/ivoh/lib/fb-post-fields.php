@@ -20,7 +20,7 @@ function metaboxes() {
   $post_is_featured->add_field([
     'name'    => esc_html__( 'Featured', 'cmb2' ),
     'id'      => $prefix . 'featured',
-    'desc'    => 'Feature on homepage',
+    'desc'    => 'If Story, shows post on carousels; if News, makes post sticky (in the works)',
     'type'    => 'checkbox',
   ]);
 
