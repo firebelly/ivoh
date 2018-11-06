@@ -3,8 +3,8 @@
 
     <div id="support-us" class="-item md-one-half accordion expanded-md">
       <h3 class="accordion-toggle"><span class="-inner">Support Us<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
-      <div class="accordion-content">
-        <p><?= \Firebelly\SiteOptions\get_option('support_us_statement'); ?></p>
+      <div class="accordion-content user-content">
+        <?= apply_filters('the_content', \Firebelly\SiteOptions\get_option('support_us_statement')); ?>
         <p class="action"><a href="/donate/" class="button">Donate</a></p>
       </div>
     </div>

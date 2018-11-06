@@ -28,7 +28,7 @@ function metaboxes() {
     'id'            => $prefix . 'post_author',
     'title'         => esc_html__( 'Author(s)', 'cmb2' ),
     'object_types'  => ['post', 'story'],
-    'context'       => 'normal',
+    'context'       => 'side',
     'priority'      => 'default',
     'show_names'    => false,
   ]);

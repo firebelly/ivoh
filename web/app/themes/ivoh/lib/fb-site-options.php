@@ -61,7 +61,7 @@ class FbSiteOptions {
    * Add menu options page
    */
   public function add_options_page() {
-    $this->options_page = add_menu_page( $this->title, $this->title, 'manage_options', $this->key, array( $this, 'admin_page_display' ) );
+    $this->options_page = add_menu_page( $this->title, $this->title, 'publish_posts', $this->key, array( $this, 'admin_page_display' ) );
 
     // Include CMB CSS in the head to avoid FOUC
     add_action( "admin_print_styles-{$this->options_page}", array( 'CMB2_hookup', 'enqueue_cmb_css' ) );
@@ -191,15 +191,21 @@ class FbSiteOptions {
       'name' => __( 'Footer Statement', 'cmb2' ),
       'id'   => 'footer_statement',
       'desc' => __( 'Statement shown in the footer'),
-      'type' => 'textarea_small',
-    ) );
+      'type' => 'wysiwyg',
+      'options' => [
+         'textarea_rows' => 4,
+       ],
+      ) );
 
     $cmb->add_field( array(
       'name' => __( 'Support Us Statement', 'cmb2' ),
       'id'   => 'support_us_statement',
       'desc' => __( 'Statement shown sitewide next to donate link'),
-      'type' => 'textarea_small',
-    ) );
+      'type' => 'wysiwyg',
+      'options' => [
+         'textarea_rows' => 4,
+       ],
+      ) );
 
     $cmb->add_field( array(
       'name'       => __( 'Facebook App ID', 'cmb2' ),

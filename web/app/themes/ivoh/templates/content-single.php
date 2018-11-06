@@ -26,7 +26,7 @@
     if (get_post_type($post) == 'story' && !empty($authors)):
       $author = get_post($authors[0]);
       $author_photo = \Firebelly\Media\get_header_bg($author, ['size'=>'thumbnail']);
-      $author_bio = get_post_meta($author->ID, '_cmb2_person_post_bio')[0];
+      $author_bio = get_post_meta($author->ID, '_cmb2_person_post_bio', true);
     endif;
   ?>
 
