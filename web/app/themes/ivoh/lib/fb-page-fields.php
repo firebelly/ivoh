@@ -187,6 +187,14 @@ function metaboxes() {
     'sortable'    => true,
     'repeatable'  => true,
   ]);
+  $donate_single_fields->add_field([
+    'name'        => 'By Mail Prompt',
+    'id'          => $prefix . 'donation_bymail',
+    'type'        => 'wysiwyg',
+    'options' => [
+       'textarea_rows' => 8,
+     ],
+  ]);
 }
 
 /**
