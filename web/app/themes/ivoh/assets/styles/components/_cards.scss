@@ -48,6 +48,10 @@
     margin: 0;
     @include h4;
 
+    a {
+      display: inline-block;
+    }
+
     &.-large {
       @include h3;
     }
