@@ -155,6 +155,9 @@
     }
     .card {
       z-index: 1;
+      &.-hover {
+        z-index: 2;
+      }
     }
     &.sm-halves {
       @include media-sm {
