@@ -27,16 +27,27 @@
       $author = get_post($authors[0]);
       $author_photo = \Firebelly\Media\get_header_bg($author, ['size'=>'thumbnail']);
       $author_bio = get_post_meta($author->ID, '_cmb2_person_post_bio', true);
+      if (empty($author_bio)) {
+        $author_edit_link = get_edit_post_link($author->ID);
+      }
     endif;
   ?>
 
   <article <?php post_class('fb-container-content'); ?>>
-    <?php if (!empty($author_bio)): ?>
+    <?php if (!empty($author)): ?>
       <div class="post-author-meta">
-        <div class="author-photo" <?= $author_photo ?>></div>
-        <p class="author-bio user-content"><?= $author_bio ?></p>
+        <?php if (!empty($author_photo)): ?>
+          <a class="author-photo" href="<?= get_permalink($author) ?>" <?= $author_photo ?>></a>
+        <?php endif; ?>
+        <div class="author-bio user-content">
+          <?php if (empty($author_bio) && !empty($author_edit_link)): ?>
+            <p>Author bio empty. <a target="_blank" href="<?= $author_edit_link ?>">Edit Author</a></p>
+          <?php else: ?>
+            <?= apply_filters('the_content', $author_bio) ?>
+          <?php endif; ?>
+        </div>
       </div>
-    <?php endif ?>
+    <?php endif; ?>
     <div class="entry-content user-content">
       <?php the_content(); ?>
     </div>
