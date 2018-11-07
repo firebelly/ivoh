@@ -32,8 +32,12 @@ $sort_by_options = [
 // Load More Vars
 $per_page = get_option('posts_per_page');
 $num_posts = wp_count_posts('post')->publish;
+
+// News page for header
+$news_page = get_post(get_option('page_for_posts'));
 ?>
-<?php get_template_part('templates/page', 'header'); ?>
+
+<?php \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', [ 'post' => $news_page ]); ?>
 
 <div class="mobile-gutter">
   <div class="topics filters fb-container-md accordion expanded-md">
