@@ -1,11 +1,12 @@
 <?php
 $person_title = get_post_meta($person_post->ID, '_cmb2_person_title', true);
+$first_name = get_post_meta($person_post->ID, '_first_name', true);
 $person_image = \Firebelly\Media\get_header_bg($person_post, ['size' => 'medium']);
 $person_type = \Firebelly\Utils\get_first_term($person_post, 'person_category');
 if ($person_type->name == 'Staff' || $person_type->name == date('Y').'-fellows') {
   $read_more_text = 'More';
 } else {
-  $read_more_text = 'About '.$person_post->post_title;
+  $read_more_text = 'About '.$first_name;
 }
 ?>
 <article class="person card sm-one-half lg-one-third <?= $person_type->slug ?><?= !empty($extra_class) ? " {$extra_class}" : '' ?>">
