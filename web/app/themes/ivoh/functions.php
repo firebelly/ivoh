@@ -35,6 +35,7 @@ $firebelly_includes = [
   'lib/cpt-person.php',                        // CPT Person
   'lib/cpt-research.php',                      // CPT Research
   'lib/cpt-tool.php',                          // CPT Tool
+  'lib/ivoh-importer.php',                     // Custom importer
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);
