@@ -7,11 +7,19 @@
 $topics = explode(',', get_query_var('topics', ''));
 $order_by = get_query_var('order-by', 'date-desc');
 
-// Get all posts matching filters
-$posts = \Firebelly\Utils\get_posts([
+// Load More Vars
+$per_page = get_option('posts_per_page');
+
+$args = [
+  'numberposts' => $per_page,
   'topics'  => array_filter($topics),
   'order-by' => $order_by,
-]);
+];
+
+// Get all posts matching filters
+$posts = \Firebelly\Utils\get_posts($args);
+
+$num_posts = \Firebelly\Utils\get_posts(array_merge(['countposts' => 1], $args));
 
 // Get base topics for filtering
 $news_topics = get_terms([
@@ -23,15 +31,11 @@ $news_topics = get_terms([
 $sort_by_options = [
   'date-desc' => 'Date (Newest First)',
   'date-asc' => 'Date (Oldest First)',
-  'title-asc' => 'Story Name (A-Z)',
-  'title-desc' => 'Story Name (Z-A)',
+  'title-asc' => 'Post Title (A-Z)',
+  'title-desc' => 'Post Title (Z-A)',
   'author-asc' => 'Author Name (A-Z)',
   'author-desc' => 'Author Name (Z-A)',
 ];
-
-// Load More Vars
-$per_page = get_option('posts_per_page');
-$num_posts = wp_count_posts('post')->publish;
 
 // News page for header
 $news_page = get_post(get_option('page_for_posts'));
@@ -84,8 +88,8 @@ $news_page = get_post(get_option('page_for_posts'));
     </div>
   </div>
   <?php if ($num_posts > $per_page): ?>
-  <div class="grid-actions">
-    <span class="load-more" data-post-type="news" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>"><a href="#" class="button">Load More</a></span>
-  </div>
+    <div class="load-more grid-actions inherit-background" data-post-type="post" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-topics="<?= get_query_var('topics', '') ?>">
+      <a href="#" class="button">Load More Posts</a>
+    </div>
   <?php endif ?>
 </div>

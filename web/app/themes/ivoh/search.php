@@ -1,4 +1,16 @@
-<?php get_template_part('templates/page', 'header'); ?>
+<?php
+use Roots\Sage\Titles;
+/*
+  Template name: Search
+*/
+?>
+
+<header class="page-header">
+  <div class="page-header-text">
+    <h4 class="breadcrumbs">Search Results</h4>
+    <h1 class="page-title"><?= Titles\title() ?></h1>
+  </div>
+</header>
 
 <div class="page-search-form fb-container-md">
   <?php \Firebelly\Utils\get_template_part_with_vars('templates/searchform', null, ['search_title' => 'Search Again']); ?>

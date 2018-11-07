@@ -291,9 +291,13 @@ var IVOH = (function($) {
     $document.on('click', '.load-more a', function(e) {
       e.preventDefault();
       var $load_more = $(this).closest('.load-more');
-      var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'news';
+      var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'post';
       var page = parseInt($load_more.attr('data-page-at'));
       var per_page = parseInt($load_more.attr('data-per-page'));
+      var order_by = $load_more.attr('data-order-by');
+      var story_types = $load_more.attr('data-story-types');
+      var topics = $load_more.attr('data-topics');
+      var topic_taxonomy = $load_more.attr('data-topic-taxonomy') ? $load_more.attr('data-topic-taxonomy') : 'category';
       var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
@@ -304,7 +308,11 @@ var IVOH = (function($) {
               action: 'load_more_posts',
               post_type: post_type,
               page: page+1,
-              per_page: per_page
+              per_page: per_page,
+              order_by: order_by,
+              story_types: story_types,
+              topics: topics,
+              topic_taxonomy: topic_taxonomy
           },
           success: function(data) {
             var $data = $(data);
@@ -317,7 +325,7 @@ var IVOH = (function($) {
 
             // Hide load more if last page
             if ($load_more.attr('data-total-pages') <= page + 1) {
-                $load_more.addClass('hide');
+              $load_more.addClass('hide');
             }
           }
       });

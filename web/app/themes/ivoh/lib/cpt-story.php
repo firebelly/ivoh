@@ -55,6 +55,7 @@ function get_stories($opts) {
     $template_type = 'story';
   }
   return \Firebelly\Utils\get_posts(array_merge([
+    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
     'template-type'  => $template_type,
     'post-type'      => 'story',
     'topic-taxonomy' => 'story_topic',
