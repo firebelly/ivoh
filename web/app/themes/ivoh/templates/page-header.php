@@ -89,7 +89,7 @@ if (has_post_thumbnail($post)) {
           <ul class="post-terms">
             <?php
               foreach ($post_terms as $term):
-                echo '<li><a href="'.get_term_link($term).'">'.$term->name.'</a></li>';
+                echo '<li><a href="'.\Firebelly\Utils\get_term_link($term).'">'.$term->name.'</a></li>';
               endforeach;
             ?>
           </ul>

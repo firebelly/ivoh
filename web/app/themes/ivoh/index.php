@@ -45,7 +45,7 @@ $news_page = get_post(get_option('page_for_posts'));
     <ul class="topics accordion-content">
     <?php foreach ($news_topics as $term):
       if (in_array($term->slug, $topics)) {
-        $active = ' class="active"';
+        $active = ' class="-active"';
         $filtered = array_filter($topics, function ($el) use ($term) { return ($el != $term->slug); });
         $link = add_query_arg(['topics' => implode(',', $filtered) ]);
       } else {
