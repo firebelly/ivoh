@@ -84,10 +84,12 @@
 
       @include media-md {
         .page-header-top {
-          padding-bottom: 300px;
+          padding-bottom: 200px;
+          transition: padding-bottom .2s ease-in;
         }
         .page-header-text {
-          margin-top: -300px;
+          margin-top: -200px;
+          transition: margin-top .2s ease-in;
         }
       }
     }
@@ -105,7 +107,7 @@
         padding-top: 0;
         min-height: 680px;
         padding-bottom: $padding-lg;
-        @include transition(padding-bottom);
+        transition: padding-bottom .1s ease-out;
       }
     }
 
@@ -157,7 +159,7 @@
         width: columns(12,20);
         padding-top: $padding-md;
         margin: -$padding-lg auto 0;
-        @include transition(margin-top);
+        transition: margin-top .1s ease-out;
       }
 
       .page-intro-body {
