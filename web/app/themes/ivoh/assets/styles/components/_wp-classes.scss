@@ -19,17 +19,18 @@
   height: auto;
 }
 
-@include media-small {
-  // Only float if not on an extra small device
-  .alignleft {
-    float: left;
-    margin-right: ($line-height-computed / 2);
-  }
-  .alignright {
-    float: right;
-    margin-left: ($line-height-computed / 2);
-  }
-}
+// All images are centered & full width on ivoh, commenting this out
+// @include media-small {
+//   // Only float if not on an extra small device
+//   .alignleft {
+//     float: left;
+//     margin-right: ($line-height-computed / 2);
+//   }
+//   .alignright {
+//     float: right;
+//     margin-left: ($line-height-computed / 2);
+//   }
+// }
 
 // Captions
 .wp-caption {}
