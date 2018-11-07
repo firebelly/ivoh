@@ -48,7 +48,10 @@ function metaboxes() {
   $person_info->add_field([
     'name'      => 'Post Bio',
     'id'        => $prefix . 'person_post_bio',
-    'type'      => 'textarea',
+    'type'      => 'wysiwyg',
+    'options' => [
+       'textarea_rows' => 8,
+     ],
   ]);
 }
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );

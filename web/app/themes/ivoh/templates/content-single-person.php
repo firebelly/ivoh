@@ -8,18 +8,19 @@ $post_meta = get_post_meta($post->ID);
 
 // Person Type/Title
 $person_categories = get_the_terms($post, 'person_category');
-$person_type = \Firebelly\Utils\get_first_term($post, 'person_category');
-$person_category_slugs = [];
-foreach ($person_categories as $cat):
-  $person_category_slugs[] = $cat->slug;
-endforeach;
-if (preg_grep("/-fellows/", $person_category_slugs)) {
-  $person_category = array_pop($person_categories);
-  $person_title = str_replace('s','',$person_category->name);
-} elseif (!empty($post_meta['_cmb2_person_title'])) {
-  $person_title = $post_meta['_cmb2_person_title'][0];
-} else {
-  $person_title = '';
+$person_title = '';
+if (!empty($person_categories)) {
+  $person_category_slugs = [];
+  $person_type = \Firebelly\Utils\get_first_term($post, 'person_category');
+  foreach ($person_categories as $cat) {
+    $person_category_slugs[] = $cat->slug;
+  }
+  if (strpos('/-fellows/', $person_category_slugs) !== false) {
+    $person_category = array_pop($person_categories);
+    $person_title = str_replace('s','',$person_category->name);
+  } else if (!empty($post_meta['_cmb2_person_title'])) {
+    $person_title = $post_meta['_cmb2_person_title'][0];
+  }
 }
 
 // Author Bio
@@ -75,9 +76,11 @@ $posts = get_posts([
   </div>
 <?php endif ?>
 
-<div class="post-navigation fb-container-content">
-  <div class="back-navigation">
-    <p class="back-text h5">Back To</p>
-    <p><a href="#" class="h4">All <?= $person_type->name ?></a></p>
+<?php if (!empty($person_type)): ?>
+  <div class="post-navigation fb-container-content">
+    <div class="back-navigation">
+      <p class="back-text h5">Back To</p>
+      <p><a href="#" class="h4">All <?= $person_type->name ?></a></p>
+    </div>
   </div>
-</div>
+<?php endif ?>

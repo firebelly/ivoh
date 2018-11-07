@@ -275,3 +275,19 @@ function get_posts($opts=[]) {
   endforeach;
   return $output;
 }
+
+/**
+ * Custom get_term_link to support filter pages (/story-bank/?topics=foo & /news/?topics=baz)
+ */
+function get_term_link($term) {
+  $link = '';
+  if ($term->taxonomy == 'story_topic') {
+    $link = '/story-bank/?topics='.$term->slug;
+  } else if ($term->taxonomy == 'category') {
+    $link = '/news/?topics='.$term->slug;
+  } else {
+    // We shouldn't ever get here as we don't use built-in category views
+    $link = \get_term_link($term);
+  }
+  return $link;
+}
