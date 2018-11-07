@@ -5,26 +5,38 @@
 
   // Pre-scroll styles
   &[data-theme="pink"] {
-    color: color(white);
-    background: color(black);
-    @include transition(color, background-color);
-    .site-header {
+    // Not Scrolled
+    &:not(.scrolled) {
       color: color(white);
-      background-color: transparent;
+      background: color(black);
+      @include transition(color, background-color);
+      .site-header {
+        color: color(white);
+        background-color: transparent;
+        &::after {
+          border-color: color(white);
+        }
+      }
+      .site-header::after {
+        background-color: transparent;
+      }
+      .site-nav::after {
+        border-color: color(white);
+      }
+      .ivoh-logo {
+        fill: color(white);
+      }
+      .page-header-text {
+        background-color: color(black);
+        @include transition(background-color);
+      }
+      .menu-toggle:not(.-active) .menu-bar {
+        &,&::before,&::after {
+          background-color: color(white);
+        }
+      }
     }
-    .site-header::after {
-      background-color: transparent;
-    }
-    .site-nav::after {
-      border-color: color(white);
-    }
-    .ivoh-logo {
-      fill: color(white);
-    }
-    .page-header-text {
-      background-color: color(black);
-      @include transition(background-color);
-    }
+
     // Menu Open
     &.menu-open {
       .site-nav::before {
@@ -48,25 +60,8 @@
       }
     }
 
-    // Resetting the styls on scroll
+    // Resetting the styles on scroll
     &.scrolled:not(.menu-open) {
-      color: color(black);
-      background: color(pink);
-      .site-header,
-      .site-nav,
-      .page-header-text {
-        color: color(black);
-        background-color: color(pink);
-      }
-      .site-header::after {
-        background-color: color(pink);
-      }
-      .site-nav::after {
-        border-color: color(black);
-      }
-      .ivoh-logo {
-        fill: color(black);
-      }
       .banner-image-container {
         &::after {
           opacity: 1;
