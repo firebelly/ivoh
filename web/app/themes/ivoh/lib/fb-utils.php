@@ -251,6 +251,14 @@ function get_posts($opts=[]) {
     return $posts;
   }
 
+  // Just count posts (used for load-more buttons)
+  if (!empty($opts['countposts'])) {
+    $args['posts_per_page'] = -1;
+    $args['fields'] = 'ids';
+    $count_query = new \WP_Query($args);
+    return $count_query->found_posts;
+  }
+
   // Set template type
   if (!empty($opts['template-type'])) {
     $template_type = $opts['template-type'];

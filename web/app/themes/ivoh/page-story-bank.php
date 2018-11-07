@@ -13,12 +13,20 @@ if (empty($story_types)) {
   $story_types = 'rn,sbm';
 }
 
+// Amount of posts to pull
+$per_page = get_option('posts_per_page');
+
 // Get all stories matching filters
-$stories = \Firebelly\PostTypes\Story\get_stories([
+$args = [
+  'numberposts' => $per_page,
   'story-types' => array_filter($story_types),
   'topics'      => array_filter($topics),
   'order-by'    => $order_by,
-]);
+];
+$stories = \Firebelly\PostTypes\Story\get_stories($args);
+
+// Total number of posts
+$num_posts = \Firebelly\PostTypes\Story\get_stories(array_merge(['countposts' => 1], $args));
 
 // Get base topics for filtering
 $story_topics = get_terms([
@@ -96,7 +104,7 @@ $story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="masonry sm-halves md-thirds lg-fourths -inner">
+  <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
     <div class="grid-sizer"></div>
     <?php if (empty($stories)): ?>
       <p class="no-posts">No posts found.</p>
@@ -104,4 +112,9 @@ $story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
       <?= $stories ?>
     <?php endif; ?>
   </div>
+  <?php if ($num_posts > $per_page): ?>
+  <div class="load-more grid-actions inherit-background" data-post-type="story" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-story-types="<?= get_query_var('story-types', 'rn,sbm') ?>" data-topic-taxonomy="story_topic" data-topics="<?= get_query_var('topics', '') ?>">
+    <a href="#" class="button">Load More Stories</a>
+  </div>
+  <?php endif ?>
 </div>

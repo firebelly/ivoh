@@ -219,7 +219,9 @@
   position: relative;
 
   a, span {
-    display: block;
+    &:not(.hide) {
+      display: block;
+    }
     + a {
       margin-top: $gutter;
     }
@@ -229,7 +231,9 @@
     padding: $padding-sm;
 
     span, a {
-      display: inline-block;
+      &:not(.hide) {
+        display: inline-block;
+      }
       + a {
         margin: 0;
       }
