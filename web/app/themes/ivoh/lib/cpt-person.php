@@ -64,15 +64,32 @@ function person_sort_meta($post_id) {
     return;
 
   $post_title = get_the_title($post_id);
+  // Remove ", Ph.D" from name
+  $post_title = preg_replace('#, ?(.*)$#', '', $post_title);
+
   if (strpos($post_title, ' ') !== FALSE) {
     list($first, $last) = preg_split('/ ([^ ]+)$/', $post_title, 0, PREG_SPLIT_DELIM_CAPTURE);
+    // Remove middle name if present
+    $first = preg_replace('# (.*)$#', '', $first);
   } else {
-    $first = '';
+    // ivoh uses first_name in people listings, so setting title to both
+    $first = $post_title;
     $last = $post_title;
   }
   update_post_meta($post_id, '_first_name', $first);
   update_post_meta($post_id, '_last_name', $last);
-  // todo: update all stories/posts `_author_sort` for this person
+
+  // Update all stories/posts `_author_sort` for this person in case name changed
+  $stories = \Firebelly\PostTypes\Story\get_stories([
+    'template-type' => 'simple',
+    'author' => $post->ID,
+    'return' => 'array',
+  ]);
+  if (!empty($stories)) {
+    foreach ($stories as $story) {
+      update_post_meta($story->ID, '_author_sort', $last);
+    }
+  }
 }
 add_action('save_post_person', __NAMESPACE__.'\person_sort_meta');
 
