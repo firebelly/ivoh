@@ -322,8 +322,8 @@ class CSVImporter {
         // Get filename from guid omitting everything up to /uploads/etc
         $filename = preg_replace('#(.*)(/uploads.*)$#', '$2', $oldFeaturedImage->guid);
 
-        // Remove image size from filename (e.g. -200x200)
-        $filename = preg_replace('#\-([\d{2-4}]+)x([\d{2-4}]+)\.(jpg|jpeg|gif|png)#', '.$3', $filename);
+        // Remove image size from filename (e.g. -200x200), also remove extension for better fuzzy matching
+        $filename = preg_replace('#(\-([\d{2-4}]+)x([\d{2-4}]+))?\.(jpg|jpeg|gif|png)#', '', $filename);
 
         // See if we can find it in media library
         $newFeaturedImagePost = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid LIKE %s", '%' . $filename . '%'));
