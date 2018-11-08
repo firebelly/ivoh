@@ -2,14 +2,18 @@
 $person_title = get_post_meta($person_post->ID, '_cmb2_person_title', true);
 $first_name = get_post_meta($person_post->ID, '_first_name', true);
 $person_image = \Firebelly\Media\get_header_bg($person_post, ['size' => 'medium']);
-$person_type = \Firebelly\Utils\get_first_term($person_post, 'person_category');
-if ($person_type->name == 'Staff' || $person_type->name == date('Y').'-fellows') {
+$person_types = get_the_terms($person_post, 'person_category');
+foreach ($person_types as &$person_type) {
+  $person_type = $person_type->slug;
+}
+$person_types = implode(' ', $person_types);
+if ($post->post_title === 'Staff' || $post->post_title === 'Fellowship') {
   $read_more_text = 'More';
 } else {
   $read_more_text = 'About '.$first_name;
 }
 ?>
-<article class="person card sm-one-half lg-one-third <?= $person_type->slug ?><?= !empty($extra_class) ? " {$extra_class}" : '' ?>">
+<article class="person card sm-one-half lg-one-third <?= $person_types ?><?= !empty($extra_class) ? " {$extra_class}" : '' ?>">
   <div class="card-content">
     <?php if ($person_image): ?>
       <div class="card-image-container background-blend">
@@ -21,7 +25,7 @@ if ($person_type->name == 'Staff' || $person_type->name == date('Y').'-fellows')
       <?php if (!empty($person_title)): ?>
         <h4 class="card-subtitle"><?= $person_title ?></h4>
       <?php endif; ?>
-      <p class="card-action"><a href="<?= get_permalink($person_post) ?>"<?= $person_type->name == 'Staff' || $person_type->name == date('Y').'-fellows' ? 'class="button"' : ''?>><?= $read_more_text ?></a></p>
+      <p class="card-action"><a href="<?= get_permalink($person_post) ?>"><?= $read_more_text ?></a></p>
     </div>
   </div>
 </article>

@@ -1,12 +1,13 @@
 // Staff Pages
 
-body.staff {
-
-}
-
-body.board-of-advisors,
-body.board-of-trustees {
-
+body.staff,
+body.fellowship {
+  .person {
+    .card-action a {
+      @extend .button-reset;
+      @include button;
+    }
+  }
 }
 
 // Person Article
@@ -46,6 +47,7 @@ body.board-of-trustees {
     .card-action a {
       @include h5;
       color: color(red);
+      text-decoration: none;
     }
   }
 }
