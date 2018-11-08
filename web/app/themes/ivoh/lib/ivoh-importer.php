@@ -293,7 +293,7 @@ class CSVImporter {
       // Strip out related links at bottom of posts
       $related_links = '';
       if (preg_match('#((<[b|strong]>)?Related:(</[b|strong]>)?(.*))#i', $post_content, $m)) {
-        $related_links = $m[4];
+        $related_links = trim($m[4]);
         $post_content = str_replace($m[0], '', $post_content);
       }
 
@@ -318,8 +318,13 @@ class CSVImporter {
         $query = $this->oldDb->prepare('SELECT * FROM wp_posts WHERE ID = ?');
         $query->execute([ $oldFeaturedImageMeta->meta_value ]);
         $oldFeaturedImage = $query->fetch(\PDO::FETCH_OBJ);
+
         // Get filename from guid omitting everything up to /uploads/etc
         $filename = preg_replace('#(.*)(/uploads.*)$#', '$2', $oldFeaturedImage->guid);
+
+        // Remove image size from filename (e.g. -200x200)
+        $filename = preg_replace('#\-([\d{2-4}]+)x([\d{2-4}]+)\.(jpg|jpeg|gif|png)#', '.$3', $filename);
+
         // See if we can find it in media library
         $newFeaturedImagePost = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid LIKE %s", '%' . $filename . '%'));
         if (!empty($newFeaturedImagePost)) {
