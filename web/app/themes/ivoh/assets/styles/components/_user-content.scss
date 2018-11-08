@@ -76,7 +76,8 @@
     }
   }
 
-  figure {
+  figure,
+  .entry-content-asset {
     width: 100%!important; // override wp inline width
     max-width: none;
 
@@ -84,6 +85,10 @@
       width: 100%;
       display: block;
       max-width: none;
+    }
+
+    iframe.instagram-media {
+      margin: 0 auto!important;
     }
 
     figcaption {

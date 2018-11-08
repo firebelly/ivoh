@@ -66,6 +66,9 @@ body.single:not(.single-tool) {
       @include media-md {
         margin: 0 auto;
         width: columns(14);
+        .banner-image {
+          padding-bottom: 40.3225%;
+        }
       }
     }
 
@@ -75,6 +78,18 @@ body.single:not(.single-tool) {
       p {
         margin: 0 auto;
         width: columns(14);
+      }
+
+      .photo-caption {
+        @include p2;
+        text-align: left;
+        + .photo-byline {
+          margin-top: $beat;
+        }
+      }
+
+      .photo-byline {
+        text-align: left;
       }
     }
   }

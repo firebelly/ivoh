@@ -112,6 +112,13 @@ function get_people($options=[]) {
     ];
   }
 
+  // By default use Intuitive CPO hand-ordering, otherwise sort by last name
+  if (!empty($options['order-by']) && $options['order-by'] === 'name') {
+    $args['order'] = 'ASC';
+    $args['orderby'] = 'meta_value';
+    $args['meta_key'] = '_last_name';
+  }
+
   // Display all matching posts using article-{$post_type}.php
   $people_posts = get_posts($args);
   if (!$people_posts) return false;
