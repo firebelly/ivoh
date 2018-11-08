@@ -16,17 +16,19 @@
 .alignright {
   height: auto;
 }
-@include media-sm {
-  // Only float if not on an extra small device
-  .alignleft {
-    float: left;
 
-  }
-  .alignright {
-    float: right;
+// All images are centered & full width on ivoh, commenting this out
+// @include media-sm {
+//   // Only float if not on an extra small device
+//   .alignleft {
+//     float: left;
 
-  }
-}
+//   }
+//   .alignright {
+//     float: right;
+
+//   }
+// }
 
 // Captions
 .wp-caption {
@@ -39,4 +41,4 @@
 // Text meant only for screen readers
 .screen-reader-text {
   @extend .visually-hidden;
-} 
+}

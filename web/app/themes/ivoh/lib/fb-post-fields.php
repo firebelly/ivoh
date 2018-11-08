@@ -76,6 +76,24 @@ function metaboxes() {
     'type'    => 'textarea_small',
   ]);
 
+  $related_links = new_cmb2_box([
+    'id'            => $prefix . 'related_links_fields',
+    'title'         => esc_html__( 'Related Links', 'cmb2' ),
+    'object_types'  => ['post', 'story'],
+    'context'       => 'normal',
+    'priority'      => 'default',
+    'show_names'    => false,
+  ]);
+  $related_links->add_field([
+    'name'    => esc_html__( 'Related Links', 'cmb2' ),
+    'id'      => $prefix . 'related_links',
+    'desc'    => 'A list of related links which shows at bottom of posts',
+    'type'    => 'wysiwyg',
+    'options' => [
+       'textarea_rows' => 8,
+     ],
+  ]);
+
   // $author = new_cmb2_box([
   //   'id'            => $prefix . 'author',
   //   'title'         => esc_html__( 'Author', 'cmb2' ),
