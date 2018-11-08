@@ -209,8 +209,8 @@ class CSVImporter {
     }
 
     // Find old post by title
-    $query = $this->oldDb->prepare('SELECT * FROM wp_posts WHERE post_title = ? AND post_type = ?');
-    $query->execute([ $data['title'], 'post' ]);
+    $query = $this->oldDb->prepare('SELECT * FROM wp_posts WHERE post_title LIKE ? AND post_type = ?');
+    $query->execute([ '%'.$data['title'].'%', 'post' ]);
     $oldPost = $query->fetch(\PDO::FETCH_OBJ);
 
     // Old post found?
@@ -304,7 +304,6 @@ class CSVImporter {
         'post_status'  => $oldPost->post_status,
         'post_content' => $post_content,
         'post_date'    => $oldPost->post_date,
-        'post_status'  => 'publish',
         'post_type'    => $postType,
         'post_author'  => get_current_user_id(),
       ];
@@ -381,5 +380,5 @@ class CSVImporter {
       return false;
 
     }
-    }
+  }
 }
