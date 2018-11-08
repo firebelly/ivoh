@@ -2,6 +2,6 @@
 
 <div class="fb-container-md card-grid">
   <div class="-inner grid">
-    <?= \Firebelly\PostTypes\Person\get_people(['category' => 'trustees']); ?>
+    <?= \Firebelly\PostTypes\Person\get_people(['category' => 'trustees', 'order-by' => 'name']); ?>
   </div>
 </div>
