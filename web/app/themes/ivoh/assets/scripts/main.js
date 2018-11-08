@@ -177,7 +177,7 @@ var IVOH = (function($) {
   }
 
   function _initCardActions() {
-    $('.card').on('mouseenter', '.card-image, .card-title a, .card-action a', function(e) {
+    $('html, document').on('mouseenter', '.card-image, .card-title a, .card-action a', function(e) {
       $(this).closest('.card').addClass('-hover');
     }).on('mouseleave', '.card-image, .card-title a, .card-action a', function(e) {
       $(this).closest('.card').removeClass('-hover');
