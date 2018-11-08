@@ -141,6 +141,26 @@ body.single:not(.single-tool) {
         }
       }
 
+      .related-links {
+        margin: $gutter 0 0;
+        padding: $gutter 0 0;
+        border-top: 1px solid color(black);
+
+        h3 {
+          @include h4;
+        }
+        p {
+          @include p2;
+        }
+        a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+
       ul, ol {
         padding-left: 0;
         li {

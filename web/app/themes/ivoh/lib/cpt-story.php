@@ -13,13 +13,30 @@ $stories = new PostType(['name' => 'story', 'plural' => 'Stories', 'slug' => 'st
   'rewrite'    => ['with_front' => false],
 ]);
 $stories->filters(['story_type', 'story_topic']);
-$stories->register();
 
 // Custom taxonomies
 $story_topic = new Taxonomy('story_topic');
 $story_topic->register();
 $story_type = new Taxonomy('story_type');
 $story_type->register();
+
+$stories->columns()->add([
+  'authors'     => esc_html__( 'Author', 'cmb2' ),
+]);
+$stories->columns()->order( [
+    'authors' => 2,
+] );
+$stories->register();
+
+$stories->columns()->populate('authors', function($column, $post_id) {
+  $authors = get_post_meta($post_id, '_cmb2_author');
+  if (!empty($authors)) {
+    $author = get_post($authors[0]);
+    echo $author->post_title;
+  } else {
+    echo '';
+  }
+});
 
 /**
  * CMB2 custom fields
