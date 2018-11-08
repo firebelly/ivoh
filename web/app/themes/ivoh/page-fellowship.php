@@ -12,7 +12,7 @@ $intro_links = get_post_meta($post->ID, '_cmb2_intro_links', true);
 <?php get_template_part('templates/page', 'header'); ?>
 
 <div class="page-section fb-container-content user-content">
-  <?= apply_filters('the-content', $post->post_content); ?>
+  <?= apply_filters('the_content', $post->post_content); ?>
 </div>
 
 <div class="page-section fb-container-content text-center">
