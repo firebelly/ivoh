@@ -304,7 +304,6 @@ class CSVImporter {
         'post_status'  => $oldPost->post_status,
         'post_content' => $post_content,
         'post_date'    => $oldPost->post_date,
-        'post_status'  => 'publish',
         'post_type'    => $postType,
         'post_author'  => get_current_user_id(),
       ];
