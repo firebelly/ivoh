@@ -24,7 +24,12 @@ if (!empty($person_categories)) {
 }
 
 // Author Bio
-$author_bio = apply_filters('the_content', $post->post_content);
+if (empty(trim($post->post_content)) && $post_bio = get_post_meta($post->ID, '_cmb2_person_post_bio', true)) {
+  // Fallback to short post bio if body is empty
+  $author_bio = apply_filters('the_content', $post_bio);
+} else {
+  $author_bio = apply_filters('the_content', $post->post_content);
+}
 
 // Get all stories by author
 $stories = \Firebelly\PostTypes\Story\get_stories([
