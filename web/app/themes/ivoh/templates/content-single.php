@@ -30,6 +30,9 @@
   // Related links at bottom of page
   $related_links = get_post_meta($post->ID, '_cmb2_related_links', true);
 
+  // Post intro shown at top of page
+  $post_intro = get_post_meta($post->ID, '_cmb2_post_intro', true);
+
 ?>
 
   <article <?php post_class('fb-container-content'); ?>>
@@ -45,6 +48,12 @@
             <?= apply_filters('the_content', $author_bio) ?>
           <?php endif; ?>
         </div>
+      </div>
+    <?php endif; ?>
+
+    <?php if (!empty($post_intro)): ?>
+      <div class="post-intro user-content">
+        <?= apply_filters('the_content', trim($post_intro)) ?>
       </div>
     <?php endif; ?>
 

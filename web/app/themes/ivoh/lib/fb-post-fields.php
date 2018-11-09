@@ -20,7 +20,7 @@ function metaboxes() {
   $post_is_featured->add_field([
     'name'    => esc_html__( 'Featured', 'cmb2' ),
     'id'      => $prefix . 'featured',
-    'desc'    => 'If a Story post, shows post on carousels; if News + Commentar post, makes post sticky (displayed at top of feed)',
+    'desc'    => 'If a Story post, shows post on carousels; if News + Commentary post, makes post sticky (displayed at top of feed)',
     'type'    => 'checkbox',
   ]);
 
@@ -76,21 +76,29 @@ function metaboxes() {
     'type'    => 'textarea_small',
   ]);
 
-  $related_links = new_cmb2_box([
-    'id'            => $prefix . 'related_links_fields',
-    'title'         => esc_html__( 'Related Links', 'cmb2' ),
+  $related_info = new_cmb2_box([
+    'id'            => $prefix . 'related_info',
+    'title'         => esc_html__( 'Related Info', 'cmb2' ),
     'object_types'  => ['post', 'story'],
     'context'       => 'normal',
     'priority'      => 'default',
-    'show_names'    => false,
   ]);
-  $related_links->add_field([
+  $related_info->add_field([
+    'name'    => esc_html__( 'Post Intro', 'cmb2' ),
+    'id'      => $prefix . 'post_intro',
+    'desc'    => 'Shows at at top of post, below author bio, i.e. Editors Note',
+    'type'    => 'wysiwyg',
+    'options' => [
+       'textarea_rows' => 4,
+     ],
+  ]);
+  $related_info->add_field([
     'name'    => esc_html__( 'Related Links', 'cmb2' ),
     'id'      => $prefix . 'related_links',
     'desc'    => 'A list of related links which shows at bottom of posts',
     'type'    => 'wysiwyg',
     'options' => [
-       'textarea_rows' => 8,
+       'textarea_rows' => 4,
      ],
   ]);
 
