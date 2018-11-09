@@ -85,7 +85,7 @@ $num_posts= \Firebelly\Utils\get_posts(['countposts' => 1]);
   </div>
 
   <div class="page-section fb-container-md">
-  	<h2 class="h3 text-center">News & Commentary</h2>
+  	<h2 class="h3 text-center">News + Commentary</h2>
     <div class="card-grid">
       <div class="load-more-container masonry sm-halves md-thirds -inner">
         <div class="grid-sizer"></div>
