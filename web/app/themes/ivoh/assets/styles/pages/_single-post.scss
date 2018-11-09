@@ -41,6 +41,7 @@ body.single:not(.single-tool) {
     }
 
     .page-header-banner {
+      margin: 0;
       border: none;
       position: relative;
       padding-top: $padding-md;
@@ -56,6 +57,7 @@ body.single:not(.single-tool) {
       }
 
       @include media-md {
+        margin: 0;
         background-image: none;
       }
     }

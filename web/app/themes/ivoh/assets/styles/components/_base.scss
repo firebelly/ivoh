@@ -78,11 +78,9 @@ hr {
 
 // Main post content padding
 .post-content {
-  padding-top: #{$beat * 3};
   padding-bottom: #{$beat * 3};
 
   @include media-md {
-    padding-top: #{$beat * 6};
     padding-bottom: #{$beat * 6};
   }
 }

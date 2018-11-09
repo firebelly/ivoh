@@ -13,10 +13,9 @@ $intro_links = get_post_meta($post->ID, '_cmb2_intro_links', true);
 
 <div class="page-section fb-container-content user-content">
   <?= apply_filters('the_content', $post->post_content); ?>
-</div>
-
-<div class="page-section fb-container-content text-center">
-  <?php \Firebelly\Utils\get_template_part_with_vars('templates/intro', 'links', [ 'intro_links' => $intro_links ]); ?>
+  <div class="text-center">
+    <?php \Firebelly\Utils\get_template_part_with_vars('templates/intro', 'links', [ 'intro_links' => $intro_links ]); ?>
+  </div>
 </div>
 
 <?php if (!empty($fellows)): ?>

@@ -91,6 +91,9 @@
   }
 
   .page-header {
+    @include media-md {
+      margin-bottom: $beat * 11;
+    }
 
     .page-header-top {
       display: flex;
