@@ -41,12 +41,20 @@ $post_meta = get_post_meta($post->ID, '');
           <?php endif; ?>
 
           <?php $address = unserialize($post_meta['_cmb2_address'][0]); ?>
-          <span property="schema:streetAddress"><?= $address['address-1'] ?>
-            <?php if (!empty($address['address-2'])): ?>
-              <br><?= $address['address-2'] ?>
-            <?php endif; ?>
-          </span><br>
-          <span property="schema:addressLocality"><?= $address['city'] ?></span>, <abbr property="schema:addressRegion"><?= $address['state'] ?></abbr> <span property="schema:postalCode"><?= $address['zip'] ?></span>
+          <?php if (!empty($address['address-1'])): ?>
+            <span property="schema:streetAddress">
+              <?php if (!empty($address['address-2'])): ?>
+                <?= $address['address-1'] ?>
+              <?php endif; ?>
+              <?php if (!empty($address['address-2'])): ?>
+                <br><?= $address['address-2'] ?>
+              <?php endif; ?>
+            </span><br>
+          <?php endif; ?>
+          <span property="schema:addressLocality"><?= $address['city'] ?></span>, <abbr property="schema:addressRegion"><?= $address['state'] ?></abbr>
+          <?php if (!empty($address['zip'])): ?>
+            <span property="schema:postalCode"><?= $address['zip'] ?></span>
+          <?php endif; ?>
         </p>
       </div>
     <?php endif; ?>

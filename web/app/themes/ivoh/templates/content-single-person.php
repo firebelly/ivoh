@@ -35,7 +35,12 @@ if (!empty($person_categories)) {
 }
 
 // Author Bio
-$author_bio = apply_filters('the_content', $post->post_content);
+if (empty(trim($post->post_content)) && $post_bio = get_post_meta($post->ID, '_cmb2_person_post_bio', true)) {
+  // Fallback to short post bio if body is empty
+  $author_bio = apply_filters('the_content', $post_bio);
+} else {
+  $author_bio = apply_filters('the_content', $post->post_content);
+}
 
 // Get all stories by author
 $stories = \Firebelly\PostTypes\Story\get_stories([
@@ -88,10 +93,23 @@ $posts = get_posts([
 <?php endif ?>
 
 <?php if (!empty($person_type)): ?>
+  <?php
+  switch ($person_type->name) {
+    case 'Trustees':
+      $back_to_link = '/who-we-are/board-of-trustees/';
+      break;
+    case 'Advisors':
+      $back_to_link = '/who-we-are/board-of-advisors/';
+      break;
+    default:
+      $back_to_link = '/who-we-are/staff/';
+      break;
+  }
+  ?>
   <div class="post-navigation fb-container-content">
     <div class="back-navigation">
       <p class="back-text h5">Back To</p>
-      <p><a href="#" class="h4">All <?= $person_type->name ?></a></p>
+      <p><a href="<?= $back_to_link ?>" class="h4">All <?= $person_type->name ?></a></p>
     </div>
   </div>
 <?php endif ?>
