@@ -232,18 +232,17 @@ function get_posts($opts=[]) {
   // News posts get featured posts shoved to top
   if ($opts['post-type'] == 'news') {
     $args = array_merge($args, [
-      // 'meta_key'    => '_date_featured',
       'orderby'     => 'meta_value_num date',
       'order'       => 'DESC',
       'meta_query'  => [
-        'relation' => 'OR',
+        'relation'  => 'OR',
         [
-          'key'       => '_date_featured',
-          'compare'     => 'EXISTS',
+          'key'     => '_date_featured',
+          'compare' => 'EXISTS',
         ],
         [
-          'key'       => '_date_featured',
-          'compare'     => 'NOT EXISTS',
+          'key'     => '_date_featured',
+          'compare' => 'NOT EXISTS',
         ],
       ],
     ]);
