@@ -27,8 +27,9 @@ $stories->columns()->add([
 $stories->columns()->order( [
     'authors' => 2,
 ] );
-$stories->register();
-
+$stories->columns()->sortable([
+  'featured'    => ['_date_featured', true],
+]);
 $stories->columns()->populate('authors', function($column, $post_id) {
   $authors = get_post_meta($post_id, '_cmb2_author');
   if (!empty($authors)) {
@@ -41,8 +42,16 @@ $stories->columns()->populate('authors', function($column, $post_id) {
 
 $stories->columns()->populate('featured', function($column, $post_id) {
   $featured = get_post_meta($post_id, '_cmb2_featured');
-  echo '<input type="checkbox" style="pointer-events:none;" disabled', ($featured ? ' checked' : ''), '/>';
+  if ($featured) {
+    $date_featured =  ' '.date('m/d/Y H:i:s', get_post_meta($post_id, '_date_featured')[0]);
+  } else {
+    $date_featured = '';
+  }
+  echo '<input type="checkbox" disabled', ($featured ? ' checked' : ''), '/>'.$date_featured;
 });
+
+$stories->register();
+
 
 /**
  * CMB2 custom fields
