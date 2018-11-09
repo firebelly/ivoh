@@ -7,11 +7,6 @@ foreach ($person_types as &$person_type) {
   $person_type = $person_type->slug;
 }
 $person_types = implode(' ', $person_types);
-if ($post->post_title === 'Staff' || $post->post_title === 'Fellowship') {
-  $read_more_text = 'More';
-} else {
-  $read_more_text = 'About '.$first_name;
-}
 ?>
 <article class="person card sm-one-half lg-one-third <?= $person_types ?><?= !empty($extra_class) ? " {$extra_class}" : '' ?>">
   <div class="card-content">
@@ -25,7 +20,7 @@ if ($post->post_title === 'Staff' || $post->post_title === 'Fellowship') {
       <?php if (!empty($person_title)): ?>
         <h4 class="card-subtitle"><?= $person_title ?></h4>
       <?php endif; ?>
-      <p class="card-action"><a href="<?= get_permalink($person_post) ?>"><?= $read_more_text ?></a></p>
+      <p class="card-action"><a href="<?= get_permalink($person_post) ?>">About <?= $first_name ?></a></p>
     </div>
   </div>
 </article>
