@@ -93,10 +93,23 @@ $posts = get_posts([
 <?php endif ?>
 
 <?php if (!empty($person_type)): ?>
+  <?php
+  switch ($person_type->name) {
+    case 'Trustees':
+      $back_to_link = '/who-we-are/board-of-trustees/';
+      break;
+    case 'Advisors':
+      $back_to_link = '/who-we-are/board-of-advisors/';
+      break;
+    default:
+      $back_to_link = '/who-we-are/staff/';
+      break;
+  }
+  ?>
   <div class="post-navigation fb-container-content">
     <div class="back-navigation">
       <p class="back-text h5">Back To</p>
-      <p><a href="#" class="h4">All <?= $person_type->name ?></a></p>
+      <p><a href="<?= $back_to_link ?>" class="h4">All <?= $person_type->name ?></a></p>
     </div>
   </div>
 <?php endif ?>
