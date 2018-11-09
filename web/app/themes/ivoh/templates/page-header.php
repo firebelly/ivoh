@@ -34,7 +34,7 @@ if (!empty($post_meta['_cmb2_intro_headline'])) {
 
 // Intro body set?
 if (!empty($post_meta['_cmb2_intro_body'])) {
-  $intro_body = $post_meta['_cmb2_intro_body'][0];
+  $intro_body = apply_filters('the_content', $post_meta['_cmb2_intro_body'][0]);
 }
 
 // Try to get photo caption and byline
@@ -91,7 +91,7 @@ if (has_post_thumbnail($post)) {
       </div>
     <?php endif ?>
     <?php if (!empty($intro_body)): ?>
-      <p class="page-intro-body"><?= $intro_body ?></p>
+      <div class="page-intro-body"><?= $intro_body ?></div>
     <?php endif ?>
   </div>
 
