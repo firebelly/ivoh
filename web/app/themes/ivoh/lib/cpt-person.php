@@ -49,7 +49,7 @@ function metaboxes() {
     'name'      => 'Post Bio',
     'id'        => $prefix . 'person_post_bio',
     'type'      => 'wysiwyg',
-    'desc'      => 'A shortened bio that appears on posts that are authored by the person.'
+    'desc'      => 'A shortened bio that appears on posts that are authored by the person.',
     'options' => [
        'textarea_rows' => 5,
      ],
