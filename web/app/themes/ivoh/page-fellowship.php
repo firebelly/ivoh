@@ -4,7 +4,7 @@
 */
 
 // Pull Fellows from this year
-$fellows = \Firebelly\PostTypes\Person\get_people(['category' => date('Y').'-fellows']);
+$fellows = \Firebelly\PostTypes\Person\get_people(['category' => date('Y').'-fellows', 'order-by' => 'name']);
 
 // Intro Links?
 $intro_links = get_post_meta($post->ID, '_cmb2_intro_links', true);
