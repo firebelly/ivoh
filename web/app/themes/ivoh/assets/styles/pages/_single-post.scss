@@ -156,6 +156,13 @@ body.single:not(.single-tool) {
         }
       }
 
+      .post-intro {
+        p {
+          @include p2;
+          font-style: italic;
+        }
+      }
+
       .related-links {
         margin: $gutter 0 0;
         padding: $gutter 0 0;
