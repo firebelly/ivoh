@@ -47,10 +47,24 @@ $stories->columns()->populate('featured', function($column, $post_id) {
   } else {
     $date_featured = '';
   }
-  echo '<input type="checkbox" disabled', ($featured ? ' checked' : ''), '/>'.$date_featured;
+  echo $featured ? '✔️ '.$date_featured : '';
 });
 
 $stories->register();
+
+
+/**
+ * Register custom sort for _date_featured
+ */
+add_action('pre_get_posts', __NAMESPACE__.'\date_featured_orderby');
+function date_featured_orderby($query) {
+  if (!is_admin()) return;
+
+  if ($query->get('orderby') == '_date_featured') {
+    $query->set('meta_key', '_date_featured');
+    $query->set('orderby', 'meta_value_num');
+  }
+}
 
 
 /**
