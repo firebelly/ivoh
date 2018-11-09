@@ -39,19 +39,43 @@ $stories->columns()->populate('authors', function($column, $post_id) {
     echo '';
   }
 });
-
 $stories->columns()->populate('featured', function($column, $post_id) {
+  echo featured_check($post_id);
+});
+$stories->register();
+
+/**
+ * Populate Featured admin list field for both Stories and News
+ */
+function featured_check($post_id) {
   $featured = get_post_meta($post_id, '_cmb2_featured');
   if ($featured) {
     $date_featured =  ' '.date('m/d/Y H:i:s', get_post_meta($post_id, '_date_featured')[0]);
   } else {
     $date_featured = '';
   }
-  echo $featured ? '✔️ '.$date_featured : '';
-});
+  return $featured ? '✔️ '.$date_featured : '';
+}
 
-$stories->register();
-
+/**
+ * Add Featured column to default Posts, and make sortable
+ */
+add_filter('manage_posts_columns', __NAMESPACE__.'\posts_custom_columns');
+add_action('manage_posts_custom_column', __NAMESPACE__.'\posts_custom_columns_content', 10, 2);
+add_filter('manage_edit-post_sortable_columns', __NAMESPACE__.'\posts_custom_columns_sortable');
+function posts_custom_columns($cols) {
+  $cols['featured'] = 'Featured';
+  return $cols;
+}
+function posts_custom_columns_content($column_name, $post_id) {
+    if ($column_name == 'featured') {
+      echo featured_check($post_id);
+    }
+}
+function posts_custom_columns_sortable($cols) {
+  $cols['featured'] = '_date_featured';
+  return $cols;
+}
 
 /**
  * Register custom sort for _date_featured
@@ -65,7 +89,6 @@ function date_featured_orderby($query) {
     $query->set('orderby', 'meta_value_num');
   }
 }
-
 
 /**
  * CMB2 custom fields
