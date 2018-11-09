@@ -210,6 +210,7 @@ var IVOH = (function($) {
     var storyImageCarousel = $storyImageCarousel.flickity({
       pageDots: false,
       bgLazyLoad: 1,
+      wrapAround: true,
       draggable: false,
       cellAlign: 'left',
       prevNextButtons: false,
