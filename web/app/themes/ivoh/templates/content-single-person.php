@@ -94,12 +94,18 @@ $posts = get_posts([
 
 <?php if (!empty($person_type)): ?>
   <?php
-  switch ($person_type->name) {
-    case 'Trustees':
+  switch (true) {
+    case $person_type->name === 'Trustees':
       $back_to_link = '/who-we-are/board-of-trustees/';
       break;
-    case 'Advisors':
+    case $person_type->name === 'Advisors':
       $back_to_link = '/who-we-are/board-of-advisors/';
+      break;
+    case $person_type->name === date('Y').' Fellows':
+      $back_to_link = '/what-we-do/fellowship/';
+      break;
+    case strpos($person_type->name, 'Fellows') !== false:
+      $back_to_link = '/what-we-do/past-fellows/';
       break;
     default:
       $back_to_link = '/who-we-are/staff/';
