@@ -146,6 +146,13 @@ body.single:not(.single-tool) {
   article {
     @include clearfix();
 
+    .post-intro {
+      p {
+        @include p2;
+        font-style: italic;
+      }
+    }
+
     .entry-content {
       h1, h2, h3, h4, h5, h6 {
         @include h3;
@@ -153,13 +160,6 @@ body.single:not(.single-tool) {
 
         @include media-md {
           margin-bottom: $beat * 4;
-        }
-      }
-
-      .post-intro {
-        p {
-          @include p2;
-          font-style: italic;
         }
       }
 
