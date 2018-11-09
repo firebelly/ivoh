@@ -24,9 +24,6 @@ $stories->columns()->add([
   'authors'     => esc_html__( 'Author', 'cmb2' ),
   'featured'    => esc_html__( 'Featured', 'cmb2'),
 ]);
-$stories->columns()->sortable([
-  'featured'    => ['_cmb2_featured', true],
-]);
 $stories->columns()->order( [
     'authors' => 2,
 ] );
@@ -44,7 +41,7 @@ $stories->columns()->populate('authors', function($column, $post_id) {
 
 $stories->columns()->populate('featured', function($column, $post_id) {
   $featured = get_post_meta($post_id, '_cmb2_featured');
-  echo '<input type="checkbox" disabled', ($featured ? ' checked' : ''), '/>';
+  echo '<input type="checkbox" style="pointer-events:none;" disabled', ($featured ? ' checked' : ''), '/>';
 });
 
 /**
