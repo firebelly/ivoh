@@ -39,9 +39,6 @@ $stories->columns()->populate('authors', function($column, $post_id) {
     echo '';
   }
 });
-$stories->columns()->populate('featured', function($column, $post_id) {
-  echo featured_check($post_id);
-});
 $stories->register();
 
 /**
