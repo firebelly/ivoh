@@ -29,11 +29,23 @@
 
   ol,
   ul {
-    li {
-      ol,
-      ul {
+    @include p2;
+    margin-bottom: $beat * 2;
+    padding-left: 1em;
 
+    @include media-md {
+      @include p1;
+      margin-bottom: $beat * 4;
+    }
+
+    li {
+      margin-bottom: $beat * 2;
+      padding-left: 1em;
+      @include media-md {
+        margin-bottom: $beat * 4;
       }
+      ol,
+      ul {}
     }
   }
 
