@@ -5,7 +5,7 @@ $post_meta = !empty($post) ? get_post_meta($post->ID) : [];
 if (!empty($post_meta['_cmb2_previous_page']) || !empty($post_meta['_cmb2_next_page'])):
 ?>
   <div class="fb-container-sm">
-    <div class="page-links grid patterned">
+    <div class="page-links patterned">
       <?php
       if (!empty($post_meta['_cmb2_previous_page'])):
         $previous_page = get_post($post_meta['_cmb2_previous_page'][0]);
@@ -15,7 +15,7 @@ if (!empty($post_meta['_cmb2_previous_page']) || !empty($post_meta['_cmb2_next_p
           $subhead = $parent_post->post_title;
         }
         ?>
-        <div class="previous-page -item inherit-background one-half">
+        <div class="previous-page -item inherit-background">
           <a href="<?= get_permalink($previous_page) ?>">
             <span class="icon-container"><svg class="icon icon-arrow" aria-hidden="true" role="presentation"><use xlink:href="#icon-arrow"/></svg></span>
             <span class="link-text">
@@ -34,7 +34,7 @@ if (!empty($post_meta['_cmb2_previous_page']) || !empty($post_meta['_cmb2_next_p
           $subhead = $parent_post->post_title;
         }
         ?>
-        <div class="next-page -item inherit-background one-half">
+        <div class="next-page -item inherit-background">
           <a href="<?= get_permalink($next_page) ?>">
             <span class="icon-container"><svg class="icon icon-arrow" aria-hidden="true" role="presentation"><use xlink:href="#icon-arrow"/></svg></span>
             <span class="link-text">
