@@ -66,6 +66,16 @@
           <?= apply_filters('the_content', $related_links) ?>
         </div>
       <?php endif ?>
+
+      <div class="share">
+        <h3>Share:</h3>
+        <div class="addthis_toolbox">
+          <a class="addthis_button_facebook button circular"><svg class="icon icon-facebook" role="img"><use xlink:href="#icon-facebook"></use></svg></a>
+          <a class="addthis_button_twitter button circular"><svg class="icon icon-share-twitter" role="img"><use xlink:href="#icon-twitter"></a>
+          <a class="addthis_button_linkedin button circular"><svg class="icon icon-linkedin" role="img"><use xlink:href="#icon-linkedin"></use></svg></a>
+          <a class="addthis_button_link button circular" target="_blank"><svg class="icon icon-link" role="img"><use xlink:href="#icon-link"></use></svg></a>
+        </div>
+      </div>
     </div>
 
     <footer>

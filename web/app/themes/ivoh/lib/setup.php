@@ -103,5 +103,7 @@ function assets() {
   }
 
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
+  wp_localize_script('sage_js', 'addthis_config', ['services_compact' => 'facebook,twitter,linkedin,copylink']);
+  wp_enqueue_script('addthis', '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5be9b822349da4df', [], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
