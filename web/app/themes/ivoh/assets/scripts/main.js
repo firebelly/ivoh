@@ -68,6 +68,7 @@ var IVOH = (function($) {
     _initDonations();
     _initScrollEvents();
     _initToolForms();
+    _initNewsletterForm();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -93,35 +94,83 @@ var IVOH = (function($) {
 
   } // end init()
 
-  // AJAX Tool form submissions
-  function _initToolForms() {
-    // Handle application form submissions
-    $document.on('submit', 'form.tool-form', function(e) {
-      e.preventDefault();
+  /**
+   * Ajaxify newsletter signup form
+   */
+  function _initNewsletterForm() {
+    $('form.newsletter').each(function() {
       var $form = $(this);
-      $.ajax({
-        url: wp_ajax_url,
-        method: 'post',
-        data: $form.serialize(),
-        dataType: 'json',
-        success: function(response) {
-          if (response.success) {
-            alert('Your request was submitted successfully! Please check your email.');
-            $form[0].reset();
-          } else {
-            alert(response.data.message);
-          }
-        },
-        error: function(response) {
-          var message;
-          alert(response.data.message);
+      $form.on('submit', function(e) {
+        e.preventDefault();
+        if ($form.hasClass('working')) {
+          return false;
+        }
+        if ($form.find('input[name=EMAIL]').val()==='') {
+          $form.find('.status').addClass('error').text('Error: Please enter an email.');
+        } else {
+          $form.addClass('working');
+          $.getJSON($form.attr('action'), $form.serialize())
+            .done(function(data) {
+              if (data.result !== 'success') {
+                if (data.msg.match(/already subscribed/)) {
+                  $form.find('.status').addClass('error').text('Error: You are already subscribed to our newsletter.');
+                } else {
+                  $form.find('.status').addClass('error').text('Error: ' + data.msg);
+                }
+              } else {
+                $form.addClass('success').find('.status').removeClass('error').html('Thank you for signing up to the newsletter!<br><br>Check your email for confirmation.');
+              }
+            })
+            .fail(function() {
+              $form.find('.status').addClass('error').text('Error: There was an error subscribing. Please try again.');
+            })
+            .always(function() {
+              $form.removeClass('working');
+            });
         }
       });
     });
   }
 
+  /**
+   * AJAX Tool form submissions
+   */
+  function _initToolForms() {
+    // Handle application form submissions
+    $document.on('submit', 'form.tool-form', function(e) {
+      e.preventDefault();
+      var $form = $(this);
+      if ($form.hasClass('working')) {
+        return false;
+      }
+      $form.addClass('working');
+      $.ajax({
+        url: wp_ajax_url,
+        method: 'post',
+        data: $form.serialize(),
+        dataType: 'json',
+      })
+      .done(function(response) {
+        if (response.success) {
+          $form.addClass('success').find('.status').removeClass('error').html('Your request was submitted successfully!<br><br>Please check your email.');
+          $form[0].reset();
+        } else {
+          $form.find('.status').addClass('error').html(response.data.message);
+        }
+      })
+      .fail(function() {
+        $form.find('.status').addClass('error').text('Error: There was an error subscribing. Please try again.');
+      })
+      .always(function() {
+        $form.removeClass('working');
+      });
+    });
+  }
+
+  /**
+   * Research "read more" buttons to reveal description (superfluous flesh?)
+   */
   function _initResearch() {
-    // Research "read more" buttons to reveal description (superfluous?)
     $(document).on('click', 'article.research a.read-description', function(e) {
       e.preventDefault();
       $(this).hide().parents('article.research:first').find('.description').velocity('slideDown', {
@@ -136,6 +185,9 @@ var IVOH = (function($) {
     });
   }
 
+  /**
+   * Donation form behavior for Other field
+   */
   function _initDonations() {
     // Other value handling in donation form
     $('.donate-form .other-amount input[type=text]').on('focus change keyup', function(e) {

@@ -112,26 +112,26 @@ function new_tool_applicant() {
 
     // Is user already a member of list?
     $result = $MailChimp->get('lists/'.$mailchimp_list_id.'/members/'.$subscriber_hash);
-    if($result['status'] === '404') {
+    if($result['status'] == '404') {
       // Add user to list
       $result = $MailChimp->post('lists/'.$mailchimp_list_id.'/members', [
         'email_address' => $_POST['email'],
         'status'        => 'subscribed',
         'merge_fields'  => [
-          'FNAME' => $_POST['first_name'],
-          'LNAME' => $_POST['last_name'],
-          'ORG'   => (!empty($_POST['organization']) ? $_POST['organization'] : ''),
-          'TITLE' => (!empty($_POST['title']) ? $_POST['title'] : ''),
+          'FNAME'   => $_POST['first_name'],
+          'LNAME'   => $_POST['last_name'],
+          'ORGNAME' => (!empty($_POST['organization']) ? $_POST['organization'] : ''),
+          'TITLE'   => (!empty($_POST['title']) ? $_POST['title'] : ''),
         ],
       ]);
     } else {
       // Update info for existing member
       $result = $MailChimp->patch('lists/'.$mailchimp_list_id.'/members/'.$subscriber_hash, [
         'merge_fields'  => [
-          'FNAME' => $_POST['first_name'],
-          'LNAME' => $_POST['last_name'],
-          'ORG'   => (!empty($_POST['organization']) ? $_POST['organization'] : ''),
-          'TITLE' => (!empty($_POST['title']) ? $_POST['title'] : ''),
+          'FNAME'   => $_POST['first_name'],
+          'LNAME'   => $_POST['last_name'],
+          'ORGNAME' => (!empty($_POST['organization']) ? $_POST['organization'] : ''),
+          'TITLE'   => (!empty($_POST['title']) ? $_POST['title'] : ''),
         ]
       ]);
     }
