@@ -105,6 +105,12 @@
 .site-pre-footer {
   border-top: solid 1px color(black);
 
+  .user-content {
+    p {
+      @include p2;
+    }
+  }
+
   .-item {
     padding: $gutter;
     text-align: center;

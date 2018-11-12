@@ -93,6 +93,17 @@ body.single:not(.single-tool) {
       .photo-byline {
         text-align: left;
       }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+        &:hover,
+        &:focus,
+        &:active {
+          color: color(red);
+        }
+      }
+
     }
   }
 
