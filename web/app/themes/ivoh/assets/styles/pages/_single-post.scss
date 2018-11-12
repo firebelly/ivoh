@@ -103,7 +103,6 @@ body.single:not(.single-tool) {
           color: color(red);
         }
       }
-
     }
   }
 
@@ -195,13 +194,13 @@ body.single:not(.single-tool) {
         }
       }
 
-      ul, ol {
-        padding-left: 0;
-        li {
-          font-size: 16px;
-          line-height: 1.5em;
-        }
-      }
+      // ul, ol {
+      //   padding-left: 0;
+      //   li {
+      //     font-size: 16px;
+      //     line-height: 1.5em;
+      //   }
+      // }
 
       // Share buttons
       .share {

@@ -32,15 +32,15 @@ add_filter( 'pre_get_posts', __NAMESPACE__ . '\\exclude_pages_from_search');
 /**
  * Custom li'l excerpt function
  */
-function get_excerpt( $post, $length=15, $force_content=false ) {
+function get_excerpt($post, $length=15, $force_content=false) {
   $excerpt = trim($post->post_excerpt);
   if (!$excerpt || $force_content) {
     $excerpt = $post->post_content;
-    $excerpt = strip_shortcodes( $excerpt );
-    $excerpt = apply_filters( 'the_content', $excerpt );
-    $excerpt = str_replace( ']]>', ']]&gt;', $excerpt );
-    $excerpt_length = apply_filters( 'excerpt_length', $length );
-    $excerpt = wp_trim_words( $excerpt, $excerpt_length );
+    $excerpt = strip_shortcodes($excerpt);
+    $excerpt = apply_filters('the_content', $excerpt);
+    $excerpt = str_replace(']]>', ']]&gt;', $excerpt);
+    $excerpt_length = apply_filters('excerpt_length', $length);
+    $excerpt = wp_trim_words($excerpt, $excerpt_length);
   }
   return $excerpt;
 }
