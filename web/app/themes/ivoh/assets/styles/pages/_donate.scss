@@ -5,11 +5,12 @@
   padding-top: $padding-sm;
   border-top: 1px solid color(black);
   label.radio:not(.other-amount) {
+    margin-bottom: $beat;
     display: inline-block;
     margin-right: $beat * 4;
   }
   .other-amount {
-    margin-top: $gutter;
+    margin-top: $beat;
     .control-text {
       padding: 0;
       display: block;
