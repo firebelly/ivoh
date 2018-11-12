@@ -177,7 +177,7 @@ var IVOH = (function($) {
         easing: 'easeOutQuart',
         duration: 250,
         complete: function() {
-          $this.hide();
+          $(this).hide();
           // Update masonry layout
           $('.masonry').masonry('layout');
         }
