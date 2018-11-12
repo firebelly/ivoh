@@ -67,6 +67,7 @@ var IVOH = (function($) {
     _initResearch();
     _initDonations();
     _initScrollEvents();
+    _initToolForms();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -91,6 +92,33 @@ var IVOH = (function($) {
     });
 
   } // end init()
+
+  // AJAX Tool form submissions
+  function _initToolForms() {
+    // Handle application form submissions
+    $document.on('submit', 'form.tool-form', function(e) {
+      e.preventDefault();
+      var $form = $(this);
+      $.ajax({
+        url: wp_ajax_url,
+        method: 'post',
+        data: $form.serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (response.success) {
+            alert('Your request was submitted successfully! Please check your email.');
+            $form[0].reset();
+          } else {
+            alert(response.data.message);
+          }
+        },
+        error: function(response) {
+          var message;
+          alert(response.data.message);
+        }
+      });
+    });
+  }
 
   function _initResearch() {
     // Research "read more" buttons to reveal description (superfluous?)
