@@ -31,5 +31,3 @@ use Roots\Sage\Titles;
     </div>
   </div>
 <?php endif; ?>
-
-<?php the_posts_navigation(); ?>

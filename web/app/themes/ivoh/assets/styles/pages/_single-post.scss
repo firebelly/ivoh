@@ -131,9 +131,9 @@ body.single:not(.single-tool) {
       display: flex;
       align-items: center;
       p {
-        @include h5;
-        line-height: 1.5;
         margin: 0;
+        @include h6;
+        line-height: 1.5;
       }
       padding-left: 72px + $gutter;
     }
@@ -194,7 +194,6 @@ body.single:not(.single-tool) {
         }
       }
 
-
       // ul, ol {
       //   padding-left: 0;
       //   li {
@@ -202,6 +201,45 @@ body.single:not(.single-tool) {
       //     line-height: 1.5em;
       //   }
       // }
+
+      // Share buttons
+      .share {
+        h3 {
+          @include h6;
+          text-align: center;
+          margin: 0 0 $gutter;
+        }
+
+        .addthis_toolbox {
+          display: flex;
+          justify-content: center;
+        }
+
+        a {
+          width: 48px;
+          display: flex;
+          + a {
+            margin-left: $gutter;
+          }
+        }
+
+        @include media-md {
+          right: 0;
+          top: $padding-sm;
+          position: absolute;
+
+          .addthis_toolbox {
+            display: block;
+          }
+
+          a {
+            margin-bottom: $gutter;
+           + a {
+            margin-left: 0;
+           }
+          }
+        }
+      }
     }
   }
 

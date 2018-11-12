@@ -7,7 +7,7 @@ namespace Firebelly\Utils;
  */
 function search_queries( $query ) {
   if ( !is_admin() && is_search() ) {
-    $query->set( 'posts_per_page', 40 );
+    $query->set( 'posts_per_page', -1 );
   }
   return $query;
 }
