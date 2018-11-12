@@ -293,7 +293,7 @@ class CSVImporter {
       // Strip out related links at bottom of posts
       $related_links = '';
       if (preg_match('#((<(b|strong)>)?Related:(</(b|strong)>)?(.*))#', $post_content, $m)) {
-        $related_content = trim($m[6]);
+        $related_links = trim($m[6]);
         $post_content = trim(str_replace($m[0], '', $post_content));
       }
 
@@ -365,7 +365,7 @@ class CSVImporter {
       // If story, assign story_type
       if ($postType == 'story') {
         foreach($this->storyTypes as $term) {
-          if (strtolower($term->name) == strtolower($data['posttype'])) {
+          if (strpos(strtolower($term->name), strtolower($data['posttype'])) !== false) {
             wp_set_object_terms($id, [$term->term_id], 'story_type');
           }
         }
