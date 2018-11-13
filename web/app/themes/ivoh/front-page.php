@@ -97,7 +97,7 @@ $num_posts= \Firebelly\Utils\get_posts(['countposts' => 1]);
     </div>
     <div class="grid-actions">
     <?php if ($num_posts > $per_page): ?>
-      <span class="load-more" data-post-type="post" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>"><a href="#" class="button">Load More</a></span>
+      <span class="load-more" data-post-type="news" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>"><a href="#" class="button">Load More</a></span>
     <?php endif ?>
       <a href="/news" class="button">All News + Commentary</a>
     </div>

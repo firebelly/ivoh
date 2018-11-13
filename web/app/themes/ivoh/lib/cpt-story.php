@@ -114,18 +114,18 @@ function metaboxes() {
 add_filter( 'cmb2_admin_init', __NAMESPACE__ . '\metaboxes' );
 
 function get_stories($opts) {
-  // Set template type
-  if (!empty($opts['template-type'])) {
-    $template_type = $opts['template-type'];
-  } else {
-    $template_type = 'story';
-  }
-  return \Firebelly\Utils\get_posts(array_merge([
-    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
-    'template-type'  => $template_type,
+  // Defaults
+  $opts = array_merge([
+    'numberposts'    => -1,
     'post-type'      => 'story',
     'topic-taxonomy' => 'story_topic',
-  ], $opts));
+    'template-type'  => 'story',
+    'story-types'    => 'all',
+  ], $opts);
+  // If story types is all, just set to blank array
+  $opts['story-types'] = ($opts['story-types'] == 'all') ? [] : [$opts['story-types']];
+
+  return \Firebelly\Utils\get_posts($opts);
 }
 
 /**
@@ -141,7 +141,7 @@ function shortcode_story_carousel($atts) {
   $stories = get_stories([
     'numberposts' => 3,
     'return'      => 'array',
-    'story-types' => ($atts['type']=='all' ? ['rn','sbm'] : [$atts['type']]),
+    'story-types' => $atts['type'],
     'featured'    => 1,
   ]);
   if (empty($stories)) return '';

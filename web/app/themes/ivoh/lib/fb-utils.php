@@ -180,19 +180,24 @@ function get_posts($opts=[]) {
     'post-type'      => 'news',
     'order-by'       => 'date-desc',
     'topic-taxonomy' => 'category',
+    'numberposts'    => -1,
+    'offset'         => 0,
   ], $opts);
+
+  // Break up custom order-by to proper get_posts args
   $orderby = explode('-', $opts['order-by']);
 
-  // Default args for get_posts call
+  // Build get_post args
   $args = [
-    'numberposts' => (!empty($opts['numberposts']) ? $opts['numberposts'] : -1),
-    'post_type'   => ($opts['post-type'] == 'news' ? 'post' : $opts['post-type']),
+    'post_type'   => ($opts['post-type']=='news' ? 'post' : $opts['post-type']),
     'orderby'     => $orderby[0],
-    'order'       => strtoupper($orderby[1]),
+    'order'       => $orderby[1],
+    'offset'      => $opts['offset'],
+    'numberposts' => $opts['numberposts'],
   ];
 
   // Order by author uses generated postmeta _author_sort which is saved in a hook
-  if ($orderby[0]=='author') {
+  if ($args['orderby'] == 'author') {
     $args = array_merge($args, [
       'orderby'  => 'meta_value',
       'meta_key' => '_author_sort',
