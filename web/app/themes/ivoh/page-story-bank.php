@@ -104,17 +104,17 @@ $story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
 </div>
 
 <div class="fb-container-md card-grid">
-  <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
-    <div class="grid-sizer"></div>
-    <?php if (empty($stories)): ?>
-      <p class="no-posts">No posts found.</p>
-    <?php else: ?>
-      <?= $stories ?>
+  <?php if (!empty($stories)): ?>
+    <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
+      <div class="grid-sizer"></div>
+        <?= $stories ?>
+    </div>
+    <?php if ($num_posts > $per_page): ?>
+    <div class="load-more grid-actions inherit-background" data-post-type="story" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-story-types="<?= $story_types ?>" data-topic-taxonomy="story_topic" data-topics="<?= get_query_var('topics', '') ?>">
+      <a href="#" class="button">Load More Stories</a>
+    </div>
     <?php endif; ?>
-  </div>
-  <?php if ($num_posts > $per_page): ?>
-  <div class="load-more grid-actions inherit-background" data-post-type="story" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-story-types="<?= get_query_var('story-types', 'rn,sbm') ?>" data-topic-taxonomy="story_topic" data-topics="<?= get_query_var('topics', '') ?>">
-    <a href="#" class="button">Load More Stories</a>
-  </div>
-  <?php endif ?>
+  <?php else: ?>
+    <div class="card"><p class="no-posts">No posts found.</p></div>
+  <?php endif; ?>
 </div>

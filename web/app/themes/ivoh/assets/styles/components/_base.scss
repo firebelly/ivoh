@@ -149,3 +149,11 @@ hr {
     background-color: rgba(color(pink),1); // default color
   }
 }
+
+p.no-posts {
+  text-align: center;
+  padding: $padding-md;
+  @include media-md {
+    padding: $padding-lg;
+  }
+}

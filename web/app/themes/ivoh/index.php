@@ -24,7 +24,7 @@ $num_posts = \Firebelly\Utils\get_posts(array_merge(['countposts' => 1], $args))
 // Get base topics for filtering
 $news_topics = get_terms([
   'taxonomy' => 'category',
-  'parent' => 0,
+  'parent'   => 0,
 ]);
 
 // Sort options
@@ -76,20 +76,18 @@ $news_page = get_post(get_option('page_for_posts'));
   </div>
 </div>
 
-<div class="fb-container-md">
-  <div class="card-grid">
+<div class="fb-container-md card-grid">
+  <?php if (!empty($posts)): ?>
     <div class="load-more-container masonry sm-halves md-thirds lg-fourths -inner">
       <div class="grid-sizer"></div>
-      <?php if (empty($posts)): ?>
-        <p class="no-posts">No posts found.</p>
-      <?php else: ?>
-        <?= $posts ?>
-      <?php endif; ?>
+      <?= $posts ?>
     </div>
-  </div>
-  <?php if ($num_posts > $per_page): ?>
-    <div class="load-more grid-actions inherit-background" data-post-type="post" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-topics="<?= get_query_var('topics', '') ?>">
-      <a href="#" class="button">Load More Posts</a>
-    </div>
-  <?php endif ?>
+    <?php if ($num_posts > $per_page): ?>
+      <div class="load-more grid-actions inherit-background" data-post-type="post" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-topics="<?= get_query_var('topics', '') ?>">
+        <a href="#" class="button">Load More Posts</a>
+      </div>
+    <?php endif; ?>
+  <?php else: ?>
+    <div class="card"><p class="no-posts">No posts found.</p></div>
+  <?php endif; ?>
 </div>
