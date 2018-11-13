@@ -6,12 +6,7 @@
 // Get filter vars
 $topics = explode(',', get_query_var('topics', ''));
 $order_by = get_query_var('order-by', 'date-desc');
-$story_types = explode(',', get_query_var('story-types', 'rn,sbm'));
-
-// Default story types = all story types
-if (empty($story_types)) {
-  $story_types = 'rn,sbm';
-}
+$story_types = get_query_var('story-types', 'all');
 
 // Amount of posts to pull
 $per_page = get_option('posts_per_page');
@@ -19,7 +14,7 @@ $per_page = get_option('posts_per_page');
 // Get all stories matching filters
 $args = [
   'numberposts' => $per_page,
-  'story-types' => array_filter($story_types),
+  'story-types' => $story_types,
   'topics'      => array_filter($topics),
   'order-by'    => $order_by,
 ];
@@ -45,32 +40,14 @@ $sort_by_options = [
 ];
 
 // Story type options
-$story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
+$story_type_terms = get_terms([
+  'taxonomy' => 'story_type'
+]);
 ?>
 
 <?php get_template_part('templates/page', 'header'); ?>
 
 <div class="mobile-gutter">
-  <div class="story-type filters fb-container-md accordion expanded-md">
-    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Story Type<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
-    <ul class="accordion-content">
-      <?php foreach ($story_type_terms as $story_type_cat):
-        $story_type_slug = $story_type_cat->slug;
-        $story_type_title = $story_type_cat->name;
-        if (in_array($story_type_slug, $story_types)) {
-          $active = ' class="-active"';
-          $filtered = array_filter($story_types, function ($el) use ($story_type_slug) { return ($el != $story_type_slug); });
-          $link = add_query_arg(['story-types' => implode(',', $filtered) ]);
-        } else {
-          $active = '';
-          $link = add_query_arg(['story-types' => implode(',', array_filter(array_merge($story_types, [$story_type_slug]))) ]);
-        }
-        ?>
-        <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $story_type_title ?></a></option>
-      <?php endforeach; ?>
-    </ul>
-  </div>
-
   <div class="topics filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Issue<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <ul class="topics accordion-content">
@@ -86,6 +63,14 @@ $story_type_terms = get_terms(['taxonomy' => 'story_type', 'hide_empty' => 0]);
       ?>
       <li<?= $active ?>><a href="<?= $link ?>" class="button rounded white"><?= $term->name ?></a></li>
     <?php endforeach; ?>
+    </ul>
+  </div>
+
+  <div class="story-type filters fb-container-md accordion expanded-md">
+    <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Story Type<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
+    <ul class="accordion-content">
+      <li<?= $story_types == 'rn' ? ' class="-active"' : ''?>><a class="button rounded white" href="<?= add_query_arg(['story-types' => 'rn']); ?>">Restorative Narratives</a></li>
+      <li<?= $story_types == 'all' ? ' class="-active"' : ''?>><a class="button rounded white" href="<?= add_query_arg(['story-types' => 'all']); ?>">All</a></li>
     </ul>
   </div>
 
