@@ -29,6 +29,8 @@
   </div>
 
   <div class="input-submit">
+    <div class="status"></div>
+
     <button type="submit" class="button">Submit</button>
   </div>
 
