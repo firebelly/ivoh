@@ -1,30 +1,35 @@
 <?php
-
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
-if (is_home() || $post && $post->post_type == 'post' ) {
-  $top_ancestor = get_option( 'page_for_posts' );
-} elseif ($post && $post->post_type == 'story') {
+// Default page color
+$page_color = 'pink';
+
+// Determine if we can get a page color override
+if (is_home() || (!empty($post) && $post->post_type == 'post')) {
+  // News posts
+  $top_ancestor = get_option('page_for_posts');
+} elseif (!empty($post) && $post->post_type == 'story') {
+  // Story posts
   $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('story-bank');
-} elseif ($post && $post->post_type == 'person') {
+} elseif (!empty($post) && $post->post_type == 'person') {
+  // Person posts
   $person_type = \Firebelly\Utils\get_first_term($post, 'person_category');
-  if (!empty($person_type)) {
-    if (strpos($person_type->name, 'Fellows')) {
-      $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('what-we-do');
-    } else {
-      $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('who-we-are');
-    }
+  if (empty($person_type) || strpos($person_type->name, 'Fellows') !== false) {
+    $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('what-we-do');
+  } else {
+    $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('who-we-are');
   }
-} elseif ($post && $post->post_type == 'tool') {
+} elseif (!empty($post) && $post->post_type == 'tool') {
+  // Tool posts
   $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('resources');
 } else {
+  // Normal page
   $top_ancestor = \Firebelly\Utils\get_top_ancestor($post);
 }
-if (!empty(get_post_meta($top_ancestor, '_cmb2_page_color', true))) {
-  $page_color = get_post_meta($top_ancestor, '_cmb2_page_color', true);
-} else {
-  $page_color = 'pink';
+// Now that we have top ancestor, see if a page color has been set
+if (!empty($top_ancestor) && $page_color_override = get_post_meta($top_ancestor, '_cmb2_page_color', true)) {
+  $page_color = $page_color_override;
 }
 ?>
 
