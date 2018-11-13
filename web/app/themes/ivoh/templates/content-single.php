@@ -67,7 +67,7 @@
         </div>
       <?php endif ?>
 
-      <div class="share">
+      <div class="share hidden">
         <h3>Share:</h3>
         <div class="addthis_toolbox">
           <a class="addthis_button_facebook button circular"><svg class="icon icon-facebook" role="img"><use xlink:href="#icon-facebook"></use></svg></a>

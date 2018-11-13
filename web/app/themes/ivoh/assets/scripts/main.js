@@ -50,6 +50,12 @@ var IVOH = (function($) {
       this.setCustomValidity('Please enter a number.');
     });
 
+    // Only show share block if addthis initializes
+    if (typeof addthis !== 'undefined' && addthis.user) {
+      addthis.user.ready(function(d) {
+        $('.share').removeClass('hidden');
+      });
+    }
 
     // Fit them vids!
     $('main').fitVids();
