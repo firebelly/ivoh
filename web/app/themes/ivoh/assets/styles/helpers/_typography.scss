@@ -108,7 +108,7 @@
 
 @mixin h6 {
   @include font-secondary;
-  @include paragraph-style(10, 16, .0161em, uppercase);
+  @include paragraph-style(10, 16, .161em, uppercase);
 }
 .h6 {
   @include h6;
