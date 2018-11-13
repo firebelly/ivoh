@@ -3,8 +3,21 @@
 use Roots\Sage\Setup;
 use Roots\Sage\Wrapper;
 
-if (is_home()) {
+if (is_home() || $post && $post->post_type == 'post' ) {
   $top_ancestor = get_option( 'page_for_posts' );
+} elseif ($post && $post->post_type == 'story') {
+  $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('story-bank');
+} elseif ($post && $post->post_type == 'person') {
+  $person_type = \Firebelly\Utils\get_first_term($post, 'person_category');
+  if (!empty($person_type)) {
+    if (strpos($person_type->name, 'Fellows')) {
+      $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('what-we-do');
+    } else {
+      $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('who-we-are');
+    }
+  }
+} elseif ($post && $post->post_type == 'tool') {
+  $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('resources');
 } else {
   $top_ancestor = \Firebelly\Utils\get_top_ancestor($post);
 }
@@ -13,7 +26,6 @@ if (!empty(get_post_meta($top_ancestor, '_cmb2_page_color', true))) {
 } else {
   $page_color = 'pink';
 }
-
 ?>
 
 <!doctype html>
