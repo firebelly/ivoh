@@ -516,7 +516,7 @@ var IVOH = (function($) {
   }
 
   function _initScrollEvents() {
-    // Homapage scroll event
+    // Homapage & article scroll event
 
     function addScrolledClass(offset) {
       var st = $(window).scrollTop();
@@ -528,7 +528,7 @@ var IVOH = (function($) {
       }
     }
 
-    if ($('body.home').length) {
+    if ($('body.home, body.single-story, body.single-post').length) {
       addScrolledClass(10);
 
       $(window).scroll(function() {

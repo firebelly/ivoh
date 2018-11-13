@@ -194,14 +194,6 @@ body.single:not(.single-tool) {
         }
       }
 
-      // ul, ol {
-      //   padding-left: 0;
-      //   li {
-      //     font-size: 16px;
-      //     line-height: 1.5em;
-      //   }
-      // }
-
       // Share buttons
       .share {
         h3 {
@@ -243,4 +235,61 @@ body.single:not(.single-tool) {
     }
   }
 
+}
+
+// Single Stories and News Posts
+body.single-story[data-theme],
+body.single-post[data-theme] {
+  // Before .scrolled class has been added
+  &:not(.scrolled) {
+    color: white;
+    background-color: color(black);
+
+    .site-header {
+      @include headerDarkStyle();
+      &::after {
+        border-color: color(white);
+      }
+    }
+
+    .menu-toggle:not(.-active) .menu-bar {
+      &,&::before,&::after {
+        background-color: color(white);
+      }
+    }
+
+    .page-header {
+      .page-header-text,
+      .page-header-banner,
+      .banner-text {
+        background-color: color(black);
+      }
+
+      .post-meta {
+        color: color(black);
+      }
+    }
+
+    .site-nav {
+      .sub-menu {
+        outline: 1px solid color(white);
+      }
+    }
+  }
+
+  // After .scrolled class has been added
+  &.scrolled {
+    .banner-image-container {
+      &::after {
+        opacity: 0;
+      }
+      .banner-image {
+        filter: none;
+        &::before,
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+  }
 }

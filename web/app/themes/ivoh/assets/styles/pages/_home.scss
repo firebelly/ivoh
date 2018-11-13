@@ -15,10 +15,8 @@
         background-color: transparent;
         &::after {
           border-color: color(white);
+          background-color: transparent;
         }
-      }
-      .site-header::after {
-        background-color: transparent;
       }
       .site-nav::after {
         border-color: color(white);

@@ -50,6 +50,29 @@ body {
   }
 }
 
+// Alternate header colors for when page has .scrolled added to it
+@mixin headerDarkStyle() {
+  color: color(white);
+  border-color: color(white);
+  background-color: color(black);
+
+  .site-logo .ivoh-logo {
+    fill: color(white);
+  }
+
+  .site-nav::after {
+    border-color: color(white);
+    background-color: color(black);
+  }
+
+  .primary-nav,
+  .secondary-nav {
+    > li:not(.donate)::after {
+      background-color: color(white);
+    }
+  }
+}
+// Regular Site Header
 .site-header {
   top: 0;
   left: 0;
@@ -87,25 +110,7 @@ body {
 
     &:hover,
     &.-hover {
-      color: color(white);
-      border-color: color(white);
-      background-color: color(black);
-
-      .site-logo .ivoh-logo {
-        fill: color(white);
-      }
-
-      .site-nav::after {
-        border-color: color(white);
-        background-color: color(black);
-      }
-
-      .primary-nav,
-      .secondary-nav {
-        > li:not(.donate)::after {
-          background-color: color(white);
-        }
-      }
+      @include headerDarkStyle();
     }
   }
 
@@ -296,14 +301,6 @@ body {
   .menu-item-has-children {
     position: relative;
 
-    @include max-screen($breakpoint-nav) {
-      &.-active {
-        .sub-menu {
-          // display: block;
-        }
-      }
-    }
-
     @include media-nav {
       &:hover,
       &:focus {
@@ -452,6 +449,7 @@ body.search-open {
     }
   }
 }
+
 // Search-open
 body.search-open {
   .site-header {
