@@ -35,6 +35,6 @@ if (get_post_type($post) == 'story') {
     <div class="card-text">
       <?= $excerpt ?>
     </div>
-    <p class="post-url h5"><a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a></p>
+    <p class="post-url h6"><a href="<?php the_permalink(); ?>"><?= getenv('WP_HOME') ?><?php the_permalink(); ?></a></p>
   </div>
 </article>
