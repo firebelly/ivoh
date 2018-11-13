@@ -64,7 +64,7 @@ function metaboxes() {
     'name'      => 'Applicant email',
     'id'        => $prefix . 'applicant_email',
     'type'      => 'wysiwyg',
-    'desc'      => 'Template for email sent to applicants',
+    'desc'      => 'Template for email sent to applicants (available shortcodes: [first_name], [last_name], [email], [organization], [final_pdf])',
     'options' => [
       'textarea_rows' => 8,
     ],
@@ -149,6 +149,9 @@ function new_tool_applicant() {
 
     // Replace vars in thank you email template
     $thanks_email = str_replace('[first_name]', $_POST['first_name'], $thanks_email);
+    $thanks_email = str_replace('[last_name]', $_POST['last_name'], $thanks_email);
+    $thanks_email = str_replace('[email]', $_POST['email'], $thanks_email);
+    $thanks_email = str_replace('[organization]', $_POST['organization'], $thanks_email);
     $thanks_email = str_replace('[final_pdf]', $final_pdf_links, $thanks_email);
 
     // Send email to applicant
