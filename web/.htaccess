@@ -4,12 +4,12 @@ RewriteEngine On
 RewriteBase /
 
 # Force single domain
-# RewriteCond %{REQUEST_URI} !\.well-known
-# RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
-# RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
-# RewriteRule ^(.*)$ https://ivoh\.org%{REQUEST_URI} [R=301,L]
+RewriteCond %{REQUEST_URI} !\.well-known
+RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
+RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 
-# Force HTTPS
+# Force HTTPS (uncomment once site is live and SSL cert is set up)
 # RewriteCond %{REQUEST_URI} !\.well-known
 # RewriteCond %{HTTP:X-Forwarded-SSL} !on
 # RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
@@ -19,6 +19,23 @@ RewriteBase /
 # Custom redirects
 # Redirect individual research articles (e.g. View Research button in WP) to base /research/ page
 RewriteRule ^research/(.*)/$ /resources/research/ [R=301,L]
+
+# Old URLs
+RewriteRule ^support-us/?$ /donate/ [R=301,L]
+RewriteRule ^contact/?$ /who-we-are/team/ [R=301,L]
+RewriteRule ^research/?$ /resources/research/ [R=301,L]
+RewriteRule ^ivohsummit/?$ /what-we-do/annual-summit/ [R=301,L]
+RewriteRule ^2017fellowship/?$ /what-we-do/fellowship/ [R=301,L]
+RewriteRule ^restorativenarrativegenre/?$ /what-we-do/restorative-narrative/ [R=301,L]
+RewriteRule ^exploring-the-impact-of-restorative-narrative/?$ /what-we-do/restorative-narrative/ [R=301,L]
+RewriteRule ^guiding-questions-for-media-practitioner-pursue-restorative-narratives/?$ /what-we-do/restorative-narrative/ [R=301,L]
+RewriteRule ^what-we-do-why-we-do-it/?$ /who-we-are/mission-history/ [R=301,L]
+RewriteRule ^mission-beliefs/ivohs-history-mission/?$ /who-we-are/mission-history/ [R=301,L]
+RewriteRule ^our-principles/?$ /who-we-are/mission-history/ [R=301,L]
+RewriteRule ^leadership/?$ /who-we-are/team/ [R=301,L]
+RewriteRule ^board-members/?$ /who-we-are/board-of-trustees/ [R=301,L]
+RewriteRule ^ivoh-board-advisors/?$ /who-we-are/board-of-advisors/ [R=301,L]
+RewriteRule ^supporters/?$ /who-we-are/partner-organizations/ [R=301,L]
 
 </IfModule>
 # END Custom redirects
