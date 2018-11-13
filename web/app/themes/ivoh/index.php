@@ -83,7 +83,7 @@ $news_page = get_post(get_option('page_for_posts'));
       <?= $posts ?>
     </div>
     <?php if ($num_posts > $per_page): ?>
-      <div class="load-more grid-actions inherit-background" data-post-type="post" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-topics="<?= get_query_var('topics', '') ?>">
+      <div class="load-more grid-actions inherit-background" data-post-type="news" data-page-at="1" data-per-page="<?= $per_page ?>" data-total-pages="<?= ceil($num_posts/$per_page) ?>" data-order-by="<?= $order_by ?>" data-topics="<?= get_query_var('topics', '') ?>">
         <a href="#" class="button">Load More Posts</a>
       </div>
     <?php endif; ?>
