@@ -124,7 +124,7 @@ var IVOH = (function($) {
                   $form.find('.status').addClass('error').text('Error: ' + data.msg);
                 }
               } else {
-                $form.addClass('success').find('.status').removeClass('error').html('Thank you for signing up to the newsletter!<br><br>Check your email for confirmation.');
+                $form.addClass('success').find('.status').removeClass('error').html('Thank you for signing up to the newsletter!<br>Check your email for confirmation.');
               }
             })
             .fail(function() {
@@ -158,7 +158,7 @@ var IVOH = (function($) {
       })
       .done(function(response) {
         if (response.success) {
-          $form.addClass('success').find('.status').removeClass('error').html('Your request was submitted successfully!<br><br>Please check your email.');
+          $form.addClass('success').find('.status').removeClass('error').html('Your request was submitted successfully!<br>Please check your email.');
           $form[0].reset();
         } else {
           $form.find('.status').addClass('error').html(response.data.message);

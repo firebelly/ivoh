@@ -7,6 +7,7 @@ RewriteBase /
 RewriteCond %{REQUEST_URI} !\.well-known
 RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
+RewriteCond %{HTTP_HOST} !^ivoh\.sage [NC]
 RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 
 # Force HTTPS (uncomment once site is live and SSL cert is set up)
@@ -14,6 +15,7 @@ RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 # RewriteCond %{HTTP:X-Forwarded-SSL} !on
 # RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
 # RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
+# RewriteCond %{HTTP_HOST} !^ivoh\.sage [NC]
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Custom redirects

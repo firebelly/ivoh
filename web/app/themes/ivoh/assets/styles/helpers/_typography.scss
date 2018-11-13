@@ -56,10 +56,10 @@
 // Type Style Mixins + Classes
 @mixin h1 {
   @include font-display;
-  @include paragraph-style(36, 40, -.032em);
+  @include paragraph-style(36, 40, -.008888889em);
 
   @include media-md {
-    @include paragraph-style(64, 64, -.046em);
+    @include paragraph-style(64, 64, -.0071875em);
   }
 }
 .h1 {
@@ -68,10 +68,10 @@
 
 @mixin h2 {
   @include font-display;
-  @include paragraph-style(22, 24, -.032em);
+  @include paragraph-style(22, 24, -.008888889em);
 
   @include media-md {
-    @include paragraph-style(48, 48, -.05em);
+    @include paragraph-style(48, 48, -.010416666em);
   }
 }
 .h2 {
@@ -80,10 +80,10 @@
 
 @mixin h3 {
   @include font-display;
-  @include paragraph-style(22, 24, -.032em);
+  @include paragraph-style(22, 24, -.014545454em);
 
   @include media-md {
-    @include paragraph-style(36, 40, -.032em);
+    @include paragraph-style(36, 40, -.008888889em);
   }
 }
 .h3 {
@@ -92,7 +92,7 @@
 
 @mixin h4 {
   @include font-display;
-  @include paragraph-style(22, 24, -.032em);
+  @include paragraph-style(22, 24, -.014545454em);
 }
 .h4 {
   @include h4;
@@ -100,7 +100,7 @@
 
 @mixin h5 {
   @include font-secondary;
-  @include paragraph-style(12, 16, .0193em, uppercase);
+  @include paragraph-style(12, 16, .160833333em, uppercase);
 }
 .h5 {
   @include h5;
@@ -116,7 +116,7 @@
 
 @mixin p1 {
   @include font-copy;
-  @include paragraph-style(20, 32, .01em);
+  @include paragraph-style(20, 32, .005em);
 }
 .p1 {
   @include p1;
@@ -124,7 +124,7 @@
 
 @mixin p2 {
   @include font-copy;
-  @include paragraph-style(16, 24, .02em);
+  @include paragraph-style(16, 24, .0125em);
 }
 .p2 {
   @include p2;

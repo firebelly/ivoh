@@ -95,6 +95,11 @@ form {
     }
   }
 
+  // Status
+  .status {
+    @include h5;
+    margin: $gutter 0;
+  }
 }
 
 // Custom select styles
