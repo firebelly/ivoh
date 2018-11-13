@@ -79,6 +79,16 @@ function get_page_content($slug) {
 }
 
 /**
+ * Get page object from slug
+ */
+function get_page_id_by_slug($slug) {
+  $return = false;
+  if ($page = get_page_by_path($slug))
+    $return = $page->ID;
+  return $return;
+}
+
+/**
  * Get category for post
  */
 function get_category($post) {
