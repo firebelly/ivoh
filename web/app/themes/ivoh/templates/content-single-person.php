@@ -108,7 +108,7 @@ $posts = get_posts([
       $back_to_link = '/what-we-do/past-fellows/';
       break;
     default:
-      $back_to_link = '/who-we-are/staff/';
+      $back_to_link = '/who-we-are/team/';
       break;
   }
   ?>
