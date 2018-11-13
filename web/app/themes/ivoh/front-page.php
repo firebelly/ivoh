@@ -42,7 +42,7 @@ if (has_post_thumbnail($post)) {
 }
 
 // News Posts Vars
-$per_page = 3;
+$per_page = 21;
 $num_posts= \Firebelly\Utils\get_posts(['countposts' => 1]);
 ?>
 
@@ -89,9 +89,8 @@ $num_posts= \Firebelly\Utils\get_posts(['countposts' => 1]);
     <div class="card-grid">
       <div class="load-more-container masonry sm-halves md-thirds -inner">
         <div class="grid-sizer"></div>
-      	<?php // todo: shove any news posts marked featured to top of list (sticky behavior) ?>
       	<?= \Firebelly\Utils\get_posts([
-      		'numberposts' => $per_page,
+      		'numberposts' => 3,
       	]); ?>
       </div>
     </div>
