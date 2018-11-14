@@ -47,6 +47,7 @@ $author_posts = \Firebelly\Utils\get_posts([
   'post_type'     => ['story','post'],
   'template-type' => 'simple',
   'author'        => $post->ID,
+  'numberposts'   => -1,
 ]);
 
 ?>
