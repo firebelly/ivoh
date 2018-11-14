@@ -2,7 +2,7 @@
 $research_url = get_post_meta($research_post->ID, '_cmb2_research_url', true);
 $research_description = get_post_meta($research_post->ID, '_cmb2_description', true);
 // External link?
-$external_link = (!preg_match('/ivoh\.org/', $research_url) && preg_match('/^http/', $research_url));
+$external_link = (!preg_match('/ivoh\.org/', $research_url) && !preg_match('/ivoh\.firebelly\.co/', $research_url) && preg_match('/^http/', $research_url));
 ?>
 <article class="research<?= $external_link ? ' with-icon' : ''?>">
   <h2 class="article-title"><a <?= $external_link ? 'rel="noopener" target="_blank" ' : '' ?>href="<?= $research_url ?>"><?= $research_post->post_title ?></a></h2>

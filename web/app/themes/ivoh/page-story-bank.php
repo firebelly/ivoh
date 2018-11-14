@@ -78,7 +78,7 @@ $sort_by_options = [
 
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="mobile-gutter">
+<div class="filters-container">
   <div class="topics filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Issue<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <ul class="topics accordion-content">
@@ -105,7 +105,7 @@ $sort_by_options = [
     </ul>
   </div>
 
-  <div class="sort-by filters accordion expanded-md">
+  <div class="sort-by filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <div class="accordion-content">
       <div class="select-wrap">

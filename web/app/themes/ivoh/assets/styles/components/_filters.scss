@@ -1,6 +1,14 @@
 // Filters
 // Appear on the News and Story Bank pages
 
+.filters-container {
+  @extend .mobile-gutter;
+
+  @include media-md {
+    margin-bottom: $padding-sm;
+  }
+}
+
 .filters {
   border-top: 1px solid color(black);
 
@@ -19,7 +27,7 @@
         transform: translateY(-50%);
       }
     }
-    
+
     @include media-md {
       padding: 0;
       margin-bottom: $gutter;
@@ -49,7 +57,7 @@
 
     @include media-md {
       justify-content: center;
-  
+
       li {
         max-width: none;
         flex-basis: auto;
@@ -80,7 +88,7 @@
       }
     }
   }
-  
+
 }
 
 // Sort-by Filter Section

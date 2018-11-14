@@ -43,7 +43,7 @@ $news_page = get_post(get_option('page_for_posts'));
 
 <?php \Firebelly\Utils\get_template_part_with_vars('templates/page', 'header', [ 'post' => $news_page ]); ?>
 
-<div class="mobile-gutter">
+<div class="filters-container">
   <div class="topics filters fb-container-md accordion expanded-md">
     <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Topic<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
     <ul class="topics accordion-content">
