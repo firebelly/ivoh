@@ -237,8 +237,10 @@ body.single:not(.single-tool) {
 
   // Related posts
   .article-list {
-    background: none;
-    margin-top: $padding-lg;
+    margin-top: $padding-md;
+    @include media-md {
+      background: none;
+    }
   }
 
 }
