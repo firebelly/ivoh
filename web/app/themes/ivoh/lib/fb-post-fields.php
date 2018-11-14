@@ -92,14 +92,23 @@ function metaboxes() {
        'textarea_rows' => 4,
      ],
   ]);
+  // $related_info->add_field([
+  //   'name'    => esc_html__( 'Related Links', 'cmb2' ),
+  //   'id'      => $prefix . 'related_links',
+  //   'desc'    => 'A list of related links which shows at bottom of posts',
+  //   'type'    => 'wysiwyg',
+  //   'options' => [
+  //      'textarea_rows' => 4,
+  //    ],
+  // ]);
   $related_info->add_field([
-    'name'    => esc_html__( 'Related Links', 'cmb2' ),
-    'id'      => $prefix . 'related_links',
-    'desc'    => 'A list of related links which shows at bottom of posts',
-    'type'    => 'wysiwyg',
-    'options' => [
-       'textarea_rows' => 4,
-     ],
+    'name'             => esc_html__( 'Related Posts', 'cmb2' ),
+    'id'               => $prefix . 'related_posts',
+    'desc'             => 'A list of related posts which shows at bottom of posts',
+    'type'             => 'pw_multiselect',
+    'multiple'         => true,
+    'show_option_none' => true,
+    'options_cb'       => '\Firebelly\CMB2\get_stories_and_posts',
   ]);
 
   // $author = new_cmb2_box([

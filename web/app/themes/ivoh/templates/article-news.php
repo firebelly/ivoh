@@ -14,7 +14,7 @@ $topics = wp_get_post_terms($article_post->ID, 'category');
   <div class="card-content">
     <h1 class="card-title"><a href="<?= get_permalink($article_post) ?>"><?= $article_post->post_title ?></a></h1>
     <?php if (!empty($news_authors)): ?>
-      <p class="author card-subtitle">By 
+      <p class="author card-subtitle">By
         <?php
         $news_author_links = [];
         foreach ($news_authors as $author_id) {
@@ -29,7 +29,7 @@ $topics = wp_get_post_terms($article_post->ID, 'category');
           <?php
           $topic_links = [];
           foreach ($topics as $term) {
-            $topic_links[] = '<a href="/news/?topic=' . $term->slug . '">' . $term->name . '</a>';
+            $topic_links[] = '<a href="/news/?topics=' . $term->slug . '">' . $term->name . '</a>';
           }
           echo implode(', ', $topic_links);
           ?>

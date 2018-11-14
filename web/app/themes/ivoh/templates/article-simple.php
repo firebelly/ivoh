@@ -10,7 +10,7 @@ $topics = wp_get_post_terms($article_post->ID, $topic_taxonomy);
         <?php
         $topic_links = [];
         foreach ($topics as $term) {
-          $topic_links[] = '<a href="/story-bank/?topic=' . $term->slug . '">' . $term->name . '</a>';
+          $topic_links[] = '<a href="/story-bank/?topics=' . $term->slug . '">' . $term->name . '</a>';
         }
         echo implode(', ', $topic_links);
         ?>

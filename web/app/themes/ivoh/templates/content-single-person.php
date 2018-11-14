@@ -42,26 +42,15 @@ if (empty(trim($post->post_content)) && $post_bio = get_post_meta($post->ID, '_c
   $author_bio = apply_filters('the_content', $post->post_content);
 }
 
-// Get all stories by author
-$stories = \Firebelly\PostTypes\Story\get_stories([
+// Get all stories & news by author
+$author_posts = \Firebelly\Utils\get_posts([
+  'post_type'     => ['story','post'],
   'template-type' => 'simple',
-  'author' => $post->ID,
-]);
-
-// Get all posts by author
-$posts = get_posts([
+  'author'        => $post->ID,
   'numberposts'   => -1,
-  'post_type'     => 'post',
-  'template-type' => 'simple',
-  'meta_query'    => [
-    [
-      'key'   => '_cmb2_author',
-      'value' => [$post->ID],
-    ]
-  ],
 ]);
-?>
 
+?>
 <header class="page-header">
   <div class="-inner">
     <div class="person-image" <?= \Firebelly\Media\get_header_bg($post, ['size'=>'medium']) ?>></div>
@@ -78,16 +67,11 @@ $posts = get_posts([
   <?= $author_bio ?>
 </div>
 
-<?php if ($stories || $posts): ?>
+<?php if ($author_posts): ?>
   <div class="article-list page-section fb-container-content">
     <div class="-inner inherit-background">
       <h3 class="list-title">Posts by author:</h3>
-
-      <?= $stories ?>
-
-      <?php foreach ($posts as $article_post): ?>
-        <?php \Firebelly\Utils\get_template_part_with_vars('templates/article', 'simple', [ 'article_post' => $article_post, 'topic_taxonomy' => 'category' ]); ?>
-      <?php endforeach ?>
+      <?= $author_posts ?>
     </div>
   </div>
 <?php endif ?>
