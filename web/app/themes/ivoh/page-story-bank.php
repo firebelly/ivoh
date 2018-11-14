@@ -11,6 +11,48 @@ $story_types = get_query_var('story-types', 'all');
 // Amount of posts to pull
 $per_page = get_option('posts_per_page');
 
+// If only showing Restorative Narratives, only show topics used by RN posts
+if ($story_types != 'all') {
+
+  // Get all story post IDs
+  $story_post_ids = \Firebelly\PostTypes\Story\get_stories([
+    'numberposts' => -1,
+    'fields'      => 'ids',
+    'return'      => 'array',
+    'story-types' => $story_types
+  ]);
+
+  // In case they've chosen some filters in ALL and then switched to RN, show those topics also, even if not used by RN posts
+  // (to avoid "no posts found" but no topic filters being shown)
+  $extra_sql = !empty($topics) ? ' OR t.slug IN ("'.implode('","', $topics).'")' : '';
+
+  // Find story topics that use those post IDs
+  $story_topic_ids = $wpdb->get_col("
+  SELECT t.term_id FROM $wpdb->terms AS t
+        INNER JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id
+        INNER JOIN $wpdb->term_relationships AS r ON r.term_taxonomy_id = tt.term_taxonomy_id
+        WHERE tt.taxonomy IN('story_topic')
+        AND (r.object_id IN (".implode(',', $story_post_ids)."){$extra_sql})
+        GROUP BY t.term_id
+  ");
+
+  // Pull those topics for filtering
+  $story_topics = get_terms([
+    'taxonomy' => 'story_topic',
+    'parent'   => 0,
+    'include'  => $story_topic_ids
+  ]);
+
+} else {
+
+  // Get all (non-empty) story topics for filtering
+  $story_topics = get_terms([
+    'taxonomy' => 'story_topic',
+    'parent'   => 0,
+  ]);
+
+}
+
 // Get all stories matching filters
 $args = [
   'numberposts' => $per_page,
@@ -23,12 +65,6 @@ $stories = \Firebelly\PostTypes\Story\get_stories($args);
 // Total number of posts
 $num_posts = \Firebelly\PostTypes\Story\get_stories(array_merge(['countposts' => 1], $args));
 
-// Get base topics for filtering
-$story_topics = get_terms([
-  'taxonomy' => 'story_topic',
-  'parent' => 0,
-]);
-
 // Sort options
 $sort_by_options = [
   'date-desc' => 'Date (Newest First)',
@@ -38,11 +74,6 @@ $sort_by_options = [
   'author-asc' => 'Author Name (A-Z)',
   'author-desc' => 'Author Name (Z-A)',
 ];
-
-// Story type options
-$story_type_terms = get_terms([
-  'taxonomy' => 'story_type'
-]);
 ?>
 
 <?php get_template_part('templates/page', 'header'); ?>
