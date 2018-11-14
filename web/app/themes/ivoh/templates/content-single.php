@@ -28,7 +28,17 @@
   ]);
 
   // Related links at bottom of page
-  $related_links = get_post_meta($post->ID, '_cmb2_related_links', true);
+  $related_posts = get_post_meta($post->ID, '_cmb2_related_posts');
+  if ($related_posts) {
+    // Get all stories & news by author
+    $related_posts = \Firebelly\Utils\get_posts([
+      'post_type'     => ['story','post'],
+      'template-type' => 'simple',
+      'post__in'      => (array)$related_posts,
+      'numberposts'   => -1,
+    ]);
+
+  }
 
   // Post intro shown at top of page
   $post_intro = get_post_meta($post->ID, '_cmb2_post_intro', true);
@@ -60,13 +70,6 @@
     <div class="entry-content user-content">
       <?php the_content(); ?>
 
-      <?php if (!empty($related_links)): ?>
-        <div class="related-links">
-          <h3>Related</h3>
-          <?= apply_filters('the_content', $related_links) ?>
-        </div>
-      <?php endif ?>
-
       <div class="share hidden">
         <h3>Share:</h3>
         <div class="addthis_toolbox">
@@ -79,4 +82,14 @@
     </div>
 
   </article>
+
+  <?php if (!empty($related_posts)): ?>
+    <div class="article-list page-section fb-container-content">
+      <div class="-inner inherit-background">
+        <h3 class="list-title">Related:</h3>
+        <?= $related_posts ?>
+      </div>
+    </div>
+  <?php endif ?>
+
 <?php endwhile; ?>

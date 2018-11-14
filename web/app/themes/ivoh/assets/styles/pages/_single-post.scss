@@ -235,6 +235,12 @@ body.single:not(.single-tool) {
     }
   }
 
+  // Related posts
+  .article-list {
+    background: none;
+    margin-top: $padding-lg;
+  }
+
 }
 
 // Single Stories and News Posts

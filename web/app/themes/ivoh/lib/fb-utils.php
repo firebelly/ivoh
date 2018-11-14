@@ -182,7 +182,6 @@ function get_posts($opts=[]) {
     'topic-taxonomy' => 'category',
     'numberposts'    => -1,
     'offset'         => 0,
-    'fields'         => '',
   ], $opts);
 
   // Break up custom order-by to proper get_posts args
@@ -195,8 +194,13 @@ function get_posts($opts=[]) {
     'order'       => $orderby[1],
     'offset'      => $opts['offset'],
     'numberposts' => $opts['numberposts'],
-    'fields'      => $opts['fields'],
   ];
+
+  // Support for various overrides
+  if (!empty($opts['fields']))
+    $args['fields'] = $opts['fields'];
+  if (!empty($opts['post__in']))
+    $args['post__in'] = $opts['post__in'];
 
   // Order by author uses generated postmeta _author_sort which is saved in a hook
   if ($args['orderby'] == 'author') {

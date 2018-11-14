@@ -33,6 +33,13 @@ function get_pages() {
 }
 
 /**
+ * Get stories + posts for CMB select
+ */
+function get_stories_and_posts() {
+    return get_post_options(['post_type' => ['story','post'], 'post_parent' => null]);
+}
+
+/**
  * Returns options markup for a state select field.
  * @param  mixed $value Selected/saved state
  * @return string       html string containing all state options
