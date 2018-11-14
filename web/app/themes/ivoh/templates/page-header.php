@@ -105,12 +105,14 @@ if (has_post_thumbnail($post)) {
     </div>
     <?php if (!empty($photo_caption) || !empty($photo_byline)): ?>
       <div class="banner-text">
-        <?php if (!empty($photo_caption)): ?>
-          <p class="photo-caption"><?= $photo_caption ?></p>
-        <?php endif; ?>
-        <?php if (!empty($photo_byline)): ?>
-          <p class="photo-byline"><?= $photo_byline ?></p>
-        <?php endif; ?>
+        <div class="-inner">
+          <?php if (!empty($photo_caption)): ?>
+            <p class="photo-caption"><?= $photo_caption ?></p>
+          <?php endif; ?>
+          <?php if (!empty($photo_byline)): ?>
+            <p class="photo-byline"><?= $photo_byline ?></p>
+          <?php endif; ?>
+        </div>
       </div>
     <?php endif; ?>
   <?php endif; ?>

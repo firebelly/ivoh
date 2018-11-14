@@ -138,6 +138,13 @@
 .banner-text {
   padding-top: $gutter;
 
+  .-inner {
+    margin: 0 auto;
+    padding-left: $gutter;
+    padding-right: $gutter;
+    max-width: #{$container-content + ($gutter * 2)};
+  }
+
   .photo-caption {
     @include h6;
     text-align: center;
