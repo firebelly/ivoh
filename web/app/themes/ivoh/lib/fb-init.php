@@ -187,3 +187,21 @@ function change_the_title() {
     return $seo_title;
   }
 }
+
+/**
+ * Redirect 404s if we can find a slug that matches
+ */
+function redirect_old_posts(){
+  if( is_404() ){
+    global $wp,$wpdb;
+    $request_url = $wp->request;
+    $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $request_url));
+    if($id) {
+      $wp_query->is_404 = false;
+      $new_url = get_permalink($id);
+      wp_redirect($new_url, 301);
+      exit;
+    }
+  }
+}
+add_action('template_redirect', __NAMESPACE__.'\\redirect_old_posts');
