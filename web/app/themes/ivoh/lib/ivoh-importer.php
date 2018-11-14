@@ -12,10 +12,13 @@ function fb_schedule_admin_menu() {
   add_management_page( 'ivoh Importer', 'ivoh Importer', 'publish_posts', 'schedule-importer', __NAMESPACE__.'\fb_csv_import_form');
 }
 function fb_csv_import_form() {
-  if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
-    require_once 'ivoh-importer.php';
+  if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $importer = new \Firebelly\Import\CSVImporter;
-    $importer->handle_post();
+    if (!empty($_REQUEST['convert-related-links'])) {
+      $importer->convert_related();
+    } else {
+      $importer->handle_post();
+    }
   }
 
 ?>
@@ -24,9 +27,9 @@ function fb_csv_import_form() {
       <form method="post" id="csv-upload-form" enctype="multipart/form-data">
           <fieldset>
             <label for="csv_import">Upload file(s):</label>
-            <input name="csv_import[]" id="csv-import" type="file" multiple required>
+            <input name="csv_import[]" id="csv-import" type="file" multiple>
           </fieldset>
-          <p class="submit"><input type="submit" class="button" id="csv-submit" name="submit" value="Import"></p>
+          <p class="submit"><input type="submit" class="button" name="submit" value="Import"> &nbsp; <input type="submit" class="button" name="convert-related-links" value="Convert Related Links"></p>
       </form>
       <h3>Format:</h3>
       <textarea style="max-width: 100%; font-family: monospace; font-size: 12px;" cols="120" rows="8">
@@ -92,6 +95,43 @@ class CSVImporter {
 
           $this->log = array();
       }
+  }
+
+  /**
+   * Convert all old Related Links -> stuctured Related Posts (if post is found)
+   *
+   * @return void
+   */
+  function convert_related($ajax=false) {
+    global $wpdb;
+    $posts = get_posts(['post_type' => 'any', 'numberposts' => -1]);
+    $matched = $nomatched = 0;
+    foreach ($posts as $post) {
+      $related_links = get_post_meta($post->ID, '_cmb2_related_links', true);
+      if($related_links) {
+        // Clear out related posts in case this is run multiple times
+        delete_post_meta($post->ID, '_cmb2_related_posts');
+
+        echo '<hr><a href="'.get_permalink($post).'">'.$post->post_title.'</a><hr>';
+
+        // Find all links in field
+        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $related_links, $match);
+        foreach($match[0] as $url) {
+          $slug = str_replace(['http://ivoh.org/','/','%20'],['','',''],$url);
+          $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $slug));
+          // Found a post? Let's associate it
+          if ($id) {
+            echo '<li>'.$slug.' matched to '.$id.'</li>';
+            add_post_meta($post->ID, '_cmb2_related_posts', $id);
+            $matched++;
+          } else {
+            echo '<li><strong>'.$slug.' not matched!</strong></li>';
+            $nomatched++;
+          }
+        }
+      }
+    }
+    echo "<h2>matched: $matched, not matched: $nomatched</h2>";
   }
 
   /**
