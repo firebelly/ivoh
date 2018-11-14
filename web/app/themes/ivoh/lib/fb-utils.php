@@ -190,7 +190,7 @@ function get_posts($opts=[]) {
 
   // Build get_post args
   $args = [
-    'post_type'   => ($opts['post-type']=='news' ? 'post' : $opts['post-type']),
+    'post_type'   => (!empty($opts['post_type']) ? $opts['post_type'] : ($opts['post-type']=='news' ? 'post' : $opts['post-type'])),
     'orderby'     => $orderby[0],
     'order'       => $orderby[1],
     'offset'      => $opts['offset'],
