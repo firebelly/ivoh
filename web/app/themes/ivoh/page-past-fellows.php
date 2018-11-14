@@ -10,8 +10,8 @@ for ($year=date('Y'); $year >= 2015 ; $year--):
   // $person_category = get_term_by('slug', $year.'-fellows', 'person_category');
   $people = \Firebelly\PostTypes\Person\get_people(['category' => $year.'-fellows', 'extra-class' => 'past-fellows', 'order-by' => 'name']);
   if (!empty($people)): ?>
-  <div class="page-section fb-container-md">
-    <h2 class="h5"><?= $year ?> Fellows</h2>
+  <div class="page-section fb-container-md padded">
+    <h2 class="h5 mobile-gutter"><?= $year ?> Fellows</h2>
     <div class="card-grid">
       <div class="-inner grid">
         <?= $people ?>

@@ -1,7 +1,15 @@
 // Tools Pages
 
 body.single-tool {
+  .article-list {
+    .-inner {
+      border-color: transparent;
+      outline: 1px solid color(black);
+    }
+  }
+
   .form-section {
+
     form {
       margin-top: $gutter;
 

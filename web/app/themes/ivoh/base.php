@@ -6,7 +6,9 @@ use Roots\Sage\Wrapper;
 $page_color = 'pink';
 
 // Determine if we can get a page color override
-if (is_home() || (!empty($post) && $post->post_type == 'post')) {
+if (is_search()) {
+  $top_ancestor = \Firebelly\Utils\get_page_id_by_slug('search');
+} elseif (is_home() || (!empty($post) && $post->post_type == 'post')) {
   // News posts
   $top_ancestor = get_option('page_for_posts');
 } elseif (!empty($post) && $post->post_type == 'story') {
@@ -49,13 +51,10 @@ if (!empty($top_ancestor) && $page_color_override = get_post_meta($top_ancestor,
       do_action('get_header');
       get_template_part('templates/header');
     ?>
-    <div class="site-wrap" role="document">
 
-      <main class="site-main" role="main">
-        <?php include Wrapper\template_path(); ?>
-      </main><!-- /.main -->
-
-    </div><!-- /.site-wrap -->
+    <main class="site-main" role="main">
+      <?php include Wrapper\template_path(); ?>
+    </main><!-- /.main -->
 
     <?php
       do_action('get_footer');

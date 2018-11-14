@@ -24,7 +24,7 @@
       .ivoh-logo {
         fill: color(white);
       }
-      .page-header-text {
+      .page-header-text .-inner {
         background-color: color(black);
         @include transition(background-color);
       }
@@ -148,14 +148,13 @@
 
     .page-header-text {
       z-index: 1;
+      padding: 0;
       position: relative;
-      padding-top: $padding-sm;
-      margin: -#{$beat * 5} $gutter 0;
-      @include media-md {
-        width: columns(12,20);
-        padding-top: $padding-md;
-        margin: -$padding-lg auto 0;
-        transition: margin-top .1s ease-out;
+      max-width: #{$container-sm + ($gutter * 2)};
+
+      .-inner {
+        padding-top: $padding-sm;
+        margin: -#{$beat * 5} $gutter 0;
       }
 
       .page-intro-body {
@@ -173,6 +172,15 @@
           margin-left: auto;
           margin-right: auto;
           width: columns(8,10);
+        }
+      }
+
+      @include media-md {
+        margin: -$padding-lg auto 0;
+        transition: margin-top .1s ease-out;
+
+        .-inner {
+          padding-top: $padding-md;
         }
       }
     }

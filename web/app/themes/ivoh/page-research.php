@@ -7,7 +7,7 @@ $research_topics = get_terms('research_topic');
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
-<div class="fb-container-md">
+<div class="fb-container-md padded">
   <div class="mobile-gutter patterned">
     <div class="article-list grid masonry outlined">
       <div class="grid-sizer md-one-half"></div>

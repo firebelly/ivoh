@@ -5,7 +5,10 @@
   margin-bottom: $padding-md;
 
   &-text {
-    padding: #{$beat * 6} $gutter 0;
+    max-width: $container-content;
+    .-inner {
+      padding: #{$beat * 6} $gutter 0;
+    }
   }
 
   .page-title {
@@ -70,8 +73,9 @@
   @include media-md {
     &-text {
       margin: 0 auto;
-      width: columns(10);
-      padding: #{$beat * 9} 0 0;
+      .-inner {
+        padding: #{$beat * 9} $content-padding 0;
+      }
     }
   }
 }
@@ -117,11 +121,6 @@
 
 .banner-image-container {
   padding: 0 $gutter;
-  @include media-md {
-    padding: 0;
-    margin: 0 auto;
-    width: columns(18);
-  }
 
   .banner-image {
     height: 192px;
@@ -159,11 +158,15 @@ body.partner-organizations {
       content: '';
       height: 1px;
       display: block;
+      max-width: $container-md;
       margin: $padding-sm $gutter 0;
       background-color: color(black);
       @include media-md {
-        width: columns(18);
-        margin: $padding-lg auto 0;
+        margin-top: $padding-lg;
+      }
+      @include min-screen(#{$container-md + ($gutter * 2)}) {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }

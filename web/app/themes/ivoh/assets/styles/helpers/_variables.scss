@@ -28,11 +28,18 @@ $breakpoint-xl: 1200px;
 $headerHeightSm: 48px;
 $headerHeightMd: 80px;
 
+// Container Max-widths
+$container-content: 992px;
+$container-sm: 848px;
+$container-md: 1136px;
+$container-lg: 1280px;
+
 // Global Padding
 $beat: 8px;
 $padding-sm: $beat * 3;
 $padding-md: $beat * 6;
 $padding-lg: $beat * 9;
+$content-padding: $beat * 18;
 
 // Global UI Transitions
 $transition: .2s;

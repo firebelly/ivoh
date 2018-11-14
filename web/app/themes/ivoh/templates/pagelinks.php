@@ -4,7 +4,7 @@ $post_meta = !empty($post) ? get_post_meta($post->ID) : [];
 
 if (!empty($post_meta['_cmb2_previous_page']) || !empty($post_meta['_cmb2_next_page'])):
 ?>
-  <div class="fb-container-sm">
+  <div class="fb-container-content">
     <div class="page-links patterned">
       <?php
       if (!empty($post_meta['_cmb2_previous_page'])):

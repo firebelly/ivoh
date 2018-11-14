@@ -53,27 +53,29 @@ $num_posts= \Firebelly\Utils\get_posts(['countposts' => 1]);
       <div class="banner-image-container background-blend">
         <div class="banner-image" <?= \Firebelly\Media\get_header_bg($post) ?>></div>
       </div>
-      <div class="fb-container-md">
+      <div class="fb-container-sm">
         <h2 class="page-title fb-container-content"><?= $intro_title; ?></h2>
       </div>
     </div>
     <div class="page-header-text">
-      <?php if (!empty($intro_body)): ?>
-        <p class="page-intro-body"><?= $intro_body ?></p>
-      <?php endif ?>
-      <?php if (!empty($intro_link)): ?>
-        <p class="intro-link"><a href="<?= $intro_link['url'] ?>" class="button"><?= $intro_link['link_text'] ?></a></p>
-      <?php endif ?>
-      <?php if (!empty($photo_caption) || !empty($photo_byline)): ?>
-        <div class="banner-text">
-          <?php if (!empty($photo_caption)): ?>
-            <p class="photo-caption"><?= $photo_caption ?></p>
-          <?php endif; ?>
-          <?php if (!empty($photo_byline)): ?>
-            <p class="photo-byline"><?= $photo_byline ?></p>
-          <?php endif; ?>
-        </div>
-      <?php endif; ?>
+      <div class="-inner inherit-background">
+        <?php if (!empty($intro_body)): ?>
+          <p class="page-intro-body"><?= $intro_body ?></p>
+        <?php endif ?>
+        <?php if (!empty($intro_link)): ?>
+          <p class="intro-link"><a href="<?= $intro_link['url'] ?>" class="button"><?= $intro_link['link_text'] ?></a></p>
+        <?php endif ?>
+        <?php if (!empty($photo_caption) || !empty($photo_byline)): ?>
+          <div class="banner-text">
+            <?php if (!empty($photo_caption)): ?>
+              <p class="photo-caption"><?= $photo_caption ?></p>
+            <?php endif; ?>
+            <?php if (!empty($photo_byline)): ?>
+              <p class="photo-byline"><?= $photo_byline ?></p>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
   </header>
 

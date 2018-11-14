@@ -138,13 +138,11 @@ body {
     @include media-nav {
       float: left;
       font-size: 15px;
-      margin-right: 62px;
+      margin-right: 52px;
       line-height: $headerHeightMd;
 
       .ivoh-logo {
-        top: 0;
-        width: 34px;
-        height: 15px;
+        top: 5px;
       }
     }
   }

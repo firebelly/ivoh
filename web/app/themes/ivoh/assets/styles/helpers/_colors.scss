@@ -8,15 +8,13 @@
     .inherit-background,
     .site-header,
     .card,
-    &.single .page-header-text,
-    &.single:not(.single-tool) .page-header .page-header-text,
     &.single .page-header .page-header-banner,
     &.single:not(.single-tool) .page-header .page-header-banner,
     &.single .page-header .banner-text,
     &.single:not(.single-tool) .page-header .banner-text,,
     &.single.single-person .page-header .-inner,
-    &.home.page .page-header-text,
-    .research-group-list .research-group {
+    .research-group-list .research-group,
+    .user-content figcaption {
       background-color: $value;
     }
 

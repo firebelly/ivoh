@@ -16,7 +16,7 @@ $application_prompt = get_post_meta($post->ID, '_cmb2_application_prompt', true)
   <?= $body ?>
 </div>
 
-<div class="fb-container-md mobile-gutter page-section patterned-sm grid">
+<div class="fb-container-md padded mobile-gutter page-section patterned-sm grid">
   <div class="article-list md-one-half">
     <div class="-inner inherit-background">
       <?php if (!empty($sample_pdfs)): ?>

@@ -39,16 +39,20 @@
   }
 
   .flickity-page-dots {
+    margin: 0;
     bottom: 0;
+    padding: 0;
     height: 95px;
     border-top: 1px solid color(black);
 
     .dot {
       top: 50%;
       opacity: 1;
+      padding: 0;
       width: 16px;
       height: 16px;
       position: relative;
+      vertical-align: top;
       transform: translateY(-8px);
       border: 1px solid color(red);
       background-color: rgba(color(red),0);
@@ -64,7 +68,7 @@
     .story-content {
       width: 100%;
       padding-bottom: 95px + $padding-sm;
-      
+
       @include media-md {
         padding: $padding-md $padding-md #{95px + $padding-md};
       }
@@ -79,7 +83,7 @@
     height: 0;
     width: 100%;
     padding-bottom: 66.6666%;
-    
+
     .flickity-viewport,
     .flickity-slider {
       width: 100%;
@@ -114,9 +118,28 @@
 .post-content .story-carousel-container {
   width: 100%;
   max-width: none;
+  margin-bottom: $padding-sm;
+  &::before {
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    content:'';
+    left: -$gutter;
+    right: -$gutter;
+    position: absolute;
+    @extend .patterned;
+  }
 
   @include media-md {
-    width: columns(14,10);
-    margin: $padding-md 0 $padding-md -#{columns(2,10)};
+    width: calc(100% + #{($content-padding * 2) - ($gutter * 2)});
+    margin: $padding-md 0 $padding-md -#{$content-padding - $gutter};
+    &::before {
+      display: none;
+    }
+  }
+
+  @include min-screen(#{$container-content + ($gutter * 2)}) {
+    width: calc(100% + #{$content-padding * 2});
+    margin: $padding-md 0 $padding-md -#{$content-padding};
   }
 }

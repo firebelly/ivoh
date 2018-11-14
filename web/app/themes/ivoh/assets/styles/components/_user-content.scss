@@ -96,13 +96,17 @@
 
   figure,
   .entry-content-asset {
-    width: 100%!important; // override wp inline width
+    @extend .patterned;
     max-width: none;
+    padding: 0 $gutter;
+    margin: $padding-sm 0 $padding-sm -#{$gutter};
+    width: calc(100% + #{$gutter * 2})!important; // override wp inline width
 
     img {
-      width: 100%;
+      width: auto;
+      margin: 0 auto;
       display: block;
-      max-width: none;
+      max-width: 100%;
     }
 
     iframe.instagram-media {
@@ -111,7 +115,9 @@
 
     figcaption {
       @include p2;
-      margin-top: $gutter;
+      margin-left: -$gutter;
+      padding: $gutter $gutter 0;
+      width: calc(100% + #{$gutter * 2});
 
       cite {
         @include h5;
@@ -121,9 +127,22 @@
     }
 
     @include media-md {
-      width: columns(14,10)!important;
-      margin: $padding-md 0 $padding-md -#{columns(2,10)};
+      padding: 0;
+      margin: $padding-md 0 $padding-md -#{$content-padding - $gutter};
+      width: calc(100% + #{($content-padding * 2) - ($gutter * 2)})!important;
+
+      figcaption {
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
+
+    @include min-screen(#{$container-content + ($gutter * 2)}) {
+      margin: $padding-md 0 $padding-md -#{$content-padding};
+      width: calc(100% + #{$content-padding * 2})!important;
+    }
+
   }
 
 }

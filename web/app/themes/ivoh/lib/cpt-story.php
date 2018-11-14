@@ -154,7 +154,7 @@ function shortcode_story_carousel($atts) {
     $output .= ob_get_clean();
   }
 
-  $output .= '</div><div class="story-content-carousel lg-one-half">';
+  $output .= '</div><div class="story-content-carousel inherit-background lg-one-half">';
 
   foreach ($stories as $story_post) {
     ob_start();

@@ -11,6 +11,6 @@
 </div>
 <?php endif; ?>
 
-<div class="grid fb-container-md">
+<div class="grid fb-container-md padded mobile-gutter patterned-sm">
   <?= \Firebelly\PostTypes\Tool\get_tools(); ?>
 </div>

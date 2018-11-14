@@ -53,9 +53,17 @@
 // Search Results Page
 body.search-results {
   .page-search-form {
-    @extend .bordered;
-    padding: $padding-sm 0;
     margin-bottom: $padding-sm;
+    > .-inner {
+      @extend .bordered;
+      padding: $padding-sm 0;
+    }
+
+    @include max-screen($breakpoint-md - 1) {
+      form {
+        padding: 0;
+      }
+    }
   }
   .search-result {
     .post-url {

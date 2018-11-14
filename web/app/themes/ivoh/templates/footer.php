@@ -11,8 +11,10 @@ $contact_email = \Firebelly\SiteOptions\get_option('contact_email');
 ?>
 
 <footer class="site-footer patterned" role="contentinfo">
-  <div class="site-wrap">
-    <div class="-inner fb-container-md grid">
+
+  <div class="fb-container-md">
+
+    <div class="-inner grid">
 
       <div class="-column-one">
         <h1 class="site-logo"><a href="<?= esc_url(home_url('/')); ?>"><svg class="ivoh-logo"><use xlink:href="#logo"/></svg><span class="sr-only"><?php bloginfo('name'); ?></span></a></h1>
@@ -22,14 +24,14 @@ $contact_email = \Firebelly\SiteOptions\get_option('contact_email');
         <div class="contact">
           <div translate="no" typeof="schema:PostalAddress">
             <p class="address">
-              <span property="schema:streetAddress"><?= \Firebelly\SiteOptions\get_option('contact_address'); ?>
+              <span property="schema:streetAddress"><?= \Firebelly\SiteOptions\get_option('contact_address'); ?></span>
               <?php if (!empty($contact_address_2)): ?>
                 <br><?= $contact_address_2 ?>
               <?php endif ?>
               <br><span property="schema:addressLocality"><?= \Firebelly\SiteOptions\get_option('contact_locality'); ?></span>, <abbr property="schema:addressRegion"><?= \Firebelly\SiteOptions\get_option('contact_region'); ?></abbr> <span property="schema:postalCode"><?= \Firebelly\SiteOptions\get_option('contact_zip'); ?></span>
             </p>
             <?php if (!empty($contact_phone)): ?>
-              <a href="tel:<?= $contact_phone ?>"> <span property="schema:telephone" class="phone"><?= $contact_phone ?></a>
+              <a href="tel:<?= $contact_phone ?>"> <span property="schema:telephone" class="phone"><?= $contact_phone ?></span></a>
             <?php endif; ?>
             <?php if (!empty($contact_email)): ?>
               <a href="mailto: <?= $contact_email ?>" class="email" property="schema:email"><?= $contact_email ?></a>
@@ -47,5 +49,7 @@ $contact_email = \Firebelly\SiteOptions\get_option('contact_email');
       </div>
 
     </div>
+
   </div>
+
 </footer>

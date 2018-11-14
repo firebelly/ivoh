@@ -44,34 +44,47 @@ hr {
 }
 
 [class*=fb-container] {
+  width: 100%;
   margin: 0 auto;
   position: relative;
-}
-.fb-container {
-  &-lg {
+
+  &.padded {
     @include media-md {
-      width: columns(18);
+      padding-left: $gutter;
+      padding-right: $gutter;
     }
   }
+}
+.fb-container {
+  &-content {
+    padding-left: $gutter;
+    padding-right: $gutter;
 
-  &-md {
     @include media-md {
-      width: columns(16);
+      max-width: $container-content;
+      padding-left: $content-padding;
+      padding-right: $content-padding;
     }
   }
 
   &-sm {
-    @include media-md {
-      width: columns(14);
+    max-width: $container-sm;
+    &.padded {
+      max-width: #{$container-sm + ($gutter * 2)};
     }
   }
 
-  &-content {
-    padding: 0 $gutter;
+  &-md {
+    max-width: $container-md;
+    &.padded {
+      max-width: #{$container-md + ($gutter * 2)};
+    }
+  }
 
-    @include media-md {
-      width: columns(14);
-      padding: 0 #{$gutter * 9};
+  &-lg {
+    max-width: $container-lg;
+    &.padded {
+      max-width: #{$container-lg + ($gutter * 2)};
     }
   }
 }

@@ -19,8 +19,8 @@ $intro_links = get_post_meta($post->ID, '_cmb2_intro_links', true);
 </div>
 
 <?php if (!empty($fellows)): ?>
-  <div class="page-section fb-container-md">
-    <h3 class="h3 text-center"><?= date('Y') ?> Fellows</h3>
+  <div class="page-section fb-container-md padded">
+    <h3 class="h3 mobile-gutter text-center"><?= date('Y') ?> Fellows</h3>
     <div class="card-grid">
       <div class="-inner grid">
         <?= $fellows ?>

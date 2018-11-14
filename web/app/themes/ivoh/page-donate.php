@@ -12,7 +12,7 @@ $by_mail_prompt = get_post_meta($post->ID, '_cmb2_donation_bymail', true);
 </div>
 <?php endif; ?>
 
-<div class="grid fb-container-md mobile-gutter patterned">
+<div class="grid fb-container-md padded mobile-gutter patterned-sm">
   <div class="card md-one-half">
     <div class="card-content">
       <h4 class="card-subtitle">Give Online</h4>

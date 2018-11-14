@@ -10,12 +10,14 @@
 }
 
 .filters {
-  border-top: 1px solid color(black);
-
-  @include media-md {
-    text-align: center;
-    padding: $padding-sm 0;
+  > .-inner {
+    border-top: 1px solid color(black);
+    @include media-md {
+      text-align: center;
+      padding: $padding-sm 0;
+    }
   }
+
 
   .filter-title {
     @include h4;
