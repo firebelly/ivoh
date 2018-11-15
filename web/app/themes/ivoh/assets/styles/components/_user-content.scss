@@ -80,6 +80,10 @@
       margin: 0;
       @include h3;
 
+      + p {
+        margin-top: 1em;
+      }
+
       cite {
         @include h5;
         margin-bottom: 0;
