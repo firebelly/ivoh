@@ -65,16 +65,14 @@ $news_page = get_post(get_option('page_for_posts'));
   </div>
 
   <div class="sort-by filters fb-container-md padded">
-    <div class="accordion expanded-md -inner">
-      <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
-      <div class="accordion-content">
+    <div class="-inner">
+      <h3 class="filter-title">Sort By</h3>
         <div class="select-wrap">
-          <select name="sort-by" class="jumpSelect">
-            <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
-              <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
+        <select name="sort-by" class="jumpSelect">
+          <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
+            <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
+          <?php endforeach; ?>
+        </select>
       </div>
     </div>
   </div>

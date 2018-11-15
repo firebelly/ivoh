@@ -21,7 +21,11 @@
 
   .filter-title {
     @include h4;
-    padding: $padding-sm 0;
+    padding: $padding-sm 0 0;
+
+    &.accordion-toggle {
+      padding: $padding-sm 0;
+    }
 
     .-inner {
       display: block;
@@ -95,6 +99,7 @@
 
 // Sort-by Filter Section
 .sort-by {
+  margin-bottom: $padding-sm;
   .select-wrap {
     width: 100%;
     @include media-md {
