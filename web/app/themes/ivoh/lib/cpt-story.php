@@ -181,10 +181,7 @@ add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
 /**
  * Update post meta for sorting articles by author(s)
  */
-function update_sort_meta($post_id, $post, $update) {
-  if (wp_is_post_revision($post_id) || !in_array($post->post_type, ['post', 'story']))
-    return;
-
+function update_author_sort_meta($post_id) {
   $author_last_names = [];
   $story_authors = get_post_meta($post_id, '_cmb2_author');
   if (!empty($story_authors)) {
@@ -194,5 +191,11 @@ function update_sort_meta($post_id, $post, $update) {
     }
   }
   update_post_meta($post_id, '_author_sort', implode(' ', $author_last_names));
+  return implode(' ', $author_last_names);
 }
-add_action('save_post', __NAMESPACE__.'\update_sort_meta', 10, 3);
+function post_updates($post_id, $post, $update) {
+  if (wp_is_post_revision($post_id) || !in_array($post->post_type, ['post', 'story']))
+    return;
+  update_author_sort_meta($post_id);
+}
+add_action('save_post', __NAMESPACE__.'\\save_post_updates', 10, 3);

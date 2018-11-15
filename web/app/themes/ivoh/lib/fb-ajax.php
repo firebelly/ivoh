@@ -23,16 +23,13 @@ function load_more_posts() {
   // Get page offsets
   $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
   $per_page = !empty($_REQUEST['per_page']) ? $_REQUEST['per_page'] : get_option('posts_per_page');
-  $order_by = !empty($_REQUEST['order_by']) ? $_REQUEST['order_by'] : 'date-desc';
-  $order_by = explode('-', $order_by);
   $offset = ($page-1) * $per_page;
 
   echo \Firebelly\Utils\get_posts([
-    'post-type'      => (!empty($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'news'),
     'offset'         => $offset,
     'numberposts'    => $per_page,
-    'orderby'        => $order_by[0],
-    'order'          => strtoupper($order_by[1]),
+    'order-by'       => (!empty($_REQUEST['order_by']) ? $_REQUEST['order_by'] : 'date-desc'),
+    'post-type'      => (!empty($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'news'),
     'topic-taxonomy' => (!empty($_REQUEST['topic_taxonomy']) ? $_REQUEST['topic_taxonomy'] : 'category'),
     'topics'         => (!empty($_REQUEST['topics']) ? explode(',', $_REQUEST['topics']) : ''),
     'story-types'    => (!empty($_REQUEST['story_types']) && $_REQUEST['story_types'] != 'all' ? [$_REQUEST['story_types']] : []),

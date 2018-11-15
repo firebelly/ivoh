@@ -250,8 +250,8 @@ function get_posts($opts=[]) {
     ]);
   }
 
-  // News posts get featured posts shoved to top
-  if ($opts['post-type'] == 'news') {
+  // News posts get featured posts shoved to top (if using default sort)
+  if ($opts['post-type'] == 'news' && $opts['order-by']=='date-desc') {
     $args = array_merge($args, [
       'orderby'     => 'meta_value_num date',
       'order'       => 'DESC',
@@ -281,6 +281,15 @@ function get_posts($opts=[]) {
     ]);
   }
 
+  // Just count posts (used for load-more buttons)
+  if (!empty($opts['countposts'])) {
+    $args['numberposts'] = -1;
+    $args['fields'] = 'ids';
+    $count_query = new \WP_Query($args);
+    return $count_query->found_posts;
+  }
+
+  // Let's get some posts
   $posts = \get_posts($args);
 
   // No posts? false!
@@ -289,14 +298,6 @@ function get_posts($opts=[]) {
   // Just return array of posts?
   if ($opts['return'] == 'array') {
     return $posts;
-  }
-
-  // Just count posts (used for load-more buttons)
-  if (!empty($opts['countposts'])) {
-    $args['posts_per_page'] = -1;
-    $args['fields'] = 'ids';
-    $count_query = new \WP_Query($args);
-    return $count_query->found_posts;
   }
 
   // Set template type

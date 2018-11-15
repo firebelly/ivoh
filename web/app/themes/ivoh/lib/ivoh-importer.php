@@ -14,7 +14,9 @@ function fb_schedule_admin_menu() {
 function fb_csv_import_form() {
   if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $importer = new \Firebelly\Import\CSVImporter;
-    if (!empty($_REQUEST['convert-related-links'])) {
+    if (!empty($_REQUEST['update-author-sort'])) {
+      $importer->update_author_sort();
+    } else if (!empty($_REQUEST['convert-related-links'])) {
       $importer->convert_related();
     } else {
       $importer->handle_post();
@@ -29,7 +31,14 @@ function fb_csv_import_form() {
             <label for="csv_import">Upload file(s):</label>
             <input name="csv_import[]" id="csv-import" type="file" multiple>
           </fieldset>
-          <p class="submit"><input type="submit" class="button" name="submit" value="Import"> &nbsp; <input type="submit" class="button" name="convert-related-links" value="Convert Related Links"></p>
+          <p class="submit">
+            <input type="submit" class="button" name="submit" value="Import">
+
+            <p class="submit">
+              Other Tasks:
+            <input type="submit" class="button" name="convert-related-links" value="Convert Related Links">
+            &nbsp; <input type="submit" class="button" name="update-author-sort" value="Update Author Sort">
+          </p>
       </form>
       <h3>Format:</h3>
       <textarea style="max-width: 100%; font-family: monospace; font-size: 12px;" cols="120" rows="8">
@@ -95,6 +104,21 @@ class CSVImporter {
 
           $this->log = array();
       }
+  }
+
+  /**
+   * Update author_sort
+   *
+   * @return void
+   */
+  function update_author_sort($ajax=false) {
+    $posts = get_posts(['post_type' => ['story','post'], 'numberposts' => -1]);
+    $matched = $nomatched = 0;
+    echo '<h2>Updating _author_sort</h2>';
+    foreach ($posts as $post) {
+      $author_sort = \Firebelly\PostTypes\Story\update_author_sort_meta($post->ID);
+      echo '<li>Post #'.$post->ID.' '.$post->post_title.' updated _author_sort to <strong>'.$author_sort.'</strong></li>';
+    }
   }
 
   /**
