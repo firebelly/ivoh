@@ -73,22 +73,23 @@
 
         a {
           position: relative;
-          padding-left: 40px;
-          padding-right: 40px;
+          padding-left: 20px;
+          padding-right: 20px;
         }
 
         &.-active {
           a {
             border: none;
+            padding-left: 54px;
             color: color(white);
             background-color: color(red);
 
             &::before {
               top: 10px;
+              left: 20px;
               content: '';
               width: 18px;
               height: 18px;
-              left: $gutter;
               position: absolute;
               background: url('../svgs/icon-checkmark-white.svg');
             }
