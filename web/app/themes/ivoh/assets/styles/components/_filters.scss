@@ -35,8 +35,11 @@
     }
 
     @include media-md {
-      padding: 0;
-      margin-bottom: $gutter;
+      &,
+      &.accordion-toggle {
+        padding: 0;
+        margin-bottom: $gutter;
+      }
     }
   }
 
