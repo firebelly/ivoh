@@ -95,6 +95,29 @@ function cmb2_sanitize_wysiwyg_callback($override_value, $content) {
 add_filter('cmb2_sanitize_wysiwyg', __NAMESPACE__ . '\\cmb2_sanitize_wysiwyg_callback', 10, 2);
 
 /**
+ * Wrap post images in figure tag
+ * @param  [type] $html
+ * @param  [type] $id
+ * @param  [type] $caption
+ * @param  [type] $title
+ * @param  [type] $align
+ * @param  [type] $url
+ * @return [type]
+ */
+function html5_insert_image($html, $id, $caption, $title, $align, $url, $size, $alt) {
+  $url = wp_get_attachment_url($id);
+  $src = wp_get_attachment_image_src( $id, $size, false );
+  $html5 = "<figure>";
+  $html5 .= "<img src='$src[0]' alt='$alt' />";
+  if ($caption) {
+    $html5 .= "<figcaption>$caption</figcaption>";
+  }
+  $html5 .= "</figure>";
+  return $html5;
+}
+add_filter( 'image_send_to_editor', __NAMESPACE__ . '\html5_insert_image', 10, 9 );
+
+/**
  * Remove unused Customize link from admin bar
  */
 add_action( 'wp_before_admin_bar_render', function() {
