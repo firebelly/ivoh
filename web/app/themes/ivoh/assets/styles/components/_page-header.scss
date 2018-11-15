@@ -59,6 +59,7 @@
     margin: #{$beat * 2} auto 0;
 
     p {
+      @include p1;
       margin: #{$beat * 2} 0 0;
       &:first-of-type {
         margin-top: 0;
