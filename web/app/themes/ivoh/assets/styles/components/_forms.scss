@@ -12,6 +12,12 @@ form {
     + .form-row {
       margin-top: $beat;
     }
+
+    &.spaced {
+      label:not(.radio) {
+        left: $gutter + 4px;
+      }
+    }
   }
 
   .input-wrap {
