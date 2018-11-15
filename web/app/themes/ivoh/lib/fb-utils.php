@@ -250,8 +250,8 @@ function get_posts($opts=[]) {
     ]);
   }
 
-  // News posts get featured posts shoved to top
-  if ($opts['post-type'] == 'news') {
+  // News posts get featured posts shoved to top (if using default sort)
+  if ($opts['post-type'] == 'news' && $opts['order-by']=='date-desc') {
     $args = array_merge($args, [
       'orderby'     => 'meta_value_num date',
       'order'       => 'DESC',
