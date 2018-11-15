@@ -127,6 +127,10 @@
       z-index: 1;
     }
 
+    .card-title a {
+      color: color(red);
+    }
+
     .card-image-container {
       &::after {
         background-color: rgba(color(pink),0);
