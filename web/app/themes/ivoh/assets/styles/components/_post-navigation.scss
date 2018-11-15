@@ -114,11 +114,19 @@
     padding-top: $padding-md;
 
     a {
-      color: inherit;
+      color: color(black);
+      display: inline-block;
       text-decoration: none;
       &:hover,
       &:focus {
         color: color(red);
+      }
+    }
+
+    span {
+      display: block;
+      + span {
+        margin-top: $beat;
       }
     }
   }
