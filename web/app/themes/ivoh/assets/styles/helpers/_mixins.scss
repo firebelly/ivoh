@@ -69,7 +69,7 @@
 @mixin image-treatment() {
   position: relative;
   filter: grayscale(1);
-  
+
   &::before,
   &::after {
     top: 0;
@@ -82,6 +82,7 @@
   }
 
   &::before {
+    opacity: 1;
     mix-blend-mode: multiply;
     background-color: color(gray-light);
   }
@@ -105,7 +106,7 @@
     }
   }
 
-  @if $sides == 'vertical' or $sides == 'both' {  
+  @if $sides == 'vertical' or $sides == 'both' {
     padding-top: $padding-sm;
     padding-bottom: $padding-sm;
 

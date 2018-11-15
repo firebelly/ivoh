@@ -508,6 +508,7 @@ var IVOH = (function($) {
   function _initMasonry() {
     $('.masonry').masonry({
       itemSelector: '.item',
+      gutter: 1,
       horizontalOrder: true,
       percentPosition: true,
       transitionDuration: 0,
@@ -523,16 +524,14 @@ var IVOH = (function($) {
 
       if (st >= offset) {
         $body.addClass('scrolled');
-      } else {
-        $body.removeClass('scrolled');
       }
     }
 
     if ($('body.home, body.single-story, body.single-post').length) {
-      addScrolledClass(10);
+      addScrolledClass(($('.site-header').outerHeight())*2);
 
       $(window).scroll(function() {
-        addScrolledClass(10);
+        addScrolledClass(($('.site-header').outerHeight())*2);
       });
     }
   }
