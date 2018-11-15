@@ -25,6 +25,10 @@
 
   .post-meta {
     @include h6;
+    margin-top: $padding-sm;
+    @include media-md {
+      margin-top: $beat * 4;
+    }
 
     span {
       display: block;
