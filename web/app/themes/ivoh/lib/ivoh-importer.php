@@ -16,6 +16,8 @@ function fb_csv_import_form() {
     $importer = new \Firebelly\Import\CSVImporter;
     if (!empty($_REQUEST['update-author-sort'])) {
       $importer->update_author_sort();
+    } elseif (!empty($_REQUEST['update-date-featured'])) {
+      $importer->update_date_featured();
     } else if (!empty($_REQUEST['convert-related-links'])) {
       $importer->convert_related();
     } else {
@@ -37,7 +39,10 @@ function fb_csv_import_form() {
             <p class="submit">
               Other Tasks:
             <input type="submit" class="button" name="convert-related-links" value="Convert Related Links">
-            &nbsp; <input type="submit" class="button" name="update-author-sort" value="Update Author Sort">
+            &nbsp;
+            <input type="submit" class="button" name="update-author-sort" value="Update Author Sort">
+            &nbsp;
+            <input type="submit" class="button" name="update-date-featured" value="Update Date Featured">
           </p>
       </form>
       <h3>Format:</h3>
@@ -113,11 +118,26 @@ class CSVImporter {
    */
   function update_author_sort($ajax=false) {
     $posts = get_posts(['post_type' => ['story','post'], 'numberposts' => -1]);
-    $matched = $nomatched = 0;
     echo '<h2>Updating _author_sort</h2>';
     foreach ($posts as $post) {
       $author_sort = \Firebelly\PostTypes\Story\update_author_sort_meta($post->ID);
       echo '<li>Post #'.$post->ID.' '.$post->post_title.' updated _author_sort to <strong>'.$author_sort.'</strong></li>';
+    }
+  }
+
+  /**
+   * Update date_featured
+   *
+   * @return void
+   */
+  function update_date_featured($ajax=false) {
+    $posts = get_posts(['post_type' => ['story','post'], 'numberposts' => -1]);
+    echo '<h2>Updating _date_featured</h2>';
+    foreach ($posts as $post) {
+      $date_featured = get_post_meta($post->ID, '_date_featured', true);
+      if (empty($date_featured)) $date_featured = 0;
+      update_post_meta($post->ID, '_date_featured', $date_featured);
+      echo '<li>Post #'.$post->ID.' '.$post->post_title.' updated _date_featured to <strong>'.$date_featured.'</strong></li>';
     }
   }
 
