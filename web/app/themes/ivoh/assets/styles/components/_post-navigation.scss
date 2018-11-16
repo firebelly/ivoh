@@ -70,6 +70,16 @@
       display: flex;
       padding-left: 0;
       padding-right: 0;
+      @include transition(color);
+      &:hover,
+      &:focus {
+        .icon-container {
+          background-color: color(red);
+          .icon {
+            fill: color(white);
+          }
+        }
+      }
     }
 
     .icon-container {
@@ -78,8 +88,10 @@
       display: flex;
       border-radius: 50%;
       border: 1px solid color(red);
+      @include transition(background-color);
       .icon {
         margin: auto;
+        @include transition(fill);
       }
     }
 
@@ -114,11 +126,19 @@
     padding-top: $padding-md;
 
     a {
-      color: inherit;
+      color: color(black);
+      display: inline-block;
       text-decoration: none;
       &:hover,
       &:focus {
         color: color(red);
+      }
+    }
+
+    span {
+      display: block;
+      + span {
+        margin-top: $beat;
       }
     }
   }

@@ -95,6 +95,29 @@ function cmb2_sanitize_wysiwyg_callback($override_value, $content) {
 add_filter('cmb2_sanitize_wysiwyg', __NAMESPACE__ . '\\cmb2_sanitize_wysiwyg_callback', 10, 2);
 
 /**
+ * Wrap post images in figure tag
+ * @param  [type] $html
+ * @param  [type] $id
+ * @param  [type] $caption
+ * @param  [type] $title
+ * @param  [type] $align
+ * @param  [type] $url
+ * @return [type]
+ */
+function html5_insert_image($html, $id, $caption, $title, $align, $url, $size, $alt) {
+  $url = wp_get_attachment_url($id);
+  $src = wp_get_attachment_image_src( $id, $size, false );
+  $html5 = "<figure>";
+  $html5 .= "<img src='$src[0]' alt='$alt' />";
+  if ($caption) {
+    $html5 .= "<figcaption>$caption</figcaption>";
+  }
+  $html5 .= "</figure>";
+  return $html5;
+}
+add_filter( 'image_send_to_editor', __NAMESPACE__ . '\html5_insert_image', 10, 9 );
+
+/**
  * Remove unused Customize link from admin bar
  */
 add_action( 'wp_before_admin_bar_render', function() {
@@ -158,6 +181,32 @@ function search_distinct($where) {
 }
 add_filter('posts_distinct', __NAMESPACE__ . '\search_distinct');
 
+/**
+ * Bump up # search results
+ */
+function search_queries( $query ) {
+  if ( !is_admin() && is_search() ) {
+    $query->set( 'posts_per_page', -1 );
+  }
+  return $query;
+}
+add_filter( 'pre_get_posts', __NAMESPACE__ . '\search_queries' );
+
+/**
+ * Exclude pages from search results
+ */
+function exclude_pages_from_search($query) {
+  if ( !is_admin() && is_search() ) {
+    $top_level_pages = get_pages(array('parent'=>0));
+    $top_level_ids = array();
+    foreach($top_level_pages as $top_level_page ) {
+      $top_level_ids[] = $top_level_page->ID;
+    }
+    $query->set('post__not_in', $top_level_ids);
+  }
+  return $query;
+}
+add_filter( 'pre_get_posts', __NAMESPACE__ . '\exclude_pages_from_search');
 
 /**
  * Hide editor on specific pages

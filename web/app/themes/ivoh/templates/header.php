@@ -1,4 +1,4 @@
-<header class="site-header site-wrap" role="banner">
+<header class="site-header" role="banner">
   <div class="-inner fb-container-md padded">
     <h1 class="site-logo"><a href="<?= esc_url(home_url('/')); ?>"><svg class="ivoh-logo"><use xlink:href="#logo"/></svg><span class="sr-only"><?php bloginfo('name'); ?></span></a></h1>
     <nav id="site-nav" class="site-nav" role="navigation">

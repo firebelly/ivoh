@@ -16,7 +16,7 @@ $person_types = implode(' ', $person_types);
       </div>
     <?php endif; ?>
     <div class="card-text">
-      <h2 class="card-title"><?= $person_post->post_title ?></h2>
+      <h2 class="card-title"><a href="<?= get_permalink($person_post) ?>"><?= $person_post->post_title ?></a></h2>
       <?php if (!empty($person_title)): ?>
         <h4 class="card-subtitle"><?= $person_title ?></h4>
       <?php endif; ?>

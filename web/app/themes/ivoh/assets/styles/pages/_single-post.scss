@@ -64,6 +64,9 @@ body.single:not(.single-tool) {
       padding: 0;
       width: auto;
       margin: 0 $gutter;
+      &::after {
+        display: none;
+      }
       @include media-md {
         margin: 0 auto;
         padding: 0 $gutter;
@@ -251,10 +254,21 @@ body.single:not(.single-tool) {
 // Single Stories and News Posts
 body.single-story[data-theme],
 body.single-post[data-theme] {
+  &,
+  .inherit-background,
+  .page-header-banner,
+  .banner-image-container,
+  .banner-text {
+    transition: color .4s ease-out, background-color .4s ease-out;
+  }
+
   // Before .scrolled class has been added
   &:not(.scrolled) {
-    color: white;
-    background-color: color(black);
+    &,
+    .inherit-background {
+      color: white;
+      background-color: color(black);
+    }
 
     .site-header {
       @include headerDarkStyle();
@@ -270,14 +284,9 @@ body.single-post[data-theme] {
     }
 
     .page-header {
-      .page-header-text .-inner,
       .page-header-banner,
       .banner-text {
         background-color: color(black);
-      }
-
-      .post-meta {
-        color: color(black);
       }
     }
 
@@ -286,10 +295,18 @@ body.single-post[data-theme] {
         outline: 1px solid color(white);
       }
     }
+
+    .post-author-meta {
+      border-color: color(white);
+    }
   }
 
   // After .scrolled class has been added
   &.scrolled {
+    .page-header-text,
+    .banner-text {
+      color: color(black);
+    }
     .banner-image-container {
       &::after {
         opacity: 0;

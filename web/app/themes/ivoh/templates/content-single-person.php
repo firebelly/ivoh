@@ -97,9 +97,11 @@ $author_posts = \Firebelly\Utils\get_posts([
   }
   ?>
   <div class="post-navigation fb-container-content">
-    <div class="back-navigation">
-      <p class="back-text h5">Back To</p>
-      <p><a href="<?= $back_to_link ?>" class="h4">All <?= $person_type->name ?></a></p>
-    </div>
+    <p class="back-navigation">
+      <a href="<?= $back_to_link ?>">
+        <span class="h5">Back To</span>
+        <span class="h4">All <?= $person_type->name ?></span>
+      </a>
+    </p>
   </div>
 <?php endif ?>

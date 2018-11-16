@@ -9,6 +9,11 @@ body.single-tool {
   }
 
   .form-section {
+    display: flex;
+
+    .card-content {
+      margin: auto;
+    }
 
     form {
       margin-top: $gutter;

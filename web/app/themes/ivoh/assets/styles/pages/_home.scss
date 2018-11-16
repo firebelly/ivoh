@@ -2,14 +2,43 @@
 
 .home.page {
   padding-top: 0;
+  &,
+  .site-header,
+  .card,
+  .inherit-background {
+    transition: color .4s ease-out, background-color .4s ease-out;
+  }
+
+  .card-image-container::after {
+    transition: opacity .4s ease-out;
+  }
 
   // Pre-scroll styles
   &[data-theme="pink"] {
     // Not Scrolled
     &:not(.scrolled) {
-      color: color(white);
-      background: color(black);
-      @include transition(color, background-color);
+      &,
+      .card,
+      .inherit-background {
+        color: color(white);
+        background-color: color(black);
+      }
+
+      .card {
+        outline-color: color(white);
+        .card-content {
+          &,
+          a {
+            color: color(white);
+            transition: color .4s ease-out;
+          }
+        }
+      }
+
+      .card-image-container::after {
+        opacity: 0;
+      }
+
       .site-header {
         color: color(white);
         background-color: transparent;
@@ -26,7 +55,6 @@
       }
       .page-header-text .-inner {
         background-color: color(black);
-        @include transition(background-color);
       }
       .menu-toggle:not(.-active) .menu-bar {
         &,&::before,&::after {
@@ -59,7 +87,7 @@
     }
 
     // Resetting the styles on scroll
-    &.scrolled:not(.menu-open) {
+    &.scrolled {
       .banner-image-container {
         &::after {
           opacity: 1;
@@ -78,11 +106,11 @@
       @include media-md {
         .page-header-top {
           padding-bottom: 200px;
-          transition: padding-bottom .2s ease-in;
+          transition: padding-bottom .4s ease-in-out;
         }
         .page-header-text {
           margin-top: -200px;
-          transition: margin-top .2s ease-in;
+          transition: margin-top .4s ease-in-out .02s;
         }
       }
     }
@@ -103,7 +131,7 @@
         padding-top: 0;
         min-height: 680px;
         padding-bottom: $padding-lg;
-        transition: padding-bottom .1s ease-out;
+        transition: padding-bottom .4s ease-out .02s;
       }
     }
 
@@ -137,8 +165,10 @@
         bottom: 0;
         height: auto;
         filter: none;
+        margin: 0 auto;
         padding-bottom: 0;
         position: absolute;
+        max-width: #{$container-lg + ($beat * 20)};
         &::before,
         &::after {
           opacity: 0;
@@ -155,6 +185,7 @@
       .-inner {
         padding-top: $padding-sm;
         margin: -#{$beat * 5} $gutter 0;
+        transition: color .4s ease-out, background-color .4s ease-out;
       }
 
       .page-intro-body {
@@ -177,7 +208,7 @@
 
       @include media-md {
         margin: -$padding-lg auto 0;
-        transition: margin-top .1s ease-out;
+        transition: margin-top .4s ease-out;
 
         .-inner {
           padding-top: $padding-md;

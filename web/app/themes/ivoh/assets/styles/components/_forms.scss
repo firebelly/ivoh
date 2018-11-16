@@ -12,6 +12,12 @@ form {
     + .form-row {
       margin-top: $beat;
     }
+
+    &.spaced {
+      label:not(.radio) {
+        left: $gutter + 4px;
+      }
+    }
   }
 
   .input-wrap {
@@ -30,7 +36,7 @@ form {
 
   label:not(.radio) {
     @include h5;
-    top: $gutter;
+    top: 22px;
     left: $gutter;
     position: absolute;
     pointer-events: none;

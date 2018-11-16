@@ -103,23 +103,21 @@ $sort_by_options = [
     <div class="accordion expanded-md -inner">
       <h3 class="filter-title accordion-toggle"><span class="-inner">Filter by Story Type<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
       <ul class="accordion-content">
-        <li<?= $story_types == 'rn' ? ' class="-active"' : ''?>><a class="button rounded white" href="<?= add_query_arg(['story-types' => 'rn']); ?>">Restorative Narratives</a></li>
-        <li<?= $story_types == 'all' ? ' class="-active"' : ''?>><a class="button rounded white" href="<?= add_query_arg(['story-types' => 'all']); ?>">All</a></li>
+        <li<?= $story_types == 'rn' ? ' class="-active"' : ''?>><a class="radio-button" href="<?= add_query_arg(['story-types' => 'rn']); ?>"><span class="button rounded white"><svg class="icon icon-checkmark" aria-hidden="true" role="presentation"><use xlink:href="#icon-checkmark"/></svg></span>Restorative Narratives</a></li>
+        <li<?= $story_types == 'all' ? ' class="-active"' : ''?>><a class="radio-button" href="<?= add_query_arg(['story-types' => 'all']); ?>"><span class="button rounded white"><svg class="icon icon-checkmark" aria-hidden="true" role="presentation"><use xlink:href="#icon-checkmark"/></svg></span>All</a></li>
       </ul>
     </div>
   </div>
 
   <div class="sort-by filters fb-container-md padded">
-    <div class="accordion expanded-md -inner">
-      <h3 class="filter-title accordion-toggle"><span class="-inner">Sort By<button class="expand-contract"><span class="icon plus-minus"></span></button></span></h3>
-      <div class="accordion-content">
+    <div class="-inner">
+      <h3 class="filter-title">Sort By</h3>
         <div class="select-wrap">
-          <select name="sort-by" class="jumpSelect">
-            <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
-              <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
+        <select name="sort-by" class="jumpSelect">
+          <?php foreach ($sort_by_options as $sort_by_option => $sort_by_title): ?>
+            <option<?= $sort_by_option == $order_by ? ' selected' : '' ?> value="<?= add_query_arg(['order-by' => $sort_by_option ]) ?>"><?= $sort_by_title ?></option>
+          <?php endforeach; ?>
+        </select>
       </div>
     </div>
   </div>

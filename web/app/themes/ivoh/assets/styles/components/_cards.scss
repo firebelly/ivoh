@@ -21,10 +21,11 @@
   }
 
   .card-content {
+    color: color(black);
     padding: $padding-sm #{$beat * 4};
 
     a:not(.button) {
-      color: inherit;
+      color: color(black);
       text-decoration: none;
       @include transition(color);
       &:hover,
@@ -126,6 +127,10 @@
       z-index: 1;
     }
 
+    .card-title a {
+      color: color(red);
+    }
+
     .card-image-container {
       &::after {
         background-color: rgba(color(pink),0);
@@ -163,7 +168,7 @@
       @include media-sm {
         .grid-sizer,
         .card {
-          width: 50%;
+          width: calc(50% - 1px);
         }
       }
     }
@@ -171,7 +176,7 @@
       @include media-md {
         .grid-sizer,
         .card {
-          width: 50%;
+          width: calc(50% - 1px);
         }
       }
     }
@@ -179,7 +184,7 @@
       @include media-md {
         .grid-sizer,
         .card {
-          width: 33.3333%;
+          width: calc(33.3333% - .5px);
         }
       }
     }
@@ -187,7 +192,7 @@
       @include media-lg {
         .grid-sizer,
         .card {
-          width: 50%;
+          width: calc(50% - 1px);
         }
       }
     }
@@ -195,7 +200,7 @@
       @include media-lg {
         .grid-sizer,
         .card {
-          width: 33.3333%;
+          width: calc(33.3333% - .5px);
         }
       }
     }
@@ -203,7 +208,7 @@
       @include media-lg {
         .grid-sizer,
         .card {
-          width: 25%;
+          width: calc(25% - .6666px);
         }
       }
     }

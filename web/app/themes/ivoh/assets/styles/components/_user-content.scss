@@ -80,6 +80,10 @@
       margin: 0;
       @include h3;
 
+      + p {
+        margin-top: 1em;
+      }
+
       cite {
         @include h5;
         margin-bottom: 0;
@@ -99,6 +103,7 @@
     @extend .patterned;
     max-width: none;
     padding: 0 $gutter;
+    text-align: center;
     margin: $padding-sm 0 $padding-sm -#{$gutter};
     width: calc(100% + #{$gutter * 2})!important; // override wp inline width
 
@@ -115,6 +120,7 @@
 
     figcaption {
       @include p2;
+      text-align: left;
       margin-left: -$gutter;
       padding: $gutter $gutter 0;
       width: calc(100% + #{$gutter * 2});

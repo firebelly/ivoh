@@ -6,7 +6,7 @@ $news_image = \Firebelly\Media\get_header_bg($article_post, ['size' => 'medium']
 $topics = wp_get_post_terms($article_post->ID, 'category');
 ?>
 <article class="news card item">
-  <?php if ($news_image): ?>
+  <?php if ($news_image && is_home()): ?>
     <div class="card-image-container background-blend">
       <a href="<?= get_permalink($article_post) ?>" class="card-image" <?= $news_image ?>></a>
     </div>
@@ -36,6 +36,9 @@ $topics = wp_get_post_terms($article_post->ID, 'category');
         </p>
       <?php endif ?>
     <?php endif; ?>
+    <?php if (!is_home()): ?>
+      <p class="card-text user-content"><?= \Firebelly\Utils\get_excerpt($article_post) ?></p>
+    <?php endif ?>
     <p class="card-action"><a href="<?= get_permalink($article_post) ?>" class="button">Read</a></p>
   </div>
 </article>
