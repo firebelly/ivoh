@@ -253,19 +253,9 @@ function get_posts($opts=[]) {
   // News posts get featured posts shoved to top (if using default sort)
   if ($opts['post-type'] == 'news' && $opts['order-by']=='date-desc') {
     $args = array_merge($args, [
-      'orderby'     => 'meta_value_num date',
+      'orderby'     => 'meta_value date',
       'order'       => 'DESC',
-      'meta_query'  => [
-        'relation'  => 'OR',
-        [
-          'key'     => '_date_featured',
-          'compare' => 'EXISTS',
-        ],
-        [
-          'key'     => '_date_featured',
-          'compare' => 'NOT EXISTS',
-        ],
-      ],
+      'meta_key'    => '_date_featured',
     ]);
   }
 
@@ -283,9 +273,10 @@ function get_posts($opts=[]) {
 
   // Just count posts (used for load-more buttons)
   if (!empty($opts['countposts'])) {
-    $args['numberposts'] = -1;
-    $args['fields'] = 'ids';
-    $count_query = new \WP_Query($args);
+    $count_query = new \WP_Query(array_merge($args, [
+      'numberposts' => -1,
+      'fields'      => 'ids',
+    ]));
     return $count_query->found_posts;
   }
 
