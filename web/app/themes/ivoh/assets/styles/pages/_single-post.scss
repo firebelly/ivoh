@@ -316,7 +316,7 @@ body.single-post[data-theme] {
           opacity: 0;
         }
         .banner-image {
-          filter: none;
+          filter: grayscale(0);
           &::before,
           &::after {
             opacity: 0;

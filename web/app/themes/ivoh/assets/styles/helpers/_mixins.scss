@@ -68,7 +68,7 @@
 // Treated images handled with CSS
 @mixin image-treatment() {
   position: relative;
-  filter: grayscale(1);
+  filter: grayscale(100%);
 
   &::before,
   &::after {

@@ -3,18 +3,18 @@
 .home.page {
   padding-top: 0;
 
-  // Things that need transitions
-  &,
-  .site-header,
-  .banner-image-container,
-  .story-content-carousel,
-  .page-header-text .-inner {
-    will-change: background-color;
-    transition: background-color .4s ease-out;
-  }
-
   // Pre-scroll styles
   &[data-theme] {
+    // Things that need transitions
+    &,
+    .site-header,
+    .banner-image-container,
+    .story-content-carousel,
+    .page-header-text .-inner {
+      will-change: background-color;
+      transition: background-color .4s ease-out;
+    }
+
     // Not Scrolled
     &:not(.scrolled) {
       // Things That need white color
@@ -31,6 +31,21 @@
       .card {
         background-color: color(black);
       }
+
+      // Banner image
+      .banner-image-container {
+        &::after {
+          opacity: 0;
+        }
+        .banner-image {
+          filter: grayscale(0);
+          &::before,
+          &::after {
+            opacity: 0;
+          }
+        }
+      }
+
       // Card overwrites
       .card {
         outline-color: color(white);
@@ -48,7 +63,7 @@
         border-color: color(white);
       }
       .card-image-container::after {
-        opacity: 0;
+        // opacity: 0;
       }
       // Site Header
       .site-header {
@@ -93,37 +108,6 @@
         background-color: transparent;
       }
     }
-
-    // Resetting the styles on scroll
-    &.scrolled {
-      .banner-image-container {
-        &::after {
-          opacity: 1;
-        }
-        .banner-image {
-          filter: grayscale(1);
-          &::before {
-            opacity: 1;
-          }
-          &::after {
-            opacity: .35;
-          }
-        }
-      }
-
-      @include media-md {
-        .page-header-top {
-          padding-bottom: 200px;
-          will-change: padding;
-          transition: padding-bottom .4s ease-in-out;
-        }
-        .page-header-text {
-          margin-top: -200px;
-          will-change: margin;
-          transition: margin-top .4s ease-in-out .02s;
-        }
-      }
-    }
   }
 
   .page-header {
@@ -163,9 +147,6 @@
       bottom: 0;
       width: 100%;
       position: absolute;
-      &::after {
-        opacity: 0;
-      }
 
       .banner-image {
         top: 0;
@@ -173,15 +154,10 @@
         right: 0;
         bottom: 0;
         height: auto;
-        filter: none;
         margin: 0 auto;
         padding-bottom: 0;
         position: absolute;
         max-width: #{$container-lg + ($beat * 20)};
-        &::before,
-        &::after {
-          opacity: 0;
-        }
       }
     }
 

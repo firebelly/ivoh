@@ -521,7 +521,7 @@ var IVOH = (function($) {
 
     function addScrolledClass() {
       var st = window.pageYOffset,
-          offset = $('.site-header').outerHeight())*2;
+          offset = $('.site-header').outerHeight()*2;
 
       if (st >= offset) {
         $body.addClass('scrolled');
@@ -529,10 +529,10 @@ var IVOH = (function($) {
     }
 
     if ($('body.home, body.single-story, body.single-post').length) {
-      addScrolledClass(();
+      addScrolledClass();
 
       $window.scroll(function() {
-        addScrolledClass(();
+        addScrolledClass();
       });
     }
   }
