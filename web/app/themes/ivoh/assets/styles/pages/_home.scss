@@ -2,45 +2,56 @@
 
 .home.page {
   padding-top: 0;
+
+  // Things that need transitions
   &,
   .site-header,
-  .card,
-  .inherit-background {
-    transition: color .4s ease-out, background-color .4s ease-out;
-  }
-
-  .card-image-container::after {
-    transition: opacity .4s ease-out;
+  .banner-image-container,
+  .story-content-carousel,
+  .page-header-text .-inner {
+    will-change: background-color;
+    transition: background-color .4s ease-out;
   }
 
   // Pre-scroll styles
-  &[data-theme="pink"] {
+  &[data-theme] {
     // Not Scrolled
     &:not(.scrolled) {
+      // Things That need white color
       &,
-      .card,
-      .inherit-background {
+      .site-header {
         color: color(white);
-        background-color: color(black);
       }
 
+      // Things that need black background
+      &,
+      .banner-image-container,
+      .page-header-text .-inner,
+      .story-content-carousel,
+      .card {
+        background-color: color(black);
+      }
+      // Card overwrites
       .card {
         outline-color: color(white);
         .card-content {
-          &,
-          a {
+          .card-title,
+          .card-subtitle,
+          .card-text,
+          a:not(.button) {
             color: color(white);
             transition: color .4s ease-out;
           }
         }
       }
-
+      .story-carousel-container .flickity-page-dots {
+        border-color: color(white);
+      }
       .card-image-container::after {
         opacity: 0;
       }
-
+      // Site Header
       .site-header {
-        color: color(white);
         background-color: transparent;
         &::after {
           border-color: color(white);
@@ -52,9 +63,6 @@
       }
       .ivoh-logo {
         fill: color(white);
-      }
-      .page-header-text .-inner {
-        background-color: color(black);
       }
       .menu-toggle:not(.-active) .menu-bar {
         &,&::before,&::after {
@@ -106,10 +114,12 @@
       @include media-md {
         .page-header-top {
           padding-bottom: 200px;
+          will-change: padding;
           transition: padding-bottom .4s ease-in-out;
         }
         .page-header-text {
           margin-top: -200px;
+          will-change: margin;
           transition: margin-top .4s ease-in-out .02s;
         }
       }
@@ -131,7 +141,6 @@
         padding-top: 0;
         min-height: 680px;
         padding-bottom: $padding-lg;
-        transition: padding-bottom .4s ease-out .02s;
       }
     }
 
@@ -185,7 +194,6 @@
       .-inner {
         padding-top: $padding-sm;
         margin: -#{$beat * 5} $gutter 0;
-        transition: color .4s ease-out, background-color .4s ease-out;
       }
 
       .page-intro-body {
@@ -208,7 +216,6 @@
 
       @include media-md {
         margin: -$padding-lg auto 0;
-        transition: margin-top .4s ease-out;
 
         .-inner {
           padding-top: $padding-md;

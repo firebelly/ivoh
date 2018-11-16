@@ -519,8 +519,9 @@ var IVOH = (function($) {
   function _initScrollEvents() {
     // Homapage & article scroll event
 
-    function addScrolledClass(offset) {
-      var st = $(window).scrollTop();
+    function addScrolledClass() {
+      var st = window.pageYOffset,
+          offset = $('.site-header').outerHeight())*2;
 
       if (st >= offset) {
         $body.addClass('scrolled');
@@ -528,10 +529,10 @@ var IVOH = (function($) {
     }
 
     if ($('body.home, body.single-story, body.single-post').length) {
-      addScrolledClass(($('.site-header').outerHeight())*2);
+      addScrolledClass(();
 
-      $(window).scroll(function() {
-        addScrolledClass(($('.site-header').outerHeight())*2);
+      $window.scroll(function() {
+        addScrolledClass(();
       });
     }
   }

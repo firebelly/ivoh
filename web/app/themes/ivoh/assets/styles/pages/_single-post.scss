@@ -254,68 +254,73 @@ body.single:not(.single-tool) {
 // Single Stories and News Posts
 body.single-story[data-theme],
 body.single-post[data-theme] {
+  // Things that need transition
   &,
-  .inherit-background,
+  .site-header,
   .page-header-banner,
+  .page-header-text .-inner,
   .banner-image-container,
   .banner-text {
-    transition: color .4s ease-out, background-color .4s ease-out;
+    will-change: background-color;
+    transition: background-color .4s ease-out;
   }
 
   // Before .scrolled class has been added
-  &:not(.scrolled) {
-    &,
-    .inherit-background {
-      color: white;
-      background-color: color(black);
-    }
-
-    .site-header {
-      @include headerDarkStyle();
-      &::after {
-        border-color: color(white);
+  &[data-theme] {
+    &:not(.scrolled) {
+      // Things that need white color
+      &,
+      .banner-text {
+        color: color(white);
       }
-    }
-
-    .menu-toggle:not(.-active) .menu-bar {
-      &,&::before,&::after {
-        background-color: color(white);
-      }
-    }
-
-    .page-header {
+      // Things that need black background
+      &,
+      .page-header-text .-inner,
       .page-header-banner,
       .banner-text {
         background-color: color(black);
       }
-    }
 
-    .site-nav {
-      .sub-menu {
-        outline: 1px solid color(white);
+      // Page header
+      .post-terms {
+        border-color: color(white);
+      }
+
+      // Site header
+      .site-header {
+        @include headerDarkStyle();
+        &::after {
+          border-color: color(white);
+        }
+      }
+      .menu-toggle:not(.-active) .menu-bar {
+        &,&::before,&::after {
+          background-color: color(white);
+        }
+      }
+      .site-nav {
+        .sub-menu {
+          outline: 1px solid color(white);
+        }
       }
     }
 
-    .post-author-meta {
-      border-color: color(white);
-    }
-  }
-
-  // After .scrolled class has been added
-  &.scrolled {
-    .page-header-text,
-    .banner-text {
-      color: color(black);
-    }
-    .banner-image-container {
-      &::after {
-        opacity: 0;
+    // After .scrolled class has been added
+    &.scrolled {
+      .page-header-text,
+      .banner-text {
+        color: color(black);
       }
-      .banner-image {
-        filter: none;
-        &::before,
+      .banner-image-container {
         &::after {
           opacity: 0;
+        }
+        .banner-image {
+          filter: none;
+          &::before,
+          &::after {
+            opacity: 0;
+          }
         }
       }
     }
