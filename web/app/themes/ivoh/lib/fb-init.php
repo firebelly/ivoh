@@ -181,6 +181,32 @@ function search_distinct($where) {
 }
 add_filter('posts_distinct', __NAMESPACE__ . '\search_distinct');
 
+/**
+ * Bump up # search results
+ */
+function search_queries( $query ) {
+  if ( !is_admin() && is_search() ) {
+    $query->set( 'posts_per_page', -1 );
+  }
+  return $query;
+}
+add_filter( 'pre_get_posts', __NAMESPACE__ . '\search_queries' );
+
+/**
+ * Exclude pages from search results
+ */
+function exclude_pages_from_search($query) {
+  if ( !is_admin() && is_search() ) {
+    $top_level_pages = get_pages(array('parent'=>0));
+    $top_level_ids = array();
+    foreach($top_level_pages as $top_level_page ) {
+      $top_level_ids[] = $top_level_page->ID;
+    }
+    $query->set('post__not_in', $top_level_ids);
+  }
+  return $query;
+}
+add_filter( 'pre_get_posts', __NAMESPACE__ . '\exclude_pages_from_search');
 
 /**
  * Hide editor on specific pages
