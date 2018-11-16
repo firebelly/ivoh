@@ -149,14 +149,13 @@ function metaboxes() {
  */
 add_action('add_post_meta', __NAMESPACE__ . '\\check_featured_added', 10, 3);
 function check_featured_added($post_id, $meta_key, $meta_value) {
-	if ($meta_key === '_cmb2_featured' && $meta_value === 'on') {
-		update_post_meta($post_id, '_date_featured', time());
-	}
-}
-// ... and delete timestamp when unmarked as featured
-add_action('delete_post_meta', __NAMESPACE__ . '\\check_featured_deleted', 10, 4);
-function check_featured_deleted($meta_id, $post_id, $meta_key, $meta_value) {
-	if ($meta_key === '_cmb2_featured') {
-		delete_post_meta($post_id, '_date_featured');
-	}
+  // Avoid this check if the importers update-date-featured task is being run to avoid nesting error
+  if (empty($_REQUEST['update-date-featured'])) {
+      if ($meta_key === '_cmb2_featured' && $meta_value === 'on') {
+        update_post_meta($post_id, '_date_featured', time());
+      } else {
+        // Always setting _date_featured to make the sticky ordering work for News
+        update_post_meta($post_id, '_date_featured', 0);
+      }
+  }
 }
