@@ -198,4 +198,4 @@ function post_updates($post_id, $post, $update) {
     return;
   update_author_sort_meta($post_id);
 }
-add_action('save_post', __NAMESPACE__.'\\save_post_updates', 10, 3);
+add_action('save_post', __NAMESPACE__.'\\post_updates', 10, 3);

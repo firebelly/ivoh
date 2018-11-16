@@ -92,15 +92,6 @@ function metaboxes() {
        'textarea_rows' => 4,
      ],
   ]);
-  // $related_info->add_field([
-  //   'name'    => esc_html__( 'Related Links', 'cmb2' ),
-  //   'id'      => $prefix . 'related_links',
-  //   'desc'    => 'A list of related links which shows at bottom of posts',
-  //   'type'    => 'wysiwyg',
-  //   'options' => [
-  //      'textarea_rows' => 4,
-  //    ],
-  // ]);
   $related_info->add_field([
     'name'             => esc_html__( 'Related Posts', 'cmb2' ),
     'id'               => $prefix . 'related_posts',
@@ -110,38 +101,6 @@ function metaboxes() {
     'show_option_none' => true,
     'options_cb'       => '\Firebelly\CMB2\get_stories_and_posts',
   ]);
-
-  // $author = new_cmb2_box([
-  //   'id'            => $prefix . 'author',
-  //   'title'         => esc_html__( 'Author', 'cmb2' ),
-  //   'object_types'  => ['post', 'story'],
-  //   'context'       => 'normal',
-  //   'priority'      => 'high',
-  // ]);
-  // $author->add_field([
-  //   'name'      => 'Author',
-  //   'id'        => $prefix . 'author',
-  //   'type'             => 'select',
-  //   'show_option_none' => true,
-  //   'options_cb'       => '\Firebelly\CMB2\get_people'
-  // ]);
-
-  // $image_slideshow = new_cmb2_box([
-  //   'id'            => 'image_slideshow',
-  //   'title'         => esc_html__( 'Image Slideshow', 'cmb2' ),
-  //   'object_types'  => ['program', 'workshop'],
-  //   'context'       => 'side',
-  //   'priority'      => 'low',
-  //   // 'closed'        => true,
-  // ]);
-  // $image_slideshow->add_field([
-  //   'name'       => __( 'Images', 'cmb2' ),
-  //   'show_names' => false,
-  //   'id'         => $prefix .'slideshow_images',
-  //   'type'       => 'file_list',
-  //   'desc'       => esc_html__('Slideshow for bottom of post', 'cmb2'),
-  // ]);
-
 }
 
 /**
@@ -149,13 +108,15 @@ function metaboxes() {
  */
 add_action('add_post_meta', __NAMESPACE__ . '\\check_featured_added', 10, 3);
 function check_featured_added($post_id, $meta_key, $meta_value) {
-  // Avoid this check if the importers update-date-featured task is being run to avoid nesting error
-  if (empty($_REQUEST['update-date-featured'])) {
-      if ($meta_key === '_cmb2_featured' && $meta_value === 'on') {
-        update_post_meta($post_id, '_date_featured', time());
-      } else {
-        // Always setting _date_featured to make the sticky ordering work for News
-        update_post_meta($post_id, '_date_featured', 0);
-      }
+  if ($meta_key === '_cmb2_featured' && $meta_value === 'on') {
+    update_post_meta($post_id, '_date_featured', time());
   }
 }
+// Always set _date_featured to 0
+function set_date_featured($post_id, $post, $update) {
+  if (wp_is_post_revision($post_id) || !in_array($post->post_type, ['story', 'post']))
+    return;
+
+  add_post_meta($post_id, '_date_featured', 0, true);
+}
+add_action('save_post', __NAMESPACE__.'\\set_date_featured', 10, 3);

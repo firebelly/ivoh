@@ -83,7 +83,7 @@ function person_sort_meta($post_id) {
   // Update all stories/posts `_author_sort` for this person in case name changed
   $stories = \Firebelly\PostTypes\Story\get_stories([
     'template-type' => 'simple',
-    'author' => $post->ID,
+    'author' => $post_id,
     'return' => 'array',
   ]);
   if (!empty($stories)) {
@@ -92,7 +92,7 @@ function person_sort_meta($post_id) {
     }
   }
 }
-add_action('save_post_person', __NAMESPACE__.'\person_sort_meta');
+add_action('save_post_person', __NAMESPACE__.'\\person_sort_meta');
 
 /**
  * Get People
