@@ -5,6 +5,7 @@ RewriteBase /
 
 # Force single domain
 RewriteCond %{REQUEST_URI} !\.well-known
+RewriteCond %{HTTP_HOST} !^ivoh\.org [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.sage [NC]
