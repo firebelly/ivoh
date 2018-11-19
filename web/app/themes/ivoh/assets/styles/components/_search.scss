@@ -66,8 +66,38 @@ body.search-results {
     }
   }
   .search-result {
+    &.-hover {
+      .icon {
+        fill: color(red);
+      }
+    }
+    .card-title {
+      a.external-link {
+        position: relative;
+        padding-left: $beat * 3;
+        padding-right: $beat * 3;
+        .icon {
+          top: 2px;
+          right: 0;
+          width: 18px;
+          height: 18px;
+          position: absolute;
+          @include transition(fill);
+        }
+        &:hover,
+        &:focus {
+          .icon {
+            fill: color(red);
+          }
+        }
+      }
+    }
     .post-url {
+      @include h6;
       margin-top: $beat;
+      a {
+        word-break: break-all;
+      }
     }
   }
 }
