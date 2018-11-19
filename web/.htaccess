@@ -11,17 +11,15 @@ RewriteRule \.(jpg|jpeg|png|gif|ico|icns|bmp)$ - [NC,R=404,L]
 RewriteCond %{REQUEST_URI} !\.well-known
 RewriteCond %{HTTP_HOST} !^ivoh\.org [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
-RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
-RewriteCond %{HTTP_HOST} !^ivoh\.sage [NC]
+RewriteCond %{HTTP_HOST} !^ivoh\.(localhost|sage) [NC]
 RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 
 # Force HTTPS (uncomment once site is live and SSL cert is set up)
-# RewriteCond %{REQUEST_URI} !\.well-known
-# RewriteCond %{HTTP:X-Forwarded-SSL} !on
-# RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
-# RewriteCond %{HTTP_HOST} !^ivoh\.localhost [NC]
-# RewriteCond %{HTTP_HOST} !^ivoh\.sage [NC]
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{REQUEST_URI} !\.well-known
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^ivoh\.(localhost|sage) [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Custom redirects
 # Redirect individual research articles (e.g. View Research button in WP) to base /research/ page
