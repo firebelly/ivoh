@@ -23,7 +23,7 @@ switch ($post->post_type) {
     $excerpt = get_post_meta($post->ID, '_cmb2_description', true);
     // External link?
     if (strpos(getenv('WP_HOME'), $permalink)===false && preg_match('/^http/', $permalink)) {
-      $external_link = 'rel="noopener" target="_blank" ';
+      $external_link = 'rel="noopener" target="_blank" class="external-link"';
       $permalink_display = $permalink;
     } else {
       $permalink_display = getenv('WP_HOME').$permalink;
@@ -58,7 +58,7 @@ if (empty($permalink)) {
   <div class="card-content">
     <header>
       <h3 class="card-subtitle"><?= $subtitle ?></h3>
-      <h2 class="card-title"><a <?= $external_link ?>href="<?= $permalink ?>"><?php the_title(); ?></a></h2>
+      <h2 class="card-title"><a <?= $external_link ?>href="<?= $permalink ?>"><?php the_title(); ?><?php if (!empty($external_link)): ?><svg class="icon icon-outbound-link" aria-hidden="true" role="presentation"><use xlink:href="#icon-outbound-link"/></svg><?php endif ?></a></h2>
     </header>
     <div class="card-text">
       <?= $excerpt ?>
