@@ -1,6 +1,7 @@
 set :stage, :production
 set :login, 'firebelly'
-set :application, 'fb-bedrock'
+set :domain, 'ivoh.org'
+set :application, 'ivoh'
 
 
 # Simple Role Syntax
