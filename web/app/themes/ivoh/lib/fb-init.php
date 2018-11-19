@@ -238,18 +238,56 @@ function change_the_title() {
 }
 
 /**
- * Redirect 404s if we can find a slug that matches
+ * Redirect 404s if we can find a suitable new home
+ * (redirect old categories if possible, and URLs that have slug in the base, e.g. /ivoh-recalibrating/ -> /news/ivoh-recalibrating/)
  */
 function redirect_old_posts(){
   if( is_404() ){
     global $wp,$wpdb;
     $request_url = $wp->request;
-    $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $request_url));
-    if($id) {
-      $wp_query->is_404 = false;
-      $new_url = get_permalink($id);
+    // Category page? See if we can find a new home for that category
+    if (preg_match('#^category/#', $request_url)) {
+      $slug = preg_replace('#^/?category/([^/]+)/?#', '$1', $request_url);
+      $new_url = '';
+      // Custom redirects (e.g. "2016-restorative-narrative-fellowship" — "ivoh-restorative-narrative-fellowship" — "ivoh-2017-summit" — "international-journalism/")
+      if (preg_match('/restorative-narrative-fellowship/', $slug)) {
+        $new_url = '/story-bank/?topics=restorative-narrative-fellowship';
+      } else if (preg_match('/summit/', $slug)) {
+        $new_url = '/news/?topics=ivoh-summit';
+      } else if (preg_match('/journalism/', $slug)) {
+        $new_url = '/news/?topics=journalism';
+      } else if (preg_match('/film/', $slug)) {
+        $new_url = '/story-bank/?topics=film';
+      }
+
+      // Custom redirect match already?
+      if (!empty($new_url)) {
+        wp_redirect($new_url, 301);
+        exit;
+      }
+
+      // Try to find story topics that match slug
+      if ($topic_slug = $wpdb->get_var($wpdb->prepare("SELECT t.slug FROM $wpdb->terms AS t INNER JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy='story_topic' AND t.slug LIKE %s", '%'.$slug.'%'))) {
+        $new_url = '/story-bank/?topics='.$topic_slug;
+      } else if ($topic_slug = $wpdb->get_var($wpdb->prepare("SELECT t.slug FROM $wpdb->terms AS t INNER JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id WHERE tt.taxonomy='category' AND t.slug LIKE %s", '%'.$slug.'%'))) {
+        // Try to find news categories that match slug
+        $new_url = '/news/?topics='.$topic_slug;
+      } else {
+        // Fall back to /story-bank if nothing found
+        $new_url = '/story-bank/';
+      }
       wp_redirect($new_url, 301);
       exit;
+
+    } else {
+      // See if we can find a matching post by slug
+      $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $request_url));
+      if($id) {
+        $wp_query->is_404 = false;
+        $new_url = get_permalink($id);
+        wp_redirect($new_url, 301);
+        exit;
+      }
     }
   }
 }
