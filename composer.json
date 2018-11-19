@@ -55,7 +55,8 @@
     "wpackagist-plugin/category-checklist-tree": "^1.3",
     "mustardBees/cmb-field-select2": "^3.0.0",
     "wpackagist-plugin/wordpress-importer": "^0.6.4",
-    "drewm/mailchimp-api": "^2.5"
+    "drewm/mailchimp-api": "^2.5",
+    "wpackagist-plugin/redirection": "^3.6"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
