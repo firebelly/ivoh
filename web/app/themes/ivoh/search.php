@@ -14,15 +14,15 @@ use Roots\Sage\Titles;
   </div>
 </header>
 
-<div class="page-search-form fb-container-md padded mobile-gutter ">
+<div class="page-section page-search-form fb-container-md padded mobile-gutter ">
   <div class="-inner">
     <?php \Firebelly\Utils\get_template_part_with_vars('templates/searchform', null, ['search_title' => 'Search Again']); ?>
   </div>
 </div>
 
 <?php if (!have_posts()) : ?>
-  <div class="alert fb-container-lg text-center">
-    <?php _e('Sorry, no results were found.', 'sage'); ?>
+  <div class="page-section fb-container-md padded mobile-gutter patterned-sm">
+    <div class="card"><p class="no-posts">No results found.</p></div>
   </div>
 <?php else: ?>
   <h2 class="h4 mobile-gutter text-center">Results</h2>
