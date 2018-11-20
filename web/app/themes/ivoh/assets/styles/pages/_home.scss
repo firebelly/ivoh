@@ -32,20 +32,6 @@
         background-color: color(black);
       }
 
-      // Banner image
-      .banner-image-container {
-        &::after {
-          opacity: 0;
-        }
-        .banner-image {
-          filter: grayscale(0);
-          &::before,
-          &::after {
-            opacity: 0;
-          }
-        }
-      }
-
       // Card overwrites
       .card {
         outline-color: color(white);
@@ -147,17 +133,25 @@
       bottom: 0;
       width: 100%;
       position: absolute;
+      &::after {
+        display: none;
+      }
 
       .banner-image {
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        filter: none;
         height: auto;
         margin: 0 auto;
         padding-bottom: 0;
         position: absolute;
         max-width: #{$container-lg + ($beat * 20)};
+        &::before,
+        &::after {
+          display: none;
+        }
       }
     }
 
