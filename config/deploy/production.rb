@@ -1,6 +1,6 @@
 set :stage, :production
-set :login, 'firebelly'
-set :domain, 'ivoh.org'
+set :login, 'ecarter'
+set :domain, 'ecarter.webfactional.com'
 set :application, 'ivoh'
 
 
