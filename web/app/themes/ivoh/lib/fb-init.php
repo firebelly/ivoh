@@ -245,10 +245,12 @@ function redirect_old_posts(){
   if( is_404() ){
     global $wp,$wpdb;
     $request_url = $wp->request;
+
     // Category page? See if we can find a new home for that category
     if (preg_match('#^category/#', $request_url)) {
       $slug = preg_replace('#^/?category/([^/]+)/?#', '$1', $request_url);
       $new_url = '';
+
       // Custom redirects (e.g. "2016-restorative-narrative-fellowship" — "ivoh-restorative-narrative-fellowship" — "ivoh-2017-summit" — "international-journalism/")
       if (preg_match('/restorative-narrative-fellowship/', $slug)) {
         $new_url = '/story-bank/?topics=restorative-narrative-fellowship';
@@ -280,6 +282,7 @@ function redirect_old_posts(){
       exit;
 
     } else {
+
       // See if we can find a matching post by slug
       $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $request_url));
       if($id) {
@@ -288,6 +291,7 @@ function redirect_old_posts(){
         wp_redirect($new_url, 301);
         exit;
       }
+
     }
   }
 }

@@ -8,8 +8,7 @@ namespace Firebelly\Import;
 // show link to import form
 add_action('admin_menu', __NAMESPACE__.'\fb_schedule_admin_menu');
 function fb_schedule_admin_menu() {
-  // add_submenu_page('edit.php?post_type=story', 'Import CSV', 'Import CSV', 'publish_posts', 'schedule-importer', __NAMESPACE__.'\fb_csv_import_form');
-  add_management_page( 'ivoh Importer', 'ivoh Importer', 'publish_posts', 'schedule-importer', __NAMESPACE__.'\fb_csv_import_form');
+  // add_management_page( 'ivoh Importer', 'ivoh Importer', 'publish_posts', 'ivoh-importer', __NAMESPACE__.'\fb_csv_import_form');
 }
 function fb_csv_import_form() {
   if ('POST' == $_SERVER['REQUEST_METHOD']) {

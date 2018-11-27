@@ -8,7 +8,7 @@ use PostTypes\PostType; // see https://github.com/jjgrainger/PostTypes
 use PostTypes\Taxonomy;
 use \DrewM\MailChimp\MailChimp; // see https://github.com/drewm/mailchimp-api
 
-$tool = new PostType('tool', [
+$tool = new PostType(['name' => 'tool', 'plural' => 'Tool Posts', 'singular' => 'Tool Post', 'slug' => 'tool'], [
   'supports'   => ['title', 'editor', 'revisions'],
   'rewrite'    => ['with_front' => false],
 ]);
