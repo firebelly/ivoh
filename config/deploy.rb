@@ -69,13 +69,16 @@ namespace :deploy do
   end
 
   task :copy_assets do
-    invoke 'deploy:compile_assets'
+    # run as NOASSETS=1 cap staging deploy to skip compiling & uploading assets
+    if ENV['NOASSETS'] == nil
+      invoke 'deploy:compile_assets'
 
-    on roles(:web) do
-      upload! fetch(:local_theme_path).join('dist').to_s, release_path.join(fetch(:theme_path)), recursive: true
+      on roles(:web) do
+        upload! fetch(:local_theme_path).join('dist').to_s, release_path.join(fetch(:theme_path)), recursive: true
+      end
+
+      invoke 'deploy:ungulp'
     end
-
-    invoke 'deploy:ungulp'
   end
 end
 
