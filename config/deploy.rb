@@ -39,7 +39,9 @@ end
 namespace :deploy do
   before :starting, :map_composer_command do
       on roles(:app) do |server|
-          SSHKit.config.command_map[:composer] = "#{fetch(:php)} /home/#{fetch(:login)}/bin/composer.phar"
+        # set previous_release to current_path for use below
+        set :previous_release, capture("readlink #{current_path}")
+        SSHKit.config.command_map[:composer] = "#{fetch(:php)} /home/#{fetch(:login)}/bin/composer.phar"
       end
   end
 end
@@ -69,7 +71,7 @@ namespace :deploy do
   end
 
   task :copy_assets do
-    # run as NOASSETS=1 cap staging deploy to skip compiling & uploading assets
+    # `NOASSETS=1 cap staging deploy` will skip compiling & uploading assets, instead cp previous dist dir
     if ENV['NOASSETS'] == nil
       invoke 'deploy:compile_assets'
 
@@ -78,6 +80,11 @@ namespace :deploy do
       end
 
       invoke 'deploy:ungulp'
+    else
+      # just copy dist dir
+      on roles(:app) do
+        execute "cp -R #{Pathname.new(fetch(:previous_release)).join(fetch(:theme_path)).join('dist')} #{release_path.join(fetch(:theme_path))}/"
+      end
     end
   end
 end
