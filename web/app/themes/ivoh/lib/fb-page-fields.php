@@ -196,6 +196,15 @@ function metaboxes() {
        'textarea_rows' => 8,
      ],
   ]);
+  $donate_single_fields->add_field([
+    'name'        => 'Thank You Notice',
+    'id'          => $prefix . 'donation_thankyou',
+    'desc'        => 'Shown when user returns to page after donating',
+    'type'        => 'wysiwyg',
+    'options' => [
+       'textarea_rows' => 8,
+     ],
+  ]);
 }
 
 /**

@@ -3,11 +3,15 @@
   Template name: Donate
 */
 $by_mail_prompt = get_post_meta($post->ID, '_cmb2_donation_bymail', true);
+$donation_thankyou = get_post_meta($post->ID, '_cmb2_donation_thankyou', true);
 ?>
 <?php get_template_part('templates/page', 'header'); ?>
 
 <?php if (!empty(trim($post->post_content))): ?>
 <div class="post-content user-content fb-container-content">
+  <?php if (!empty($_REQUEST['success']) && !empty($donation_thankyou)): ?>
+    <?= apply_filters('the_content', $donation_thankyou) ?>
+  <?php endif; ?>
   <?= apply_filters('the_content', $post->post_content) ?>
 </div>
 <?php endif; ?>
@@ -24,6 +28,8 @@ $by_mail_prompt = get_post_meta($post->ID, '_cmb2_donation_bymail', true);
         <input type="hidden" name="item_number" value="One Time Donation">
         <input type="hidden" name="currency_code" value="USD">
         <input type="hidden" name="no_shipping" value="1">
+        <input type="hidden" name="return" value="<?= getenv('WP_HOME').'/donate/?success=1' ?>" />
+        <input type="hidden" name="cancel_return" value="<?= getenv('WP_HOME').'/donate/' ?>" />
 
         <fieldset>
           <h3 class="p1">Choose an Amount:</h3>
