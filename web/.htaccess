@@ -11,6 +11,7 @@ RewriteRule \.(jpg|jpeg|png|gif|ico|icns|bmp)$ - [NC,R=404,L]
 RewriteCond %{REQUEST_URI} !\.well-known
 RewriteCond %{HTTP_HOST} !^ivoh\.org [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^ecarter\.webfactional\.com [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.(localhost|sage) [NC]
 RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 
@@ -18,6 +19,7 @@ RewriteRule ^(.*)$ https://ivoh.org%{REQUEST_URI} [R=301,L]
 RewriteCond %{REQUEST_URI} !\.well-known
 RewriteCond %{HTTP:X-Forwarded-SSL} !on
 RewriteCond %{HTTP_HOST} !^ivoh\.firebelly\.co [NC]
+RewriteCond %{HTTP_HOST} !^ecarter\.webfactional\.com [NC]
 RewriteCond %{HTTP_HOST} !^ivoh\.(localhost|sage) [NC]
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
