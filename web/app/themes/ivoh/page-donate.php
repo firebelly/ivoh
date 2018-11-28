@@ -7,7 +7,7 @@ $donation_thankyou = get_post_meta($post->ID, '_cmb2_donation_thankyou', true);
 ?>
 
 <?php if (!empty($_REQUEST['success']) && !empty($donation_thankyou)): ?>
-  <div class="page-section fb-container-md padded mobile-gutter patterned-sm">
+  <div class="page-section fb-container-md padded mobile-gutter patterned-sm user-content">
     <div class="card header-notice">
       <?= apply_filters('the_content', $donation_thankyou) ?>
     </div>
