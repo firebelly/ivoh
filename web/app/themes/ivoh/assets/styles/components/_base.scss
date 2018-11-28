@@ -170,3 +170,11 @@ p.no-posts {
     padding: $padding-lg;
   }
 }
+.header-notice {
+  margin-top: $padding-md;
+  text-align: center;
+  padding: $padding-md;
+  @include media-md {
+    padding: $padding-lg;
+  }
+}

@@ -5,13 +5,19 @@
 $by_mail_prompt = get_post_meta($post->ID, '_cmb2_donation_bymail', true);
 $donation_thankyou = get_post_meta($post->ID, '_cmb2_donation_thankyou', true);
 ?>
+
+<?php if (!empty($_REQUEST['success']) && !empty($donation_thankyou)): ?>
+  <div class="page-section fb-container-md padded mobile-gutter patterned-sm">
+    <div class="card header-notice">
+      <?= apply_filters('the_content', $donation_thankyou) ?>
+    </div>
+  </div>
+<?php endif; ?>
+
 <?php get_template_part('templates/page', 'header'); ?>
 
 <?php if (!empty(trim($post->post_content))): ?>
 <div class="post-content user-content fb-container-content">
-  <?php if (!empty($_REQUEST['success']) && !empty($donation_thankyou)): ?>
-    <?= apply_filters('the_content', $donation_thankyou) ?>
-  <?php endif; ?>
   <?= apply_filters('the_content', $post->post_content) ?>
 </div>
 <?php endif; ?>
