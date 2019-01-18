@@ -168,6 +168,11 @@ function metaboxes() {
     'id'   => $prefix . 'microsite_url',
     'type' => 'text_url',
   ]);
+  $annual_summit->add_field([
+    'name' => esc_html__( 'Microsite Button Text', 'cmb2' ),
+    'id'   => $prefix . 'microsite_text',
+    'type' => 'text',
+  ]);
 
   /**
     * Donate page fields

@@ -65,7 +65,7 @@ $post_meta = get_post_meta($post->ID, '');
           <a rel="noopener" target="_blank" class="button" href="<?= $post_meta['_cmb2_register_url'][0] ?>">Register</a>
         <?php endif; ?>
         <?php if (!empty($post_meta['_cmb2_microsite_url'])): ?>
-          <a rel="noopener" target="_blank" class="button" href="<?= $post_meta['_cmb2_microsite_url'][0] ?>">Microsite</a>
+          <a rel="noopener" target="_blank" class="button" href="<?= $post_meta['_cmb2_microsite_url'][0] ?>"><?= !empty($post_meta['_cmb2_microsite_text']) ? $post_meta['_cmb2_microsite_text'][0] : 'Microsite' ?></a>
         <?php endif; ?>
       </div>
     <?php endif; ?>
