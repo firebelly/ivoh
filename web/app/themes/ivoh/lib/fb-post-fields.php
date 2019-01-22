@@ -112,11 +112,14 @@ function check_featured_added($post_id, $meta_key, $meta_value) {
     update_post_meta($post_id, '_date_featured', time());
   }
 }
-// Always set _date_featured to 0
-function set_date_featured($post_id, $post, $update) {
-  if (wp_is_post_revision($post_id) || !in_array($post->post_type, ['story', 'post']))
+// Always set _date_featured to 0 (unless _cmb2_featured post_meta is set, then leave it alone)
+add_action('pre_post_update', __NAMESPACE__.'\\set_date_featured', 10, 2);
+function set_date_featured($post_id, $data) {
+  if (wp_is_post_revision($post_id) || !in_array(get_post_type($post_id), ['story', 'post']))
     return;
 
-  add_post_meta($post_id, '_date_featured', 0, true);
+  // If not marking featured, clear out date_featured
+  if (empty($_POST['_cmb2_featured'])) {
+    update_post_meta($post_id, '_date_featured', 0);
+  }
 }
-add_action('save_post', __NAMESPACE__.'\\set_date_featured', 10, 3);
